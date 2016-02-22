@@ -11,5 +11,8 @@
     "url": "git@gitlab.mr-calen.eu:plic/LumHue.git"
   },
   "author": "dagues_p@yaka.epita.fr",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }
