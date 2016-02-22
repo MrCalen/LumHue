@@ -1,0 +1,15 @@
+{
+  "name": "lumhue",
+  "version": "0.0.1",
+  "description": "NodeJS API for Hue wrapper",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.mr-calen.eu:plic/LumHue.git"
+  },
+  "author": "dagues_p@yaka.epita.fr",
+  "license": "MIT"
+}
