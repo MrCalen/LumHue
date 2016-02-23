@@ -4,7 +4,6 @@ class Routes
   init: =>
     @homeRoutes()
 
-
   homeRoutes: =>
     home = require(global.appRoot + '/routes/home')
     homeRoute = new home(@app)

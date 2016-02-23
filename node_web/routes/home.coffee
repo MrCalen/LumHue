@@ -6,7 +6,7 @@ class HomeRoute
     controller = new HomeController()
     return controller
 
-  registerHandlers: () =>
+  registerHandlers: =>
     @app.get '/', (request, response) =>
       @controller().homeRequest(request, response)
 

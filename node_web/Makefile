@@ -2,3 +2,5 @@
 
 all:
 	npm install
+run:
+	nodemon app.coffee
