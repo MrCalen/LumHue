@@ -3,7 +3,9 @@ app = express()
 path = require('path');
 global.appRoot = path.resolve(__dirname);
 
-Route = require(global.appRoot + '/routes/routes')
+module.Routing = {}
+
+Route = require(global.appRoot + '/routes/routes').Routes
 routes = new Route(app)
 routes.init()
 

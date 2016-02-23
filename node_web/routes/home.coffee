@@ -1,5 +1,8 @@
-class HomeRoute
-  constructor: (@app) ->
+Router = require(global.appRoot + '/routes/router').Router
+
+class exports.HomeRoute extends Router
+  constructor: (app) ->
+    super(app)
 
   controller: =>
     HomeController = require(global.appRoot + '/controller/home_controller')
@@ -9,5 +12,3 @@ class HomeRoute
   registerHandlers: =>
     @app.get '/', (request, response) =>
       @controller().homeRequest(request, response)
-
-module.exports = HomeRoute
