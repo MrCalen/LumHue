@@ -4,6 +4,7 @@ class exports.Routes
   init: =>
     @homeRoutes()
     @listingRoutes()
+    @defaultRoutes()
 
   homeRoutes: =>
     home = require(global.appRoot + '/routes/home').HomeRoute
@@ -14,3 +15,8 @@ class exports.Routes
     listing = require(global.appRoot + '/routes/listing').ListingRoutes
     listing = new listing(@app)
     listing.registerHandler()
+
+  defaultRoutes: =>
+    defaultR = require(global.appRoot + '/routes/default').DefaultRoutes
+    defaultR = new defaultR(@app)
+    defaultR.registerHandler()
