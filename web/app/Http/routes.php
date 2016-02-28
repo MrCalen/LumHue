@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@GetBridge');
+
+Route::get('/lights', 'HomeController@GetLights');
+
+Route::post('/lights', 'HomeController@SetLights');
 
 /*
 |--------------------------------------------------------------------------
