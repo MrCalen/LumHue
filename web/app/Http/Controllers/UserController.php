@@ -3,42 +3,35 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
-use Tymon\JWTAuth\Facades\JWTAuth;
+use JWTAuth;
 use Illuminate\Support\Facades\Response;
 
 class UserController extends Controller
 {
     public function SignUp(Request $request)
     {
-        $email = $request->input('email');
-        $password = $request->input('password');
-
         try {
-            $user = User::create([
-                'email' => $email,
-                'password' => $password,
+            $user = User::create($request->all());
+            $user->password = \Hash::make($request->input('password'));
+            $user->save();
+            $token = \JWTAuth::fromUser($user);
+            return Response::json(compact('token'));
+        } catch (\Exception $e) {
+            return Response::json([
+                'success' => false,
             ]);
-        } catch (\Exception $e)
-        {}
-
-        $token = JWTAuth::fromUser($user);
-
-        return Response::json(compact('token'));
+        }
     }
 
     public function SignIn(Request $request)
     {
-        $email = $request->input('email');
-        $password = $request->input('password');
+        $credentials = $request->all();
+        $token = \JWTAuth::attempt($credentials);
 
-        $credentials = [
-            'email' => $email,
-            'password' => $password,
-        ];
-
-        if (!$token = JWTAuth::attempt($credentials)) {
-            return Response::json('{false}');
-        }
+        if (!$token)
+            return Response::json([
+                'Auth Failed'
+            ]);
 
         return Response::json(compact('token'));
     }
