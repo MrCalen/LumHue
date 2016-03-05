@@ -1,11 +1,11 @@
 <?php
 
 
-$R = 200;
-$B = 255;
-$G = 200;
+$R = 0;
+$B = 76;
+$G = 148;
 
-$bri = 255;
+$bri = 150;
 
 $X = 0.4124*$R + 0.3576*$G + 0.1805*$B;
 $Y = 0.2126*$R + 0.7152*$G + 0.0722*$B;
@@ -20,14 +20,16 @@ $url = 'https://www.meethue.com/api/sendmessage?token=WGF4TXNzVUtJWXRrVGFSQXhlcW
 $clipmessage = [
     'clipCommand' =>
     [
-        'url' => "/api/328f4f1a291e01cd550e24950d02d4e/lights/2/state",
+        'url' => "/api/328f4f1a291e01cd550e24950d02d4e/lights/3/state",
         'method' => "PUT",
         'body' => [
             "on" => true,
+    	    "effect" => "colorloop",
             "alert" => "none",
             "bri" => $bri,
             "xy" => [
-                $x,$y            ],
+                $x,$y
+            ],
         ],
     ]
 ];

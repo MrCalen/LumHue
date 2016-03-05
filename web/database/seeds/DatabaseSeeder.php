@@ -11,13 +11,5 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserTableSeeder::class);
-        for ($i = 0; $i < 3; ++$i)
-          DB::table('lights')
-            ->insert([
-              'id' => $i,
-              'reachable' => 1,
-              'on' => 1,
-            ]);
     }
 }

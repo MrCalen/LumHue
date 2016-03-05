@@ -11,7 +11,7 @@ class LumHueColorConverter
     $Y = 0.2126*$r + 0.7152*$g + 0.0722*$b;
     $Z = 0.0193*$r + 0.1192*$g + 0.9505*$b;
 
-    $div = ($X + $Y + $Z) == 0 ? 1 : ($X + $Y + $Z);
+    $div = ($X + $Y + $Z) === 0 ? 1 : ($X + $Y + $Z);
 
     $x = $X / $div;
     $y = $Y / $div;
