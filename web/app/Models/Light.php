@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Helpers\LumHueColorConverter;
+
 class Light
 {
     protected $id;
@@ -10,6 +12,8 @@ class Light
     protected $effect;
 
     protected $rgb;
+
+    protected $colorConverter;
 
     /**
      * Light constructor.
@@ -28,7 +32,9 @@ class Light
         $this->on = $on;
         $this->bri = $bri;
         $this->effect = $effect;
-        $this->rgb = new RGB(100, 100, 100);
+        $this->rgb = null;
+
+        $this->colorConverter = new LumHueColorConverter();
     }
 
     /**
@@ -113,12 +119,10 @@ class Light
 
     public function toArray()
     {
-        $result = [
-            'id' => $this->id,
-        ];
+        $result = [];
 
-        if (isset($this->on))
-            $result['on'] = $this->on;
+        if ($this->on != null)
+            $result['on'] = json_decode($this->on);
         if (isset($this->bri))
             $result['bri'] = $this->bri;
 
@@ -126,6 +130,10 @@ class Light
             $result['effect'] = $this->effect;
         else
             $result['effect'] = 'none';
+
+        if (isset($this->rgb))
+            $result['xy'] =$this->colorConverter->RGBToChromaticRGB($this->rgb);
+
         return $result;
     }
 

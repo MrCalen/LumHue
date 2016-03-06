@@ -2,8 +2,18 @@
 
 namespace App\Helpers;
 
+use App\Models\RGB;
+
 class LumHueColorConverter
 {
+
+  public function RGBToChromaticRGB(RGB $rgb)
+  {
+    return $this->RGBToChromatic(
+                $rgb->getRed(),
+                $rgb->getGreen(),
+                $rgb->getBlue());
+  }
 
   public function RGBtoChromatic($r, $g, $b)
   {

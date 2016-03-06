@@ -32,7 +32,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            'throttle:60,1',
+          \App\Http\Middleware\api::class,
         ],
     ];
 
@@ -49,7 +49,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
-        'jwt.auth' => 'Tymon\JWTAuth\Middleware\GetUserFromToken',
-        'jwt.refresh' => 'Tymon\JWTAuth\Middleware\RefreshToken',
+        'jwt.auth' => Tymon\JWTAuth\Middleware\GetUserFromToken::class,
+        'jwt.refresh' => Tymon\JWTAuth\Middleware\RefreshToken::class,
     ];
 }
