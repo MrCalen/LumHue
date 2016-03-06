@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use Request;
+use Illuminate\Http\Request;
 use MeetHue;
 use DB;
 
@@ -9,7 +9,8 @@ class HomeController extends Controller
 {
     public function GetBridge()
     {
-        return MeetHue::getBridge();
+        $token = 'WGF4TXNzVUtJWXRrVGFSQXhlcWNrenhobk16UkIvRGgwNDJ6RmJydVhsWT0%3D';
+        return MeetHue::getBridge($token);
     }
 
     public function GetLights()

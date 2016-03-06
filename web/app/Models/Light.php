@@ -17,15 +17,18 @@ class Light
      * @param bool $on
      * @param string $bri
      * @param string $effect
-     * @param \App\Models\RGB $rgb
+     * @throws \Exception
      */
-    public function __construct($id, $on = true, $bri = "255", $effect = "none", RGB $rgb)
+    public function __construct($id, $on, $bri, $effect)
     {
+        if (!$id)
+            throw new \Exception('Light does not have an ID');
+
         $this->id = $id;
         $this->on = $on;
         $this->bri = $bri;
         $this->effect = $effect;
-        $this->rgb = isset($rgb) ? $rgb : new RGB(255, 255, 255);
+        $this->rgb = new RGB(100, 100, 100);
     }
 
     /**
@@ -110,12 +113,20 @@ class Light
 
     public function toArray()
     {
-        return [
+        $result = [
             'id' => $this->id,
-            'on' => $this->on,
-            'bri' => $this->bri,
-            'effect' => $this->effect,
         ];
+
+        if (isset($this->on))
+            $result['on'] = $this->on;
+        if (isset($this->bri))
+            $result['bri'] = $this->bri;
+
+        if (isset($this->effect))
+            $result['effect'] = $this->effect;
+        else
+            $result['effect'] = 'none';
+        return $result;
     }
 
 
