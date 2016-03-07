@@ -10,10 +10,10 @@ Route::group(['prefix' => 'api'], function ()
 
   Route::post('/signup', 'UserController@Signup');
   Route::post('/signin', 'UserController@SignIn');
-
 });
 
 Route::group(['middleware' => ['web']], function ()
 {
   //
+  Route::get('/', 'HomeController@index');
 });

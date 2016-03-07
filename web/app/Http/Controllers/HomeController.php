@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use MeetHue;
+use View;
 use DB;
 
 class HomeController extends Controller
@@ -28,6 +29,11 @@ class HomeController extends Controller
           ->update([ 'on' => $status ]);
 
         return DB::table('lights')->get();
+    }
+
+    public function index()
+    {
+      return View::make('welcome');
     }
 
 }
