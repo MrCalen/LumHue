@@ -38,5 +38,5 @@ Route::group(['middleware' => ['web']], function ()
 {
   //
   Route::get('/', 'HomeController@index');
-
+  Route::get('/mongo', 'MongoDBController@GetTable');
 });

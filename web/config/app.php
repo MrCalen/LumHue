@@ -158,6 +158,7 @@ return [
 
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         App\Providers\MeetHueServiceProvider::class,
+        App\Providers\MongoDBServiceProvider::class,
     ],
 
     /*
@@ -206,6 +207,7 @@ return [
         'JWTAuth'   => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'MeetHue'  => App\Helpers\MeetHue\MeetHue::class,
+        'LumHueMongo'  => App\Helpers\LumHueMongo::class,
     ],
 
 ];
