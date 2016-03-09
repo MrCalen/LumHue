@@ -6,6 +6,8 @@ use MeetHue;
 use MongoHue;
 use View;
 use DB;
+use App\User;
+use JWTAuth;
 
 class HomeController extends Controller
 {

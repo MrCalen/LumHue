@@ -11,13 +11,12 @@ Route::group(['prefix' => 'api'], function ()
   | to generate tokens and filter them.
   |
   */
-  Route::group(['middleware' => 'api'], function (){
+  Route::group(['middleware' => ['api']], function (){
 
     Route::get('/', 'HomeController@GetBridge');
     Route::post('/light', 'LightsController@SetLights');
 
   });
-
 
   // Token Generation routes.
   Route::post('/signup', 'UserController@Signup');
@@ -38,5 +37,6 @@ Route::group(['middleware' => ['web']], function ()
 {
   //
   Route::get('/', 'HomeController@index');
+  Route::get('/login', 'App\LoginController@LoginPage');
   Route::get('/mongo', 'MongoDBController@GetTable');
 });
