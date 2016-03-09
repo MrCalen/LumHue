@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helpers\MeetHue;
+namespace App\Helpers;
 
 use Illuminate\Support\Facades\Facade;
 

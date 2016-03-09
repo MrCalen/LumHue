@@ -206,7 +206,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'JWTAuth'   => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
-        'MeetHue'  => App\Helpers\MeetHue\MeetHue::class,
+        'MeetHue'  => App\Helpers\MeetHue::class,
         'MongoHue'  => App\Helpers\MongoHue::class,
     ],
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use MeetHue;
+use MongoHue;
 use View;
 use DB;
 
