@@ -42,5 +42,8 @@ class UpdateBridge extends Command
       foreach ($users as $user) {
         $this->getBridge($user);
       }
+
+      echo 'Updated Bridge';
+
     }
 }
