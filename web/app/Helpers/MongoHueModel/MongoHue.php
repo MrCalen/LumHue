@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Helpers\MongoDBModel;
+namespace App\Helpers\MongoHueModel;
 
 use App\Models\Light;
 
-class LumHueMongo
+class MongoHue
 {
   protected $client;
 

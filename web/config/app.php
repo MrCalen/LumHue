@@ -207,7 +207,7 @@ return [
         'JWTAuth'   => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'MeetHue'  => App\Helpers\MeetHue\MeetHue::class,
-        'LumHueMongo'  => App\Helpers\LumHueMongo::class,
+        'MongoHue'  => App\Helpers\MongoHue::class,
     ],
 
 ];

@@ -13,6 +13,6 @@ class MongoDBServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('mongo', 'App\Helpers\MongoDBModel\LumHueMongo');
+        $this->app->bind('mongohue', 'App\Helpers\MongoHueModel\MongoHue');
     }
 }
