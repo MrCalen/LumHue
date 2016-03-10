@@ -10,7 +10,9 @@ class LoginController extends \App\Http\Controllers\Controller
 
   public function LoginPage()
   {
-    return View::make('login/login');
+    return View::make('login/login', [
+      'coucou' => 'coucou12'
+    ]);
   }
 }
 

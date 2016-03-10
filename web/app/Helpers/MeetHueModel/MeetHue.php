@@ -2,7 +2,7 @@
 
 namespace App\Helpers\MeetHueModel;
 
-use App\Models\Light;
+use App\Models\HueLight;
 
 class MeetHue
 {
@@ -26,7 +26,7 @@ class MeetHue
     return $data;
   }
 
-  private function createClipMessage(Light $light)
+  private function createClipMessage(HueLight $light)
   {
     $clipmessage = [
       'clipCommand' => [
@@ -41,7 +41,7 @@ class MeetHue
     ];
   }
 
-  private function curlPostHelper($action, Light $light, $token)
+  private function curlPostHelper($action, HueLight $light, $token)
   {
     $url = 'https://www.meethue.com/api/' . $action . '?token=' . $token;
     $fields = $this->createClipMessage($light);
@@ -66,7 +66,7 @@ class MeetHue
     return $this->curlGetHelper('getbridge', $token);
   }
 
-  public function applyLightStatus(Light $light, $token)
+  public function applyLightStatus(HueLight $light, $token)
   {
     return $this->curlPostHelper('sendmessage', $light, $token);
   }

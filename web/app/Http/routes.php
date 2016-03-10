@@ -21,7 +21,7 @@ Route::group(['prefix' => 'api'], function ()
     Route::get('/bridge', 'Api\LightsController@GetBridge');
     Route::post('/light', 'Api\LightsController@SetLights');
 
-
+    Route::get('/lights', 'Api\LightsController@GetLights');
 
   });
 
