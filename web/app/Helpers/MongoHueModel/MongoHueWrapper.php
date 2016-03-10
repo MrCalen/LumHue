@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Helpers\MongoHueModel;
 
@@ -28,7 +29,7 @@ class MongoHueWrapper
       ]);
   }
 
-  public static function RetrieveLight($user_id, $light_id)
+  public static function RetrieveLight($user_id, $light_id) : HueLight
   {
     $lights = MongoHueWrapper::RetrieveLightStates($user_id);
     if (!isset($lights[$light_id]))
@@ -36,7 +37,7 @@ class MongoHueWrapper
     return $lights[$light_id];
   }
 
-  public static function RetrieveLightStates($user_id)
+  public static function RetrieveLightStates($user_id) : array
   {
     $bridgeStatus = MongoHue::table('bridge')->find([ 'user_id' => $user_id ]);
     $bridgeStatus = Utils::MongoArray($bridgeStatus);

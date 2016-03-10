@@ -1,6 +1,8 @@
 <?php
+declare(strict_types=1);
 
 namespace app\Models;
+use stdClass;
 
 class HueLight
 {
@@ -18,7 +20,7 @@ class HueLight
   protected $name;
   protected $id;
 
-  public function __construct($id, $light)
+  public function __construct(string $id, stdClass $light)
   {
     $this->id = $id;
     foreach ($light->state as $key => $value)
@@ -26,10 +28,12 @@ class HueLight
     $this->name = $light->name;
   }
 
-  public function setProperty()
-{}
+  public function setProperty(string $property, $value)
+  {
+    $this->{$property} = $value;
+  }
 
-  public function toArray()
+  public function toArray() : array
   {
     $result = [];
 

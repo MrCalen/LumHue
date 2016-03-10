@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Helpers\MongoHueModel;
 
@@ -19,7 +20,7 @@ class MongoHue
     $this->db = $this->client->LumHue;
   }
 
-  public function table($table)
+  public function table($table) : \MongoDB\Collection
   {
     return $this->db->{$table};
   }

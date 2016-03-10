@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Helpers\MeetHueModel;
 
 use App\Models\HueLight;
@@ -9,7 +11,7 @@ class MeetHue
   private $base_uri = "https://www.meethue.com/api";
   private $user_token = "328f4f1a291e01cd550e24950d02d4e";
 
-  private function curlGetHelper($action, $token)
+  private function curlGetHelper(string $action, string $token) : string
   {
     $base_uri = $this->base_uri . '/' . $action . '?token=' . $token;
     $ch = curl_init();
@@ -26,7 +28,7 @@ class MeetHue
     return $data;
   }
 
-  private function createClipMessage(HueLight $light)
+  private function createClipMessage(HueLight $light) : array
   {
     $clipmessage = [
       'clipCommand' => [
@@ -41,7 +43,7 @@ class MeetHue
     ];
   }
 
-  private function curlPostHelper($action, HueLight $light, $token)
+  private function curlPostHelper(string $action, HueLight $light, $token) : string
   {
     $url = 'https://www.meethue.com/api/' . $action . '?token=' . $token;
     $fields = $this->createClipMessage($light);
@@ -61,12 +63,12 @@ class MeetHue
     return $result;
   }
 
-  public function getBridge($token)
+  public function getBridge(string $token) : string
   {
     return $this->curlGetHelper('getbridge', $token);
   }
 
-  public function applyLightStatus(HueLight $light, $token)
+  public function applyLightStatus(HueLight $light, $token) : string
   {
     return $this->curlPostHelper('sendmessage', $light, $token);
   }
