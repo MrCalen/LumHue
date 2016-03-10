@@ -1,1 +1,1 @@
-@extends('templates/basic_layout')
+@extends('templates/basic_nav')
