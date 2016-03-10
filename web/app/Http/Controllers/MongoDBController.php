@@ -7,19 +7,9 @@ use Illuminate\Http\Request;
 
 class MongoDBController extends Controller
 {
-    public function getTable(Request $request)
+    public function getTable($table)
     {
-        return MongoHue::table($request->get("table"));
+        return MongoHue::table($table);
     }
 
-    public function insertIntoTable($table, $element)
-    {
-        return MongoHue::table($table)->insert($element);
-    }
-
-    public function GetBridge()
-    {
-    //    $mongo = new LumHueMongo();
-  //      return $mongo->getCollection();
-    }
 }
