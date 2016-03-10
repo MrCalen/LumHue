@@ -45,5 +45,6 @@ Route::group(['middleware' => ['web']], function ()
   //
   Route::get('/', 'HomeController@index');
   Route::get('/login', 'App\LoginController@LoginPage');
+  Route::post('/login', 'App\LoginController@Authentication');
   Route::get('/mongo', 'MongoDBController@GetTable');
 });

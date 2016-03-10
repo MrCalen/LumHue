@@ -38,4 +38,5 @@
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </nav>
+  @yield('content')
 @endsection
