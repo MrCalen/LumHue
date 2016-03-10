@@ -12,7 +12,7 @@ class UpdateBridge extends Command
 {
     protected $signature = 'meethue:bridge';
 
-    protected $description = 'Get Bridge status of Application';
+    protected $description = 'Update Bridge status of Application';
 
     public function __construct()
     {

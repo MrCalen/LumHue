@@ -24,7 +24,7 @@ class MongoHueWrapper
           ],
         ], [
           'upsert' => true,
-        ]
+        ],
       ]);
   }
 
