@@ -3,6 +3,7 @@
 namespace App\Helpers\MongoHueModel;
 
 use MongoHue;
+use DataTime;
 
 class MongoHueWrapper
 {
@@ -14,6 +15,10 @@ class MongoHueWrapper
       ], [
         '$set' => [
           'status' => $bridge,
+          'last_updated' => [
+            'date' => date("F j, Y, g:i a"),
+            'timestamp' => time(),
+          ],
         ], [
           'upsert' => true,
         ]

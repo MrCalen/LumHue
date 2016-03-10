@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use MeetHue;
 use MongoHue;
 use App\User;
+use DataTime;
 
 class UpdateBridge extends Command
 {
@@ -30,6 +31,10 @@ class UpdateBridge extends Command
           '$set' => [
             'user_id' => $user_id,
             'status' => $bridge,
+            'last_updated' => [
+              'date' => date("F j, Y, g:i a"),
+              'timestamp' => time(),
+            ],
           ],
         ], [
           'upsert' => true,
