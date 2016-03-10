@@ -27,6 +27,13 @@ class LightQueryBuilder
     return $this;
   }
 
+  public function setProperties(array $values)
+  {
+    foreach ($values as $key => $value)
+      $this->setProperty($key, $value);
+    return $this;
+  }
+
   public function apply($token)
   {
     MeetHue::applyLightStatus($this->light, $token);
