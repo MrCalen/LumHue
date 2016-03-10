@@ -13,7 +13,7 @@ class Utils
   {
     $unserialized = [];
     array_map(function (Serializable $element) use (&$unserialized) {
-      $unserialized[] = $element->bsonSerialize();
+      $unserialized[] = json_decode(json_encode($element));
     }, iterator_to_array($bsonDocuments));
     return $unserialized;
   }

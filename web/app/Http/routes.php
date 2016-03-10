@@ -13,8 +13,15 @@ Route::group(['prefix' => 'api'], function ()
   */
   Route::group(['middleware' => ['api']], function (){
 
-    Route::get('/', 'HomeController@GetBridge');
-    Route::post('/light', 'LightsController@SetLights');
+    // MeetHue direct responses
+    Route::group(['prefix' => 'meethue'], function (){
+      Route::get('/bridge', 'Api\MeetHue\MeetHueController@GetBridge');
+    });
+
+    Route::get('/bridge', 'Api\LightsController@GetBridge');
+    Route::post('/light', 'Api\LightsController@SetLights');
+
+
 
   });
 

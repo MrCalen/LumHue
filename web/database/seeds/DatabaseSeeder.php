@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         ->insert([
           'name' => 'root',
           'password' => \Hash::make('coucou'),
-          'email' => 'dagues@yaka.epita.fr',
+          'email' => 'dagues_p@yaka.epita.fr',
           'meethue_token' => 'alhzT29HZFptWEFtTTlNaTVGYlYvUHRCVHJHYjNPUWF3S2NSTjY0Znc3ND0%3D'
         ]);
     }

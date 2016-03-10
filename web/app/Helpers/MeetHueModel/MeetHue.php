@@ -68,7 +68,6 @@ class MeetHue
 
   public function applyLightStatus(Light $light, $token)
   {
-//    $token = $token->__toString();
     return $this->curlPostHelper('sendmessage', $light, $token);
   }
 

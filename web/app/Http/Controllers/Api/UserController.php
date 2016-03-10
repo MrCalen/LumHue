@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
+
 use Illuminate\Http\Request;
 use App\User;
 use JWTAuth;
 use Illuminate\Support\Facades\Response;
 
-class UserController extends Controller
+class UserController extends \App\Http\Controllers\Controller
 {
     public function SignUp(Request $request)
     {
@@ -26,8 +27,8 @@ class UserController extends Controller
     public function SignIn(Request $request)
     {
         $credentials = $request->all();
-        $token = \JWTAuth::attempt($credentials);
 
+        $token = \JWTAuth::attempt($credentials);
         if (!$token)
             return Response::json([
                 'Auth Failed'
