@@ -16,4 +16,8 @@ class HomeController extends Controller
       return View::make('welcome');
     }
 
+    public function test()
+    {
+      return View::make('test/test');
+    }
 }

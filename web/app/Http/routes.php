@@ -1,7 +1,6 @@
 <?php
 
-Route::group(['prefix' => 'api'], function ()
-{
+Route::group(['prefix' => 'api'], function () {
 
   /*
   |--------------------------------------------------------------------------
@@ -11,10 +10,10 @@ Route::group(['prefix' => 'api'], function ()
   | to generate tokens and filter them.
   |
   */
-  Route::group(['middleware' => ['api']], function (){
+  Route::group(['middleware' => ['api']], function () {
 
     // MeetHue direct responses
-    Route::group(['prefix' => 'meethue'], function (){
+    Route::group(['prefix' => 'meethue'], function () {
       Route::get('/bridge', 'Api\MeetHue\MeetHueController@GetBridge');
     });
 
@@ -40,11 +39,11 @@ Route::group(['prefix' => 'api'], function ()
 | Protected by CSRF verification and Web MiddleWare.
 |
 */
-Route::group(['middleware' => ['web']], function ()
-{
-  //
+Route::group(['middleware' => ['web']], function () {
   Route::get('/', 'HomeController@index');
   Route::get('/login', 'App\LoginController@LoginPage');
   Route::post('/login', 'App\LoginController@Authentication');
   Route::get('/mongo', 'MongoDBController@GetTable');
+
+  Route::get('/chat', 'Chat\ChatController@index');
 });
