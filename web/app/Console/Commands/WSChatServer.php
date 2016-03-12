@@ -21,8 +21,7 @@ class WSChatServer extends Command {
 
   public function fire()
   {
-    $port = intval($this->option('port'));
-    $this->info("Starting chat web socket server on port " . $port);
+    $this->info("Starting chat web socket server on port " . '9090');
 
     $server = IoServer::factory(
       new HttpServer(
@@ -30,7 +29,7 @@ class WSChatServer extends Command {
           new Chat()
         )
       ),
-      $port,
+      '9090',
       '0.0.0.0'
     );
     $server->run();
