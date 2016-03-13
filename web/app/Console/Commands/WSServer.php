@@ -7,31 +7,40 @@ use Symfony\Component\Console\Input\InputArgument;
 use Ratchet\Server\IoServer;
 use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
-use App\Models\Chat;
+use App\WebSockets\Protocol;
+use App\WebSockets\Strategy\ChatStrategy;
 
-class WSChatServer extends Command {
+class WSServer extends Command {
 
-  protected $name = 'chat:serve';
-  protected $description = 'Start chat server.';
+  protected $name = 'ws:serve';
+  protected $description = 'Start Websockets handlers.';
+
+  private $hueChatPort = '9090';
 
   public function __construct()
   {
     parent::__construct();
   }
 
-  public function fire()
+  public function startHueChat()
   {
-    $this->info("Starting chat web socket server on port " . '9090');
+    $this->info("Starting chat web socket server on port " . $this->hueChatPort);
 
     $server = IoServer::factory(
       new HttpServer(
         new WsServer(
-          new Chat()
+          new Protocol(new ChatStrategy())
         )
       ),
-      '9090',
+      $this->hueChatPort,
       '0.0.0.0'
     );
     $server->run();
   }
+
+  public function fire()
+  {
+    $this->startHueChat();
+  }
+
 }

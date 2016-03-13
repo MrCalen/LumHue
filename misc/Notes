@@ -1,0 +1,20 @@
+Les notifications de google agenda
+on aurait du paralleliser le machine learning parce que ca va nous prendre du temps
+
+logique de rdv, de rappel etc -> notre point fort
+
+Créer les méthodes post et get via les modèles directement
+
+Redis devient bien quand on a beaucoup de temps réel à gérer
+Redis va permettre de distribuer les signaux
+SignalR
+
+faire un average au niveau de l'android
+
+AWS IoT : gérer les lampes au sein de l'application
+          tuto avec Hue
+
+Estimote : les stickers suffisent
+les beacons ne sont pas communiquants
+
+représenter l'appartement

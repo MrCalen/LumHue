@@ -9,7 +9,7 @@ class Kernel extends ConsoleKernel
 {
     protected $commands = [
         Commands\UpdateBridge::class,
-        Commands\WSChatServer::class,
+        Commands\WSServer::class,
     ];
 
     protected function schedule(Schedule $schedule)
