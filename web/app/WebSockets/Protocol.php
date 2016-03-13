@@ -22,7 +22,6 @@ class Protocol implements MessageComponentInterface
   public function onOpen(ConnectionInterface $connection)
   {
     $this->openConnections[$connection->resourceId] = new Connection($connection);
-    $this->keepLog("New connection! ({$connection->resourceId})", $connection);
   }
 
   public function onMessage(ConnectionInterface $connection, $message)
@@ -32,15 +31,12 @@ class Protocol implements MessageComponentInterface
 
   public function onClose(ConnectionInterface $connection)
   {
-    $this->keepLog("Connection {$this->openConnections[$connection->resourceId]->getName()} has disconnected", $connection);
+    $this->strategy->onClose($connection, $this);
     unset($this->openConnections[$connection->resourceId]);
-    $this->strategy->onClose($this);
   }
 
   public function onError(ConnectionInterface $connection, Exception $e)
   {
-    $this->keepLog("An error has occurred: {$e->getMessage()}", $connection);
-    echo ("An error has occurred: {$e->getMessage()}\n");
     $connection->close();
     unset($this->openConnections[$connection->resourceId]);
   }

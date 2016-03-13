@@ -11,7 +11,7 @@ class ChatStrategy implements StrategyInterface
     $username = $protocol->getConnections()[$connection->resourceId]->getName();
     $protocol->keepLog("New message {$message} from {$username}", $connection);
     foreach ($protocol->getConnections() as $name => $client)
-        $client->send($message);
+      $client->send($message);
   }
 
   public function onMessage($connection, $message, Protocol $protocol)
@@ -42,16 +42,30 @@ class ChatStrategy implements StrategyInterface
       $this->broadcast($protocol, $msg, $connection);
   }
 
-  public function onClose(Protocol $protocol)
+  public function onClose($connection, Protocol $protocol)
   {
+    $names = array_map(function ($elt) use ($connection){
+                    if ($connection->resourceId !== $elt->getConnection()->resourceId)
+                      return $elt->getName();
+                }, array_values($protocol->getConnections()));
+    $names = array_filter($names, function ($elt) { return $elt != null; });
     $message = json_encode([
-      'type'  => 'auth',
-      'users' =>  array_values($protocol->getConnections()),
+        'type'  => 'auth',
+        'users' => $names,
       ]);
 
-    foreach ($protocol->getConnections() as $name => $connection)
-        $connection->send($message);
-    $this->broadcast($protocol, $message);
+    $name = $protocol->getConnections()[$connection->resourceId]->getName();
+    $botMessage = json_encode([
+      'type' => 'message',
+      'content' => "{$name} disconnected",
+      'author' => 'LumHue Bot',
+      'date' => date('l jS \of F Y h:i:s A'),
+    ]);
+    foreach ($protocol->getConnections() as $name => $client)
+    {
+        $client->send($message);
+        $client->send($botMessage);
+    }
   }
 
 }
