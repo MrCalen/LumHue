@@ -6,6 +6,12 @@ use App\WebSockets\Protocol;
 
 class ChatStrategy implements StrategyInterface
 {
+  private function broadcast(Protocol $protocol, $message)
+  {
+    foreach ($protocol->getConnections() as $name => $client)
+        $client->send($message);
+  }
+
   public function onMessage($connection, $message, Protocol $protocol)
   {
     $message = json_decode($message);
@@ -30,9 +36,8 @@ class ChatStrategy implements StrategyInterface
         'date' => date('l jS \of F Y h:i:s A'),
       ]);
     }
-
-    foreach ($protocol->getConnections() as $name => $client)
-        $client->send($msg);
+    if (isset($msg))
+      $this->broadcast($protocol, $msg);
   }
 
   public function onClose(Protocol $protocol)
@@ -44,6 +49,7 @@ class ChatStrategy implements StrategyInterface
 
     foreach ($protocol->getConnections() as $name => $connection)
         $connection->send($message);
+    $this->broadcast($protocol, $message);
   }
 
 }

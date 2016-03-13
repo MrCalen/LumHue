@@ -1,7 +1,7 @@
 var HueChatApp = angular.module('HueChat', [], function($interpolateProvider) {
-        $interpolateProvider.startSymbol('{$');
-        $interpolateProvider.endSymbol('$}');
-    });
+  $interpolateProvider.startSymbol('{$');
+  $interpolateProvider.endSymbol('$}');
+});
 
 HueChatApp.controller('HueChatController', function ($scope, $http, $timeout)
 {
@@ -12,6 +12,15 @@ HueChatApp.controller('HueChatController', function ($scope, $http, $timeout)
     console.error('No Websocket');
   var conn = new WebSocket("wss://lumhue.mr-calen.eu/ws");
 
+  $scope.pingServer = function() {
+    conn.send(JSON.stringify({
+      'protocol' : 'chat',
+      'type' : 'ping',
+      'user' : $scope.username,
+    }));
+    $timeout($scope.pingServer, 30000);
+  }
+
   conn.onopen = function (e) {
     conn.send(JSON.stringify({
       'protocol' : 'chat',
@@ -20,6 +29,7 @@ HueChatApp.controller('HueChatController', function ($scope, $http, $timeout)
         'name' : window.username
       }
     }));
+    $scope.pingServer();
   };
 
   conn.onmessage = function (e) {
