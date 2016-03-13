@@ -45,10 +45,10 @@
                 <div class="text" ng-bind="message.content"></div>
                 <div class="time" ng-bind="message.date"></div>
               </div>
-              <div class="answer-add">
+              <form class="answer-add" ng-submit="sendMessage(); currentMessage = ''">
                 <input placeholder="Write a message" ng-model="currentMessage">
                 <span class="answer-btn answer-btn-2" ng-click="sendMessage(); currentMessage = ''"></span>
-              </div>
+              </form>
             </div>
           </div>
         </div>
