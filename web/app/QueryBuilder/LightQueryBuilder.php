@@ -35,7 +35,7 @@ class LightQueryBuilder
     return $this;
   }
 
-  public function apply($token) : void
+  public function apply($token)
   {
     MeetHue::applyLightStatus($this->light, $token);
   }

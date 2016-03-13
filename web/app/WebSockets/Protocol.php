@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\WebSockets;
 
 use Ratchet\MessageComponentInterface;
@@ -41,7 +44,7 @@ class Protocol implements MessageComponentInterface
     unset($this->openConnections[$connection->resourceId]);
   }
 
-  public function getConnections()
+  public function getConnections() : array
   {
     return $this->openConnections;
   }

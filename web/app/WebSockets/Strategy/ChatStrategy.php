@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\WebSockets\Strategy;
 
 use App\WebSockets\Protocol;
+use Ratchet\ConnectionInterface;
 
 class ChatStrategy implements StrategyInterface
 {
-  private function broadcast(Protocol $protocol, $message, $connection)
+  private function broadcast(Protocol $protocol, string $message, ConnectionInterface $connection)
   {
     $username = $protocol->getConnections()[$connection->resourceId]->getName();
     $protocol->keepLog("New message {$message} from {$username}", $connection);
@@ -14,7 +17,7 @@ class ChatStrategy implements StrategyInterface
       $client->send($message);
   }
 
-  public function onMessage($connection, $message, Protocol $protocol)
+  public function onMessage(ConnectionInterface $connection, string $message, Protocol $protocol)
   {
     $message = json_decode($message);
     if ($message->type === 'auth')
@@ -42,9 +45,9 @@ class ChatStrategy implements StrategyInterface
       $this->broadcast($protocol, $msg, $connection);
   }
 
-  public function onClose($connection, Protocol $protocol)
+  public function onClose(ConnectionInterface $connection, Protocol $protocol)
   {
-    $names = array_map(function ($elt) use ($connection){
+    $names = array_map(function ($elt) use ($connection) {
                     if ($connection->resourceId !== $elt->getConnection()->resourceId)
                       return $elt->getName();
                 }, array_values($protocol->getConnections()));

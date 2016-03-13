@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\WebSockets;
 
 use Ratchet\MessageComponentInterface;
@@ -10,12 +12,12 @@ class Connection
   protected $connection;
   protected $name;
 
-  public function __construct($connection)
+  public function __construct(ConnectionInterface $connection)
   {
     $this->connection = $connection;
   }
 
-  public function getConnection()
+  public function getConnection() : ConnectionInterface
   {
     return $this->connection;
   }
@@ -25,7 +27,7 @@ class Connection
     $this->name = $name;
   }
 
-  public function getName()
+  public function getName() : string
   {
     return $this->name;
   }
