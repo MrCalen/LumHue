@@ -6,8 +6,10 @@ use App\WebSockets\Protocol;
 
 class ChatStrategy implements StrategyInterface
 {
-  private function broadcast(Protocol $protocol, $message)
+  private function broadcast(Protocol $protocol, $message, $connection)
   {
+    $username = $protocol->getConnections()[$connection->resourceId]->getName();
+    $protocol->keepLog("New message {$message} from {$username}", $connection);
     foreach ($protocol->getConnections() as $name => $client)
         $client->send($message);
   }
@@ -37,7 +39,7 @@ class ChatStrategy implements StrategyInterface
       ]);
     }
     if (isset($msg))
-      $this->broadcast($protocol, $msg);
+      $this->broadcast($protocol, $msg, $connection);
   }
 
   public function onClose(Protocol $protocol)
