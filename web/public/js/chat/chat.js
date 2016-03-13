@@ -10,7 +10,7 @@ HueChatApp.controller('HueChatController', function ($scope, $http, $timeout)
 
   if (!WebSocket)
     console.error('No Websocket');
-  var conn = new WebSocket("ws://lumhue-ws.mr-calen.eu");
+  var conn = new WebSocket("wss://lumhue.mr-calen.eu/ws");
 
   conn.onopen = function (e) {
     conn.send(JSON.stringify({
