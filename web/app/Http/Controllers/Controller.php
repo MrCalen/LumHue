@@ -15,7 +15,7 @@ class Controller extends BaseController
 
     protected function tokenToUser(\Illuminate\Http\Request $request)
     {
-      $token = $request->get('access_token');
+      $token = $this->getToken($request);
       \JWTAuth::setToken($token);
       $user = \JWTAuth::toUser();
       return $user;
@@ -25,5 +25,13 @@ class Controller extends BaseController
     {
       $user = $this->tokenToUser($request);
       return $user->meethue_token;
+    }
+
+    protected function getToken(\Illuminate\Http\Request $request)
+    {
+      $token = $request->get('access_token');
+      if (!$token)
+        $token = $request->get('?access_token');
+      return $token;
     }
 }

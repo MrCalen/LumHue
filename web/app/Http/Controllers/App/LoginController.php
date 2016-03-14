@@ -5,6 +5,7 @@ namespace App\Http\Controllers\App;
 use Illuminate\Http\Request;
 use Auth;
 use View;
+use Redirect;
 
 class LoginController extends \App\Http\Controllers\Controller
 {
@@ -19,10 +20,9 @@ class LoginController extends \App\Http\Controllers\Controller
   public function authenticate(Request $request)
   {
     if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $request->input('remember')))
-    {
-      return redirect()->intended('lights');
-    }
-    return redirect()->intended('login');
+      return Redirect::to('lights');
+
+    return Redirect::to('login');
   }
 }
 

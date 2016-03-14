@@ -47,8 +47,7 @@ Route::group(['middleware' => ['web']], function () {
 
   Route::get('/chat', 'Chat\ChatController@index');
 
-  Route::group(['middleware' => 'auth'], function()
-  {
+  Route::group(['middleware' => 'auth'], function()  {
     Route::get('/lights', 'App\LightController@index');
   });
 });

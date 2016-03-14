@@ -1,6 +1,6 @@
 @extends('templates/basic_nav')
 @section('content')
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <div ng-app="light" ng-controller="lightControl">
         <div class="col-md-12">Lights</div>
         <div class="col-md-4" ng-repeat="light in lights">
@@ -13,7 +13,7 @@
                 $interpolateProvider.startSymbol('{$').
                 endSymbol('$}')});
             app.controller('lightControl', function($scope, $http) {
-                    $http.get("http://karskrin.mr-calen.eu/api/bridge", {params: {"access_token": '{{$token}}'}})
+                    $http.get("{{ URL::to('/')}}/api/bridge", {params: {"access_token": '{{$token}}'}})
                             .success(function (data, status) {
                                 console.log("success");
                                 console.log(data[0].status.lights[1]);
