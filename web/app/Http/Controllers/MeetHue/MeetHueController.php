@@ -8,6 +8,7 @@ use View;
 use DB;
 use App\User;
 use JWTAuth;
+use App\Helpers\MongoHueModel\MongoHueWrapper;
 
 class MeetHueController extends \App\Http\Controllers\Controller
 {
@@ -17,6 +18,6 @@ class MeetHueController extends \App\Http\Controllers\Controller
     $token = $user->meethue_token;
 
     $bridge = MeetHue::getBridge($token);
-    \App\Helpers\MongoHueModel\MongoHueWrapper::UpdateBridgeStatus($bridge, $user->id);
+    MongoHueWrapper::UpdateBridgeStatus($bridge, $user->id);
   }
 }

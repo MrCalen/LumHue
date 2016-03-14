@@ -12,12 +12,14 @@ class LoginController extends \App\Http\Controllers\Controller
 
   public function LoginPage()
   {
+    if (Auth::user())
+        return Redirect::to('lights');
+
     return View::make('login/login', [
-      'coucou' => 'coucou12'
     ]);
   }
 
-  public function authenticate(Request $request)
+  public function Authenticate(Request $request)
   {
     if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $request->input('remember')))
       return Redirect::to('lights');

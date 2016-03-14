@@ -17,11 +17,11 @@ Route::group(['prefix' => 'api'], function () {
       Route::get('/bridge', 'Api\MeetHue\MeetHueController@GetBridge');
     });
 
+    // Get Bridge Status
     Route::get('/bridge', 'Api\LightsController@GetBridge');
-    Route::post('/light', 'Api\LightsController@SetLights');
 
     Route::get('/lights', 'Api\LightsController@GetLights');
-
+    Route::post('/light', 'Api\LightsController@SetLights');
   });
 
   // Token Generation routes.
@@ -40,14 +40,22 @@ Route::group(['prefix' => 'api'], function () {
 |
 */
 Route::group(['middleware' => ['web']], function () {
-  Route::get('/', 'HomeController@index');
-  Route::get('/login', 'App\LoginController@LoginPage');
-  Route::post('/login', 'App\LoginController@authenticate');
-  Route::get('/mongo', 'MongoDBController@GetTable');
 
-  Route::get('/chat', 'Chat\ChatController@index');
+  // Index
+  Route::get('/', 'HomeController@Index');
 
-  Route::group(['middleware' => 'auth'], function()  {
-    Route::get('/lights', 'App\LightController@index');
+  // Login routes
+  Route::group(['prefix' => 'login'], function () {
+    Route::get('/', 'App\LoginController@LoginPage');
+    Route::post('/', 'App\LoginController@Authenticate');
   });
+
+  // Chat route
+  Route::get('/chat', 'Chat\ChatController@Index');
+
+  // Authentificated routes
+  Route::group(['middleware' => 'auth'], function()  {
+    Route::get('/lights', 'App\LightController@Index');
+  });
+
 });

@@ -7,7 +7,7 @@ use View;
 
 class LightController extends \App\Http\Controllers\Controller
 {
-    public function index()
+    public function Index()
     {
         return View::make('lights/light', [
             'token' => \JWTAuth::fromUser(Auth::user()),

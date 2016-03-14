@@ -11,13 +11,8 @@ use JWTAuth;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function Index()
     {
       return View::make('welcome');
-    }
-
-    public function test()
-    {
-      return View::make('test/test');
     }
 }
