@@ -33,7 +33,6 @@ HueChatApp.controller('HueChatController', function ($scope, $http, $timeout)
   };
 
   conn.onmessage = function (e) {
-    console.log(e.data);
     var message = JSON.parse(e.data);
     if (message.type === 'auth')
       $scope.users = message.users;
