@@ -42,8 +42,13 @@ Route::group(['prefix' => 'api'], function () {
 Route::group(['middleware' => ['web']], function () {
   Route::get('/', 'HomeController@index');
   Route::get('/login', 'App\LoginController@LoginPage');
-  Route::post('/login', 'App\LoginController@Authentication');
+  Route::post('/login', 'App\LoginController@authenticate');
   Route::get('/mongo', 'MongoDBController@GetTable');
 
   Route::get('/chat', 'Chat\ChatController@index');
+
+  Route::group(['middleware' => 'auth'], function()
+  {
+    Route::get('/lights', 'App\LightController@index');
+  });
 });

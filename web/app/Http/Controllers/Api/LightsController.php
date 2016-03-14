@@ -32,16 +32,18 @@ class LightsController extends \App\Http\Controllers\Controller
     $user = $this->tokenToUser($request);
     $bridge = MongoHue::table('bridge')->find([ 'user_id' => $user->id ]);
     $bridge = Utils::MongoArray($bridge);
-    dd($bridge);
+    //dd($bridge);
     return $bridge;
   }
 
   public function GetLights(Request $request)
   {
+    //dd($request);
     $user = $this->tokenToUser($request);
     $light = MongoHueWrapper::RetrieveLight($user->id, 2);
     $queryBuilder = LightQueryBuilder::create($light)->setProperty('on', true);
-    dd($queryBuilder);
+    return $light;
+    //dd($queryBuilder);
   }
 
 }
