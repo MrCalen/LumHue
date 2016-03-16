@@ -1,15 +1,15 @@
 <?php
 
-Route::group(['prefix' => 'api'], function () {
 
-  /*
-  |--------------------------------------------------------------------------
-  | API Routes
-  |--------------------------------------------------------------------------
-  | Most API Routes are protected by the API middleware which uses JWAuth
-  | to generate tokens and filter them.
-  |
-  */
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+| Most API Routes are protected by the API middleware which uses JWAuth
+| to generate tokens and filter them.
+|
+*/
+Route::group(['prefix' => 'api'], function () {
   Route::group(['middleware' => ['api']], function () {
 
     // MeetHue direct responses
@@ -56,6 +56,10 @@ Route::group(['middleware' => ['web']], function () {
   // Authentificated routes
   Route::group(['middleware' => 'auth'], function()  {
     Route::get('/lights', 'App\LightController@Index');
+  });
+
+  Route::group(['prefix' => 'test'], function () {
+    Route::get('email', 'HomeController@Mail');
   });
 
 });

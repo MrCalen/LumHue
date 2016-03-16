@@ -155,6 +155,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\HueMailProvider::class,
 
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         App\Providers\MeetHueServiceProvider::class,
@@ -209,6 +210,7 @@ return [
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'MeetHue'  => App\Helpers\MeetHue::class,
         'MongoHue'  => App\Helpers\MongoHue::class,
+        'HueMail' => App\Helpers\HueMail\HueMailFacade::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Input' => Illuminate\Support\Facades\Input::class,
