@@ -161,8 +161,6 @@ return [
         App\Providers\MeetHueServiceProvider::class,
         App\Providers\MongoDBServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-
-        LeroyMerlin\LaraSniffer\ServiceProvider::class,
     ],
 
     /*
