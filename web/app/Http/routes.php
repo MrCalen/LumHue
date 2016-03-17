@@ -14,19 +14,19 @@ Route::group(['prefix' => 'api'], function () {
 
     // MeetHue direct responses
     Route::group(['prefix' => 'meethue'], function () {
-      Route::get('/bridge', 'Api\MeetHue\MeetHueController@GetBridge');
+      Route::get('/bridge', 'Api\MeetHue\MeetHueController@getBridge');
     });
 
     // Get Bridge Status
-    Route::get('/bridge', 'Api\LightsController@GetBridge');
+    Route::get('/bridge', 'Api\LightsController@getBridge');
 
-    Route::get('/lights', 'Api\LightsController@GetLights');
-    Route::post('/light', 'Api\LightsController@SetLights');
+    Route::get('/lights', 'Api\LightsController@getLights');
+    Route::post('/light', 'Api\LightsController@getLights');
   });
 
   // Token Generation routes.
-  Route::post('/signup', 'UserController@Signup');
-  Route::post('/signin', 'UserController@SignIn');
+  Route::post('/signup', 'UserController@signup');
+  Route::post('/signin', 'UserController@signIn');
 
 });
 
@@ -42,24 +42,24 @@ Route::group(['prefix' => 'api'], function () {
 Route::group(['middleware' => ['web']], function () {
 
   // Index
-  Route::get('/', 'HomeController@Index');
+  Route::get('/', 'HomeController@index');
 
   // Login routes
   Route::group(['prefix' => 'login'], function () {
-    Route::get('/', 'App\LoginController@LoginPage');
-    Route::post('/', 'App\LoginController@Authenticate');
+    Route::get('/', 'App\LoginController@loginPage');
+    Route::post('/', 'App\LoginController@authenticate');
   });
 
   // Chat route
-  Route::get('/chat', 'Chat\ChatController@Index');
+  Route::get('/chat', 'Chat\ChatController@index');
 
   // Authentificated routes
   Route::group(['middleware' => 'auth'], function()  {
-    Route::get('/lights', 'App\LightController@Index');
+    Route::get('/lights', 'App\LightController@index');
   });
 
   Route::group(['prefix' => 'test'], function () {
-    Route::get('email', 'HomeController@Mail');
+    Route::get('email', 'HomeController@mail');
   });
 
 });

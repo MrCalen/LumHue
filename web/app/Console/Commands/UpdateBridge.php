@@ -21,34 +21,34 @@ class UpdateBridge extends Command
 
     private function getBridge($user)
     {
-      $meethue_token = $user->meethue_token;
-      $user_id = $user->id;
-      $bridge = json_decode(MeetHue::getBridge($meethue_token));
-      MongoHue::table('bridge')
+        $meethue_token = $user->meethue_token;
+        $user_id = $user->id;
+        $bridge = json_decode(MeetHue::getBridge($meethue_token));
+        MongoHue::table('bridge')
         ->updateOne([
-          'user_id' => $user_id,
-        ], [
-          '$set' => [
             'user_id' => $user_id,
-            'status' => $bridge,
-            'last_updated' => [
-              'date' => date("F j, Y, g:i a"),
-              'timestamp' => time(),
-            ],
-          ],
         ], [
-          'upsert' => true,
+            '$set' => [
+                'user_id' => $user_id,
+                'status' => $bridge,
+                'last_updated' => [
+                    'date' => date("F j, Y, g:i a"),
+                    'timestamp' => time(),
+                ],
+            ],
+        ], [
+            'upsert' => true,
         ]);
     }
 
     public function handle()
     {
-      $users = User::all();
-      foreach ($users as $user) {
-        $this->getBridge($user);
-      }
+        $users = User::all();
+        foreach ($users as $user) {
+            $this->getBridge($user);
+        }
 
-      echo 'Updated Bridge';
+        echo 'Updated Bridge';
 
     }
 }

@@ -10,11 +10,11 @@ class RGB
     protected $blue;
 
     /**
-     * RGB constructor.
-     * @param $red
-     * @param $green
-     * @param $blue
-     */
+    * RGB constructor.
+    * @param $red
+    * @param $green
+    * @param $blue
+    */
     public function __construct($red, $green, $blue)
     {
         $this->red = $red;
@@ -23,51 +23,50 @@ class RGB
     }
 
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function getRed()
     {
         return $this->red;
     }
 
     /**
-     * @param mixed $red
-     */
+    * @param mixed $red
+    */
     public function setRed($red)
     {
         $this->red = $red;
     }
 
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function getGreen()
     {
         return $this->green;
     }
 
     /**
-     * @param mixed $green
-     */
+    * @param mixed $green
+    */
     public function setGreen($green)
     {
         $this->green = $green;
     }
 
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function getBlue()
     {
         return $this->blue;
     }
 
     /**
-     * @param mixed $blue
-     */
+    * @param mixed $blue
+    */
     public function setBlue($blue)
     {
         $this->blue = $blue;
     }
-
 }

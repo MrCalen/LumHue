@@ -7,12 +7,12 @@ use Illuminate\Support\ServiceProvider;
 class MeetHueServiceProvider extends ServiceProvider
 {
     /**
-     * Register the application services.
-     *
-     * @return void
-     */
+    * Register the application services.
+    *
+    * @return void
+    */
     public function register()
     {
-        $this->app->bind('meethue', 'App\Helpers\MeetHueModel\MeetHue' );
+        $this->app->bind('meethue', 'App\Helpers\MeetHueModel\MeetHue');
     }
 }

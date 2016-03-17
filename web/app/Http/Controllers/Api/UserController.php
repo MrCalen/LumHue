@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Response;
 
 class UserController extends \App\Http\Controllers\Controller
 {
-    public function SignUp(Request $request)
+    public function signUp(Request $request)
     {
         try {
             $user = User::create($request->all());
@@ -24,17 +24,16 @@ class UserController extends \App\Http\Controllers\Controller
         }
     }
 
-    public function SignIn(Request $request)
+    public function signIn(Request $request)
     {
         $credentials = $request->all();
 
         $token = \JWTAuth::attempt($credentials);
-        if (!$token)
+        if (!$token) {
             return Response::json([
                 'Auth Failed'
             ]);
-
+        }
         return Response::json(compact('token'));
     }
-
 }

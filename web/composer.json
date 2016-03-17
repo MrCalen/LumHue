@@ -10,7 +10,8 @@
         "tymon/jwt-auth": "0.5.*",
         "mongodb/mongodb": "^1.0.0",
         "laravelcollective/html": "5.*",
-	      "guzzlehttp/guzzle": "~5.3|~6.0"
+	      "guzzlehttp/guzzle": "~5.3|~6.0",
+        "leroy-merlin-br/larasniffer": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

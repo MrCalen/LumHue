@@ -9,6 +9,6 @@ use Ratchet\ConnectionInterface;
 
 interface StrategyInterface
 {
-  public function onMessage(ConnectionInterface $connection, string $message, Protocol $protocol);
-  public function onClose(ConnectionInterface $connection, Protocol $protocol);
+    public function onMessage(ConnectionInterface $connection, string $message, Protocol $protocol);
+    public function onClose(ConnectionInterface $connection, Protocol $protocol);
 }

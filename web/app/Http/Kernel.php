@@ -32,7 +32,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-          \App\Http\Middleware\api::class,
+          \App\Http\Middleware\Api::class,
         ],
     ];
 

@@ -13,49 +13,49 @@ use MongoHue;
 
 class Protocol implements MessageComponentInterface
 {
-  protected $openConnections;
-  protected $strategy;
+    protected $openConnections;
+    protected $strategy;
 
-  public function __construct(StrategyInterface $strategy)
-  {
-    $this->openConnections = [];
-    $this->strategy = $strategy;
-  }
+    public function __construct(StrategyInterface $strategy)
+    {
+        $this->openConnections = [];
+        $this->strategy = $strategy;
+    }
 
-  public function onOpen(ConnectionInterface $connection)
-  {
-    $this->openConnections[$connection->resourceId] = new Connection($connection);
-  }
+    public function onOpen(ConnectionInterface $connection)
+    {
+        $this->openConnections[$connection->resourceId] = new Connection($connection);
+    }
 
-  public function onMessage(ConnectionInterface $connection, $message)
-  {
-    $this->strategy->onMessage($connection, $message, $this);
-  }
+    public function onMessage(ConnectionInterface $connection, $message)
+    {
+        $this->strategy->onMessage($connection, $message, $this);
+    }
 
-  public function onClose(ConnectionInterface $connection)
-  {
-    $this->strategy->onClose($connection, $this);
-    unset($this->openConnections[$connection->resourceId]);
-  }
+    public function onClose(ConnectionInterface $connection)
+    {
+        $this->strategy->onClose($connection, $this);
+        unset($this->openConnections[$connection->resourceId]);
+    }
 
-  public function onError(ConnectionInterface $connection, Exception $e)
-  {
-    $connection->close();
-    unset($this->openConnections[$connection->resourceId]);
-  }
+    public function onError(ConnectionInterface $connection, Exception $e)
+    {
+        $connection->close();
+        unset($this->openConnections[$connection->resourceId]);
+    }
 
-  public function getConnections() : array
-  {
-    return $this->openConnections;
-  }
+    public function getConnections() : array
+    {
+        return $this->openConnections;
+    }
 
-  public function keepLog($message, $connection)
-  {
-    MongoHue::table('huechat_log')
-              ->insertOne([
-                'message' => $message,
-                'user' => $this->openConnections[$connection->resourceId]->getName(),
-                'date' => date('l jS \of F Y h:i:s A'),
-              ]);
-  }
+    public function keepLog($message, $connection)
+    {
+        MongoHue::table('huechat_log')
+        ->insertOne([
+            'message' => $message,
+            'user' => $this->openConnections[$connection->resourceId]->getName(),
+            'date' => date('l jS \of F Y h:i:s A'),
+        ]);
+    }
 }

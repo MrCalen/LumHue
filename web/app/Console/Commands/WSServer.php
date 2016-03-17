@@ -10,37 +10,36 @@ use Ratchet\WebSocket\WsServer;
 use App\WebSockets\Protocol;
 use App\WebSockets\Strategy\ChatStrategy;
 
-class WSServer extends Command {
+class WSServer extends Command
+{
+    protected $name = 'ws:serve';
+    protected $description = 'Start Websockets handlers.';
 
-  protected $name = 'ws:serve';
-  protected $description = 'Start Websockets handlers.';
+    private $hueChatPort = '9090';
 
-  private $hueChatPort = '9090';
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-  public function __construct()
-  {
-    parent::__construct();
-  }
+    public function startHueChat()
+    {
+        $this->info("Starting chat web socket server on port " . $this->hueChatPort);
 
-  public function startHueChat()
-  {
-    $this->info("Starting chat web socket server on port " . $this->hueChatPort);
+        $server = IoServer::factory(
+            new HttpServer(
+                new WsServer(
+                    new Protocol(new ChatStrategy())
+                )
+            ),
+            $this->hueChatPort,
+            '0.0.0.0'
+        );
+        $server->run();
+    }
 
-    $server = IoServer::factory(
-      new HttpServer(
-        new WsServer(
-          new Protocol(new ChatStrategy())
-        )
-      ),
-      $this->hueChatPort,
-      '0.0.0.0'
-    );
-    $server->run();
-  }
-
-  public function fire()
-  {
-    $this->startHueChat();
-  }
-
+    public function fire()
+    {
+        $this->startHueChat();
+    }
 }

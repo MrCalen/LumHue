@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use MeetHue;
 use MongoHue;
@@ -12,12 +13,12 @@ use JWTAuth;
 
 class HomeController extends Controller
 {
-    public function Index()
+    public function index()
     {
-      return View::make('welcome');
+        return View::make('welcome');
     }
 
-    public function Mail()
+    public function mail()
     {
         HueMail::sendMail('pl.dagues@gmail.com', 'Calen', 'Test!', 'Test');
     }

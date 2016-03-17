@@ -9,23 +9,21 @@ use Redirect;
 
 class LoginController extends \App\Http\Controllers\Controller
 {
+    public function loginPage()
+    {
+        if (Auth::user()) {
+            return Redirect::to('lights');
+        }
 
-  public function LoginPage()
-  {
-    if (Auth::user())
-        return Redirect::to('lights');
+        return View::make('login/login', []);
+    }
 
-    return View::make('login/login', [
-    ]);
-  }
+    public function authenticate(Request $request)
+    {
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $request->input('remember'))) {
+            return Redirect::to('lights');
+        }
 
-  public function Authenticate(Request $request)
-  {
-    if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $request->input('remember')))
-      return Redirect::to('lights');
-
-    return Redirect::to('login');
-  }
+        return Redirect::to('login');
+    }
 }
-
-?>

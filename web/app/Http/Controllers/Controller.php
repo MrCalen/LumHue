@@ -15,23 +15,24 @@ class Controller extends BaseController
 
     protected function tokenToUser(\Illuminate\Http\Request $request)
     {
-      $token = $this->getToken($request);
-      \JWTAuth::setToken($token);
-      $user = \JWTAuth::toUser();
-      return $user;
+        $token = $this->getToken($request);
+        \JWTAuth::setToken($token);
+        $user = \JWTAuth::toUser();
+        return $user;
     }
 
     protected function getMeetHueToken(\Illuminate\Http\Request $request)
     {
-      $user = $this->tokenToUser($request);
-      return $user->meethue_token;
+        $user = $this->tokenToUser($request);
+        return $user->meethue_token;
     }
 
     protected function getToken(\Illuminate\Http\Request $request)
     {
-      $token = $request->get('access_token');
-      if (!$token)
-        $token = $request->get('?access_token');
-      return $token;
+        $token = $request->get('access_token');
+        if (!$token) {
+            $token = $request->get('?access_token');
+        }
+        return $token;
     }
 }

@@ -12,8 +12,8 @@ use JWTAuth;
 
 class ChatController extends \App\Http\Controllers\Controller
 {
-    public function Index()
+    public function index()
     {
-      return View::make('chat/chat');
+        return View::make('chat/chat');
     }
 }

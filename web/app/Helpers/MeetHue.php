@@ -6,5 +6,8 @@ use Illuminate\Support\Facades\Facade;
 
 class MeetHue extends Facade
 {
-    protected static function getFacadeAccessor() { return 'meethue'; }
+    protected static function getFacadeAccessor()
+    {
+        return 'meethue';
+    }
 }
