@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
@@ -24,7 +25,7 @@ class WSServer extends Command
 
     public function startHueChat()
     {
-        $this->info("Starting chat web socket server on port " . $this->hueChatPort);
+        $this->info("Starting WebSockets on port " . $this->hueChatPort);
 
         $server = IoServer::factory(
             new HttpServer(
