@@ -32,24 +32,27 @@ class HueLight
 
     public function setProperty(string $property, $value)
     {
-        $this->{$property} = $value;
+        if ($value)
+            $this->{$property} = $value;
+    }
+
+    public function getId() : string
+    {
+        return $this->id;
     }
 
     public function toArray() : array
     {
         $result = [];
 
-        if ($this->on != null) {
-            $result['on'] = json_decode($this->on);
-        }
+        $result['on'] = json_decode($this->on);
+
         if (isset($this->bri)) {
             $result['bri'] = $this->bri;
         }
 
         if (isset($this->effect)) {
             $result['effect'] = $this->effect;
-        } else {
-            $result['effect'] = 'none';
         }
 
         return $result;

@@ -43,7 +43,7 @@ class MeetHue
         ];
     }
 
-    private function curlPostHelper(string $action, HueLight $light, $token) : string
+    private function curlPostHelper(string $action, HueLight $light, $token) : bool
     {
         $url = 'https://www.meethue.com/api/' . $action . '?token=' . $token;
         $fields = $this->createClipMessage($light);
@@ -58,6 +58,7 @@ class MeetHue
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, count($fields));
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+
         $result = curl_exec($ch);
         curl_close($ch);
 
@@ -69,7 +70,7 @@ class MeetHue
         return $this->curlGetHelper('getbridge', $token);
     }
 
-    public function applyLightStatus(HueLight $light, $token) : string
+    public function applyLightStatus(HueLight $light, $token) : bool
     {
         return $this->curlPostHelper('sendmessage', $light, $token);
     }

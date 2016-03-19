@@ -21,7 +21,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('/bridge', 'Api\LightsController@getBridge');
 
     Route::get('/lights', 'Api\LightsController@getLights');
-    Route::post('/light', 'Api\LightsController@getLights');
+    Route::post('/lights', 'Api\LightsController@setLights');
   });
 
   // Token Generation routes.

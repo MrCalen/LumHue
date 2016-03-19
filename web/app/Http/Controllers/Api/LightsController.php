@@ -21,7 +21,14 @@ class LightsController extends \App\Http\Controllers\Controller
         $light_bri = $request->get('bri');
         $light_effect = $request->get('effect');
 
-        $meethue_token = $this->getMeetHueToken($request);
+        $user = $this->tokenToUser($request);
+        $light = MongoHueWrapper::RetrieveLight($user->id, $light_id);
+        $queryBuilder = LightQueryBuilder::create($light);
+        $queryBuilder->setProperty('on', $light_on)
+                     ->setProperty('bri', $light_bri)
+                     ->setProperty('effect', $light_effect);
+
+        $queryBuilder->apply($user->meethue_token);
     }
 
     public function getBridge(Request $request)
