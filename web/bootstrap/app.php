@@ -41,6 +41,20 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+$app->configureMonologUsing(function ($monolog) {
+
+    $monolog->pushHandler($chromeHandler = new \Monolog\Handler\ChromePHPHandler());
+    $chromeHandler->setFormatter(new \Monolog\Formatter\ChromePHPFormatter());
+
+    $slackHandler = new \Monolog\Handler\SlackHandler(env('SLACK_TOKEN'), '#logs',
+                    $username = 'Logger',
+                    false,
+                    null,
+                    \Monolog\Logger::WARNING);
+    $monolog->pushHandler($slackHandler);
+    $slackHandler->setFormatter(new \Monolog\Formatter\LineFormatter());
+});
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application
