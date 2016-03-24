@@ -10,7 +10,7 @@
   <script>
     var username = @if (Auth::check()) "{{ Auth::user()->name}}" @else 'user' + Math.floor((Math.random() * 100) + 1)@endif;
   </script>
-  <script src="{{ URL::asset('/js/chat.js') }}"></script>
+  <script src="{{ elixir('js/app.js') }}"></script>
 @endsection
 
 @section('content')

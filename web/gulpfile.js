@@ -12,6 +12,7 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
- mix.coffee(['chat.coffee'], 'public/js/chat.js');
+ mix.coffee(['*.coffee'], 'public/js/app.js');
 
+ mix.version(['public/js/app.js']);
 });
