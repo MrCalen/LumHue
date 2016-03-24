@@ -1,4 +1,4 @@
-ADDR=root@mr-calen.eu:/root/DevLumHue/web
+ADDR=hugh@mr-calen.eu:/home/hugh/LumHue/web
 
 deploy:
 	composer install
@@ -6,6 +6,6 @@ deploy:
 	cp /tmp/env .env
 
 update:
-	rsync -avz --exclude 'vendor' --exclude '.git' --exclude '.env' --exclude 'composer.lock' . ${ADDR}
+	rsync -av --exclude 'vendor' --exclude '.git' --exclude '.env' --exclude 'composer.lock' . ${ADDR}
 
 .PHONY: deploy
