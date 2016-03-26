@@ -1,45 +1,25 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
+@extends('templates/basic_layout')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+@section('specific_css')
+  <link rel="stylesheet" href="{{ asset('css/landing/landing.css') }}"/>
+@endsection
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+@section ('body')
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <button class="btn btn-1 btn-1e pull-right" id="login">Login</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="title col-md-8 col-md-offset-2 center text-center">
+        <h1 class="hidden-xs"><b>Lum Hue</b></h1>
+        <h1 class="visible-xs"><b>Lum Hue</b></h1><hr class="separator"/>
+        <h5>Bring lights to your home</h5>
+        <button class="btn btn-1 btn-1e">Discover Now</button>
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
+      </div>
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
-            </div>
-        </div>
-    </body>
-</html>
+    </div>
+  </div>
+@endsection
