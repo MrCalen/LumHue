@@ -1,5 +1,8 @@
 @extends('templates/basic_layout')
 
+@section('title') @endsection
+
+
 @section('framework')
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"

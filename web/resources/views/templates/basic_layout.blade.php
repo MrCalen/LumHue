@@ -6,7 +6,7 @@
   <meta name="description" content="Lumhue PLIC application">
   <meta name="author" content="LumHue">
 
-  <title>@section('title') LumHue @endsection</title>
+  <title>LumHue @yield('title')</title>
   <link rel="apple-touch-icon" sizes="57x57" href="{{ URL::to('/fav') }}/apple-touch-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="{{ URL::to('/fav') }}/apple-touch-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72" href="{{ URL::to('/fav') }}/apple-touch-icon-72x72.png">

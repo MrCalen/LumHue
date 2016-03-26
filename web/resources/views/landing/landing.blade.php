@@ -1,5 +1,7 @@
 @extends('templates/basic_layout')
 
+@section('title') - Home @endsection
+
 @section('specific_css')
   <link rel="stylesheet" href="{{ asset('css/landing/landing.css') }}"/>
 @endsection
