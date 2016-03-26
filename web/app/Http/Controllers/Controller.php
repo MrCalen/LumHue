@@ -21,6 +21,12 @@ class Controller extends BaseController
         return $user;
     }
 
+    protected function userToToken() {
+        $user = \Auth::user();
+        $token = \JWTAuth::fromUser($user);
+        return $token;
+    }
+
     protected function getMeetHueToken(\Illuminate\Http\Request $request)
     {
         $user = $this->tokenToUser($request);

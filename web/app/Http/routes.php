@@ -59,11 +59,10 @@ Route::group(['middleware' => ['web']], function () {
   });
 
   Route::group(['prefix' => 'test'], function () {
-    Route::get('email', 'HomeController@mail');
+    Route::get('email', 'TestController@mail');
+    Route::get('slack', 'TestController@slack');
   });
 
-//  Route::get('/login', 'App\LoginController@LoginPage');
-//  Route::post('/login', 'App\LoginController@Authentication');
   Route::get('/mongo', 'MongoDBController@GetTable');
   Route::get('/homeview', 'HomeController@home');
 
