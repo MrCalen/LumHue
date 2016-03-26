@@ -10,7 +10,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <button class="btn btn-1 btn-1e pull-right" id="login">Login</button>
+        <a href="{{ URL::to('/login') }}" class="btn btn-1 btn-1e pull-right" id="login">@if (Auth::check())Home @else Login @endif</a>
       </div>
     </div>
     <div class="row">
@@ -18,7 +18,7 @@
         <h1 class="hidden-xs"><b>Lum Hue</b></h1>
         <h1 class="visible-xs"><b>Lum Hue</b></h1><hr class="separator"/>
         <h5>Bring lights to your home</h5>
-        <button class="btn btn-1 btn-1e">Discover Now</button>
+        <a class="btn btn-1 btn-1e">Discover Now</a>
 
       </div>
 
