@@ -1,4 +1,4 @@
-ADDR=hugh@mr-calen.eu:/home/hugh/LumHue/web
+ADDR=root@mr-calen.eu:/root/DevLumHue/web
 
 deploy:
 	composer install
