@@ -15,7 +15,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return View::make('welcome');
+        return View::make('landing/landing');
     }
 
     public function mail()
