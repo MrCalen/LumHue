@@ -16,11 +16,23 @@
   font-size: 24px;
 }
 
+.navbar-toggle,
+.navbar-toggle::before,
+.navbar-toggle::after {
+  color: white;
+}
+
+.navbar-toggle:hover:before,
+.navbar-toggle:focus:before {
+  color: pink;
+}
+
 /* Forms */
 
 .form-control {
   width: auto;
   border: 2px solid #2980b9;
+  margin-bottom: 3px;
 }
 .form-group.focus .form-control,
 .form-control:focus,
@@ -78,8 +90,10 @@ input[type=submit].btn-block{
 /* Style */
 
 <style type=text/css>
-a:link {
-  COLOR: blue; /*The color of the link*/
+
+a,
+a:link{
+  COLOR: white
 }
 
 a:visited {

@@ -50,6 +50,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/', 'App\LoginController@authenticate');
   });
 
+  Route::group(['prefix' => 'signup'], function () {
+    Route::get('/', 'App\SignupController@signUpPage');
+    Route::post('/', 'App\SignupController@signup');
+  });
+
   // Chat route
   Route::get('/chat', 'Chat\ChatController@index');
 

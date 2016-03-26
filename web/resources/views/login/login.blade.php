@@ -7,4 +7,8 @@
     {{ Form::submit('Log in', array('class' => 'btn btn-primary btn-lg btn-block')) }}
     {{ Form::close() }}
   </center>
+
+  <center>
+    <btn-lg>Sign Up</btn-lg>
+  </center>
 @endsection
