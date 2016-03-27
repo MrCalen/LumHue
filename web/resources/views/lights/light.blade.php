@@ -1,7 +1,7 @@
 @extends('templates/basic_nav')
 
 @section('ngApp')ng-app="light"@endsection
-@section('ngController')ng-controller="LightController"@endsection
+@section('ngController')ng-controller="LightController" ng-cloak @endsection
 
 @section('css')
     <link rel="stylesheet" href="{{ URL::asset('css/light/light.css') }}">

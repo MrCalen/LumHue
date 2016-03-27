@@ -1,7 +1,7 @@
 @extends('templates/basic_nav')
 
-@section('ngApp')ng-app="LoginApp"@endsection
-@section('ngController')ng-controller="LoginController"@endsection
+@section('ngApp')ng-app="LoginApp" @endsection
+@section('ngController')ng-controller="LoginController" ng-cloak @endsection
 
 @section('content')
   <div class="container-fluid">

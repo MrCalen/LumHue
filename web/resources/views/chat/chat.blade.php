@@ -1,6 +1,6 @@
 @extends('templates/basic_nav')
-@section('ngApp')ng-app="HueChat"@endsection
-@section('ngController')ng-controller="HueChatController"@endsection
+@section('ngApp')ng-app="HueChat" @endsection
+@section('ngController')ng-controller="HueChatController" ng-cloak @endsection
 
 @section('css')
   <link rel="stylesheet" href="{{ URL::asset('css/chat/chat.css') }}">
