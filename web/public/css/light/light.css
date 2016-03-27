@@ -1,0 +1,28 @@
+body {
+    color: #ebebeb !important;
+}
+
+.light_info {
+    background: rgba(44, 44, 44, 0.79);
+}
+
+.light_info_row {
+    background: rgba(44, 44, 44, 0.43);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+#lamp_reachable_true {
+    width: auto;
+    height: auto;
+    content: url("../../assets/lamp_true.png");
+}
+
+#lamp_reachable_false {
+    width: auto;
+    height: auto;
+    content: url("../../assets/lamp_false.png");
+}
