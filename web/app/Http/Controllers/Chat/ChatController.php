@@ -9,8 +9,9 @@ use View;
 use DB;
 use App\User;
 use JWTAuth;
+use App\Http\Controllers\Controller;
 
-class ChatController extends \App\Http\Controllers\Controller
+class ChatController extends Controller
 {
     public function index()
     {

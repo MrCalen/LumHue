@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\MongoHueModel\MongoHueWrapper;
-use app\Models\HueLight;
+use App\Http\Controllers\Controller;
 use App\Models\Light;
 use Illuminate\Http\Request;
 use App\Helpers\Mongo\Utils;
@@ -12,7 +12,7 @@ use MongoHue;
 use JWTAuth;
 use App\QueryBuilder\LightQueryBuilder;
 
-class LightsController extends \App\Http\Controllers\Controller
+class LightsController extends Controller
 {
     public function setLights(Request $request)
     {

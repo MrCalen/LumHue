@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\App;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use View;
 use Redirect;
 
-class LoginController extends \App\Http\Controllers\Controller
+class LoginController extends Controller
 {
     public function loginPage()
     {

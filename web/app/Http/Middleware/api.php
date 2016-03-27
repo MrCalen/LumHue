@@ -7,8 +7,7 @@ use JWTAuth;
 
 class Api
 {
-    private function error($str)
-    {
+    private function error($str) {
         $error = [
             'error' => $str,
         ];
@@ -23,8 +22,7 @@ class Api
     * @param  \Closure $next
     * @return mixed
     */
-    public function handle($request, Closure $next)
-    {
+    public function handle($request, Closure $next) {
         $token = $request->get('access_token');
         if (!$token) {
             $token = $request->get('?access_token');

@@ -13,8 +13,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected function tokenToUser(\Illuminate\Http\Request $request)
-    {
+    protected function tokenToUser(\Illuminate\Http\Request $request) {
         $token = $this->getToken($request);
         \JWTAuth::setToken($token);
         $user = \JWTAuth::toUser();
@@ -27,14 +26,12 @@ class Controller extends BaseController
         return $token;
     }
 
-    protected function getMeetHueToken(\Illuminate\Http\Request $request)
-    {
+    protected function getMeetHueToken(\Illuminate\Http\Request $request) {
         $user = $this->tokenToUser($request);
         return $user->meethue_token;
     }
 
-    protected function getToken(\Illuminate\Http\Request $request)
-    {
+    protected function getToken(\Illuminate\Http\Request $request) {
         $token = $request->get('access_token');
         if (!$token) {
             $token = $request->get('?access_token');

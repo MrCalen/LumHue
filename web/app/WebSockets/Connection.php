@@ -12,28 +12,23 @@ class Connection
     protected $connection;
     protected $name;
 
-    public function __construct(ConnectionInterface $connection)
-    {
+    public function __construct(ConnectionInterface $connection) {
         $this->connection = $connection;
     }
 
-    public function getConnection() : ConnectionInterface
-    {
+    public function getConnection() : ConnectionInterface {
         return $this->connection;
     }
 
-    public function setName(string $name)
-    {
+    public function setName(string $name) {
         $this->name = $name;
     }
 
-    public function getName() : string
-    {
+    public function getName() : string {
         return $this->name;
     }
 
-    public function send($message)
-    {
+    public function send($message) {
         $this->connection->send($message);
     }
 }

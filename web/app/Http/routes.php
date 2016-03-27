@@ -10,23 +10,23 @@
 |
 */
 Route::group(['prefix' => 'api'], function () {
-  Route::group(['middleware' => ['api']], function () {
+    Route::group(['middleware' => ['api']], function () {
 
-    // MeetHue direct responses
-    Route::group(['prefix' => 'meethue'], function () {
-      Route::get('/bridge', 'Api\MeetHue\MeetHueController@getBridge');
+        // MeetHue direct responses
+        Route::group(['prefix' => 'meethue'], function () {
+            Route::get('/bridge', 'Api\MeetHue\MeetHueController@getBridge');
+        });
+
+        // Get Bridge Status
+        Route::get('/bridge', 'Api\LightsController@getBridge');
+
+        Route::get('/lights', 'Api\LightsController@getLights');
+        Route::post('/lights', 'Api\LightsController@setLights');
     });
 
-    // Get Bridge Status
-    Route::get('/bridge', 'Api\LightsController@getBridge');
-
-    Route::get('/lights', 'Api\LightsController@getLights');
-    Route::post('/lights', 'Api\LightsController@setLights');
-  });
-
-  // Token Generation routes.
-  Route::post('/signup', 'UserController@signup');
-  Route::post('/signin', 'UserController@signIn');
+    // Token Generation routes.
+    Route::post('/signup', 'UserController@signup');
+    Route::post('/signin', 'UserController@signIn');
 
 });
 
@@ -41,34 +41,30 @@ Route::group(['prefix' => 'api'], function () {
 */
 Route::group(['middleware' => ['web']], function () {
 
-  // Index
-  Route::get('/', 'HomeController@index');
+    // Index
+    Route::get('/', 'HomeController@index');
 
-  // Login routes
-  Route::group(['prefix' => 'login'], function () {
-    Route::get('/', 'App\LoginController@loginPage');
-    Route::post('/', 'App\LoginController@authenticate');
-  });
+    // Login routes
+    Route::group(['prefix' => 'login'], function () {
+        Route::get('/', 'App\LoginController@loginPage');
+        Route::post('/', 'App\LoginController@authenticate');
+    });
 
-  Route::group(['prefix' => 'signup'], function () {
-    Route::get('/', 'App\SignupController@signUpPage');
-    Route::post('/', 'App\SignupController@signup');
-  });
+    Route::group(['prefix' => 'signup'], function () {
+        Route::get('/', 'App\SignupController@signUpPage');
+        Route::post('/', 'App\SignupController@signup');
+    });
 
-  // Chat route
-  Route::get('/chat', 'Chat\ChatController@index');
+    // Chat route
+    Route::get('/chat', 'Chat\ChatController@index');
 
-  // Authentificated routes
-  Route::group(['middleware' => 'auth'], function()  {
-    Route::get('/lights', 'App\LightController@index');
-  });
+    // Authentificated routes
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('/lights', 'App\LightController@index');
+    });
 
-  Route::group(['prefix' => 'test'], function () {
-    Route::get('email', 'TestController@mail');
-    Route::get('slack', 'TestController@slack');
-  });
-
-  Route::get('/mongo', 'MongoDBController@GetTable');
-  Route::get('/homeview', 'HomeController@home');
-
+    Route::group(['prefix' => 'test'], function () {
+        Route::get('email', 'TestController@mail');
+        Route::get('slack', 'TestController@slack');
+    });
 });

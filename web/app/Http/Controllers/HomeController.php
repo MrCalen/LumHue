@@ -17,11 +17,4 @@ class HomeController extends Controller
     {
         return View::make('landing/landing');
     }
-
-    public function home()
-    {
-      return View::make('home/home', [
-        'acces_token_user' => $this->getToken(),
-      ]);
-    }
 }

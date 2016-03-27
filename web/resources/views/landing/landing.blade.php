@@ -18,7 +18,7 @@
         <h1 class="hidden-xs"><b>Lum Hue</b></h1>
         <h1 class="visible-xs"><b>Lum Hue</b></h1><hr class="separator"/>
         <h5>Bring lights to your home</h5>
-        <a class="btn btn-1 btn-1e">Discover Now</a>
+        <a href="{{ URL::to('/signup')}}" class="btn btn-1 btn-1e">Discover Now</a>
 
       </div>
 

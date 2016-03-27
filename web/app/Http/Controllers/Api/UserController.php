@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use JWTAuth;
 use Illuminate\Support\Facades\Response;
 
-class UserController extends \App\Http\Controllers\Controller
+class UserController extends Controller
 {
     public function signUp(Request $request)
     {
