@@ -8,6 +8,7 @@
 @endsection
 
 @section('javascript')
+    @parent
     <script src="{{ elixir('js/app.js') }}"></script>
     <script>
       var token = '{{ $token }}';
@@ -18,7 +19,7 @@
 
 @section('content')
 
-    <div>
+    <div class="container-fluid">
         <div class="row text-center light_info">Lights</div>
         <div class="col-md-12" ng-repeat="light in lights">
             <div class="row light_info_row">

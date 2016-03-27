@@ -67,10 +67,10 @@
   </script>
 
   <!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flat-ui/2.2.2/js/vendor/jquery.min.js"></script>
+  {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flat-ui/2.2.2/js/vendor/jquery.min.js"></script> --}}
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flat-ui/2.2.2/js/vendor/video.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flat-ui/2.2.2/js/flat-ui.min.js"></script>
+  {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flat-ui/2.2.2/js/vendor/video.js"></script> --}}
+  {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flat-ui/2.2.2/js/flat-ui.min.js"></script> --}}
 
   @yield('javascript')
 
