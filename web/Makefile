@@ -8,4 +8,7 @@ deploy:
 update:
 	rsync -av --exclude 'vendor' --exclude '.git' --exclude '.env' --exclude 'composer.lock' . ${ADDR}
 
+slack-clean:
+	slack-cleaner --token=<TOKEN> --message --bot --perform --channel logs
+
 .PHONY: deploy

@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('password', 60);
 
             $table->string('meethue_token')->nullable();
+            $table->string('validation_token')->nullable();
 
             $table->rememberToken();
             $table->timestamps();

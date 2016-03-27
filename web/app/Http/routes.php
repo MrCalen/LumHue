@@ -53,6 +53,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['prefix' => 'signup'], function () {
         Route::get('/', 'App\SignupController@signUpPage');
         Route::post('/', 'App\SignupController@signup');
+        Route::get('/confirm', 'App\SignupController@confirm');
     });
 
     // Chat route

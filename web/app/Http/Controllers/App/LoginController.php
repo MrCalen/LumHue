@@ -21,7 +21,13 @@ class LoginController extends Controller
 
     public function authenticate(Request $request)
     {
-        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $request->input('remember'))) {
+        $credentials = [
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+            'validation_token' => null,
+        ];
+
+        if (Auth::attempt($credentials, $request->input('remember'))) {
             return Redirect::to('lights');
         }
 
