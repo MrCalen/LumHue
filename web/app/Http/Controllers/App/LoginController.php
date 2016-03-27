@@ -21,6 +21,20 @@ class LoginController extends Controller
 
     public function authenticate(Request $request)
     {
+      $rules = array(
+       'email'             => 'required|email',
+       'password'            => 'required'
+      );
+      $validator = \Validator::make(\Input::all(), $rules);
+
+      if ($validator->fails()) {
+        $messages = $validator->messages();
+
+       return Redirect::to('login')
+           ->withErrors($validator)
+           ->withInput(\Input::except('password'));
+
+      } else {
         $credentials = [
             'email' => $request->input('email'),
             'password' => $request->input('password'),
@@ -33,4 +47,5 @@ class LoginController extends Controller
 
         return Redirect::to('login');
     }
+  }
 }

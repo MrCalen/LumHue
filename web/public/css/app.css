@@ -16,6 +16,20 @@
   border-radius: 10px;
 }
 
+.error-block {
+  padding: 10px 10px;
+  background: rgba(255, 2, 2, 0.2);
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.help-block {
+  font-size: 15px;
+  margin-bottom: 3px;
+  color:rgba(255, 50, 50, 1);
+  text-shadow: 1px 1px rgba(200, 200, 200, 0.4);
+}
+
 /* Forms */
 
 .form-control {
