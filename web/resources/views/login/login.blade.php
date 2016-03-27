@@ -5,7 +5,7 @@
 
 @section('content')
   <div class="container-fluid">
-    <div class="col-lg-3 center-block row">
+    <div class="col-lg-3 center-block">
       {{ Form::open(array('url' => 'login', 'ng-if' => '!open')) }}
 
       {{ Form::text('email', Input::old('email'), array('placeholder' => 'Your Email', 'class' => 'form-control login-field')) }}

@@ -6,6 +6,21 @@
     display: none;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: white !important;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+    color:
+    text-shadow: none;
+    -webkit-text-fill-color: initial;
+}
+
 .center-block {
   padding: 30px 50px;
   top:50%;
