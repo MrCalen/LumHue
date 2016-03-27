@@ -87,25 +87,12 @@ body {
   font-family: 'Sorts Mill Goudy', serif;
 }
 
-/*
-<style type=text/css>
-
-a,
-a:link{
-  COLOR: white
+.forgot-pwd,
+.forgot-pwd:hover {
+    font-size: 18px;
+    margin: 10% 0;
+    font-family: 'Sorts Mill Goudy', serif;
+    color: white;
+    right: 0px;
+    cursor: pointer;
 }
-
-a:visited {
-  COLOR: white; //The color of the visited link
-}
-
-a:hover {
-  COLOR:  #19608f; //#1d6fa5; /*The color of the mouseover or 'hover' link
-}
-
-body {
-  COLOR: red;
-  background-color: #34495e;
-  font-size: 24px;//The color of all the other text within the body of the page
-</style>
-*/
