@@ -56,6 +56,13 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/confirm', 'App\SignupController@confirm');
     });
 
+    Route::get('/logout', function()
+    {
+        Auth::logout();
+        Session::flush();
+        return Redirect::to('/');
+    });
+
     // Chat route
     Route::get('/chat', 'Chat\ChatController@index');
 
