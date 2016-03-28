@@ -50,17 +50,11 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/', 'App\LoginController@authenticate');
     });
 
+    // Signup routes
     Route::group(['prefix' => 'signup'], function () {
         Route::get('/', 'App\SignupController@signUpPage');
         Route::post('/', 'App\SignupController@signup');
         Route::get('/confirm', 'App\SignupController@confirm');
-    });
-
-    Route::get('/logout', function()
-    {
-        Auth::logout();
-        Session::flush();
-        return Redirect::to('/');
     });
 
     // Chat route
@@ -69,6 +63,7 @@ Route::group(['middleware' => ['web']], function () {
     // Authentificated routes
     Route::group(['middleware' => 'auth'], function () {
         Route::get('/lights', 'App\LightController@index');
+        Route::get('/logout', 'App\LoginController@logout');
     });
 
     Route::group(['prefix' => 'test'], function () {
