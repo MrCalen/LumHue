@@ -9,7 +9,8 @@ use View;
 
 class LightController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return View::make('lights/light', [
             'token' => \JWTAuth::fromUser(Auth::user()),
         ]);

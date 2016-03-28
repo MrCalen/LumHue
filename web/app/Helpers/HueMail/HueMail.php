@@ -8,14 +8,16 @@ use Mail;
 
 class HueMail
 {
-    public function sendMail(string $to, string $name, string $subject, string $msg) {
+    public function sendMail(string $to, string $name, string $subject, string $msg)
+    {
         Mail::raw($msg, function ($message) use ($to, $name, $subject) {
             $message->to($to, $name);
             $message->subject($subject);
         });
     }
 
-    public function sendConfirmation(string $username, string $email, string $confirmation) {
+    public function sendConfirmation(string $username, string $email, string $confirmation)
+    {
         Mail::send('templates/mails/confirmation', [
             'name' => $username,
             'link' => $confirmation,

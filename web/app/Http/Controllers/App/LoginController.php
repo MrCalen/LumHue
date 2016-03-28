@@ -21,38 +21,39 @@ class LoginController extends Controller
 
     public function authenticate(Request $request)
     {
-      $rules = array(
-       'email'             => 'required|email',
-       'password'            => 'required'
-      );
-      $validator = \Validator::make(\Input::all(), $rules);
+        $rules = array(
+            'email'    => 'required|email',
+            'password' => 'required'
+        );
 
-      if ($validator->fails()) {
-        $messages = $validator->messages();
+        $validator = \Validator::make(\Input::all(), $rules);
 
-       return Redirect::to('login')
-           ->withErrors($validator)
-           ->withInput(\Input::except('password'));
+        if ($validator->fails()) {
+            $messages = $validator->messages();
 
-      } else {
-        $credentials = [
-            'email' => $request->input('email'),
-            'password' => $request->input('password'),
-            'validation_token' => null,
-        ];
+            return Redirect::to('login')
+                ->withErrors($validator)
+                ->withInput(\Input::except('password'));
 
-        if (Auth::attempt($credentials, $request->input('remember'))) {
-            return Redirect::to('lights');
+        } else {
+            $credentials = [
+                'email' => $request->input('email'),
+                'password' => $request->input('password'),
+                'validation_token' => null,
+            ];
+
+            if (Auth::attempt($credentials, $request->input('remember'))) {
+                return Redirect::to('lights');
+            }
+
+            return Redirect::to('login');
         }
-
-        return Redirect::to('login');
     }
-  }
 
-  public function logout()
-  {
-      Auth::logout();
-      \Session::flush();
-      return Redirect::to('/');
-  }
+    public function logout()
+    {
+        Auth::logout();
+        \Session::flush();
+        return Redirect::to('/');
+    }
 }

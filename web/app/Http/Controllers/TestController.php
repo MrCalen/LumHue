@@ -13,11 +13,13 @@ use JWTAuth;
 
 class TestController extends Controller
 {
-    public function mail() {
+    public function mail()
+    {
         HueMail::sendMail('pl.dagues@gmail.com', 'Calen', 'Test!', 'Test');
     }
 
-    public function slack() {
+    public function slack()
+    {
         5 / 0;
     }
 }

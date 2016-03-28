@@ -9,7 +9,8 @@ use Ratchet\ConnectionInterface;
 
 class ChatStrategy implements StrategyInterface
 {
-    private function broadcast(Protocol $protocol, string $message, ConnectionInterface $connection) {
+    private function broadcast(Protocol $protocol, string $message, ConnectionInterface $connection)
+    {
         $username = $protocol->getConnections()[$connection->resourceId]->getName();
         $protocol->keepLog("New message {$message} from {$username}", $connection);
         foreach ($protocol->getConnections() as $name => $client) {
@@ -17,7 +18,8 @@ class ChatStrategy implements StrategyInterface
         }
     }
 
-    public function onMessage(ConnectionInterface $connection, string $message, Protocol $protocol) {
+    public function onMessage(ConnectionInterface $connection, string $message, Protocol $protocol)
+    {
         $message = json_decode($message);
         if ($message->type === 'auth') {
             $name = $message->data->name;
@@ -42,7 +44,8 @@ class ChatStrategy implements StrategyInterface
         }
     }
 
-    public function onClose(ConnectionInterface $connection, Protocol $protocol) {
+    public function onClose(ConnectionInterface $connection, Protocol $protocol)
+    {
         $names = array_map(function ($elt) use ($connection) {
             if ($connection->resourceId !== $elt->getConnection()->resourceId) {
                 return $elt->getName();

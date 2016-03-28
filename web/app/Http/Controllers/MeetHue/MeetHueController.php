@@ -14,7 +14,8 @@ use App\Http\Controllers\Controller;
 
 class MeetHueController extends Controller
 {
-    public function getBridge(Request $request) {
+    public function getBridge(Request $request)
+    {
         $user = $this->tokenToUser($request);
         $token = $user->meethue_token;
         $bridge = MeetHue::getBridge($token);

@@ -22,8 +22,10 @@ class UpdateBridge extends Command
     private function getBridge($user)
     {
         $meethue_token = $user->meethue_token;
-        if (!$meethue_token)
+        if (!$meethue_token) {
             return;
+        }
+
         $user_id = $user->id;
         $bridge = json_decode(MeetHue::getBridge($meethue_token));
         MongoHue::table('bridge')

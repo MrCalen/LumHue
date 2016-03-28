@@ -12,7 +12,8 @@ use JWTAuth;
 
 class MeetHueController extends Controller
 {
-    public function GetBridge(Request $request) {
+    public function getBridge(Request $request)
+    {
         $user = $this->tokenToUser($request);
         $token = $user->meethue_token;
         return MeetHue::getBridge($token);

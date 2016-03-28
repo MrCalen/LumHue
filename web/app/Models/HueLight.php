@@ -32,8 +32,9 @@ class HueLight
 
     public function setProperty(string $property, $value)
     {
-        if ($value)
+        if ($value) {
             $this->{$property} = $value;
+        }
     }
 
     public function getId() : string
