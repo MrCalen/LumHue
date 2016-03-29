@@ -43,7 +43,7 @@ class SignupController extends Controller
 
             return Redirect::to('signup')
                 ->withErrors($validator)
-                ->withInput(Input::except('password','passwordVerificaton'));
+                ->withInput(Input::except('password', 'passwordVerificaton'));
 
         } else {
             $user = User::create($request->all());
@@ -162,7 +162,7 @@ class SignupController extends Controller
 
             return Redirect::back()
                 ->withErrors($validator)
-                ->withInput(Input::except('password','passwordVerificaton'));
+                ->withInput(Input::except('password', 'passwordVerificaton'));
 
         } else {
             $user = User::where('email', '=', $request->get('email'))
