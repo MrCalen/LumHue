@@ -31,22 +31,25 @@ class LoginController extends Controller
         if ($validator->fails()) {
             $messages = $validator->messages();
 
-            return Redirect::to('login')
-                ->withErrors($validator)
-                ->withInput(\Input::except('password'));
+        return Redirect::to('login')
+            ->withErrors($validator)
+            ->withInput(\Input::except('password'));
 
         } else {
             $credentials = [
                 'email' => $request->input('email'),
                 'password' => $request->input('password'),
                 'validation_token' => null,
+                'reset_token' => null,
             ];
 
-            if (Auth::attempt($credentials, $request->input('remember'))) {
+            if (($result = Auth::attempt($credentials, $request->input('remember')))) {
                 return Redirect::to('lights');
             }
 
-            return Redirect::to('login');
+            return Redirect::to('login')->withErrors([
+              'email' => 'Email and password combination is invalid.',
+            ]);
         }
     }
 

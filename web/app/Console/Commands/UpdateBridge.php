@@ -26,6 +26,7 @@ class UpdateBridge extends Command
             return;
         }
 
+        date_default_timezone_set('Europe/Paris');
         $user_id = $user->id;
         $bridge = json_decode(MeetHue::getBridge($meethue_token));
         MongoHue::table('bridge')

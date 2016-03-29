@@ -19,7 +19,6 @@ Route::group(['prefix' => 'api'], function () {
 
         // Get Bridge Status
         Route::get('/bridge', 'Api\LightsController@getBridge');
-
         Route::get('/lights', 'Api\LightsController@getLights');
         Route::post('/lights', 'Api\LightsController@setLights');
     });
@@ -55,6 +54,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/', 'App\SignupController@signUpPage');
         Route::post('/', 'App\SignupController@signup');
         Route::get('/confirm', 'App\SignupController@confirm');
+
+        Route::post('/forgot', 'App\SignupController@reset');
+        Route::post('/reset/password', 'App\SignupController@resetPasswordPost');
+        Route::get('/reset/index', 'App\SignupController@resetPwd');
     });
 
     // Chat route

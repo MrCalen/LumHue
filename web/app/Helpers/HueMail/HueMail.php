@@ -26,4 +26,14 @@ class HueMail
             $message->subject('Please confirm your email');
         });
     }
+
+    public function sendResetPassword(string $username, string $email, string $resetToken) {
+      Mail::send('templates/mails/reset', [
+        'name' => $username,
+        'link' => $resetToken,
+      ], function ($message) use ($email, $username) {
+        $message->to($email, $username);
+        $message->subject('LumHue : Reset Password');
+      });
+    }
 }

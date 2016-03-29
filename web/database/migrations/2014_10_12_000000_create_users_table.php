@@ -13,6 +13,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
+
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
@@ -20,9 +21,11 @@ class CreateUsersTable extends Migration
 
             $table->string('meethue_token')->nullable();
             $table->string('validation_token')->nullable();
+            $table->string('reset_token')->nullable();
 
             $table->rememberToken();
             $table->timestamps();
+
         });
     }
 

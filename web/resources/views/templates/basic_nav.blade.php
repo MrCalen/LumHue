@@ -37,16 +37,17 @@
               <li><a href="{{ URL::to('/lights') }}">Lights</a></li>
               @endif
             </ul>
-            @if (Auth::check())
             <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" >More <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="{{ URL::to('/logout') }}">Log out</a></li>
-                </ul>
-              </li>
+              @if(session('info'))<li>{{ session('info') }}</li> @endif
+              @if (Auth::check())
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" >More <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{{ URL::to('/logout') }}">Log out</a></li>
+                  </ul>
+                </li>
+              @endif
             </ul>
-            @endif
           </div>
         </div>
       </nav>
