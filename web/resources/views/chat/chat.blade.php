@@ -20,10 +20,10 @@
         <div class="col-sm-3 col-xs-12">
           <div class="col-inside-lg decor-default chat" tabindex="5000">
             <div class="chat-users">
-              <h6>Online</h6>
+              <h6 class="name">Online</h6>
               <div class="user" ng-repeat="connected_user in users track by $index">
                 <div class="avatar">
-                  <img src="http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/images/chat/40.png" alt="User name">
+                  <img src="http://downloadicons.net/sites/default/files/user-group-icon-18526.png" alt="User name">
                   <div class="status online"></div>
                 </div>
                 <div class="name" ng-bind="connected_user">User name</div>
@@ -38,7 +38,7 @@
               <h6>Chat</h6>
               <div ng-repeat="message in messages track by $index" class="answer {$ message.author == username ? 'right' : 'left' $}">
                 <div class="avatar">
-                  <img src="http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/images/chat/40.png" alt="User name">
+                  <img src="http://downloadicons.net/sites/default/files/user-group-icon-18526.png" alt="User name">
                   <div class="status online"></div>
                 </div>
                 <div class="name" ng-bind="message.author"></div>

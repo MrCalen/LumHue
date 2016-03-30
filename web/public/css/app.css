@@ -104,6 +104,10 @@ body {
   font-family: 'Sorts Mill Goudy', serif;
 }
 
+.name {
+    color: grey;
+}
+
 .forgot-pwd,
 .forgot-pwd:hover {
     font-size: 18px;

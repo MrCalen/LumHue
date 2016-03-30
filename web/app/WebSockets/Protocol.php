@@ -51,6 +51,7 @@ class Protocol implements MessageComponentInterface
 
     public function keepLog($message, $connection)
     {
+        date_default_timezone_set('Europe/Paris');
         MongoHue::table('huechat_log')
                 ->insertOne([
                     'message' => $message,

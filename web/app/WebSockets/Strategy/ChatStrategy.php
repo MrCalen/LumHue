@@ -20,6 +20,7 @@ class ChatStrategy implements StrategyInterface
 
     public function onMessage(ConnectionInterface $connection, string $message, Protocol $protocol)
     {
+        date_default_timezone_set('Europe/Paris');
         $message = json_decode($message);
         if ($message->type === 'auth') {
             $name = $message->data->name;
@@ -46,6 +47,7 @@ class ChatStrategy implements StrategyInterface
 
     public function onClose(ConnectionInterface $connection, Protocol $protocol)
     {
+        date_default_timezone_set('Europe/Paris');
         $names = array_map(function ($elt) use ($connection) {
             if ($connection->resourceId !== $elt->getConnection()->resourceId) {
                 return $elt->getName();
