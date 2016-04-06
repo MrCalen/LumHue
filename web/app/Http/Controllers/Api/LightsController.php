@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use MeetHue;
 use MongoHue;
 use JWTAuth;
+use Auth;
 use App\QueryBuilder\LightQueryBuilder;
 
 class LightsController extends Controller
@@ -31,7 +32,8 @@ class LightsController extends Controller
 
     public function getBridge(Request $request)
     {
-        $bridge = LightQueryBuilder::create(null)->getBridgeState();
+        $meethue = $this->getMeetHueToken($request);
+        $bridge = LightQueryBuilder::create(null, $meethue)->getBridgeState();
         return $bridge;
     }
 

@@ -7,6 +7,7 @@ use App\Models\HueLight;
 use NodeHue;
 use MongoHue;
 use MeetHue;
+use Auth;
 
 class LightQueryBuilder
 {
@@ -14,23 +15,25 @@ class LightQueryBuilder
     protected $access_method = 'node';
     protected $meethue_token = null;
 
-    private function __construct($light_id = null)
+    private function __construct($light_id = null, $meethue_token = null)
     {
-        if ($light_id === null)
-            return;
-        if (Auth::user()->bridge_addr === null)
+        $this->meethue_token = $meethue_token;
+        if (!Auth::user() || !Auth::user()->bridge_addr)
         {
             $this->access_method = 'meethue';
             return;
         }
+
+        if ($light_id === null)
+            return;
         $lights = json_decode(NodeHue::getBridgeStatus());
         $light = $lights->lights[$light_id];
         $this->light = new HueLight($light_id, $light);
     }
 
-    public static function create($light_id) : LightQueryBuilder
+    public static function create($light_id, $meethue_token) : LightQueryBuilder
     {
-        return new LightQueryBuilder($light_id);
+        return new LightQueryBuilder($light_id, $meethue_token);
     }
 
     public function setLight(HueLight $light) : LightQueryBuilder
@@ -38,10 +41,9 @@ class LightQueryBuilder
       $this->light = $light;
     }
 
-    public function viaMeetHue($meethue_token) : LightQueryBuilder
+    public function viaMeetHue() : LightQueryBuilder
     {
       $this->access_method = 'meethue';
-      $this->meethue_token = $meethue_token;
     }
 
     public function getBridgeState()
@@ -68,7 +70,10 @@ class LightQueryBuilder
     public function apply($token = null)
     {
         if ($this->access_method === 'node')
+        {
             NodeHue::applyLightStatus($this->light);
+            return;
+        }
         MeetHue::applyLightStatus($this->light, $token);
     }
 }

@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('validation_token')->nullable();
             $table->string('reset_token')->nullable();
 
+            $table->string('bridge_addr')->nullable();
             $table->rememberToken();
             $table->timestamps();
 
