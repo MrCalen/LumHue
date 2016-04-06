@@ -16,8 +16,13 @@ class LightQueryBuilder
 
     private function __construct($light_id = null)
     {
-        if ($light_id == null)
+        if ($light_id === null)
             return;
+        if (Auth::user()->bridge_addr === null)
+        {
+            $this->access_method = 'meethue';
+            return;
+        }
         $lights = json_decode(NodeHue::getBridgeStatus());
         $light = $lights->lights[$light_id];
         $this->light = new HueLight($light_id, $light);
