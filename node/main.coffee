@@ -8,7 +8,7 @@ bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get 'getBridgeIP', (req, res) ->
+app.get '/getBridgeIP', (req, res) ->
   hue.nupnpSearch().then((result) ->
     bridge_ip = result[0].ipaddress
     res.send bridge_ip
