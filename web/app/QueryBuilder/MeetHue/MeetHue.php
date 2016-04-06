@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Helpers\MeetHueModel;
+namespace App\QueryBuilder\MeetHue;
 
 use App\Models\HueLight;
 

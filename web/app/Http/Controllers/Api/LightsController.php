@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Helpers\MongoHueModel\MongoHueWrapper;
 use App\Http\Controllers\Controller;
 use App\Models\Light;
 use Illuminate\Http\Request;
-use App\Helpers\Mongo\Utils;
 use MeetHue;
 use MongoHue;
 use JWTAuth;
@@ -22,8 +20,8 @@ class LightsController extends Controller
         $light_effect = $request->get('effect');
 
         $user = $this->tokenToUser($request);
-        $light = MongoHueWrapper::RetrieveLight($user->id, $light_id);
-        $queryBuilder = LightQueryBuilder::create($light);
+ #       $light = MongoHueWrapper::RetrieveLight($user->id, $light_id);
+        $queryBuilder = LightQueryBuilder::create($light_id);
         $queryBuilder->setProperty('on', $light_on)
                      ->setProperty('bri', $light_bri)
                      ->setProperty('effect', $light_effect);
@@ -33,17 +31,12 @@ class LightsController extends Controller
 
     public function getBridge(Request $request)
     {
-        $user = $this->tokenToUser($request);
-        $bridge = MongoHue::table('bridge')->find([ 'user_id' => $user->id ]);
-        $bridge = Utils::MongoArray($bridge);
+        $bridge = LightQueryBuilder::create(null)->getBridgeState();
         return $bridge;
     }
 
     public function getLights(Request $request)
     {
-        $user = $this->tokenToUser($request);
-        $light = MongoHueWrapper::RetrieveLight($user->id, 2);
-        $queryBuilder = LightQueryBuilder::create($light)->setProperty('on', true);
-        return $light;
+        return $this->getBridge($request);
     }
 }

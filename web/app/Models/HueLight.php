@@ -46,7 +46,7 @@ class HueLight
     {
         $result = [];
 
-        $result['on'] = json_decode($this->on);
+        $result['on'] = $this->on;
 
         if (isset($this->bri)) {
             $result['bri'] = $this->bri;

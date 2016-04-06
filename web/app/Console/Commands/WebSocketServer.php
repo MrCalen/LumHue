@@ -11,7 +11,7 @@ use Ratchet\WebSocket\WsServer;
 use App\WebSockets\Protocol;
 use App\WebSockets\Strategy\ChatStrategy;
 
-class WSServer extends Command
+class WebSocketServer extends Command
 {
     protected $name = 'ws:serve';
     protected $description = 'Start Websockets handlers.';

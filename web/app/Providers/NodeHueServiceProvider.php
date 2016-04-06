@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class MeetHueServiceProvider extends ServiceProvider
+class NodeHueServiceProvider extends ServiceProvider
 {
     /**
     * Register the application services.
@@ -13,6 +13,6 @@ class MeetHueServiceProvider extends ServiceProvider
     */
     public function register()
     {
-        $this->app->bind('meethue', 'App\QueryBuilder\MeetHue\MeetHue');
+        $this->app->bind('nodehue', 'App\QueryBuilder\NodeHue\NodeHue');
     }
 }

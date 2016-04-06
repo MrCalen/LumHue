@@ -11,8 +11,8 @@ app.controller 'LightController', ($scope, $http, $timeout) ->
                     access_token: window.token
                 )
           .success (data, status) ->
-              $scope.lights = data[0].status.lights
-              $scope.light = data[0].status.lights[1]
+              $scope.lights = data.lights
+              $scope.light = data.lights[1]
               $scope.name = $scope.light.name
               $timeout ->
                   $scope.refreshLights()
