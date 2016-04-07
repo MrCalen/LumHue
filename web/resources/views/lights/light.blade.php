@@ -36,11 +36,20 @@
           <div class="sk-cube3 sk-cube"></div>
         </center>
 
-        <div class="col-md-12" ng-repeat="light in lights">
-          <div class="row light_info_row">
-            <img id="lamp_reachable_{$light.state.reachable && light.state.on $}">
-            <span>{$light.name$}</span>
+        <div class="container-fluid row">
+          <div class="row" ng-if="lights">
+            <div ng-repeat="light in lights">
+              <div class="col-lg-3 col-md-3 light_info_row">
+                <div class="container-fluid">
+                  <div class="row">
+                    <img id="lamp_reachable_{$light.state.reachable && light.state.on $}" class="img img-responsive">
+                  </div>
+                  <div class="row">
+                    <span class="center">{$light.name$}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-
       @endsection

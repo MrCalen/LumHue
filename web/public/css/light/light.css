@@ -4,10 +4,17 @@ body {
 
 .light_info {
     background: rgba(44, 44, 44, 0.79);
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#191919+0,2c2c2c+100&1+0,0.43+100 */
+    background: -moz-linear-gradient(top,  rgba(25,25,25,1) 0%, rgba(44,44,44,0.43) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(25,25,25,1) 0%,rgba(44,44,44,0.43) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(25,25,25,1) 0%,rgba(44,44,44,0.43) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#191919', endColorstr='#6e2c2c2c',GradientType=0 ); /* IE6-9 */
+
 }
 
 .light_info_row {
     background: rgba(44, 44, 44, 0.43);
+    margin: 25px;
 }
 
 img {
