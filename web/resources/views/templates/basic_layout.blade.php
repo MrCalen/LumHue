@@ -71,6 +71,15 @@
 
   {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flat-ui/2.2.2/js/vendor/video.js"></script> --}}
   {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flat-ui/2.2.2/js/flat-ui.min.js"></script> --}}
+  <script>
+    $(function() {
+      console.log('coucou');
+        window.isActive = true;
+        $(window).focus(function() { this.isActive = true; });
+        $(window).blur(function() { this.isActive = false; });
+    });
+  </script>
+
 
   @yield('javascript')
 
