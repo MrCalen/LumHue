@@ -6,6 +6,7 @@ app.controller 'LightController', ($scope, $http, $timeout) ->
     $scope.token = window.token
 
     $scope.refreshLights = ->
+      $scope.loading = true
       $http.get($scope.base_url + "/api/bridge",
                   params:
                     access_token: window.token
@@ -14,6 +15,7 @@ app.controller 'LightController', ($scope, $http, $timeout) ->
               $scope.lights = data.lights
               $scope.light = data.lights[1]
               $scope.name = $scope.light.name
+              $scope.loading = false
               $timeout ->
                   $scope.refreshLights()
               , 30 * 1000
