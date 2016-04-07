@@ -1,10 +1,22 @@
-app = angular.module 'light', [], ($interpolateProvider) ->
+app = angular.module 'light', ['colorpicker.module', 'uiSwitch'], ($interpolateProvider) ->
     $interpolateProvider.startSymbol('{$').endSymbol('$}')
 
 app.controller 'LightController', ($scope, $http, $timeout) ->
     $scope.base_url = window.base_url
     $scope.token = window.token
 
+    # View controls Logic
+
+    $scope.toggleModal = (i) ->
+      oldLight = $scope.lights[i + 1]
+      $scope.currentLight =
+        reachable: oldLight.state.reachable
+        on: oldLight.state.on
+        id: i + 1
+      $('#modalEditLight').modal('toggle')
+      return
+
+    # Refresh light status Logic
     $scope.loop = (time = 30) ->
       $timeout ->
           $scope.refreshLights()
@@ -28,7 +40,6 @@ app.controller 'LightController', ($scope, $http, $timeout) ->
               $scope.loop()
           .error ->
               $scope.loop()
-
     $timeout ->
         $scope.refreshLights()
     , 200
