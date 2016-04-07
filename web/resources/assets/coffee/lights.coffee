@@ -10,7 +10,6 @@ app.controller 'LightController', ($scope, $http, $timeout) ->
           $scope.refreshLights()
       , time * 1000
 
-
     $scope.refreshLights = ->
       if window.blurred
         $scope.loop(10)
