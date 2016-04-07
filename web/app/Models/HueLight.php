@@ -24,15 +24,17 @@ class HueLight
     public function __construct(string $id, stdClass $light)
     {
         $this->id = $id;
-        foreach ($light->state as $key => $value) {
-            $this->{$key} = $value;
+        if (count((array)$light)) {
+            foreach ($light->state as $key => $value) {
+                $this->{$key} = $value;
+            }
+            $this->name = $light->name;
         }
-        $this->name = $light->name;
     }
 
     public function setProperty(string $property, $value)
     {
-        if ($value) {
+        if ($value !== null) {
             $this->{$property} = $value;
         }
     }
@@ -49,11 +51,15 @@ class HueLight
         $result['on'] = $this->on;
 
         if (isset($this->bri)) {
+          dd($this->bri);
             $result['bri'] = $this->bri;
         }
 
         if (isset($this->effect)) {
             $result['effect'] = $this->effect;
+        }
+        if (isset($this->xy)) {
+            $result['xy'] = $this->xy;
         }
 
         return $result;

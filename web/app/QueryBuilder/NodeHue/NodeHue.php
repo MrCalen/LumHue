@@ -47,8 +47,8 @@ class NodeHue
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_URL, $base_uri);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch,CURLOPT_POST, count($arr));
-        curl_setopt($ch,CURLOPT_POSTFIELDS, $fields);
+        curl_setopt($ch, CURLOPT_POST, count($arr));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
 
         $data = curl_exec($ch);
         curl_close($ch);

@@ -24,7 +24,7 @@ $clipmessage = [
         'method' => "PUT",
         'body' => [
             "on" => true,
-    	    "effect" => "colorloop",
+            "effect" => "colorloop",
             "alert" => "none",
             "bri" => $bri,
             "xy" => [
@@ -33,8 +33,6 @@ $clipmessage = [
         ],
     ]
 ];
-
-
 
 $fields = array(
     'clipmessage' => urlencode(json_encode($clipmessage)),

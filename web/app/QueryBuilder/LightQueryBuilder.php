@@ -18,14 +18,19 @@ class LightQueryBuilder
     private function __construct($light_id = null, $meethue_token = null)
     {
         $this->meethue_token = $meethue_token;
-        if (!Auth::user() || !Auth::user()->bridge_addr)
-        {
+        if (!Auth::user() || !Auth::user()->bridge_addr) {
             $this->access_method = 'meethue';
+            if (!$light_id) {
+                $light_id = '';
+            }
+            $this->light = new HueLight($light_id, (object)[]);
             return;
         }
 
-        if ($light_id === null)
+        if ($light_id === null) {
             return;
+        }
+
         $lights = json_decode(NodeHue::getBridgeStatus());
         $light = $lights->lights[$light_id];
         $this->light = new HueLight($light_id, $light);
@@ -38,19 +43,20 @@ class LightQueryBuilder
 
     public function setLight(HueLight $light) : LightQueryBuilder
     {
-      $this->light = $light;
+        $this->light = $light;
     }
 
     public function viaMeetHue() : LightQueryBuilder
     {
-      $this->access_method = 'meethue';
+        $this->access_method = 'meethue';
     }
 
     public function getBridgeState()
     {
-      if ($this->access_method === 'node')
-        return NodeHue::getBridgeStatus();
-      return MeetHue::getBridge($this->meethue_token);
+        if ($this->access_method === 'node') {
+            return NodeHue::getBridgeStatus();
+        }
+        return MeetHue::getBridge($this->meethue_token);
     }
 
     public function setProperty($propertyName, $value) : LightQueryBuilder
@@ -67,13 +73,12 @@ class LightQueryBuilder
         return $this;
     }
 
-    public function apply($token = null)
+    public function apply()
     {
-        if ($this->access_method === 'node')
-        {
+        if ($this->access_method === 'node') {
             NodeHue::applyLightStatus($this->light);
             return;
         }
-        MeetHue::applyLightStatus($this->light, $token);
+        MeetHue::applyLightStatus($this->light, $this->meethue_token);
     }
 }

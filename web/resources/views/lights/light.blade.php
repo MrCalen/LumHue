@@ -59,7 +59,7 @@
           </div>
         </div>
       </div>
-    </div>
+   </div>
   @endsection
 
   @section('modals')
@@ -78,8 +78,7 @@
                 <button colorpicker="rgba" type="button"
                         colorpicker-position="top"
                         class="light-modal-text"
-                        ng-model="color"
-                        ng-bind="currentLight.color">Change Color</button>
+                        ng-model="currentLight.color">Change Color</button>
                 <h6 class="light-modal-title">On / Off</h6>
                 <switch id="enabled" name="enabled" ng-model="currentLight.on" class="green"></switch>
               </div>
@@ -89,7 +88,10 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default">Save</button>
+            <div ng-show="applying"><i style="color:black" class="fa fa-spinner fa-spin fa-fw"></i></div>
+            <button type="button" class="btn btn-default" ng-click="applyLight()" ng-hide="applying">
+              Save
+            </button>
           </div>
         </div>
       </div>

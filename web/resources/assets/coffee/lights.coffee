@@ -6,15 +6,25 @@ app.controller 'LightController', ($scope, $http, $timeout) ->
     $scope.token = window.token
 
     # View controls Logic
-
     $scope.toggleModal = (i) ->
       oldLight = $scope.lights[i + 1]
       $scope.currentLight =
         reachable: oldLight.state.reachable
         on: oldLight.state.on
+        color: oldLight.rgbstr
         id: i + 1
       $('#modalEditLight').modal('toggle')
       return
+
+    $scope.applyLight = ->
+      # $scope.applying = true
+      $http.post $scope.base_url + '/api/lights?access_token=' + window.token,
+          id: $scope.currentLight.id
+          on: $scope.currentLight.on
+          color: $scope.currentLight.color
+      .success (data, status) ->
+        $scope.applying = false
+        console.log data
 
     # Refresh light status Logic
     $scope.loop = (time = 30) ->

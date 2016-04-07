@@ -10,6 +10,7 @@ use MongoHue;
 use JWTAuth;
 use Auth;
 use App\QueryBuilder\LightQueryBuilder;
+use App\Helpers\LumHueColorConverter;
 
 class LightsController extends Controller
 {
@@ -17,24 +18,37 @@ class LightsController extends Controller
     {
         $light_id = $request->get('id');
         $light_on = $request->get('on');
-        $light_bri = $request->get('bri');
         $light_effect = $request->get('effect');
+        $light_color = $request->get('color');
+        $light_color = LumHueColorConverter::RGBstrToRGB($light_color);
+
+        $hueColors = LumHueColorConverter::RGBtoChromatic($light_color[0], $light_color[1], $light_color[2]);
 
         $user = $this->tokenToUser($request);
- #       $light = MongoHueWrapper::RetrieveLight($user->id, $light_id);
-        $queryBuilder = LightQueryBuilder::create($light_id);
+        $queryBuilder = LightQueryBuilder::create(strval($light_id), $user->meethue_token);
         $queryBuilder->setProperty('on', $light_on)
-                     ->setProperty('bri', $light_bri)
+                     ->setProperty('bri', $hueColors['bri'])
+                     ->setProperty('xy', [
+                       $hueColors['x'],
+                       $hueColors['y'],
+                     ])
                      ->setProperty('effect', $light_effect);
 
-        $queryBuilder->apply($user->meethue_token);
+        $queryBuilder->apply();
     }
 
     public function getBridge(Request $request)
     {
         $meethue = $this->getMeetHueToken($request);
         $bridge = LightQueryBuilder::create(null, $meethue)->getBridgeState();
-        return $bridge;
+        $bridge = json_decode($bridge);
+        foreach ($bridge->lights as $light) {
+            $rgb = LumHueColorConverter::chromaticToRGB($light->state->xy[0], $light->state->xy[1], $light->state->bri);
+            $light->rgb = $rgb;
+            $light->rgbstr = 'rgba(' . $rgb['r'] . ',' . $rgb['g'] . ',' . $rgb['b'] . ')';
+        }
+
+        return json_encode($bridge);
     }
 
     public function getLights(Request $request)
