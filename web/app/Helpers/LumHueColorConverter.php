@@ -61,7 +61,16 @@ class LumHueColorConverter
             'y' => $y,
             'bri' => $Y,
         ];
+    }
 
+    public static function RGBToHex($r, $g, $b)
+    {
+        $hex = "#";
+        $hex .= str_pad(dechex($r), 2, "0", STR_PAD_LEFT);
+        $hex .= str_pad(dechex($g), 2, "0", STR_PAD_LEFT);
+        $hex .= str_pad(dechex($b), 2, "0", STR_PAD_LEFT);
+
+        return $hex;
     }
 
     public static function chromaticToRGB($x, $y, $bri)

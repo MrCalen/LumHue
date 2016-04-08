@@ -49,7 +49,12 @@
               <i class="fa fa-edit"></i>
             </button>
             <div class="row">
-              <img id="lamp_reachable_{$light.state.reachable && light.state.on $}" class="img img-responsive">
+              <section class="stage">
+                <figure class="ball"
+                        style="background: radial-gradient(circle at 80% 100%, {$ light.rgbhex $} , #0a0a0a 80%, #000000 100%)">
+                  <span class="shadow"></span>
+                </figure>
+              </section>
             </div>
             <div class="row">
               <span class="center">{$light.name$}</span>
