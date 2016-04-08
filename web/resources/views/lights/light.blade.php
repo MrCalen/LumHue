@@ -22,7 +22,7 @@
 @endsection
 
 @section('content')
-  <div class="container-fluid">
+  <div class="container-fluid" id="content">
     <div class="row light_info">
       <div class="text-center">
         <div ng-show="loading && lights">
@@ -81,7 +81,7 @@
             <div class="container-fluid">
               <div class="row" ng-show="currentLight.reachable">
                 <h6 class="light-modal-title">Change Lamp Color</h6>
-                <button colorpicker="rgba" type="button"
+                <button colorpicker="rgb" type="button"
                         colorpicker-position="top"
                         class="light-modal-text"
                         ng-model="currentLight.color">Change Color</button>
@@ -94,7 +94,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <div ng-show="applying"><i class="fa fa-spinner fa-spin fa-fw black"></i></div>
+            <div ng-show="applying"><span class="modal-title" ng-bind="applyText"></span><i class="fa fa-spinner fa-spin fa-fw black"></i></div>
             <button type="button" class="btn btn-default" ng-click="applyLight()" ng-hide="applying">
               Save
             </button>

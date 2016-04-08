@@ -51,8 +51,7 @@ class HueLight
         $result['on'] = $this->on;
 
         if (isset($this->bri)) {
-          dd($this->bri);
-            $result['bri'] = $this->bri;
+//            $result['bri'] = $this->bri * 100;
         }
 
         if (isset($this->effect)) {
