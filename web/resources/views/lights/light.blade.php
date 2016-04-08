@@ -44,23 +44,22 @@
         <div ng-repeat="light in lights">
           <div class="col-lg-3 col-md-3 light_info_row">
             <div class="container-fluid">
-              <button class="col-xs-1 col-xs-offset-10"
-                      style="background-color: transparent; border-color: transparent; margin-top: 10px"
+              <button class="col-xs-1 col-xs-offset-10 modal-toggle"
                       ng-click="toggleModal($index)">
-                <i class="fa fa-edit"></i>
-              </button>
-              <div class="row">
-                <img id="lamp_reachable_{$light.state.reachable && light.state.on $}" class="img img-responsive">
-              </div>
-              <div class="row">
-                <span class="center">{$light.name$}</span>
-              </div>
+              <i class="fa fa-edit"></i>
+            </button>
+            <div class="row">
+              <img id="lamp_reachable_{$light.state.reachable && light.state.on $}" class="img img-responsive">
+            </div>
+            <div class="row">
+              <span class="center">{$light.name$}</span>
             </div>
           </div>
         </div>
       </div>
-   </div>
-  @endsection
+    </div>
+  </div>
+@endsection
 
   @section('modals')
     @parent
@@ -68,7 +67,9 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
             <h4 class="modal-title">Edit light</h4>
           </div>
           <div class="modal-body">
@@ -88,7 +89,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <div ng-show="applying"><i style="color:black" class="fa fa-spinner fa-spin fa-fw"></i></div>
+            <div ng-show="applying"><i class="fa fa-spinner fa-spin fa-fw black"></i></div>
             <button type="button" class="btn btn-default" ng-click="applyLight()" ng-hide="applying">
               Save
             </button>
@@ -96,5 +97,4 @@
         </div>
       </div>
     </div>
-
   @endsection

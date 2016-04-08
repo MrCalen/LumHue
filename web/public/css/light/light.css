@@ -49,3 +49,13 @@ img {
   color: grey;
   font-size: 20px;
 }
+
+.modal-toggle {
+  background-color: transparent;
+  border-color: transparent;
+  margin-top: 10px
+}
+
+.black {
+  color: black;
+}
