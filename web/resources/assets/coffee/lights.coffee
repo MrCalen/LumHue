@@ -51,11 +51,15 @@ app.controller 'LightController', ($scope, $http, $timeout) ->
               $scope.light = data.lights[1]
               $scope.name = $scope.light.name
               $scope.loading = false
-              callback() if callback
-              $scope.loop()
+              if callback
+                callback()
+              else
+                $scope.loop()
           .error ->
-              callback() if callback
-              $scope.loop()
+              if callback
+                callback()
+              else
+                $scope.loop()
     $timeout ->
         $scope.refreshLights()
     , 200
