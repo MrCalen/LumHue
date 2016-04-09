@@ -1,0 +1,19 @@
+{
+  "name": "LumHue",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "https://github.com/MrCalen/LumHue",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bootstrap-colorpicker": "^3.0.25"
+  }
+}
