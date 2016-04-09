@@ -52,7 +52,6 @@ class MongoHueWrapper
         foreach ($lights as $index => $light) {
             $convertedLights[$index] = new HueLight($index, $light);
         }
-
         return $convertedLights;
     }
 }

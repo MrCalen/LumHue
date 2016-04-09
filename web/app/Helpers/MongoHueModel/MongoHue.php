@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Helpers\MongoHueModel;
 
 use App\Models\Light;
+use App\Helpers\Mongo\Utils;
 
 class MongoHue
 {
@@ -24,5 +25,17 @@ class MongoHue
     public function table($table) : \MongoDB\Collection
     {
         return $this->db->{$table};
+    }
+
+    public function find($table, $criteria = []) : \stdClass
+    {
+        return Utils::toJson(Utils::MongoArray($this->table($table)
+                                                    ->find($criteria)));
+    }
+
+    public function insert($table, $data, $filter = [])
+    {
+        $this->table($table)
+             ->insertOne($data);
     }
 }

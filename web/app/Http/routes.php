@@ -21,12 +21,17 @@ Route::group(['prefix' => 'api'], function () {
         Route::get('/bridge', 'Api\LightsController@getBridge');
         Route::get('/lights', 'Api\LightsController@getLights');
         Route::post('/lights', 'Api\LightsController@setLights');
+
+        // Ambiances
+        Route::group(['prefix' => 'ambiance'], function () {
+            Route::get('/', 'Api\Ambiance\AmbianceController@index');
+            Route::post('/create', 'Api\Ambiance\AmbianceController@create');
+        });
     });
 
     // Token Generation routes.
     Route::post('/signup', 'UserController@signup');
     Route::post('/signin', 'UserController@signIn');
-
 });
 
 

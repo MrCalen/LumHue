@@ -14,8 +14,14 @@ class Utils
     {
         $unserialized = [];
         array_map(function (Serializable $element) use (&$unserialized) {
-            $unserialized[] = json_decode(json_encode($element));
+            $unserialized[] = \MongoDB\BSON\toPHP(\MongoDB\BSON\fromPHP($element));
         }, iterator_to_array($bsonDocuments));
+
         return $unserialized;
+    }
+
+    public static function toJson(array $document) : \stdClass
+    {
+        return json_decode(\MongoDB\BSON\toJSON(\MongoDB\BSON\fromPHP($document)));
     }
 }
