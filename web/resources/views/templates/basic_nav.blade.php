@@ -32,10 +32,13 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="{{ URL::to('/') }}">Home</a></li>
-              @if (Auth::check())
-              <li><a href="{{ URL::to('/lights') }}">Lights</a></li>
-              @endif
+                <li class="active"><a href="{{ URL::to('/') }}">Home</a></li>
+                @if (Auth::check())
+                <li><a href="{{ URL::to('/lights') }}">Lights</a></li>
+                @endif
+                @if (Auth::check())
+                <li><a href="{{ URL::to('/ambiances') }}">Ambiances</a></li>
+                @endif
             </ul>
             <ul class="nav navbar-nav navbar-right">
               @if(session('info'))<li>{{ session('info') }}</li> @endif

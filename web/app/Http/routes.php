@@ -72,6 +72,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::get('/lights', 'App\LightController@index');
         Route::get('/logout', 'App\LoginController@logout');
+        Route::get('/ambiances', 'App\AmbianceController@index');
     });
 
     Route::group(['prefix' => 'test'], function () {
