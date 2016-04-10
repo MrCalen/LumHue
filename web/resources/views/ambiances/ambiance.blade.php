@@ -47,12 +47,12 @@
                     <div class="col-lg-3 col-md-3 light_info_row">
                         <div class="container-fluid">
                             <button class="col-xs-1 col-xs-offset-10 modal-toggle"
-                                    ng-click="toggleModal($index)">
+                                    ng-click="toggleEditAmbiance($index)">
                                 <i class="fa fa-edit"></i>
                             </button>
                             <div class="row">
                                 <section class="stage">
-                                    <div ng-repeat="light in ambiance.ambiance.lights">
+                                    <div ng-repeat="light in ambiance.lights">
                                         <figure class="ball"
                                                 style="background: radial-gradient(circle at 80% 100%, {$ light.rgbhex $} , #0a0a0a 80%, #000000 100%)">
                                             <span class="shadow"></span>
@@ -116,4 +116,3 @@
                 </div>
             </div>
 @endsection
-

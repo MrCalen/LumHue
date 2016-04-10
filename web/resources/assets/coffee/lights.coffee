@@ -5,6 +5,12 @@ app.controller 'AmbianceController', ($scope, $http, $timeout) ->
     $scope.base_url = window.base_url
     $scope.token = window.token
 
+    # Refresh light status Logic
+    $scope.loop = (time = 30) ->
+      $timeout ->
+          $scope.refreshLights()
+      , time * 1000
+
     $scope.refreshAmbiances = (callback = null)->
       if window.blurred
         $scope.loop(10)
@@ -18,9 +24,8 @@ app.controller 'AmbianceController', ($scope, $http, $timeout) ->
           .success (data, status) ->
               tmp = []
               for key, value of data
-                tmp.push value
+                tmp.push value.ambiance
               $scope.ambiances = tmp
-              $scope.currentAmbiance = ambiances[0]
               $scope.loading = false
               if callback
                 callback()
@@ -35,20 +40,28 @@ app.controller 'AmbianceController', ($scope, $http, $timeout) ->
         $scope.refreshAmbiances()
     , 200
 
+    $scope.toggleEditAmbiance = (i) ->
+      oldAmbiance = $scope.ambiances[i]
+      $scope.currentAmbiance =
+        name: oldAmbiance.name
+        lights: oldAmbiance.lights
+      $('#modalCreateAmbiance').modal('toggle')
+      return
+
     $scope.toggleNewAmbiance = ->
       $scope.currentAmbiance =
         name: "new ambiance",
         lights: [
           id: 0,
-          rgb:rgb(255, 0, 0),
+          rgb:"rgb(255, 0, 0)",
           on: true
         ,
           id: 1,
-          rgb:rgb(0, 255, 0),
+          rgb:"rgb(0, 255, 0)",
           on: true
         ,
           id: 2,
-          rgb:rgb(0, 0, 255),
+          rgb:"rgb(0, 0, 255)",
           on: true
         ]
       $('#modalCreateAmbiance').modal('toggle')
