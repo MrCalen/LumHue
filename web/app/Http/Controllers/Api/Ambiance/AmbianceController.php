@@ -28,7 +28,7 @@ class AmbianceController extends Controller
             ]);
         }
 
-        $ambiance = json_decode($ambiance);
+        //$ambiance = json_decode($ambiance);
         MongoHue::insert('ambiance', [
                 'ambiance' => $ambiance,
                 'user_id' => $user_id->id,
