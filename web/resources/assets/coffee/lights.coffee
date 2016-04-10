@@ -1,6 +1,53 @@
 app = angular.module 'light', ['colorpicker.module', 'uiSwitch'], ($interpolateProvider) ->
     $interpolateProvider.startSymbol('{$').endSymbol('$}')
 
+app.controller 'AmbianceController', ($scope, $http, $timeout) ->
+    $scope.base_url = window.base_url
+    $scope.token = window.token
+
+    $scope.toggleNewAmbiance ->
+      $scope.currentAmbiance =
+        name: "new ambiance",
+        lights: [
+          id: 0,
+          rgb:rgb(255, 0, 0),
+          on: true
+        ,
+          id: 1,
+          rgb:rgb(0, 255, 0),
+          on: true
+        ,
+          id: 2,
+          rgb:rgb(0, 0, 255),
+          on: true
+        ]
+      $('#modalCreateAmbiance').modal('toggle')
+      return
+
+    $scope.saveNewAmbiance ->
+      $scope.saving = true
+      $scope.savingText = "Saving new ambiance..."
+      $http.post $scope.base_url + '/api/ambiance/create?access_token=' + window.token,
+          ambiance: $scope.currentAmbiance
+      .success (data, status) ->
+          $scope.savingText = "Saved"
+
+
+      $scope.applying = true
+      $scope.applyText = "Applying new light..."
+      $http.post $scope.base_url + '/api/lights?access_token=' + window.token,
+          id: $scope.currentLight.id
+          on: $scope.currentLight.on
+          color: $scope.currentLight.color
+      .success (data, status) ->
+        $scope.applyText = "Refreshing light states..."
+        $scope.refreshLights ->
+          $scope.applying = ""
+          $scope.applying = false
+          $("#modalEditLight").modal('toggle')
+
+
+
 app.controller 'LightController', ($scope, $http, $timeout) ->
     $scope.base_url = window.base_url
     $scope.token = window.token
