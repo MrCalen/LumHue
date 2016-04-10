@@ -5,7 +5,37 @@ app.controller 'AmbianceController', ($scope, $http, $timeout) ->
     $scope.base_url = window.base_url
     $scope.token = window.token
 
-    $scope.toggleNewAmbiance ->
+    $scope.refreshAmbiances = (callback = null)->
+      if window.blurred
+        $scope.loop(10)
+        return
+
+      $scope.loading = true
+      $http.get($scope.base_url + "/api/ambiance",
+                  params:
+                    access_token: window.token
+                )
+          .success (data, status) ->
+              tmp = []
+              for key, value of data
+                tmp.push value
+              $scope.ambiances = tmp
+              $scope.currentAmbiance = ambiances[0]
+              $scope.loading = false
+              if callback
+                callback()
+              else
+                $scope.loop()
+          .error ->
+              if callback
+                callback()
+              else
+                $scope.loop()
+    $timeout ->
+        $scope.refreshAmbiances()
+    , 200
+
+    $scope.toggleNewAmbiance = ->
       $scope.currentAmbiance =
         name: "new ambiance",
         lights: [
@@ -24,29 +54,13 @@ app.controller 'AmbianceController', ($scope, $http, $timeout) ->
       $('#modalCreateAmbiance').modal('toggle')
       return
 
-    $scope.saveNewAmbiance ->
+    $scope.saveNewAmbiance = ->
       $scope.saving = true
       $scope.savingText = "Saving new ambiance..."
       $http.post $scope.base_url + '/api/ambiance/create?access_token=' + window.token,
           ambiance: $scope.currentAmbiance
       .success (data, status) ->
           $scope.savingText = "Saved"
-
-
-      $scope.applying = true
-      $scope.applyText = "Applying new light..."
-      $http.post $scope.base_url + '/api/lights?access_token=' + window.token,
-          id: $scope.currentLight.id
-          on: $scope.currentLight.on
-          color: $scope.currentLight.color
-      .success (data, status) ->
-        $scope.applyText = "Refreshing light states..."
-        $scope.refreshLights ->
-          $scope.applying = ""
-          $scope.applying = false
-          $("#modalEditLight").modal('toggle')
-
-
 
 app.controller 'LightController', ($scope, $http, $timeout) ->
     $scope.base_url = window.base_url
