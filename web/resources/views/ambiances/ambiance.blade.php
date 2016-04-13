@@ -53,13 +53,16 @@
                             <div class="row">
                                 <section class="stage">
                                     <div ng-repeat="light in ambiance.lights">
-                                        <figure class="ball"
+                                      <div class="col-md-4">
+                                        <figure class="flatball"
                                                 style="background: radial-gradient(circle at 80% 100%, {$ light.rgbhex $} , #0a0a0a 80%, #000000 100%)">
                                             <span class="shadow"></span>
                                         </figure>
+                                      </div>
                                     </div>
                                 </section>
                             </div>
+                            <div ng-bind="ambiance.name"></div>
                         </div>
                     </div>
                 </div>

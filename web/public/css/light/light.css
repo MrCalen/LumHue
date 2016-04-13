@@ -113,6 +113,23 @@ img {
     z-index: -1;
 }
 
+/* Flatball */
+.flatball {
+    display: inline-block;
+    width: 100%;
+    /* height: auto; */
+    margin: 0;
+    border-radius: 50%;
+    position: relative;
+    background: radial-gradient(circle at 50% 150%, #323232, #0a0a0a 80%, #000000 50%);
+}
+
+.flatball:before{
+    content:'';
+    padding:50% 0; /* vertical value as  100% equals width */
+    display:inline-block;
+}
+
 .stage {
     width: 300px;
     height: 300px;
