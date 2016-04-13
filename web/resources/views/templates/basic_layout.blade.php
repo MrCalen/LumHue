@@ -45,8 +45,8 @@
   @yield('framework')
 
   @yield('css')
-  <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('css/animated-button.css') }}"/>
+  <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
   @yield('specific_css')
 
   <!--[if lt IE 9]>

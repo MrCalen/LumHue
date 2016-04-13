@@ -110,8 +110,9 @@
 
                         </div>
                         <div class="modal-footer">
+                            <input ng-model="currentAmbiance.name" class="ambiance-name"/>
                             <div ng-show="saving"><span class="modal-title" ng-bind="savingText"></span><i class="fa fa-spinner fa-spin fa-fw black"></i></div>
-                            <button type="button" class="btn btn-default" ng-click="saveNewAmbiance()" ng-hide="saving">
+                            <button type="button" class="save-button btn" ng-click="saveNewAmbiance()" ng-hide="saving">
                                 Save
                             </button>
                         </div>

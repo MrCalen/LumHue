@@ -74,6 +74,7 @@ app.controller 'AmbianceController', ($scope, $http, $timeout) ->
           ambiance: $scope.currentAmbiance
       .success (data, status) ->
           $scope.savingText = "Saved"
+          window.location.reload()
 
 app.controller 'LightController', ($scope, $http, $timeout) ->
     $scope.base_url = window.base_url
