@@ -53,15 +53,15 @@ app.controller 'AmbianceController', ($scope, $http, $timeout) ->
         name: "new ambiance",
         lights: [
           id: 0,
-          rgb:"rgb(255, 0, 0)",
+          color:"rgb(255, 0, 0)",
           on: true
         ,
           id: 1,
-          rgb:"rgb(0, 255, 0)",
+          color:"rgb(0, 255, 0)",
           on: true
         ,
           id: 2,
-          rgb:"rgb(0, 0, 255)",
+          color:"rgb(0, 0, 255)",
           on: true
         ]
       $('#modalCreateAmbiance').modal('toggle')

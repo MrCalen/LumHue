@@ -45,7 +45,7 @@ class LightsController extends Controller
         foreach ($bridge->lights as $light) {
             $rgb = LumHueColorConverter::chromaticToRGB($light->state->xy[0], $light->state->xy[1], $light->state->bri);
             $light->rgb = $rgb;
-            $light->rgbstr = 'rgba(' . $rgb['r'] . ',' . $rgb['g'] . ',' . $rgb['b'] . ')';
+            $light->rgbstr = 'rgb(' . $rgb['r'] . ',' . $rgb['g'] . ',' . $rgb['b'] . ')';
             $light->rgbhex = LumHueColorConverter::RGBToHex($rgb['r'], $rgb['g'], $rgb['b']);
         }
 
