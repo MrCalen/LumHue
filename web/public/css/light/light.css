@@ -121,7 +121,7 @@ img {
     margin: 0;
     border-radius: 50%;
     position: relative;
-    background: radial-gradient(circle at 50% 150%, #323232, #0a0a0a 80%, #000000 50%);
+    background: #323232;
 }
 
 .flatball:before{
@@ -135,6 +135,22 @@ img {
     height: 300px;
     display: inline-block;
     margin: 20px;
+    -webkit-perspective: 1200px;
+    -moz-perspective: 1200px;
+    -ms-perspective: 1200px;
+    -o-perspective: 1200px;
+    perspective: 1200px;
+    -webkit-perspective-origin: 50% 50%;
+    -moz-perspective-origin: 50% 50%;
+    -ms-perspective-origin: 50% 50%;
+    -o-perspective-origin: 50% 50%;
+    perspective-origin: 50% 50%;
+}
+
+.flatstage {
+    width: 300px;
+    display: inline-block;
+    margin: 20px 0;
     -webkit-perspective: 1200px;
     -moz-perspective: 1200px;
     -ms-perspective: 1200px;
