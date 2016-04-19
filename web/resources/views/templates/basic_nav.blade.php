@@ -16,6 +16,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flat-ui/2.2.2/css/flat-ui.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
+  @if (\Auth::check())
+      <link rel="stylesheet" href="{{ URL::asset('css/chat/chat.css') }}">
+  @endif
+
+@endsection
+
+@section('javascript')
+    @parent
 @endsection
 
 @section('body')
@@ -53,4 +61,9 @@
         </div>
       </nav>
   @yield('content')
+
+  @if (\Auth::check())
+      @include('chat/chat_tabs')
+  @endif
+
 @endsection

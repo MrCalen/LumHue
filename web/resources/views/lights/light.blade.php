@@ -1,6 +1,6 @@
 @extends('templates/basic_nav')
 
-@section('ngApp')ng-app="light"@endsection
+@section('ngApp')ng-app="LumHue"@endsection
 @section('ngController')ng-controller="LightController" ng-cloak @endsection
 
 @section('specific_css')
@@ -12,9 +12,9 @@
 
 @section('javascript')
   @parent
-  <script src="{{ elixir('js/app.js') }}"></script>
   <script src="{{ URL::asset('components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js')}}"></script>
   <script src="{{ URL::asset('components/angular-ui-switch/angular-ui-switch.min.js')}}"></script>
+  <script src="{{ elixir('js/app.js') }}"></script>
   <script>
     var token = '{{ $token }}';
     var base_url = '{{ URL::to('/') }}';

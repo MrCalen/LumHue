@@ -1,7 +1,4 @@
-app = angular.module 'light', ['colorpicker.module', 'uiSwitch'], ($interpolateProvider) ->
-    $interpolateProvider.startSymbol('{$').endSymbol('$}')
-
-app.controller 'AmbianceController', ($scope, $http, $timeout) ->
+window.app.controller 'AmbianceController', ($scope, $http, $timeout) ->
     $scope.base_url = window.base_url
     $scope.token = window.token
 

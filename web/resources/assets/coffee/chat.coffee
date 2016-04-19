@@ -1,8 +1,4 @@
-HueChatApp = angular.module 'HueChat', [], ($interpolateProvider) ->
-  $interpolateProvider.startSymbol('{$');
-  $interpolateProvider.endSymbol('$}');
-
-HueChatApp.controller 'HueChatController', ($scope, $http, $timeout) ->
+window.app.controller 'HueChatController', ($scope, $http, $timeout) ->
   $scope.username = window.username
   $scope.messages = [];
 
