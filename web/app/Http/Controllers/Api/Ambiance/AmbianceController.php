@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Api\Ambiance;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\JobAmbiance;
+use app\Models\HueLight;
+use App\QueryBuilder\LightQueryBuilder;
 use Illuminate\Http\Request;
 use MongoHue;
 use App\Helpers\Mongo\Utils;
 use App\Helpers\LumHueColorConverter;
 use Response;
+use Auth;
 
 class AmbianceController extends Controller
 {
@@ -41,12 +45,24 @@ class AmbianceController extends Controller
             ]);
         }
 
-        //$ambiance = json_decode($ambiance);
         MongoHue::insert('ambiance', [
                 'ambiance' => $ambiance,
                 'user_id' => $user_id->id,
             ]);
 
         return Response::json([ 'success' => true, ]);
+    }
+
+    public function apply(Request $request) {
+        $ambiance_id = $request->get('ambiance_id');
+        if (!$ambiance_id) {
+            return Response::json([
+                'error' => 'Please provide an ambiance',
+                'success' => false,
+            ]);
+        }
+
+        $this->dispatch((new JobAmbiance($ambiance_id, $this->tokenToUser($request))));
+        return Response::json('{ "status" : true  }');
     }
 }

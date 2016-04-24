@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\WebSockets\Strategy;
 
+use App\WebSockets\Bot;
 use App\WebSockets\Protocol;
 use Ratchet\ConnectionInterface;
 
@@ -39,7 +40,25 @@ class ChatStrategy implements StrategyInterface
                 'author' => $protocol->getConnections()[$connection->resourceId]->getName(),
                 'date' => date('l jS \of F Y h:i:s A'),
             ]);
+        } elseif ($message->type === 'bot') {
+            $msg = json_encode([
+                'type' => 'bot',
+                'content' => $message->content,
+                'author' => $protocol->getConnections()[$connection->resourceId]->getName(),
+                'date' => date('l jS \of F Y h:i:s A'),
+            ]);
+            $bot = Bot::instance();
+            $return = $bot->handleMessage($message->content);
+            $client = $protocol->getConnections()[$connection->resourceId];
+            $return = json_encode([
+                'content' => $return,
+                'type' => 'message',
+                'author' => $client->getName(),
+            ]);
+            $client->send($return);
+            return;
         }
+
         if (isset($msg)) {
             $this->broadcast($protocol, $msg, $connection);
         }

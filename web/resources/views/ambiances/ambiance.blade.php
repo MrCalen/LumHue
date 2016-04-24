@@ -1,6 +1,6 @@
 @extends('templates/basic_nav')
 
-@section('ngApp')ng-app="light"@endsection
+@section('ngApp')ng-app="LumHue"@endsection
 <!--FIXME ambiance-->
 @section('ngController')ng-controller="AmbianceController" ng-cloak @endsection
 

@@ -22,7 +22,7 @@ class LumHueColorConverter
 
     public static function RGBToChromaticRGB(RGB $rgb)
     {
-        return $this->RGBToChromatic(
+        return LumHueColorConverter::RGBToChromatic(
             $rgb->getRed(),
             $rgb->getGreen(),
             $rgb->getBlue()

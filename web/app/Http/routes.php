@@ -26,6 +26,8 @@ Route::group(['prefix' => 'api'], function () {
         Route::group(['prefix' => 'ambiance'], function () {
             Route::get('/', 'Api\Ambiance\AmbianceController@index');
             Route::post('/create', 'Api\Ambiance\AmbianceController@create');
+            Route::post('/apply', 'Api\Ambiance\AmbianceController@apply');
+
         });
     });
 
@@ -68,11 +70,12 @@ Route::group(['middleware' => ['web']], function () {
     // Chat route
     Route::get('/chat', 'Chat\ChatController@index');
 
-    // Authentificated routes
+    // Authenticated routes
     Route::group(['middleware' => 'auth'], function () {
         Route::get('/lights', 'App\LightController@index');
         Route::get('/logout', 'App\LoginController@logout');
         Route::get('/ambiances', 'App\AmbianceController@index');
+        Route::get('/profile', 'App\ProfileController@index');
     });
 
     Route::group(['prefix' => 'test'], function () {

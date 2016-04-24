@@ -1,4 +1,4 @@
-@extends('templates/basic_nav')
+@extends('templates/basic_with_chat')
 
 @section('ngApp')ng-app="LumHue"@endsection
 @section('ngController')ng-controller="LightController" ng-cloak @endsection
