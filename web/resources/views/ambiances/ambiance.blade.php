@@ -94,9 +94,13 @@
                         </div>
                         <div class="modal-body">
 
+                          <div class="container-fluid">
                             <div ng-repeat="light in currentAmbiance.lights">
-                                <div class="container-fluid">
-
+                                  <div class="col-md-4">
+                                    <figure class="flatball"
+                                            style="background: radial-gradient(circle at 0% 5%, {$ light.color $} , #0a0a0a 150%, #000000 150%)">
+                                        <span class="shadow"></span>
+                                    </figure>
                                         <h6 class="light-modal-title">Change Lamp Color</h6>
                                         <button colorpicker="rgb" type="button"
                                                 colorpicker-position="top"
@@ -104,7 +108,7 @@
                                                 ng-model="light.color">Change Color</button>
                                         <h6 class="light-modal-title">On / Off</h6>
                                         <switch id="enabled" name="enabled" ng-model="light.on" class="green"></switch>
-
+                                      </div>
                                 </div>
                             </div>
 

@@ -70,8 +70,11 @@ window.app.controller 'AmbianceController', ($scope, $http, $timeout) ->
       $http.post $scope.base_url + '/api/ambiance/create?access_token=' + window.token,
           ambiance: $scope.currentAmbiance
       .success (data, status) ->
-          $scope.savingText = "Saved"
-          window.location.reload()
+        $scope.savingText = "Saved"
+        $scope.refreshAmbiances ->
+          $scope.savingText = ""
+          $scope.saving = false
+          $("#modalCreateAmbiance").modal('toggle')
 
 app.controller 'LightController', ($scope, $http, $timeout) ->
     $scope.base_url = window.base_url
