@@ -25,6 +25,7 @@ class StatsManager
         $stats = [];
 
         foreach ($records as $key => $record) {
+            if (!isset($record->status->lights)) continue;
             foreach ($record->status->lights as $lightId => $light) {
                 if ($light_id != $lightId) continue;
                 $stats[$record->last_updated->timestamp] = $light->state;

@@ -13,7 +13,7 @@ class LoginController extends Controller
     public function loginPage()
     {
         if (Auth::user()) {
-            return Redirect::to('lights');
+            return Redirect::to('dashboard');
         }
 
         return View::make('login/login', []);
@@ -43,7 +43,7 @@ class LoginController extends Controller
             ];
 
             if (($result = Auth::attempt($credentials, $request->input('remember')))) {
-                return Redirect::to('lights');
+                return Redirect::to('dashboard');
             }
 
             return Redirect::to('login')->withErrors([

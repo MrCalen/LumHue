@@ -113,6 +113,8 @@ class AmbianceController extends Controller
         }
 
         $this->dispatch((new JobAmbiance($ambiance_id, $this->tokenToUser($request))));
-        return Response::json('{ "status" : true  }');
+        return Response::json([
+            'success' => true,
+        ]);
     }
 }
