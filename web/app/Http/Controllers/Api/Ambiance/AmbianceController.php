@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers\Api\Ambiance;
 
+use App\Helpers\LumHueColorConverter;
 use App\Http\Controllers\Controller;
 use App\Jobs\JobAmbiance;
-use app\Models\HueLight;
-use App\QueryBuilder\LightQueryBuilder;
+use Auth;
 use Illuminate\Http\Request;
 use MongoHue;
-use App\Helpers\Mongo\Utils;
-use App\Helpers\LumHueColorConverter;
 use Response;
-use Auth;
 
 class AmbianceController extends Controller
 {
@@ -48,14 +45,64 @@ class AmbianceController extends Controller
         }
 
         MongoHue::insert('ambiance', [
-                'ambiance' => $ambiance,
-                'user_id' => $user_id->id,
-            ]);
+            'ambiance' => $ambiance,
+            'user_id' => $user_id->id,
+        ]);
 
-        return Response::json([ 'success' => true, ]);
+        return Response::json(['success' => true,]);
     }
 
-    public function apply(Request $request) {
+    public function update(Request $request)
+    {
+        $user_id = $this->tokenToUser($request);
+        $ambiance_id = $request->get('ambiance_id');
+        $ambiance = $request->get('ambiance');
+        if (!$ambiance_id || !$ambiance) {
+            return Response::json([
+                'error' => 'Please provide an ambiance',
+                'success' => false,
+            ]);
+        }
+
+        $ambianceId = new \MongoDB\BSON\ObjectID($ambiance_id);
+        MongoHue::table('ambiance')->updateOne([
+            'user_id' => $user_id,
+            '_id' => $ambianceId,
+        ], [
+            '$set' => [
+                'user_id' => $user_id,
+                'ambiance' => $ambiance,
+            ],
+        ], [
+            'upsert' => true,
+        ]);
+        return Response::json('{ "success" : true }');
+    }
+
+    public function remove(Request $request) {
+        $user_id = $this->tokenToUser($request);
+
+        $ambiance_id = $request->get('ambiance_id');
+        if (!$ambiance_id) {
+            return Response::json([
+                'error' => 'Please provide an ambiance',
+                'success' => false,
+            ]);
+        }
+
+        $ambianceId = new \MongoDB\BSON\ObjectID($ambiance_id);
+
+        $user_id = $this->tokenToUser($request);
+        MongoHue::table('ambiance')->removeOne([
+            'user_id' => $user_id,
+            '_id' => $ambianceId,
+        ]);
+
+        return Response::json('{ "success" : true }');
+    }
+
+    public function apply(Request $request)
+    {
         $ambiance_id = $request->get('ambiance_id');
         if (!$ambiance_id) {
             return Response::json([
