@@ -26,7 +26,6 @@ window.app.controller 'HueChatController', ($scope, $http, $timeout) ->
 
   conn.onmessage =  (e) ->
     message = JSON.parse e.data
-    console.log message
     if (message.type == 'auth')
       $scope.users = message.users;
     else if (message.type == 'message')

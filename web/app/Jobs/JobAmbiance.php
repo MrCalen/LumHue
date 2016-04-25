@@ -48,7 +48,6 @@ class JobAmbiance extends Job implements SelfHandling, ShouldQueue
                 $builder->setLight($hueLight);
                 $builder->apply();
             }
-            echo 'finished one step';
             sleep($sleep_time);
         }
     }

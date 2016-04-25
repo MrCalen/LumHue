@@ -13,7 +13,6 @@ window.app.controller 'AmbianceController', ($scope, $http, $timeout) ->
       $http.post $scope.base_url + '/api/ambiance/apply?access_token=' + window.token,
         ambiance_id: ambiance.uniq_id
       .success (data, status) ->
-        console.log data
 
     $scope.refreshAmbiances = (callback = null)->
       if window.blurred
