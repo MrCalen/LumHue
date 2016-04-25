@@ -29,6 +29,11 @@ Route::group(['prefix' => 'api'], function () {
             Route::post('/apply', 'Api\Ambiance\AmbianceController@apply');
 
         });
+
+        Route::group(['prefix' => 'dashboard'], function () {
+            Route::get('/light', 'Api\dashboard\StatsController@light');
+            Route::get('/bridge', 'Api\dashboard\StatsController@bridge');
+        });
     });
 
     // Token Generation routes.

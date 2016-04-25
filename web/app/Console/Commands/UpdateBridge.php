@@ -30,20 +30,14 @@ class UpdateBridge extends Command
         $user_id = $user->id;
         $bridge = json_decode(MeetHue::getBridge($meethue_token));
         MongoHue::table('bridge')
-        ->updateOne([
-            'user_id' => $user_id,
-        ], [
-            '$set' => [
+            ->insertOne([
                 'user_id' => $user_id,
                 'status' => $bridge,
                 'last_updated' => [
                     'date' => date("F j, Y, g:i a"),
                     'timestamp' => time(),
                 ],
-            ],
-        ], [
-            'upsert' => true,
-        ]);
+            ]);
     }
 
     public function handle()

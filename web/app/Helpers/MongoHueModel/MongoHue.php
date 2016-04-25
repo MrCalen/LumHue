@@ -27,10 +27,10 @@ class MongoHue
         return $this->db->{$table};
     }
 
-    public function find($table, $criteria = []) : \stdClass
+    public function find($table, $criteria = [], $filter = []) : \stdClass
     {
         return Utils::toJson(Utils::MongoArray($this->table($table)
-                                                    ->find($criteria)));
+                                                    ->find($criteria, $filter)));
     }
 
     public function insert($table, $data, $filter = [])
