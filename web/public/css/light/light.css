@@ -162,3 +162,17 @@ img {
     -o-perspective-origin: 50% 50%;
     perspective-origin: 50% 50%;
 }
+
+.carousel {
+  margin-top: 20px;
+  background-color: gray;
+}
+
+.carousel .item{
+  margin: 0 auto;
+}
+
+.carousel-indicators li{
+  background-color: green;
+  border-color: red;
+}

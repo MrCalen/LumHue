@@ -5,7 +5,7 @@ window.app.controller 'AmbianceController', ($scope, $http, $timeout) ->
     # Refresh light status Logic
     $scope.loop = (time = 30) ->
       $timeout ->
-          $scope.refreshLights()
+          $scope.refreshAmbiances()
       , time * 1000
 
     $scope.applyAmbiance = (id) ->
@@ -52,10 +52,14 @@ window.app.controller 'AmbianceController', ($scope, $http, $timeout) ->
       $('#modalCreateAmbiance').modal('toggle')
       return
 
-    $scope.toggleNewAmbiance = ->
-      $scope.currentAmbiance =
-        name: "new ambiance",
-        lights: [
+    $scope.removeAmbianceSlide = (i) ->
+      $scope.currentAmbiance.lights.splice(i, 1)
+      return
+
+    $scope.addNewAmbianceSlide = ->
+      tmp =
+        duration: 10
+        lightscolors: [
           id: 0,
           color:"rgb(255, 0, 0)",
           on: true
@@ -68,8 +72,31 @@ window.app.controller 'AmbianceController', ($scope, $http, $timeout) ->
           color:"rgb(0, 0, 255)",
           on: true
         ]
+      $scope.currentAmbiance.lights.push tmp
+      return
+
+    $scope.toggleNewAmbiance = ->
+      $scope.currentAmbiance =
+        name: "new ambiance"
+        lights: [
+          duration: 10
+          lightscolors: [
+            id: 0,
+            color:"rgb(255, 0, 0)",
+            on: true
+          ,
+            id: 1,
+            color:"rgb(0, 255, 0)",
+            on: true
+          ,
+            id: 2,
+            color:"rgb(0, 0, 255)",
+            on: true
+          ]
+        ]
       $('#modalCreateAmbiance').modal('toggle')
       return
+
 
     $scope.saveNewAmbiance = ->
       $scope.saving = true
@@ -82,6 +109,7 @@ window.app.controller 'AmbianceController', ($scope, $http, $timeout) ->
           $scope.savingText = ""
           $scope.saving = false
           $("#modalCreateAmbiance").modal('toggle')
+
 
 app.controller 'LightController', ($scope, $http, $timeout) ->
     $scope.base_url = window.base_url
