@@ -45,11 +45,13 @@ class LightQueryBuilder
     public function setLight(HueLight $light) : LightQueryBuilder
     {
         $this->light = $light;
+        return $this;
     }
 
     public function viaMeetHue() : LightQueryBuilder
     {
         $this->access_method = 'meethue';
+        return $this;
     }
 
     public function getBridgeState()

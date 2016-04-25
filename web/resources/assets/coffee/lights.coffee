@@ -8,6 +8,13 @@ window.app.controller 'AmbianceController', ($scope, $http, $timeout) ->
           $scope.refreshLights()
       , time * 1000
 
+    $scope.applyAmbiance = (id) ->
+      ambiance = $scope.ambiances[id]
+      $http.post $scope.base_url + '/api/ambiance/apply?access_token=' + window.token,
+        ambiance_id: ambiance.uniq_id
+      .success (data, status) ->
+        console.log data
+
     $scope.refreshAmbiances = (callback = null)->
       if window.blurred
         $scope.loop(10)
@@ -21,6 +28,7 @@ window.app.controller 'AmbianceController', ($scope, $http, $timeout) ->
           .success (data, status) ->
               tmp = []
               for key, value of data
+                value.ambiance.uniq_id = value._id['$oid']
                 tmp.push value.ambiance
               $scope.ambiances = tmp
               $scope.loading = false

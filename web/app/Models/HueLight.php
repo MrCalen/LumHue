@@ -21,7 +21,7 @@ class HueLight
     protected $name;
     protected $id;
 
-    public function __construct(string $id, stdClass $light)
+    public function __construct($id, stdClass $light)
     {
         $this->id = $id;
         if (count((array)$light)) {
@@ -39,7 +39,7 @@ class HueLight
         }
     }
 
-    public function getId() : string
+    public function getId()
     {
         return $this->id;
     }

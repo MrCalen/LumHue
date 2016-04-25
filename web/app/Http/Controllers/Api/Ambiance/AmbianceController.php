@@ -21,13 +21,15 @@ class AmbianceController extends Controller
         $result = MongoHue::find('ambiance');
         foreach ($result as $key => $value) {
             $ambiance = $value->ambiance;
-            foreach ($ambiance->lights as $light) {
-                $light_color = LumHueColorConverter::RGBstrToRGB($light->color);
-                $r = $light_color[0];
-                $g = $light_color[1];
-                $b = $light_color[2];
+            foreach ($ambiance->lights as $step) {
+                foreach ($step->lightscolors as $light) {
+                    $light_color = LumHueColorConverter::RGBstrToRGB($light->color);
+                    $r = $light_color[0];
+                    $g = $light_color[1];
+                    $b = $light_color[2];
 
-                $light->rgbhex = LumHueColorConverter::RGBToHex($r, $g, $b);
+                    $light->rgbhex = LumHueColorConverter::RGBToHex($r, $g, $b);
+                }
             }
         }
 

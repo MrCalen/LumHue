@@ -50,6 +50,10 @@
                                     ng-click="toggleEditAmbiance($index)">
                                 <i class="fa fa-edit"></i>
                             </button>
+                            <button class="col-xs-1 col-xs-offset-1"
+                                    ng-click="applyAmbiance($index)">
+                                <i class="fa fa-user"></i>
+                            </button>
                             <div class="row">
                                 <section class="flatstage">
                                     <div ng-repeat="light in ambiance.lights">

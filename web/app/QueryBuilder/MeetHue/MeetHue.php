@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\QueryBuilder\MeetHue;
 
@@ -32,15 +32,13 @@ class MeetHue
     {
         $clipmessage = [
             'clipCommand' => [
-                'url'    => '/api/' . $this->user_token . '/lights/' . $light->getId() . '/state',
+                'url' => '/api/' . $this->user_token . '/lights/' . $light->getId() . '/state',
                 'method' => "PUT",
-                'body'   => $light->toArray(),
+                'body' => $light->toArray(),
             ],
         ];
 
-        return [
-            'clipmessage' => urlencode(json_encode($clipmessage)),
-        ];
+        return ['clipmessage' => urlencode(json_encode($clipmessage)),];
     }
 
     private function curlPostHelper(string $action, HueLight $light, $token) : bool
