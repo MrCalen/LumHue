@@ -99,10 +99,10 @@
                         </div>
                         <div class="modal-body">
 
-                          <div id="ambianceCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                          <div id="ambianceCarousel" class="carousel slide carousel-fade" data-ride="carousel" data-interval="0">
 
                             <ol class="carousel-indicators">
-                              <li data-target="#ambianceCarousel" data-slide-to="{$index}" ng-class="{'active': $index == 0}" ng-repeat="slideLights in currentAmbiance.lights" ></li>
+                              <li data-target="#ambianceCarousel" data-slide-to="{$ $index $}" ng-class="{'active': $index == 0}" ng-repeat="slideLights in currentAmbiance.lights" ></li>
                             </ol>
 
                             <div class="carousel-inner" role="listbox">
