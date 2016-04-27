@@ -49,7 +49,7 @@ window.app.controller 'AmbianceController', ($scope, $http, $timeout) ->
       $scope.currentAmbiance =
         name: oldAmbiance.name
         lights: oldAmbiance.lights
-      $('#modalCreateAmbiance').modal('toggle')
+      $('#modalUpdateAmbiance').modal('toggle')
       return
 
     $scope.removeAmbianceSlide = (i) ->
@@ -110,6 +110,19 @@ window.app.controller 'AmbianceController', ($scope, $http, $timeout) ->
           $scope.saving = false
           $("#modalCreateAmbiance").modal('toggle')
 
+    $scope.updateAmbiance = ->
+      $http.post $scope.base_url + '/api/ambiance/update?access_token=' + window.token,
+        ambiance: $scope.currentAmbiance,
+        ambiance_id: $scope.currentAmbiance.uniq_id
+      .success (data, status) ->
+        $scope.savingText = "Saved"
+        $scope.refreshAmbiances ->
+          $scope.savingText = ""
+          $scope.saving = false
+          $("#modalUpdateAmbiance").modal('toggle')
+
+
+################################## LIGHTS ######################################
 
 app.controller 'LightController', ($scope, $http, $timeout) ->
     $scope.base_url = window.base_url

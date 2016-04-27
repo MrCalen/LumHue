@@ -19,7 +19,10 @@
     <script>
         var token = '{{ $token }}';
         var base_url = '{{ URL::to('/') }}';
+//        $('ambiancePreview').carousel();
         $('ambianceCarousel').carousel();
+        $('ambianceCarousel2').carousel();
+
     </script>
 @endsection
 
@@ -57,14 +60,33 @@
                             </button>
                             <div class="row">
                                 <section class="flatstage">
-                                    <div ng-repeat="light in ambiance.lights[0].lightscolors">
-                                      <div class="col-md-4">
-                                        <figure class="flatball"
-                                                style="background: radial-gradient(circle at 0% 5%, {$ light.rgbhex $} , #0a0a0a 150%, #000000 150%)">
-                                            <span class="shadow"></span>
-                                        </figure>
+
+                                  <div class="carousel slide carousel-fade" data-ride="carousel" interval="1500">
+                                    <div class="carousel-inner" role="listbox">
+                                      <div class="item" ng-class="{'active':$index == 0}" ng-repeat="slideLights in ambiance.lights">
+                                        <div class="container-fluid">
+                                          <div ng-repeat="light in slideLights.lightscolors">
+                                            <div class="col-lg-4">
+                                              <figure class="flatball"
+                                              style="background: radial-gradient(circle at 0% 5%, {$ light.color $} , #0a0a0a 150%, #000000 150%)">
+                                              <span class="shadow"></span>
+                                              </figure>
+                                            </div>
+                                          </div>
+                                        </div>
                                       </div>
                                     </div>
+                                  </div>
+
+
+                                  {{-- <div ng-repeat="light in ambiance.lights[0].lightscolors">
+                                    <div class="col-md-4">
+                                      <figure class="flatball"
+                                              style="background: radial-gradient(circle at 0% 5%, {$ light.rgbhex $} , #0a0a0a 150%, #000000 150%)">
+                                          <span class="shadow"></span>
+                                      </figure>
+                                    </div>
+                                  </div> --}}
                                 </section>
                             </div>
                             <div ng-bind="ambiance.name"></div>
@@ -72,6 +94,7 @@
                     </div>
                 </div>
             </div>
+
             <div>
                 <div class="col-lg-1 col-md-1 light_info_row">
                     <div class="container-fluid">
@@ -87,7 +110,8 @@
 
         @section('modals')
             @parent
-            <div class="modal fade" tabindex="-1" role="dialog" id="modalCreateAmbiance">
+
+            <div class="modal fade" tabindex="-1" role="dialog" id="modalCreateAmbiance" aria-labelledby="modalCreateAmbiance">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -95,7 +119,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <h4 class="modal-title">
-                                Edit ambiance</h4>
+                                Create ambiance</h4>
                         </div>
                         <div class="modal-body">
 
@@ -153,6 +177,80 @@
                             </button>
                             <div ng-show="saving"><span class="modal-title" ng-bind="savingText"></span><i class="fa fa-spinner fa-spin fa-fw black"></i></div>
                             <button type="button" class="save-button btn" ng-click="saveNewAmbiance()" ng-hide="saving">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal fade" tabindex="-1" role="dialog" id="modalUpdateAmbiance" aria-labelledby="modalUpdateAmbiance">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title">
+                                Edit ambiance</h4>
+                        </div>
+                        <div class="modal-body">
+
+                          <div id="ambianceCarousel2" class="carousel slide carousel-fade" data-ride="carousel" data-interval="0">
+
+                            <ol class="carousel-indicators">
+                              <li data-target="#ambianceCarousel2" data-slide-to="{$ $index $}" ng-class="{'active': $index == 0}" ng-repeat="slideLights in currentAmbiance.lights" ></li>
+                            </ol>
+
+                            <div class="carousel-inner" role="listbox">
+
+                              <div class="item" ng-class="{'active':$index == 0}" ng-repeat="slideLights in currentAmbiance.lights">
+
+                                <div class="container-fluid">
+                                  <div ng-repeat="light in slideLights.lightscolors">
+                                    <div class="col-md-4">
+                                      <figure class="flatball"
+                                      style="background: radial-gradient(circle at 0% 5%, {$ light.color $} , #0a0a0a 150%, #000000 150%)">
+                                      <span class="shadow"></span>
+                                      </figure>
+                                      <h6 class="light-modal-title">Change Lamp Color</h6>
+                                      <button colorpicker="rgb" type="button"
+                                      colorpicker-position="top"
+                                      class="light-modal-text"
+                                      ng-model="light.color">Change Color</button>
+                                      <h6 class="light-modal-title">On / Off</h6>
+                                      <switch id="enabled" name="enabled" ng-model="light.on" class="green"></switch>
+                                    </div>
+                                  </div>
+                                  <button type="button" class="btn" style="background-color=red" ng-click="removeAmbianceSlide(currentAmbiance.lights.indexOf(slideLights))" ng-hide="saving">
+                                      remove slide
+                                  </button>
+                                </div>
+                                <div class="carousel-caption">
+                                  <p>{$ slideLights.duration $}</p>
+                                </div>
+
+                              </div>
+
+                            </div>
+
+                            <a class="carousel-control left" href="#ambianceCarousel2" data-slide="prev">
+                              <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a class="carousel-control right" href="#ambianceCarousel2" data-slide="next">
+                              <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input ng-model="currentAmbiance.name" class="ambiance-name"/>
+                            <button type="button" class="btn" ng-click="addNewAmbianceSlide()" ng-hide="saving">
+                                Add slide
+                            </button>
+                            <div ng-show="saving"><span class="modal-title" ng-bind="savingText"></span><i class="fa fa-spinner fa-spin fa-fw black"></i></div>
+                            <button type="button" class="save-button btn" ng-click="updateAmbiance()" ng-hide="saving">
                                 Save
                             </button>
                         </div>
