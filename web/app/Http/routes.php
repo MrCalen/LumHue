@@ -32,7 +32,10 @@ Route::group(['prefix' => 'api'], function () {
 
         Route::group(['prefix' => 'dashboard'], function () {
             Route::get('/light', 'Api\dashboard\StatsController@light');
+            Route::get('/lights', 'Api\dashboard\StatsController@lights');
             Route::get('/bridge', 'Api\dashboard\StatsController@bridge');
+            Route::get('/history', 'Api\dashboard\StatsController@history');
+            Route::get('/weather', 'Api\dashboard\StatsController@weather');
         });
     });
 

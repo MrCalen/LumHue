@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Light;
+use App\Models\Logger;
 use Illuminate\Http\Request;
 use MeetHue;
 use MongoHue;
@@ -25,6 +26,8 @@ class LightsController extends Controller
         $hueColors = LumHueColorConverter::RGBtoChromatic($light_color[0], $light_color[1], $light_color[2]);
 
         $user = $this->tokenToUser($request);
+        Logger::Log('Applying action on light ' . $light_id, $user->id, $user->name);
+
         $queryBuilder = LightQueryBuilder::create(strval($light_id), $user->meethue_token);
         $queryBuilder->setProperty('on', $light_on)
                      ->setProperty('bri', $hueColors['bri'])

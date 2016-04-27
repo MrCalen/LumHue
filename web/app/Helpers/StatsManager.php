@@ -3,6 +3,7 @@
 
 namespace App\Helpers;
 
+use MongoHue;
 
 class StatsManager
 {
@@ -23,12 +24,14 @@ class StatsManager
     {
         $records = $this->getRecord($granularity);
         $stats = [];
+        $i = 0;
 
         foreach ($records as $key => $record) {
             if (!isset($record->status->lights)) continue;
             foreach ($record->status->lights as $lightId => $light) {
                 if ($light_id != $lightId) continue;
                 $stats[$record->last_updated->timestamp] = $light->state;
+                ++$i;
             }
         }
         return $stats;
@@ -55,17 +58,51 @@ class StatsManager
         $lastFilter = [];
         if ($granularity === 'hours')
             $lastFilter = [
-                '$limit' => 60,
+                'limit' => 60,
+                'sort' => [
+                    '_id' => -1,
+                ],
             ];
         else if ($granularity === 'days')
             $lastFilter = [
-                '$limit' => 1440,
+                'limit' => 1440,
+                'sort' => [
+                    '_id' => -1,
+                ],
             ];
 
-        $records = MongoHue::find('bridge', [
+        $records = MongoHue::table('bridge')->find([
             'user_id' => $this->user->id,
         ], $lastFilter);
         return $records;
     }
 
+    public function history() {
+        $record = MongoHue::table('history')->find([
+            'user_id' => $this->user->id,
+        ], [
+            'limit' => 10,
+            'sort' => [
+                '_id' => -1,
+            ],
+        ]);
+        return $record;
+    }
+
+    public function weather($lat, $long) {
+        $token = env('WEATHER_API_KEY');
+
+        $base_uri = 'api.openweathermap.org/data/2.5/forecast?APPID=' . $token . '&lat=' . $lat . '&lon=' . $long;
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_AUTOREFERER, true);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_URL, $base_uri);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+
+        $data = curl_exec($ch);
+        curl_close($ch);
+        return $data;
+    }
 }

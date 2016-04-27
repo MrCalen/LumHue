@@ -16,7 +16,6 @@ input:-webkit-autofill:active {
 
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
-    color:
     text-shadow: none;
     -webkit-text-fill-color: initial;
 }

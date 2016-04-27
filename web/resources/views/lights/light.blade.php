@@ -1,4 +1,4 @@
-@extends('templates/basic_with_chat')
+@extends('templates/basic_nav')
 
 @section('ngApp')ng-app="LumHue"@endsection
 @section('ngController')ng-controller="LightController" ng-cloak @endsection
@@ -12,8 +12,6 @@
 
 @section('javascript')
   @parent
-  <script src="{{ URL::asset('components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js')}}"></script>
-  <script src="{{ URL::asset('components/angular-ui-switch/angular-ui-switch.min.js')}}"></script>
   <script src="{{ elixir('js/app.js') }}"></script>
   <script>
     var token = '{{ $token }}';
@@ -66,7 +64,7 @@
   </div>
 @endsection
 
-  @section('modals')
+@section('modals')
     @parent
     <div class="modal fade" tabindex="-1" role="dialog" id="modalEditLight">
       <div class="modal-dialog">
@@ -102,4 +100,4 @@
         </div>
       </div>
     </div>
-  @endsection
+@endsection

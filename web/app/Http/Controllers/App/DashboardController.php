@@ -9,6 +9,8 @@ use View;
 class DashboardController extends Controller
 {
     public function index() {
-        return View::make('dashboard/dashboard', []);
+        return View::make('dashboard/dashboard', [
+            'token' => $this->userToToken(),
+        ]);
     }
 }

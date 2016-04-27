@@ -20,6 +20,8 @@
 
 @section('javascript')
     @parent
+    <script src="{{ URL::asset('components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js')}}"></script>
+    <script src="{{ URL::asset('components/angular-ui-switch/angular-ui-switch.min.js')}}"></script>
 @endsection
 
 @section('body')
