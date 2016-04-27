@@ -19,9 +19,13 @@
     <script>
         var token = '{{ $token }}';
         var base_url = '{{ URL::to('/') }}';
-//        $('ambiancePreview').carousel();
-        $('ambianceCarousel').carousel();
-        $('ambianceCarousel2').carousel();
+        var applySlide = function () {
+            setTimeout(function () {
+                $(".preview").carousel('next');
+                applySlide();
+            }, 2000);
+        };
+        applySlide();
 
     </script>
 @endsection
@@ -61,7 +65,7 @@
                             <div class="row">
                                 <section class="flatstage">
 
-                                  <div class="carousel slide carousel-fade" data-ride="carousel" interval="1500">
+                                  <div class="carousel slide carousel-fade preview" data-ride="carousel" interval="1500">
                                     <div class="carousel-inner" role="listbox">
                                       <div class="item" ng-class="{'active':$index == 0}" ng-repeat="slideLights in ambiance.lights">
                                         <div class="container-fluid">
