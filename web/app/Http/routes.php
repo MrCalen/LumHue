@@ -27,6 +27,7 @@ Route::group(['prefix' => 'api'], function () {
             Route::get('/', 'Api\Ambiance\AmbianceController@index');
             Route::post('/create', 'Api\Ambiance\AmbianceController@create');
             Route::post('/apply', 'Api\Ambiance\AmbianceController@apply');
+            Route::post('/update', 'Api\Ambiance\AmbianceController@update');
 
         });
 
