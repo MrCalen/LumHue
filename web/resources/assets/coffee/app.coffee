@@ -1,24 +1,28 @@
-app = angular.module 'LumHue', ['colorpicker.module', 'uiSwitch', 'ngSanitize'], ($interpolateProvider) ->
+app = angular.module 'LumHue', ['colorpicker.module', 'uiSwitch', 'ngSanitize', 'dndLists', 'LocalStorageModule'], ($interpolateProvider) ->
   $interpolateProvider.startSymbol('{$');
   $interpolateProvider.endSymbol('$}');
 
+app.config (localStorageServiceProvider) ->
+    localStorageServiceProvider.setStorageCookie()
+
 app.directive 'graphComponent', ($http) ->
   return {
-    restrict: 'E',
-    templateUrl: "graph-template.html",
-    scope: {
-      canvas_id: '@',
-      lightid: '@',
-      granularity: '@',
-    },
+    restrict: 'E'
+    templateUrl: "graph-template.html"
+    scope:
+      canvas_id: '@'
+      lightid: '@'
+      widgetid: '@'
+      granularity: '@'
+    ,
     link: (scope, elem, attrs) ->
       datas = []
       scope.loading = true
       scope.fetchData = ->
-        params = {
-          granularity: attrs.granularity,
+        params =
+          granularity: attrs.granularity
           access_token: window.token
-        }
+
         url = window.base_url + "/api/dashboard/lights"
         if attrs.lightid?
           params.light_id = attrs.lightid
@@ -30,13 +34,12 @@ app.directive 'graphComponent', ($http) ->
         .success (data, status) ->
           datas = []
           if attrs.lightid?
-            datas = [scope.getLightdata]
+            datas = [scope.getLight data]
           else
             for k, v of data
               datas.push scope.getLight v
           scope.loading = false
           scope.refresh()
-
 
       scope.fetchData()
 
@@ -101,6 +104,7 @@ app.directive 'activitiesComponent', ($http) ->
   return {
     restrict: 'E',
     templateUrl: 'activities-template.html',
+    widgetid: '@'
     scope: {},
     link: (scope, elem, attrs) ->
       scope.loading = true
@@ -122,9 +126,10 @@ app.directive 'activitiesComponent', ($http) ->
 
 app.directive 'weatherComponent', ($http, $timeout) ->
   return {
-    restrict: 'E',
-    templateUrl: 'weather-template.html',
-    scope: {},
+    restrict: 'E'
+    templateUrl: 'weather-template.html'
+    widgetid: '@'
+    scope: {}
     link: (scope, elem, attrs) ->
       scope.loading = true
       url = window.base_url + "/api/dashboard/weather"
@@ -173,14 +178,11 @@ app.directive 'weatherComponent', ($http, $timeout) ->
           icons = new Skycons({
             "color": "#000000"
           })
-          console.log( angular.copy scope.days)
           list = [
               "clear-day", "clear-night", "partly-cloudy-day",
               "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
               "fog"
           ]
-
-
           $timeout ->
             for weatherType in list by -1
               elements = document.getElementsByClassName weatherType

@@ -81,7 +81,7 @@ class StatsManager
         $record = MongoHue::table('history')->find([
             'user_id' => $this->user->id,
         ], [
-            'limit' => 10,
+            'limit' => 5,
             'sort' => [
                 '_id' => -1,
             ],

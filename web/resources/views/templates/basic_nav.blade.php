@@ -22,6 +22,8 @@
     @parent
     <script src="{{ URL::asset('components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js')}}"></script>
     <script src="{{ URL::asset('components/angular-ui-switch/angular-ui-switch.min.js')}}"></script>
+    <script src="{{ URL::asset('components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js')}}"></script>
+    <script src="{{ URL::asset('components/angular-local-storage/dist/angular-local-storage.min.js') }}"></script>
 @endsection
 
 @section('body')
@@ -45,10 +47,11 @@
                 @endif
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              @if(session('info'))<li>{{ session('info') }}</li> @endif
+              @if (session('info'))<li>{{ session('info') }}</li> @endif
               @if (Auth::check())
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" >More <span class="caret"></span></a>
+              @yield('nav_options')
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">More <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li><a href="{{ URL::to('/logout') }}">Log out</a></li>
                   </ul>
