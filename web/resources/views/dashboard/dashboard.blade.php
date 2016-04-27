@@ -62,7 +62,7 @@
     </script>
 
     <script type="text/ng-template" id="graph-template.html">
-        <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="dashboard_graph">
 
                 <div class="row x_title">
@@ -77,7 +77,8 @@
                     <div id="placeholder33" style="height: 260px; display: none"
                          class="demo-placeholder"></div>
                     <div style="width: 100%;">
-                        <div id="canvas_dahs" class="demo-placeholder" style="width: 100%; height:270px;"></div>
+                        <div ng-hide="loading" id="canvas_dahs" class="demo-placeholder" style="width: 100%; height:270px;"></div>
+                        <div ng-show="loading" style="width: 100%; height:270px;"><h2><i class="left fa fa-spinner fa-spin fa-fw"></i> Refreshing</h2></div>
                     </div>
                 </div>
 
@@ -95,8 +96,7 @@
                         <small>Sessions</small>
                     </h2>
                     <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-expanded="false"><i class="fa fa-wrench"></i></a>
@@ -116,7 +116,8 @@
                     <div class="dashboard-widget-content">
 
                         <ul class="list-unstyled timeline widget">
-                            <li ng-repeat="message in messages">
+                            <li ng-show="loading"><h2><i class="left fa fa-spinner fa-spin fa-fw"></i> Refreshing</h2></li>
+                            <li ng-hide="loading" ng-repeat="message in messages">
                                 <div class="block">
                                     <div class="block_content">
                                         <h2 class="title">
@@ -135,10 +136,9 @@
         </div>
     </script>
     <script type="text/ng-template" id="weather-template.html">
-        <div class="col-md-8 col-sm-8 col-xs-12" ng-show="loaded">
+        <div class="col-md-8 col-sm-8 col-xs-12">
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="x_panel">
-
                     <div class="x_title">
                         <h2>Weather Prevision
                             <small></small>
@@ -162,8 +162,8 @@
                         <div class="clearfix"></div>
                     </div>
 
-
-                    <div class="x_content">
+                    <div ng-show="loading"><h2><i class="left fa fa-spinner fa-spin fa-fw"></i> Refreshing</h2></div>
+                    <div class="x_content" ng-hide="loading">
                         <!-- TODAY -->
                         <div class="row">
                             <div class="col-sm-12">

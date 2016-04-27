@@ -13,6 +13,7 @@ app.directive 'graphComponent', ($http) ->
     },
     link: (scope, elem, attrs) ->
       datas = []
+      scope.loading = true
       scope.fetchData = ->
         params = {
           granularity: attrs.granularity,
@@ -33,7 +34,10 @@ app.directive 'graphComponent', ($http) ->
           else
             for k, v of data
               datas.push scope.getLight v
+          scope.loading = false
           scope.refresh()
+
+
       scope.fetchData()
 
       scope.getLight = (data) ->
@@ -99,7 +103,7 @@ app.directive 'activitiesComponent', ($http) ->
     templateUrl: 'activities-template.html',
     scope: {},
     link: (scope, elem, attrs) ->
-
+      scope.loading = true
       url = window.base_url + "/api/dashboard/history"
       scope.refresh = ->
         params = {
@@ -111,6 +115,7 @@ app.directive 'activitiesComponent', ($http) ->
         )
         .success (data, status) ->
           scope.messages = data
+          scope.loading = false
 
       scope.refresh()
   }
@@ -121,7 +126,7 @@ app.directive 'weatherComponent', ($http, $timeout) ->
     templateUrl: 'weather-template.html',
     scope: {},
     link: (scope, elem, attrs) ->
-      scope.loaded = false
+      scope.loading = true
       url = window.base_url + "/api/dashboard/weather"
       scope.position = {}
       showPosition = (position) ->
@@ -166,7 +171,7 @@ app.directive 'weatherComponent', ($http, $timeout) ->
           scope.today = data.list[0]
           scope.days.shift()
           icons = new Skycons({
-            "color": "#73879C"
+            "color": "#000000"
           })
           console.log( angular.copy scope.days)
           list = [
@@ -182,7 +187,7 @@ app.directive 'weatherComponent', ($http, $timeout) ->
               for e in elements
                 icons.set e, weatherType
             icons.play();
-            scope.loaded = true
+            scope.loading = false
           , 200
   }
 

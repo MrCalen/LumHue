@@ -27,7 +27,7 @@ class MongoHue
         return $this->db->{$table};
     }
 
-    public function find($table, $criteria = [], $filter = []) : \stdClass
+    public function find($table, $criteria = [], $filter = [ 'sort' => ['_id' =>  1]]) : \stdClass
     {
         return Utils::toJson(Utils::MongoArray($this->table($table)
                                                     ->find($criteria, $filter)));
