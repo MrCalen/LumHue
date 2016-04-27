@@ -3,7 +3,7 @@ app.controller 'AmbianceController', ($scope, $http, $timeout) ->
     $scope.token = window.token
 
     # Refresh light status Logic
-    $scope.loop = (time = 30) ->
+    $scope.loop = (time = 10) ->
       $timeout ->
           $scope.refreshAmbiances()
       , time * 1000
