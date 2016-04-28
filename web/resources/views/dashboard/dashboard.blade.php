@@ -7,10 +7,15 @@
 @section('specific_css')
     <link href="{{ URL::asset('components/bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/dashboard/css/custom.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
 @endsection
 
 @section('nav_options')
-    <li><a ng-click="newWidget()" href="#">New Widget</a></li>
+    <li><a type="button" href="#" data-toggle="modal" data-target="#newWidgetModal">New Widget</a></li>
+@endsection
+
+@section('dropdown_options')
+    <li><a href="#" ng-click="resetDashboard()">Reset Dashboard</a></li>
 @endsection
 
 @section('content')
@@ -29,11 +34,50 @@
             </div>
         </div>
     </div>
+
+    <div id="newWidgetModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Widget Creation</h4>
+                </div>
+                <div class="modal-body">
+                    <h4>Select a Type</h4>
+
+                    <select
+                            class="form-control"
+                            ng-model="currentWidget.widget_type"
+                            ng-options="value for value in types track by value"
+                            ng-change="onChange()">
+                    </select>
+                    <div ng-if="currentWidget.widget_type">
+                        <h4>Select a Size</h4>
+                        <select class="form-control"
+                                ng-options="opt as opt for opt in currentWidget.availableStates"
+                                ng-model="currentWidget.size"></select>
+                    </div>
+                    <div ng-if="currentWidget.widget_type =='graph'">
+                        <h4>Select a Light</h4>
+                        <select class="form-control"
+                                ng-options="light for light in lights"
+                                ng-model="currentWidget.light"></select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="createWidget()">Create Widget</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('javascript')
     @parent
     <script src="{{ elixir('js/app.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+
     <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/skycons/1396634940/skycons.js"></script>
 
@@ -48,11 +92,15 @@
     <script>
         var base_url = '{{ URL::to('/') }}';
         var token = '{{ $token }}';
+        $(document).ready(function () {
+            $(".selectpicker").selectpicker();
+        });
+
     </script>
 
     <script type="text/ng-template" id="widgets.html">
         <div dnd-list="list">
-            <div ng-repeat="item in list"
+            <div ng-repeat="item in list track by $index"
                  dnd-draggable="item"
                  dnd-effect-allowed="move"
                  dnd-moved="list.splice($index, 1)"
@@ -64,8 +112,8 @@
                                       'col-md-12 col-xs-12': item.size == 'large'
                                       }">
 
-                <div ng-if="item.widget_type == 'plot'">
-                    <graph-component granularity="hours" widgetid="{$ $index $}"></graph-component>
+                <div ng-if="item.widget_type == 'graph'">
+                    <graph-component granularity="hours" widgetid="{$ $index $}" lightid="{$ item.light $}"></graph-component>
                 </div>
                 <div ng-if="item.widget_type == 'weather'">
                     <weather-component widgetid="{$ $index $}"></weather-component>
@@ -82,7 +130,8 @@
             <div class="dashboard_graph">
                 <div class="row x_title">
                     <div class="col-md-6">
-                        <h3>Global Stats<small></small></h3>
+                        <h3 ng-if="lightid">Stats for light <b ng-bind="lightid"></b></h3>
+                        <h3 ng-if="!lightid">Global Stats</h3>
                     </div>
                     <div class="col-md-6">
                         <ul class="nav panel_toolbox">
@@ -106,10 +155,10 @@
                     </div>
                 </div>
                 <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
-                    <div id="placeholder33" style="height: 260px; display: none"
+                    <div style="height: 260px; display: none"
                          class="demo-placeholder"></div>
                     <div style="width: 100%;">
-                        <div ng-hide="loading" id="canvas_dahs" class="demo-placeholder"
+                        <div ng-hide="loading" id="canvas_dahs{$ widgetid $}" class="demo-placeholder"
                              style="width: 100%; height:270px;"></div>
                         <div ng-show="loading" style="width: 100%; height:270px;"><h2><i
                                         class="left fa fa-spinner fa-spin fa-fw"></i> Refreshing</h2></div>
