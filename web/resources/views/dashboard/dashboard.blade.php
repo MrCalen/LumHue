@@ -5,12 +5,7 @@
 @section('ngController') ng-controller="DashboardController" @endsection
 
 @section('specific_css')
-    <link href="{{ URL::asset('assets/dashboard/vendors/bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('assets/dashboard/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('assets/dashboard/vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('assets/dashboard/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.css') }}"
-          rel="stylesheet">
-    <link href="{{ URL::asset('assets/dashboard/css/maps/jquery-jvectormap-2.0.3.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/dashboard/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/dashboard/css/custom.css') }}" rel="stylesheet">
 @endsection
 
@@ -39,18 +34,14 @@
 @section('javascript')
     @parent
     <script src="{{ elixir('js/app.js') }}"></script>
-    <script src="{{ URL::asset('assets/dashboard/vendors/fastclick/lib/fastclick.js') }}"></script>
-    <script src="{{ URL::asset('assets/dashboard/vendors/nprogress/nprogress.js') }}"></script>
-    <script src="{{ URL::asset('assets/dashboard/vendors/Chart.js/dist/Chart.min.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/vendors/iCheck/icheck.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/dashboard/js/Chart.min.js')}}"></script>
+
     <script src="{{ URL::asset('assets/dashboard/vendors/skycons/skycons.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/vendors/Flot/jquery.flot.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/vendors/Flot/jquery.flot.pie.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/vendors/Flot/jquery.flot.time.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/vendors/Flot/jquery.flot.stack.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/vendors/Flot/jquery.flot.resize.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/js/flot/jquery.flot.orderBars.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/js/flot/date.js')}}"></script>
+    <script src="{{ URL::asset('assets/dashboard/js/flot/jquery.flot.js')}}"></script>
+    <script src="{{ URL::asset('assets/dashboard/js/flot/jquery.flot.pie.js')}}"></script>
+    <script src="{{ URL::asset('assets/dashboard/js/flot/jquery.flot.time.js')}}"></script>
+    <script src="{{ URL::asset('assets/dashboard/js/flot/jquery.flot.stack.js')}}"></script>
+    <script src="{{ URL::asset('assets/dashboard/js/flot/jquery.flot.resize.js')}}"></script>
     <script src="{{ URL::asset('assets/dashboard/js/flot/jquery.flot.spline.js')}}"></script>
     <script src="{{ URL::asset('assets/dashboard/js/flot/curvedLines.js')}}"></script>
     <script src="{{ URL::asset('assets/dashboard/js/custom.js')}}"></script>
