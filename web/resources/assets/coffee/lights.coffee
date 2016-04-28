@@ -53,10 +53,6 @@ app.controller 'AmbianceController', ($scope, $http, $timeout) ->
       $('#modalUpdateAmbiance').modal('toggle')
       return
 
-    $scope.removeAmbianceSlide = (i) ->
-      $scope.currentAmbiance.lights.splice(i, 1)
-      return
-
     $scope.addNewAmbianceSlide = ->
       tmp =
         duration: 10
@@ -121,6 +117,19 @@ app.controller 'AmbianceController', ($scope, $http, $timeout) ->
           $scope.savingText = ""
           $scope.saving = false
           $("#modalUpdateAmbiance").modal('toggle')
+
+    $scope.deleteSlide = (carousel) ->
+      currentItem = $(carousel + " .item.active" )
+      currentIndex = $(carousel + ' .item').index(currentItem)
+      return if currentIndex == 0
+      $(carousel).carousel('prev')
+      $scope.currentAmbiance.lights.splice(currentIndex, 1)
+      return
+
+    $scope.getSlideIndex = (carousel) ->
+      currentItem = $(carousel + " .item.active" )
+      currentIndex = $(carousel + ' .item').index(currentItem)
+      return currentIndex
 
 
 ################################## LIGHTS ######################################

@@ -116,7 +116,7 @@
             @parent
 
             <div class="modal fade" tabindex="-1" role="dialog" id="modalCreateAmbiance" aria-labelledby="modalCreateAmbiance">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -135,42 +135,52 @@
 
                             <div class="carousel-inner" role="listbox">
 
+
                               <div class="item" ng-class="{'active':$index == 0}" ng-repeat="slideLights in currentAmbiance.lights">
 
+                                <div class="row">
+                                  <i class="fa fa-clock-o black left col-md-offset-1" aria-hidden="true"></i>
+                                  <input type="number" min="1" ng-model="slideLights.duration" class="ambiance-duration left"/>
+                                  <i class="fa fa-trash col-md-offset-8 right" ng-class="{ 'white' : $first, 'black': $index > 0 }" ng-click="deleteSlide('#ambianceCarousel')"></i>
+
+                                </div>
+                                <div class="col-md-10 col-md-offset-1">
                                 <div class="container-fluid">
+                                  <div class="col-md-10 col-md-offset-1">
                                   <div ng-repeat="light in slideLights.lightscolors">
                                     <div class="col-md-4">
+                                      <div class="text-center">
                                       <figure class="flatball"
                                       style="background: radial-gradient(circle at 0% 5%, {$ light.color $} , #0a0a0a 150%, #000000 150%)">
                                       <span class="shadow"></span>
                                       </figure>
-                                      <h6 class="light-modal-title">Change Lamp Color</h6>
+                                      <br>
                                       <button colorpicker="rgb" type="button"
                                       colorpicker-position="top"
-                                      class="light-modal-text"
-                                      ng-model="light.color">Change Color</button>
-                                      <h6 class="light-modal-title">On / Off</h6>
-                                      <switch id="enabled" name="enabled" ng-model="light.on" class="green"></switch>
+                                      class="colorpickerButton alignButton"
+                                      ng-model="light.color">
+                                        <img src="/assets/art-palette.png" width="30px"/>
+                                      </button>
+                                      <switch id="enabled" name="enabled" ng-model="light.on" class="green alignButton"></switch>
+                                    </div>
                                     </div>
                                   </div>
-                                  <button type="button" class="btn" style="background-color=red" ng-click="removeAmbianceSlide(currentAmbiance.lights.indexOf(slideLights))" ng-hide="saving">
-                                      remove slide
-                                  </button>
                                 </div>
-                                <div class="carousel-caption">
-                                  <p>{$ slideLights.duration $}</p>
                                 </div>
+                                <br margin-bottom="8px"></br>
+                                <a class="carousel-control left" href="#ambianceCarousel" data-slide="prev">
+                                  <span class="glyphicon glyphicon-chevron-left"></span>
+                                </a>
+                                <a class="carousel-control right" href="#ambianceCarousel" data-slide="next">
+                                  <span class="glyphicon glyphicon-chevron-right"></span>
+                                </a>
 
                               </div>
+                            </div>
 
                             </div>
 
-                            <a class="carousel-control left" href="#ambianceCarousel" data-slide="prev">
-                              <span class="glyphicon glyphicon-chevron-left"></span>
-                            </a>
-                            <a class="carousel-control right" href="#ambianceCarousel" data-slide="next">
-                              <span class="glyphicon glyphicon-chevron-right"></span>
-                            </a>
+
 
                           </div>
                         </div>
@@ -227,7 +237,7 @@
                                       <switch id="enabled" name="enabled" ng-model="light.on" class="green"></switch>
                                     </div>
                                   </div>
-                                  <button type="button" class="btn" style="background-color=red" ng-click="removeAmbianceSlide(currentAmbiance.lights.indexOf(slideLights))" ng-hide="saving">
+                                  <button type="button" class="btn" style="background-color=red" ng-click="deleteSlide('#ambianceCarousel2')" ng-hide="saving">
                                       remove slide
                                   </button>
                                 </div>

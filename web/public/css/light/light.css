@@ -122,6 +122,7 @@ img {
     border-radius: 50%;
     position: relative;
     background: #323232;
+    margin-bottom: 20px;
 }
 
 .flatball:before{
@@ -165,8 +166,6 @@ img {
 
 .carousel {
   margin-top: 20px;
-  background-color: gray;
-  
 }
 
 .carousel .item{
@@ -174,8 +173,12 @@ img {
 }
 
 .carousel-indicators li{
-  background-color: green;
-  border-color: red;
+  background-color: white;
+  border-color: cornflowerblue;
+}
+.carousel-indicators li.active {
+  background-color: cornflowerblue;
+  border-color: 004080;
 }
 
 .carousel-fade .carousel-inner .item {
@@ -204,4 +207,40 @@ img {
 
 .carousel-fade .carousel-control {
   z-index: 2;
+}
+
+.carousel-control.left, .carousel-control.right {
+  color: gray;
+   background-image:none !important;
+   filter:none !important;
+}
+
+.white {
+  color:white;
+}
+
+.black {
+  color:grey;
+  cursor: pointer;
+}
+
+.colorpickerButton {
+  background-color: white;
+  border: 0;
+  font-size: 15px;
+}
+
+.alignButton {
+  vertical-align: middle;
+}
+
+.switch.checked {
+  background: cornflowerblue !important;
+  border-color: cornflowerblue !important;
+}
+
+.ambiance-duration {
+    color: black;
+    height: 40px;
+    width: 90px;
 }
