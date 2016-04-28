@@ -165,8 +165,11 @@
                                     </div>
                                     </div>
                                   </div>
+
                                 </div>
                                 </div>
+
+
                                 <br margin-bottom="8px"></br>
                                 <a class="carousel-control left" href="#ambianceCarousel" data-slide="prev">
                                   <span class="glyphicon glyphicon-chevron-left"></span>
@@ -180,14 +183,12 @@
 
                             </div>
 
-
-
                           </div>
                         </div>
                         <div class="modal-footer">
                             <input ng-model="currentAmbiance.name" class="ambiance-name"/>
-                            <button type="button" class="btn" ng-click="addNewAmbianceSlide()" ng-hide="saving">
-                                Add slide
+                            <button type="button" class="btn blackBtn" ng-click="addNewAmbianceSlide()" ng-hide="saving">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>Add state
                             </button>
                             <div ng-show="saving"><span class="modal-title" ng-bind="savingText"></span><i class="fa fa-spinner fa-spin fa-fw black"></i></div>
                             <button type="button" class="save-button btn" ng-click="saveNewAmbiance()" ng-hide="saving">

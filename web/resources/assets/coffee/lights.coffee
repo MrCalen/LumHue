@@ -74,7 +74,7 @@ app.controller 'AmbianceController', ($scope, $http, $timeout) ->
 
     $scope.toggleNewAmbiance = ->
       $scope.currentAmbiance =
-        name: "new ambiance"
+        name: "New ambiance"
         lights: [
           duration: 10
           lightscolors: [
