@@ -226,6 +226,7 @@ img {
 .blackBtn,
 .blackBtn:target,
 .blackBtn:focus {
+  background-color: transparent !important;
   color:grey;
 }
 
@@ -236,6 +237,10 @@ img {
 
 .black {
   color:grey;
+  cursor: pointer;
+}
+
+.cursor {
   cursor: pointer;
 }
 

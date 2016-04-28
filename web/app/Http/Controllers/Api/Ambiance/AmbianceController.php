@@ -98,7 +98,7 @@ class AmbianceController extends Controller
         Logger::Log('Deleted ambiance', $user->id, $user->name);
 
         $user = $this->tokenToUser($request);
-        MongoHue::table('ambiance')->removeOne([
+        MongoHue::table('ambiance')->deleteOne([
             'user_id' => $user->id,
             '_id' => $ambianceId,
         ]);

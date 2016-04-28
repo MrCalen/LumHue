@@ -14,6 +14,13 @@ app.controller 'AmbianceController', ($scope, $http, $timeout) ->
         ambiance_id: ambiance.uniq_id
       .success (data, status) ->
 
+    $scope.deleteAmbiance = (id) ->
+      ambiance = $scope.ambiances[id]
+      $http.post $scope.base_url + '/api/ambiance/remove?access_token=' + window.token,
+        ambiance_id: ambiance.uniq_id
+      .success (data, status) ->
+        window.location.refresh()
+
     $scope.refreshAmbiances = (callback = null)->
       if window.blurred
         $scope.loop(10)

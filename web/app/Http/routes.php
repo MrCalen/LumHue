@@ -28,7 +28,7 @@ Route::group(['prefix' => 'api'], function () {
             Route::post('/create', 'Api\Ambiance\AmbianceController@create');
             Route::post('/apply', 'Api\Ambiance\AmbianceController@apply');
             Route::post('/update', 'Api\Ambiance\AmbianceController@update');
-
+            Route::post('/remove', 'Api\Ambiance\AmbianceController@remove');
         });
 
         Route::group(['prefix' => 'dashboard'], function () {
