@@ -62,8 +62,19 @@ class StatsController extends Controller
         $statsManager = new StatsManager($this->tokenToUser($request));
         $json = $statsManager->weather($lat, $long);
         $json_dec = json_decode($json);
-        $json_dec->list = array_values(array_filter($json_dec->list, function ($elt) {
-            return (preg_match("/.* 15.*/", $elt->dt_txt)) === 1;
+        $first = true;
+        $json_dec->list = array_values(array_filter($json_dec->list, function ($elt) use (&$first) {
+
+            $matches = [];
+            preg_match("/.{4}-.{2}-(.{2}).* (.{2}).*/", $elt->dt_txt, $matches);
+            $day = date("d");
+            if ($day === $matches[1] && $first) {
+                $first = false;
+                return true;
+            } else if ($matches[2] === '15') {
+                return true;
+            }
+            return false;
         }));
         return json_encode($json_dec);
     }

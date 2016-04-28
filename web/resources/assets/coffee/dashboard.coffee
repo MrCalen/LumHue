@@ -42,7 +42,7 @@ app.controller "DashboardController", ($scope, $timeout, localStorageService) ->
         },
         {
           "type": "item",
-          "size": "small",
+          "size": "medium",
           "id": "2",
           "widget_type": "weather"
         },

@@ -38,12 +38,9 @@
 @section('javascript')
     @parent
     <script src="{{ elixir('js/app.js') }}"></script>
-    <script src="{{ URL::asset('assets/dashboard/vendors/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/dashboard/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ URL::asset('assets/dashboard/vendors/fastclick/lib/fastclick.js') }}"></script>
     <script src="{{ URL::asset('assets/dashboard/vendors/nprogress/nprogress.js') }}"></script>
     <script src="{{ URL::asset('assets/dashboard/vendors/Chart.js/dist/Chart.min.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js')}}"></script>
     <script src="{{ URL::asset('assets/dashboard/vendors/iCheck/icheck.min.js')}}"></script>
     <script src="{{ URL::asset('assets/dashboard/vendors/skycons/skycons.js')}}"></script>
     <script src="{{ URL::asset('assets/dashboard/vendors/Flot/jquery.flot.js')}}"></script>
@@ -55,13 +52,7 @@
     <script src="{{ URL::asset('assets/dashboard/js/flot/date.js')}}"></script>
     <script src="{{ URL::asset('assets/dashboard/js/flot/jquery.flot.spline.js')}}"></script>
     <script src="{{ URL::asset('assets/dashboard/js/flot/curvedLines.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/js/maps/jquery-jvectormap-2.0.3.min.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/js/moment/moment.min.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/js/datepicker/daterangepicker.js')}}"></script>
     <script src="{{ URL::asset('assets/dashboard/js/custom.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/js/maps/jquery-jvectormap-world-mill-en.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/js/maps/jquery-jvectormap-us-aea-en.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/js/maps/gdp-data.js')}}"></script>
     <script>
         var base_url = '{{ URL::to('/') }}';
         var token = '{{ $token }}';
@@ -176,8 +167,7 @@
         <div>
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Weather Prevision
-                    </h2>
+                    <h2>Weather Prevision</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
@@ -225,7 +215,7 @@
                     <div class="clearfix"></div>
 
                     <div class="row weather-days">
-                        <div class="col-sm-3" ng-repeat="day in days">
+                        <div class="col-sm-2" ng-repeat="day in days">
                             <div class="daily-weather">
                                 <h2 class="day" ng-bind="day.dayname"></h2>
                                 <h3 class="degrees" ng-bind="day.temperature"></h3>
@@ -237,7 +227,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </script>
 @endsection

@@ -18,6 +18,7 @@ app.directive 'graphComponent', ($http) ->
     link: (scope, elem, attrs) ->
       datas = []
       scope.loading = true
+      scope.widgetid = attrs.widgetid
       scope.fetchData = ->
         params =
           granularity: attrs.granularity
@@ -107,6 +108,7 @@ app.directive 'activitiesComponent', ($http) ->
     widgetid: '@'
     scope: {},
     link: (scope, elem, attrs) ->
+      scope.widgetid = attrs.widgetid
       scope.loading = true
       url = window.base_url + "/api/dashboard/history"
       scope.refresh = ->
@@ -131,6 +133,7 @@ app.directive 'weatherComponent', ($http, $timeout) ->
     widgetid: '@'
     scope: {}
     link: (scope, elem, attrs) ->
+      scope.widgetid = attrs.widgetid
       scope.loading = true
       url = window.base_url + "/api/dashboard/weather"
       scope.position = {}
@@ -174,7 +177,6 @@ app.directive 'weatherComponent', ($http, $timeout) ->
             date = new Date(day.dt * 1000);
             day.dayname = days[date.getDay()]
           scope.today = data.list[0]
-          scope.days.shift()
           icons = new Skycons({
             "color": "#000000"
           })
