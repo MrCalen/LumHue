@@ -8,7 +8,8 @@
     <link href="{{ URL::asset('assets/dashboard/vendors/bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/dashboard/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/dashboard/vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('assets/dashboard/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/dashboard/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.css') }}"
+          rel="stylesheet">
     <link href="{{ URL::asset('assets/dashboard/css/maps/jquery-jvectormap-2.0.3.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/dashboard/css/custom.css') }}" rel="stylesheet">
 @endsection
@@ -88,13 +89,29 @@
     <script type="text/ng-template" id="graph-template.html">
         <div>
             <div class="dashboard_graph">
-
                 <div class="row x_title">
                     <div class="col-md-6">
-                        <h3>
-                            Global Stats
-                            <small></small>
-                        </h3>
+                        <h3>Global Stats<small></small></h3>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="nav panel_toolbox">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false"><i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu first" role="menu">
+                                    <li class="dropdown-submenu">
+                                        <a href="#" tabindex="-1">Size</a>
+                                        <ul class="dropdown-menu">
+                                            <li ng-repeat="size in sizes">
+                                                <a ng-bind="size" ng-click="applyNewSize(size, widgetid)"></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a ng-click="removeWidget(widgetid)">Remove</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
@@ -122,18 +139,21 @@
                         <small>Sessions</small>
                     </h2>
                     <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Settings 1</a>
+                               aria-expanded="false"><i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu first" role="menu">
+                                <li class="dropdown-submenu">
+                                    <a href="#" tabindex="-1">Size</a>
+                                    <ul class="dropdown-menu">
+                                        <li ng-repeat="size in sizes">
+                                            <a ng-bind="size" ng-click="applyNewSize(size, widgetid)"></a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li><a href="#">Settings 2</a>
-                                </li>
+                                <li><a ng-click="removeWidget(widgetid)">Remove</a></li>
                             </ul>
-                        </li>
-                        <li><a class="close-link"><i class="fa fa-close"></i></a>
                         </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -168,20 +188,22 @@
             <div class="x_panel">
                 <div class="x_title">
                     <h2>Weather Prevision</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
+                    <ul class="nav panel_toolbox">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Settings 1</a>
+                               aria-expanded="false"><i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu first" role="menu">
+                                <li class="dropdown-submenu">
+                                    <a href="#" tabindex="-1">Size</a>
+                                    <ul class="dropdown-menu">
+                                        <li ng-repeat="size in sizes">
+                                            <a ng-bind="size" ng-click="applyNewSize(size, widgetid)"></a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li><a href="#">Settings 2</a>
-                                </li>
+                                <li><a ng-click="removeWidget(widgetid)">Remove</a></li>
                             </ul>
-                        </li>
-                        <li><a class="close-link"><i class="fa fa-close"></i></a>
                         </li>
                     </ul>
                     <div class="clearfix"></div>

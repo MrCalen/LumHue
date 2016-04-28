@@ -9,13 +9,19 @@ app.directive 'graphComponent', ($http) ->
   return {
     restrict: 'E'
     templateUrl: "graph-template.html"
-    scope:
-      canvas_id: '@'
-      lightid: '@'
-      widgetid: '@'
-      granularity: '@'
+    canvas_id: '@'
+    lightid: '@'
+    widgetid: '@'
+    granularity: '@'
     ,
     link: (scope, elem, attrs) ->
+      scope.sizes = [
+        'small'
+        'half'
+        'medium'
+        'large'
+      ]
+
       datas = []
       scope.loading = true
       scope.widgetid = attrs.widgetid
@@ -106,8 +112,13 @@ app.directive 'activitiesComponent', ($http) ->
     restrict: 'E',
     templateUrl: 'activities-template.html',
     widgetid: '@'
-    scope: {},
     link: (scope, elem, attrs) ->
+      scope.sizes = {
+        'small'
+        'half'
+        'medium'
+      }
+
       scope.widgetid = attrs.widgetid
       scope.loading = true
       url = window.base_url + "/api/dashboard/history"
@@ -131,8 +142,13 @@ app.directive 'weatherComponent', ($http, $timeout) ->
     restrict: 'E'
     templateUrl: 'weather-template.html'
     widgetid: '@'
-    scope: {}
     link: (scope, elem, attrs) ->
+      scope.sizes = {
+        'small'
+        'half'
+        'medium'
+      }
+
       scope.widgetid = attrs.widgetid
       scope.loading = true
       url = window.base_url + "/api/dashboard/weather"

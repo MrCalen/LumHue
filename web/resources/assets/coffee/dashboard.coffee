@@ -55,6 +55,13 @@ app.controller "DashboardController", ($scope, $timeout, localStorageService) ->
       ],
     }
   };
+
+  $scope.applyNewSize = (size, widgetid) ->
+    $scope.models.dropzones['A'][widgetid].size = size
+
+  $scope.removeWidget = (widgetid) ->
+    delete $scope.models.dropzones['A'][widgetid]
+
   $scope.models = localStorageService.cookie.get('dashboard')
   if !$scope.models?
     $scope.models = defaultModel
