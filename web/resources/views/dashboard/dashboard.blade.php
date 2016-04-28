@@ -5,7 +5,7 @@
 @section('ngController') ng-controller="DashboardController" @endsection
 
 @section('specific_css')
-    <link href="{{ URL::asset('assets/dashboard/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('components/bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/dashboard/css/custom.css') }}" rel="stylesheet">
 @endsection
 
@@ -34,16 +34,16 @@
 @section('javascript')
     @parent
     <script src="{{ elixir('js/app.js') }}"></script>
-    <script src="{{ URL::asset('assets/dashboard/js/Chart.min.js')}}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/skycons/1396634940/skycons.js"></script>
 
-    <script src="{{ URL::asset('assets/dashboard/vendors/skycons/skycons.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/js/flot/jquery.flot.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/js/flot/jquery.flot.pie.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/js/flot/jquery.flot.time.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/js/flot/jquery.flot.stack.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/js/flot/jquery.flot.resize.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/js/flot/jquery.flot.spline.js')}}"></script>
-    <script src="{{ URL::asset('assets/dashboard/js/flot/curvedLines.js')}}"></script>
+    <script src="{{ URL::asset('components/Flot/jquery.flot.js')}}"></script>
+    <script src="{{ URL::asset('components/Flot/jquery.flot.pie.js')}}"></script>
+    <script src="{{ URL::asset('components/Flot/jquery.flot.time.js')}}"></script>
+    <script src="{{ URL::asset('components/Flot/jquery.flot.stack.js')}}"></script>
+    <script src="{{ URL::asset('components/Flot/jquery.flot.resize.js')}}"></script>
+    <script src="{{ URL::asset('components/flot-spline/js/jquery.flot.spline.js')}}"></script>
+    <script src="//cdn.rawgit.com/MichaelZinsmaier/CurvedLines/1.1.1/curvedLines.js"></script>
     <script src="{{ URL::asset('assets/dashboard/js/custom.js')}}"></script>
     <script>
         var base_url = '{{ URL::to('/') }}';
