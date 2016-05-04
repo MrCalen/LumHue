@@ -76,8 +76,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/reset/index', 'App\SignupController@resetPwd');
     });
 
-    // Chat route
-    Route::get('/chat', 'Chat\ChatController@index');
 
     // Authenticated routes
     Route::group(['middleware' => 'auth'], function () {
@@ -86,6 +84,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/ambiances', 'App\AmbianceController@index');
         Route::get('/dashboard', 'App\DashboardController@index');
         Route::get('/profile', 'App\ProfileController@index');
+	    // Chat route
+	Route::get('/chat', 'Chat\ChatController@index');
     });
 
     Route::group(['prefix' => 'test'], function () {

@@ -54,6 +54,7 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">More <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     @yield('dropdown_options')
+                    <li><a href="{{ URL::to('/chat') }}">Chat</a></li>
                     <li><a href="{{ URL::to('/logout') }}">Log out</a></li>
                   </ul>
                 </li>
