@@ -1,5 +1,5 @@
 @extends('templates/basic_nav')
-@section('ngApp')ng-app="LumHue" @endsection
+@section('ngApp')ng-app="ChatHue" @endsection
 @section('ngController')ng-controller="HueChatController" ng-cloak @endsection
 
 @section('css')

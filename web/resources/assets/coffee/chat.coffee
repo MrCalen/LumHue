@@ -1,9 +1,9 @@
-app = angular.module 'LumHue', [], ($interpolateProvider) ->
+app = angular.module 'ChatHue', [], ($interpolateProvider) ->
   $interpolateProvider.startSymbol('{$');
   $interpolateProvider.endSymbol('$}');
-window.app = app
+window.chathue = app
 
-window.app.controller 'HueChatController', ($scope, $http, $timeout) ->
+window.chathue.controller 'HueChatController', ($scope, $http, $timeout) ->
   $scope.username = window.username
   $scope.messages = [];
 
