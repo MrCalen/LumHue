@@ -14,9 +14,9 @@ class DatabaseSeeder extends Seeder
       DB::table('users')
         ->insert([
           'name' => 'root',
-          'password' => \Hash::make('coucou'),
+          'password' => \Hash::make(env("DB_PWD", "coucou")),
           'email' => 'dagues_p@yaka.epita.fr',
-          'meethue_token' => 'WGF4TXNzVUtJWXRrVGFSQXhlcWNrenhobk16UkIvRGgwNDJ6RmJydVhsWT0%3D'
+          'meethue_token' => env('DB_MEETHUE', "coucou"),
         ]);
     }
 }
