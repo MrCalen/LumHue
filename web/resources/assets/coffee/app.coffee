@@ -88,25 +88,25 @@ app.directive 'graphComponent', ($http) ->
             hoverable: true,
             clickable: true,
             tickColor: "#d5d5d5",
-            borderWidth: 3,
+            borderWidth: 1,
             color: '#fff'
           },
-          colors: ["rgba(25, 23, 154, 0.38)", "rgba(3, 88, 106, 0.38)"],
+          colors: ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)"],
           xaxis: {
-            tickColor: "rgba(0,0,0,1)",
+            tickColor: "rgba(51, 51, 51, 0.06)",
             mode: "time",
             tickSize: [1, "day"],
             axisLabel: "Date",
             axisLabelUseCanvas: true,
             axisLabelFontSizePixels: 12,
-            axisLabelFontFamily: 'Arial',
+            axisLabelFontFamily: 'Verdana, Arial',
             axisLabelPadding: 10
           },
           yaxis: {
-            ticks: 1,
+            ticks: 8,
             tickColor: "rgba(51, 51, 51, 0.06)",
           },
-          tooltip: true
+          tooltip: false
         });
   }
 
