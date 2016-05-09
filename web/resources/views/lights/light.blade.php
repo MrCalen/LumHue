@@ -62,6 +62,12 @@
       </div>
     </div>
   </div>
+
+  <div class="voice-control hidden-xs">
+      <i class="fa fa-microphone micro" aria-hidden="true" ng-hide="recording" ng-click="startRecord()"></i>
+      <i class="fa fa-stop micro" aria-hidden="true" ng-show="recording" ng-click="stopRecord()"></i>
+  </div>
+
 @endsection
 
 @section('modals')

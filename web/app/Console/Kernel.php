@@ -10,6 +10,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\UpdateBridge::class,
         Commands\WebSocketServer::class,
+        Commands\WebSocketAudioServer::class,
     ];
 
     protected function schedule(Schedule $schedule)

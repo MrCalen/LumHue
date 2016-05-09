@@ -91,5 +91,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['prefix' => 'test'], function () {
         Route::get('email', 'TestController@mail');
         Route::get('slack', 'TestController@slack');
+        Route::get('voice', 'TestController@voice');
     });
 });

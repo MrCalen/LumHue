@@ -10,6 +10,7 @@ use DB;
 use App\User;
 use HueMail;
 use JWTAuth;
+use App\Helpers\SpeechAPI\SpeechApiHelper;
 
 class TestController extends Controller
 {
@@ -21,5 +22,11 @@ class TestController extends Controller
     public function slack()
     {
         5 / 0;
+    }
+
+    public function voice()
+    {
+        $content = file_get_contents('/tmp/1462668868.sampled.wav');
+        $result = SpeechApiHelper::SendBinary($content);
     }
 }

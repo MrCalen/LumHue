@@ -1,4 +1,10 @@
-app = angular.module 'LumHue', ['colorpicker.module', 'uiSwitch', 'ngSanitize', 'dndLists', 'LocalStorageModule'], ($interpolateProvider) ->
+app = angular.module 'LumHue', [
+  'colorpicker.module',
+  'uiSwitch',
+  'ngSanitize',
+  'dndLists',
+  'LocalStorageModule'
+  ], ($interpolateProvider) ->
   $interpolateProvider.startSymbol('{$');
   $interpolateProvider.endSymbol('$}');
 

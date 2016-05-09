@@ -40,6 +40,7 @@ class Protocol implements MessageComponentInterface
 
     public function onError(ConnectionInterface $connection, Exception $e)
     {
+        var_dump($e);
         $connection->close();
         unset($this->openConnections[$connection->resourceId]);
     }
