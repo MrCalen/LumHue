@@ -11,6 +11,7 @@ class Connection
 {
     protected $connection;
     protected $name;
+    protected $token;
 
     public function __construct(ConnectionInterface $connection)
     {
@@ -36,4 +37,16 @@ class Connection
     {
         $this->connection->send($message);
     }
+
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    public function setToken($token)
+    {
+        $this->token = $token;
+    }
+
+
 }

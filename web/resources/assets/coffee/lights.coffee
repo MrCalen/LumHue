@@ -78,6 +78,13 @@ app.controller 'LightController', ($scope, $http, $timeout, $window) ->
       $timeout $scope.pingServer, 30000
 
     conn.onopen = (e) ->
+      json = JSON.stringify
+        'type' : 'auth',
+        'data': {
+          'token': window.token
+          'name': window.username
+        }
+      conn.send json
       $scope.pingServer()
 
     conn.onmessage =  (e) ->

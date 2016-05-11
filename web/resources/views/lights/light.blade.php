@@ -15,6 +15,7 @@
   <script src="{{ elixir('js/app.js') }}"></script>
   <script>
     var token = '{{ $token }}';
+    var username = "{{ Auth::user()->name}}";
     var base_url = '{{ URL::to('/') }}';
   </script>
 @endsection

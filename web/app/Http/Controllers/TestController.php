@@ -10,7 +10,8 @@ use DB;
 use App\User;
 use HueMail;
 use JWTAuth;
-use App\Helpers\SpeechAPI\SpeechApiHelper;
+use App\Helpers\WebServices\SpeechApiHelper;
+use App\Helpers\WebServices\LuisApiHelper;
 
 class TestController extends Controller
 {
@@ -28,5 +29,10 @@ class TestController extends Controller
     {
         $content = file_get_contents('/tmp/1462668868.sampled.wav');
         $result = SpeechApiHelper::SendBinary($content);
+    }
+
+    public function luis()
+    {
+        LuisApiHelper::GetIntent("allume la première lampe");
     }
 }

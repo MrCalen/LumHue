@@ -11,7 +11,7 @@ use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
 use App\WebSockets\Protocol;
 
-use App\Helpers\SpeechAPI\SpeechApiHelper;
+use App\Helpers\WebServices\SpeechApiHelper;
 
 
 class WebSocketAudioServer extends Command
