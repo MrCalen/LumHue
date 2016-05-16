@@ -2,6 +2,8 @@
 
 namespace App\Helpers\WebServices;
 
+use App\Helpers\WebServices\Luis\LuisIntent;
+
 class LuisApiHelper
 {
     private static function IssueCall($query)
@@ -35,17 +37,8 @@ class LuisApiHelper
         $response = self::IssueCall($message);
         $intent = $response->intents[0];
         $confidence = $intent->score * 100;
+        LuisIntent::ApplyIntent($intent);
 
-        switch ($intent->intent)
-        {
-            case 'On1':
-                break;
-            case 'On2':
-                break;
-            case 'On3':
-                break;
-            case 'None':
-                break;
-        }
+        return $response;
     }
 }

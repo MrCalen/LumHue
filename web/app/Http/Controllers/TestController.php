@@ -33,6 +33,7 @@ class TestController extends Controller
 
     public function luis()
     {
-        LuisApiHelper::GetIntent("allume la première lampe");
+        $result = LuisApiHelper::GetIntent('mets la deuxieme lampe en rouge');
+        dd("finished");
     }
 }
