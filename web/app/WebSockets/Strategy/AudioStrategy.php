@@ -45,9 +45,24 @@ class AudioStrategy implements StrategyInterface
         $result = SpeechApiHelper::SendBinary($message);
         unlink($filename);
         unlink($filename_sampled);
-        $result = $result->results[0]->name;
+        if (!isset($result->results)) {
+            $client->send(json_encode([
+                'result' => 'KO',
+                'reason' => 'no result found',
+            ]));
+            return;
+        }
 
-        LuisApiHelper::GetIntent($result);
+        $result = $result->results[0]->name;
+        try {
+            LuisApiHelper::GetIntent($result);
+        } catch (Throwable $e) {
+            $client->send(json_encode([
+                'result' => 'KO',
+                'reason' => 'Error with Luis',
+            ]));
+            return;
+        }
 
         // FIXME: Handle when results are not confident enough
         $client->send(json_encode([

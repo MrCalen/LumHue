@@ -2,8 +2,6 @@
 
 namespace App\Helpers\WebServices;
 
-use App\QueryBuilder\LightQueryBuilder;
-
 class LuisApiHelper
 {
     private static function IssueCall($query)
