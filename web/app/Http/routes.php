@@ -41,8 +41,8 @@ Route::group(['prefix' => 'api'], function () {
     });
 
     // Token Generation routes.
-    Route::post('/signup', 'UserController@signup');
-    Route::post('/signin', 'UserController@signIn');
+    Route::post('/signup', 'Api\UserController@signup');
+    Route::post('/signin', 'Api\UserController@signIn');
 });
 
 
