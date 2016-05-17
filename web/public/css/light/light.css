@@ -1,17 +1,9 @@
 body {
-    color: #ebebeb !important;
-    background-image: url('/assets/background_lights.jpg');
-}
-
-.light_info {
-    background: -moz-linear-gradient(top,  rgba(25,25,25,1) 0%, rgba(44,44,44,0.43) 100%);
-    background: -webkit-linear-gradient(top,  rgba(25,25,25,1) 0%,rgba(44,44,44,0.43) 100%);
-    background: linear-gradient(to bottom,  rgba(25,25,25,1) 0%,rgba(44,44,44,0.43) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#191919', endColorstr='#6e2c2c2c',GradientType=0 );
+    color: rgba(104, 104, 104, 0.99) !important;
 }
 
 .light_info_row {
-    background: rgba(44, 44, 44, 0.80);
+    /*background: rgba(44, 44, 44, 0.80);*/
     margin: 25px;
 }
 
@@ -20,25 +12,12 @@ img {
     height: auto;
 }
 
-#lamp_reachable_true {
-    width: auto;
-    height: auto;
-    content: url("../../assets/lamp_true.png");
-}
-
-#lamp_reachable_false {
-    width: auto;
-    height: auto;
-    content: url("../../assets/lamp_false.png");
-}
-
 .light-modal-title {
     font-size:14px;
     color: #444;
 }
 
 .light-modal-text {
-    background-color: grey;
     border: 0;
     font-size: 15px;
 }

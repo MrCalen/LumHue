@@ -4,7 +4,7 @@
 
 @section('ngController') ng-controller="DashboardController" @endsection
 
-@section('specific_css')
+@section('css')
     <link href="{{ URL::asset('components/bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/dashboard/css/custom.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
@@ -15,7 +15,7 @@
 @endsection
 
 @section('dropdown_options')
-    <li><a href="#" ng-click="resetDashboard()">Reset Dashboard</a></li>
+    <li><a class="gn-icon gn-icon-download" href="#" ng-click="resetDashboard()">Reset Dashboard</a></li>
 @endsection
 
 @section('content')
@@ -99,7 +99,7 @@
     </script>
 
     <script type="text/ng-template" id="widgets.html">
-        <div dnd-list="list">
+        <div dnd-list="list" class="boxes">
             <div ng-repeat="item in list track by $index"
                  dnd-draggable="item"
                  dnd-effect-allowed="move"
@@ -126,7 +126,7 @@
     </script>
 
     <script type="text/ng-template" id="graph-template.html">
-        <div>
+        <div class="boxes">
             <div class="dashboard_graph">
                 <div class="row x_title">
                     <div class="col-md-6">
@@ -172,7 +172,7 @@
     </script>
 
     <script type="text/ng-template" id="activities-template.html">
-        <div>
+        <div class="boxes">
             <div class="x_panel">
                 <div class="x_title">
                     <h2>Recent Activities
@@ -224,7 +224,7 @@
     </script>
 
     <script type="text/ng-template" id="weather-template.html">
-        <div>
+        <div class="boxes">
             <div class="x_panel">
                 <div class="x_title">
                     <h2>Weather Prevision</h2>

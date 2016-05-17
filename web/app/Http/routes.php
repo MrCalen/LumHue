@@ -93,5 +93,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('slack', 'TestController@slack');
         Route::get('voice', 'TestController@voice');
         Route::get('luis', 'TestController@luis');
+        Route::get('/', 'TestController@design');
     });
 });

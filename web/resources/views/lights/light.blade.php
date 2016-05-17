@@ -3,8 +3,9 @@
 @section('ngApp')ng-app="LumHue"@endsection
 @section('ngController')ng-controller="LightController" ng-cloak @endsection
 
-@section('specific_css')
+@section('css')
   <link rel="stylesheet" href="{{ URL::asset('css/light/light.css') }}">
+  <link rel="stylesheet" href="{{ URL::asset('assets/dashboard/css/custom.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('css/spinners/loader.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('components/angular-bootstrap-colorpicker/css/colorpicker.min.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('components/angular-ui-switch/angular-ui-switch.min.css') }}">
@@ -20,17 +21,20 @@
   </script>
 @endsection
 
+@section('header')
+  <div class="row light_info">
+    <div class="text-center">
+      <div ng-show="loading && lights">
+        <i class="left fa fa-spinner fa-spin fa-fw"></i> Refreshing
+      </div>
+      <div ng-hide="loading && lights">Lights</div>
+    </div>
+  </div>
+
+@endsection
+
 @section('content')
   <div class="container-fluid" id="content">
-    <div class="row light_info">
-      <div class="text-center">
-        <div ng-show="loading && lights">
-          <i class="left fa fa-spinner fa-spin fa-fw"></i> Refreshing
-        </div>
-        <div ng-hide="loading && lights">Lights</div>
-      </div>
-    </div>
-
     <center class="sk-folding-cube" ng-show="!lights">
       <div class="sk-cube1 sk-cube"></div>
       <div class="sk-cube2 sk-cube"></div>
@@ -40,35 +44,32 @@
 
     <div class="container-fluid row">
       <div class="row" ng-if="lights">
-        <div ng-repeat="light in lights">
-          <div class="col-lg-3 col-md-3 light_info_row">
-            <div class="container-fluid">
-              <button class="col-xs-1 col-xs-offset-10 modal-toggle"
-                      ng-click="toggleModal($index)">
-              <i class="fa fa-edit"></i>
-            </button>
-            <div class="row">
-              <section class="stage">
-                <figure class="ball"
-                        style="background: radial-gradient(circle at 80% 100%, {$ light.rgbhex $} , #0a0a0a 80%, #000000 100%)">
-                  <span class="shadow"></span>
-                </figure>
-              </section>
+        <div ng-repeat="light in lights" class="col-md-4">
+          <div class="x_panel boxes">
+            <div class="x_title">
+              <h2>{$ light.name $}</h2>
+                <button class="nav navbar-right panel_toolbox"
+                        ng-click="toggleModal($index)">
+                  <i class="fa fa-edit"></i>
+                </button>
+
+              <div class="clearfix"></div>
             </div>
-            <div class="row">
-              <span class="center">{$light.name$}</span>
+            <div class="x_content">
+              <div class="dashboard-widget-content">
+                <section class="stage">
+                  <figure class="ball"
+                          style="background: radial-gradient(circle at 80% 100%, {$ light.rgbhex $} , #0a0a0a 80%, #000000 100%)">
+                    {{--<span class="shadow"></span>--}}
+                  </figure>
+                </section>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="voice-control hidden-xs">
-      <i class="fa fa-microphone micro" aria-hidden="true" ng-hide="recording" ng-click="startRecord()"></i>
-      <i class="fa fa-stop micro" aria-hidden="true" ng-show="recording" ng-click="stopRecord()"></i>
-  </div>
-
 @endsection
 
 @section('modals')

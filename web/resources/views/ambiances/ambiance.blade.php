@@ -4,7 +4,7 @@
 <!--FIXME ambiance-->
 @section('ngController')ng-controller="AmbianceController" ng-cloak @endsection
 
-@section('specific_css')
+@section('css')
     <link rel="stylesheet" href="{{ URL::asset('css/light/light.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/spinners/loader.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('components/angular-bootstrap-colorpicker/css/colorpicker.min.css') }}">
@@ -98,6 +98,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
         @endsection
 
