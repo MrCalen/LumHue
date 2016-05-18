@@ -3,7 +3,8 @@ app = angular.module 'LumHue', [
   'uiSwitch',
   'ngSanitize',
   'dndLists',
-  'LocalStorageModule'
+  'LocalStorageModule',
+  'ngRoute'
   ], ($interpolateProvider) ->
   $interpolateProvider.startSymbol('{$');
   $interpolateProvider.endSymbol('$}');

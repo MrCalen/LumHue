@@ -78,14 +78,8 @@ Route::group(['middleware' => ['web']], function () {
 
 
     // Authenticated routes
-    Route::group(['middleware' => 'auth'], function () {
-        Route::get('/lights', 'App\LightController@index');
-        Route::get('/logout', 'App\LoginController@logout');
-        Route::get('/ambiances', 'App\AmbianceController@index');
-        Route::get('/dashboard', 'App\DashboardController@index');
-        Route::get('/profile', 'App\ProfileController@index');
-        // Chat route
-        Route::get('/chat', 'Chat\ChatController@index');
+    Route::group(['middleware' => 'auth', 'prefix' => 'app'], function () {
+        Route::get('/', 'App\AppController@index');
     });
 
     Route::group(['prefix' => 'test'], function () {

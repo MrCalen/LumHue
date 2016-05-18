@@ -2356,6 +2356,6 @@ fieldset {
 }
 
 .boxes {
-  border: 1px solid rgba(104, 104, 104, 0.99);
-  margin: 10px;
+  /*border: 1px solid rgba(104, 104, 104, 0.99);*/
+  /*margin: 10px;*/
 }

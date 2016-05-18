@@ -1,5 +1,6 @@
 body {
     color: rgba(104, 104, 104, 0.99) !important;
+    background-image: url('/assets/background_lights.jpg');
 }
 
 .light_info_row {

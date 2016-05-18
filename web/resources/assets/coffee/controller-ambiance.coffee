@@ -2,12 +2,6 @@ app.controller 'AmbianceController', ($scope, $http, $timeout) ->
     $scope.base_url = window.base_url
     $scope.token = window.token
 
-    # Refresh light status Logic
-    $scope.loop = (time = 10) ->
-      $timeout ->
-          $scope.refreshAmbiances()
-      , time * 1000
-
     $scope.applyAmbiance = (id) ->
       ambiance = $scope.ambiances[id]
       $http.post $scope.base_url + '/api/ambiance/apply?access_token=' + window.token,
@@ -23,11 +17,7 @@ app.controller 'AmbianceController', ($scope, $http, $timeout) ->
         .success (data, status) ->
           window.location.reload()
 
-    $scope.refreshAmbiances = (callback = null)->
-      if window.blurred
-        $scope.loop(10)
-        return
-
+    $scope.refreshAmbiances = (callback = null) ->
       $scope.loading = true
       $http.get($scope.base_url + "/api/ambiance",
                   params:
@@ -42,13 +32,9 @@ app.controller 'AmbianceController', ($scope, $http, $timeout) ->
               $scope.loading = false
               if callback
                 callback()
-              else
-                $scope.loop()
           .error ->
               if callback
                 callback()
-              else
-                $scope.loop()
     $timeout ->
         $scope.refreshAmbiances()
     , 200

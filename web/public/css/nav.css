@@ -341,16 +341,19 @@ body {
 .gn-menu-main,
 .gn-menu-main ul {
     margin: 0;
-    border-bottom: 1px solid rgba(104, 104, 104, 0.99);
     z-index: 10;
     padding: 0;
-    background: white;
+    /*background: white;*/
     color: #5f6f81;
     list-style: none;
     text-transform: none;
     font-weight: 300;
     font-family: 'Lato', Arial, sans-serif;
     line-height: 60px;
+}
+
+.gn-menu-main > li {
+    background-color: white;
 }
 
 .gn-menu-main {
@@ -1074,4 +1077,9 @@ a {
     .codrops-header h1 {
         font-size: 2.8em;
     }
+}
+
+body {
+    color: rgba(104, 104, 104, 0.99) !important;
+    background-image: url('/assets/background_lights.jpg');
 }

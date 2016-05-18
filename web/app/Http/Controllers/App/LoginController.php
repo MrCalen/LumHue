@@ -13,7 +13,7 @@ class LoginController extends Controller
     public function loginPage()
     {
         if (Auth::user()) {
-            return Redirect::to('dashboard');
+            return Redirect::to('/app');
         }
 
         return View::make('login/login', []);
