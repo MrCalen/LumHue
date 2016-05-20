@@ -694,9 +694,10 @@ a.checkout__button:focus {
 }
 
 .checkout--active a.checkout__button {
-    background-color: #3f3d3d;
+    /*background-color: #3f3d3d;*/
     -webkit-transform: perspective(1000px) translate3d(0, -2.5em, 0);
     transform: perspective(1000px) translate3d(0, -2.5em, 0);
+    cursor: default;
 }
 
 .checkout__text-inner {

@@ -6,6 +6,7 @@ namespace App\WebSockets\Strategy;
 
 use App\Helpers\WebServices\SpeechApiHelper;
 use App\Helpers\WebServices\LuisApiHelper;
+use App\WebSockets\Bot;
 use App\WebSockets\Protocol;
 use Ratchet\ConnectionInterface;
 use JWAuth;
@@ -59,6 +60,13 @@ class AudioStrategy implements StrategyInterface
         }
 
         $result = $result->results[0]->name;
+        $client->send(json_encode([
+            'content' => $result,
+            'type' => 'message',
+            'author' => $client->getName(),
+            'date' => date('l jS \of F Y h:i:s A'),
+        ]));
+
         try {
             LuisApiHelper::GetIntent($result, $client->meethue_token);
         } catch (Throwable $e) {

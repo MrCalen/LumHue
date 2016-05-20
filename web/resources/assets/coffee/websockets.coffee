@@ -98,7 +98,13 @@ app.controller 'WebSocketController', ($scope, $http, $timeout, $window, $sce) -
 
   $scope.recording = false
 
-  $scope.startRecord = () ->
+  $scope.toggleRecording = ->
+    if !$scope.recording
+      $scope.startRecord()
+    else
+      $scope.stopRecord()
+
+  $scope.startRecord = ->
     $scope.recordRTC.startRecording()
     $scope.recording = true
   $scope.stopRecord = ->
