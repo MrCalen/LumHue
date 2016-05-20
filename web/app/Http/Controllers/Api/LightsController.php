@@ -18,7 +18,7 @@ class LightsController extends Controller
     public function setLights(Request $request)
     {
         $light_id = $request->get('id');
-        $light_on = $request->get('on');
+        $light_on = $request->get('on') == 'true';
         $light_effect = $request->get('effect');
         $light_color = $request->get('color');
         $light_color = LumHueColorConverter::RGBstrToRGB($light_color);
@@ -57,6 +57,11 @@ class LightsController extends Controller
 
     public function getLights(Request $request)
     {
-        return $this->getBridge($request);
+        $bridge = json_decode($this->getBridge($request));
+        $lights = array();
+        foreach($bridge->lights as $light) {
+            $lights[] = $light;
+        }
+        return json_encode($lights);
     }
 }
