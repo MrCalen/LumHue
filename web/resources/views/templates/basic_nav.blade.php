@@ -15,7 +15,6 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
           integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
           crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flat-ui/2.2.2/css/flat-ui.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ URL::asset('css/nav.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/chat/chat.css') }}">
@@ -39,7 +38,6 @@
                 </div>
             </nav>
         </li>
-        {{--<li><a href="#">LumHue</a></li>--}}
         @yield('nav_options')
         <li></li>
     </ul>
@@ -47,49 +45,7 @@
     <section>
         <div ng-view></div>
     </section>
-    <div class="dummy-fixed" ng-controller="WebSocketController">
-        <div class="checkout">
-            <a class="checkout__button" href="#">
-                <span class="checkout__text">
-                    <span class="checkout__text-inner checkout__initial-text">Micro / Text</span>
-                </span>
-            </a>
-            <div class="checkout__order">
-                <div class="checkout__order-inner">
-                    <div class="checkout__summary">
-                        <ul class="chat chat-body row" style="overflow-y: scroll; outline: none; max-height: 300px;" id="chat">
-                            <li ng-repeat="message in messages track by $index"
-                                class="answer {$ message.author == username ? 'right' : 'left' $}">
-                                <div class="avatar">
-                                    <img src="http://downloadicons.net/sites/default/files/user-group-icon-18526.png"
-                                         alt="User name"
-                                         class="img img-responsive">
-                                    <div class="status online"></div>
-                                </div>
-                                <div class="name" ng-bind="message.author"></div>
-                                <div class="text" data-ng-bind-html="message.content"></div>
-                                <div class="time" ng-bind="message.date"></div>
-                            </li>
-                        </ul>
-                        <ul class="chat-body">
-                            <li>
-                                <form class="answer-add" ng-submit="sendMessage(); currentMessage = ''">
-                                    <input placeholder="Write a message" ng-model="currentMessage">
-                                    <span class="answer-btn answer-btn-2"
-                                          ng-click="sendMessage(); currentMessage = ''"></span>
-                                    <span ng-click="toggleRecording()">
-                                        <i class="fa {$ recording ? 'fa-stop' : 'fa-microphone' $} fa-2x fa-fw"></i>
-                                    </span>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                    <button class="checkout__close checkout__cancel"><i class="icon fa fa-fw fa-close"></i>Close
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('templates/bottom_bar')
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>

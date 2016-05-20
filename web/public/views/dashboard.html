@@ -234,7 +234,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="weather-icon">
-                                <canvas height="84" width="84" class="{$ today.weather[0].main $}"></canvas>
+                                <canvas height="84" width="84" class="{$ today.weather[0].main.toLowerCase() $}"></canvas>
                             </div>
                         </div>
                         <div class="col-sm-8">
@@ -256,7 +256,7 @@
                             <div class="daily-weather">
                                 <h2 class="day" ng-bind="day.dayname"></h2>
                                 <h3 class="degrees" ng-bind="day.temperature"></h3>
-                                <canvas class="{$ day.weather[0].main $}" width="32" height="32"></canvas>
+                                <canvas class="{$ day.weather[0].main.toLowerCase() $}" width="32" height="32"></canvas>
                                 <h5><i ng-bind="day.wind.speed"></i> <i>km/h</i></h5>
                             </div>
                         </div>

@@ -31,10 +31,10 @@
                     <div class="x_panel boxes">
                         <div class="x_title">
                             <h2>{$ light.name $}</h2>
-                            <button class="nav navbar-right panel_toolbox"
+                            <a class="nav navbar-right panel_toolbox"
                                     ng-click="toggleModal($index)">
                                 <i class="fa fa-edit"></i>
-                            </button>
+                            </a>
 
                             <div class="clearfix"></div>
                         </div>
@@ -82,9 +82,7 @@
                 <div class="modal-footer">
                     <div ng-show="applying"><span class="modal-title" ng-bind="applyText"></span><i
                             class="fa fa-spinner fa-spin fa-fw black"></i></div>
-                    <button type="button" class="btn btn-default" ng-click="applyLight()" ng-hide="applying">
-                        Save
-                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="applyLight()" ng-hide="applying">Save</button>
                 </div>
             </div>
         </div>
