@@ -1,9 +1,9 @@
-@extends('templates/basic_nav')
+@extends('templates/basic_layout')
 
 @section('ngApp')ng-app="LoginApp" @endsection
 @section('ngController')ng-controller="LoginController" ng-cloak @endsection
 
-@section('content')
+@section('body')
   <div class="container-fluid">
     <div class="col-lg-3 center-block">
       <center>

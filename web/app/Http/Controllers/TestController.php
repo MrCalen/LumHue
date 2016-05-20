@@ -33,7 +33,7 @@ class TestController extends Controller
 
     public function luis()
     {
-        $result = LuisApiHelper::GetIntent('mets la deuxieme lampe en bleu');
+        $result = LuisApiHelper::GetIntent('mets la deuxieme lampe en bleu', Auth::user()->meethue_token);
         dd("finished");
     }
 

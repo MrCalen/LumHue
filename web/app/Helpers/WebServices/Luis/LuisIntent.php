@@ -64,16 +64,19 @@ class LuisIntent
             return LuisIntent::$intents[$value->type][$value->entity];
     }
 
-    public static function ApplyIntent($intent)
+    public static function ApplyIntent($intent, $meethue_token)
     {
         if ($intent->intent === 'light')
             $luisintent = new LightIntent();
         elseif ($intent->intent === 'color')
             $luisintent = new ColorIntent();
-        else {
-            dd('intent not found');
-            return;
+        else
+            return null;
+        try {
+            $luisintent->ApplyIntent($intent, $meethue_token);
+        } catch (\Throwable $e) {
+            return null;
         }
-        $luisintent->applyIntent($intent);
+        return $intent->intent;
     }
 }

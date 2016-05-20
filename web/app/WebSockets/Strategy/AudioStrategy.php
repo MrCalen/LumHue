@@ -36,6 +36,11 @@ class AudioStrategy implements StrategyInterface
         if (!$client || !$client->getToken())
             return;
 
+        $token = $client->getToken();
+        \JWTAuth::setToken($token);
+        $user = \JWTAuth::toUser();
+        if (!$user)
+            return;
         $uniq = time();
         $filename = '/tmp/' . $uniq . '.wav';
         $filename_sampled = '/tmp/' . $uniq . '.sampled.wav';
@@ -55,7 +60,7 @@ class AudioStrategy implements StrategyInterface
 
         $result = $result->results[0]->name;
         try {
-            LuisApiHelper::GetIntent($result);
+            LuisApiHelper::GetIntent($result, $client->meethue_token);
         } catch (Throwable $e) {
             $client->send(json_encode([
                 'result' => 'KO',

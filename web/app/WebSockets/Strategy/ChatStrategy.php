@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\WebSockets\Strategy;
 
+use App\Helpers\WebServices\LuisApiHelper;
 use App\WebSockets\Bot;
 use App\WebSockets\Protocol;
 use Ratchet\ConnectionInterface;
@@ -23,44 +24,35 @@ class ChatStrategy implements StrategyInterface
     {
         date_default_timezone_set('Europe/Paris');
         $message = json_decode($message);
+        $token = $message->token;
+        \JWTAuth::setToken($token);
+        $user = \JWTAuth::toUser();
+        if (!$user)
+            return;
+        $client = $protocol->getConnections()[$connection->resourceId];
+        $bot = Bot::instance();
+
         if ($message->type === 'auth') {
             $name = $message->data->name;
             $protocol->getConnections()[$connection->resourceId]->setName($name);
-            $names = array_map(function ($elt) {
-                return $elt->getName();
-            }, array_values($protocol->getConnections()));
-            $msg = json_encode([
-                'type'  => 'auth',
-                'users' =>  $names,
-            ]);
+            $client->send(json_encode($bot->onConnect($name)));
+            return;
         } elseif ($message->type === 'message') {
-            $msg = json_encode([
-                'type' => 'message',
-                'content' => $message->content,
-                'author' => $protocol->getConnections()[$connection->resourceId]->getName(),
-                'date' => date('l jS \of F Y h:i:s A'),
-            ]);
-        } elseif ($message->type === 'bot') {
-            $msg = json_encode([
-                'type' => 'bot',
-                'content' => $message->content,
-                'author' => $protocol->getConnections()[$connection->resourceId]->getName(),
-                'date' => date('l jS \of F Y h:i:s A'),
-            ]);
-            $bot = Bot::instance();
-            $return = $bot->handleMessage($message->content);
-            $client = $protocol->getConnections()[$connection->resourceId];
-            $return = json_encode([
-                'content' => $return,
+            // Handle message with luis
+            $content = $message->content;
+            $client->send(json_encode([
+                'content' => $content,
                 'type' => 'message',
                 'author' => $client->getName(),
-            ]);
-            $client->send($return);
-            return;
-        }
+                'date' => date('l jS \of F Y h:i:s A'),
+            ]));
 
-        if (isset($msg)) {
-            $this->broadcast($protocol, $msg, $connection);
+            $luisresponse = LuisApiHelper::GetIntent($content, $user->meethue_token);
+            $client->send(json_encode([
+                'content' => $luisresponse['message'],
+                'type' => 'message',
+                'date' => date('l jS \of F Y h:i:s A'),
+            ]));
         }
     }
 

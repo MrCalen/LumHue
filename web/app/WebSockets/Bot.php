@@ -37,4 +37,20 @@ class Bot
         return $command;
     }
 
+    public function onConnect($clientName) {
+        return [
+            "type" => 'message',
+            "content" => "
+                <p><b>Bienvenue ${clientName}</b></p>
+                <p>Pour utiliser notre service:
+                    <ul>
+                        <li><pre>Allume la lampe une</pre></li>
+                        <li><pre>Mets la première lampe en rouge</pre></li>
+                    </ul>
+                </p>
+                ",
+            'date' => date('l jS \of F Y h:i:s A'),
+        ];
+    }
+
 }

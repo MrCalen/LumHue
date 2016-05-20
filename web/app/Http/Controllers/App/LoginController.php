@@ -43,7 +43,7 @@ class LoginController extends Controller
             ];
 
             if (($result = Auth::attempt($credentials, $request->input('remember')))) {
-                return Redirect::to('dashboard');
+                return Redirect::to('templates/basic_nav');
             }
 
             return Redirect::to('login')->withErrors([

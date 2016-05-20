@@ -8,11 +8,11 @@ use Auth;
 class LightIntent
 {
 
-    public function applyIntent($intent)
+    public function applyIntent($intent, $meethue_token)
     {
         $parameters = $intent->actions[0]->parameters[0];
         $parameters = LuisIntent::GetLightParameters($parameters->value);
-        $lightQueryBuidler = LightQueryBuilder::create($parameters['index'], Auth::user()->meethue_token);
+        $lightQueryBuidler = LightQueryBuilder::create($parameters['index'], $meethue_token);
         $lightQueryBuidler->setProperty('on', true);
         $lightQueryBuidler->apply();
     }

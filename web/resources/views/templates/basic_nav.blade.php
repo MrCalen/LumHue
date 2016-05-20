@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flat-ui/2.2.2/css/flat-ui.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ URL::asset('css/nav.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/chat/chat.css') }}">
+
     @yield('css')
 </head>
 <body @yield('ngController')>
@@ -46,7 +48,7 @@
         {{--@yield('content')--}}
         <div ng-view></div>
     </section>
-    <div class="dummy-fixed">
+    <div class="dummy-fixed" ng-controller="WebSocketController">
         <div class="checkout">
             <a class="checkout__button" href="#">
                 <span class="checkout__text">
@@ -56,7 +58,33 @@
             </a>
             <div class="checkout__order">
                 <div class="checkout__order-inner">
-                    <button class="checkout__close checkout__cancel"><i class="icon fa fa-fw fa-close"></i>Close</button>
+                    <div class="checkout__summary">
+                        <ul class="chat chat-body row" style="overflow-y: scroll; outline: none; max-height: 250px;" id="chat">
+                            <li ng-repeat="message in messages track by $index"
+                                class="answer {$ message.author == username ? 'right' : 'left' $}">
+                                <div class="avatar">
+                                    <img src="http://downloadicons.net/sites/default/files/user-group-icon-18526.png"
+                                         alt="User name"
+                                         class="img img-responsive">
+                                    <div class="status online"></div>
+                                </div>
+                                <div class="name" ng-bind="message.author"></div>
+                                <div class="text" data-ng-bind-html="message.content"></div>
+                                <div class="time" ng-bind="message.date"></div>
+                            </li>
+                        </ul>
+                        <ul class="chat-body">
+                            <li>
+                                <form class="answer-add" ng-submit="sendMessage(); currentMessage = ''">
+                                    <input placeholder="Write a message" ng-model="currentMessage">
+                                    <span class="answer-btn answer-btn-2"
+                                          ng-click="sendMessage(); currentMessage = ''"></span>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    <button class="checkout__close checkout__cancel"><i class="icon fa fa-fw fa-close"></i>Close
+                    </button>
                 </div>
             </div>
         </div>

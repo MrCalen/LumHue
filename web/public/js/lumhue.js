@@ -32,10 +32,12 @@
             return elem.classList.contains(c);
         };
         addClass = function (elem, c) {
-            elem.classList.add(c);
+            if (elem)
+                elem.classList.add(c);
         };
         removeClass = function (elem, c) {
-            elem.classList.remove(c);
+            if (elem)
+                elem.classList.remove(c);
         };
     }
     else {
@@ -178,4 +180,3 @@ $(function () {
         this.isActive = false;
     });
 });
-

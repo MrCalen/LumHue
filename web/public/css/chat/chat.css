@@ -1,8 +1,8 @@
 
-body {
-    margin-top: 20px;
-    background: #eee;
-}
+/*body {*/
+    /*margin-top: 20px;*/
+    /*background: #eee;*/
+/*}*/
 
 .row.row-broken {
     padding-bottom: 0;
@@ -13,7 +13,8 @@ body {
 }
 
 .chat {
-    height: calc(100vh - 180px);
+    /*height: calc(100vh - 180px);*/
+    /*padding-bottom: 200px;*/
 }
 
 .decor-default {
@@ -56,7 +57,7 @@ body {
 }
 
 .chat .avatar .status.online {
-    background: #4caf50;
+    background: #4e4e4f;
 }
 
 .chat .avatar .status.busy {
@@ -177,7 +178,6 @@ body {
 
 .chat-body .answer.left .time {
     padding-left: 12px;
-    color: #333333;
 }
 
 .chat-body .answer .time {
@@ -203,20 +203,14 @@ body {
 }
 
 .chat-body .answer.right .text {
-    background: #7266ba;
     color: #ffffff;
     border-radius: 8px 8px 0 8px;
-}
-
-.chat-body .answer.right .text:before {
-    right: -30px;
-    border-left-color: #7266ba;
-    border-left-width: 12px;
+    border: 1px solid white;
 }
 
 .chat-body .answer.right .time {
     padding-right: 12px;
-    color: #333333;
+    /*color: #333333;*/
 }
 
 /**************ADD FORM ***************/
@@ -225,7 +219,7 @@ body {
     position: relative;
     margin: 20px -20px -20px;
     padding: 20px;
-    background: #46be8a;
+    border-top: 1px solid white;
 }
 
 .chat-body .answer-add input {
@@ -288,7 +282,7 @@ body {
 }
 
 .chatbox {
-    position: absolute;
+    /*position: absolute;*/
     right: 0px;
     bottom: 0px;
 }
