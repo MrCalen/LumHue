@@ -1,8 +1,12 @@
-app.controller 'LightController', ($scope, $http, $timeout) ->
+app.controller 'LightController', ($rootScope, $scope, $http, $timeout) ->
     $scope.base_url = window.base_url
     $scope.token = window.token
 
     $scope.recordedInput = {}
+
+    $rootScope.$on 'refresh', ->
+      $scope.refreshLights ->
+
 
     # View controls Logic
     $scope.toggleModal = (i) ->

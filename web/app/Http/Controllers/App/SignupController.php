@@ -21,7 +21,7 @@ class SignupController extends Controller
     public function signUpPage()
     {
         if (Auth::user()) {
-            return Redirect::to('lights');
+            return Redirect::to('app');
         }
 
         return View::make('signup/signup', []);

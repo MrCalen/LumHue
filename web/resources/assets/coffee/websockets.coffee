@@ -1,4 +1,4 @@
-app.controller 'WebSocketController', ($scope, $http, $timeout, $window, $sce) ->
+app.controller 'WebSocketController', ($scope, $http, $timeout, $window, $sce, $rootScope) ->
   $scope.base_url = window.base_url
   $scope.token = window.token
   $scope.username = window.username
@@ -69,6 +69,7 @@ app.controller 'WebSocketController', ($scope, $http, $timeout, $window, $sce) -
         'content' : $sce.trustAsHtml message.content
         'author'  : message.author
         'date' : message.date
+    $rootScope.$emit 'refresh', {}
     $('#chat').animate({
       scrollTop: $('#chat')[0].scrollHeight }, 50
     );
