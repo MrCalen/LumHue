@@ -114,10 +114,11 @@ app.controller 'AmbianceController', ($scope, $http, $timeout) ->
           $("#modalUpdateAmbiance").modal('toggle')
 
     $scope.deleteSlide = (carousel) ->
-      currentItem = $(carousel + " .item.active" )
-      currentIndex = $(carousel + ' .item').index(currentItem)
+#      currentItem = $(carousel + " .item.active" )
+#      currentIndex = $(carousel + ' .item').index(currentItem)
+      currentIndex = $scope.getSlideIndex(carousel)
       return if currentIndex == 0
-      $(carousel).carousel('prev')
+      $scope.previousSlide(carousel)
       $scope.currentAmbiance.lights.splice(currentIndex, 1)
       return
 
@@ -125,3 +126,10 @@ app.controller 'AmbianceController', ($scope, $http, $timeout) ->
       currentItem = $(carousel + " .item.active" )
       currentIndex = $(carousel + ' .item').index(currentItem)
       return currentIndex
+
+    $scope.nextSlide = (carousel) ->
+      $(carousel).carousel('next')
+      return
+    $scope.previousSlide = (carousel) ->
+      $(carousel).carousel('prev')
+      return

@@ -12,7 +12,7 @@
                         <li ng-repeat="message in messages track by $index"
                             class="answer {$ message.author == username ? 'right' : 'left' $}">
                             <div class="avatar">
-                                <img src="http://downloadicons.net/sites/default/files/user-group-icon-18526.png"
+                                <img src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png"
                                      alt="User name"
                                      class="img img-responsive">
                                 <div class="status online"></div>
@@ -26,7 +26,7 @@
                         <li>
                             <form class="answer-add" ng-submit="sendMessage(); currentMessage = ''">
                                 <input placeholder="Write a message" ng-model="currentMessage">
-                                    <span class="answer-btn answer-btn-2"
+                                    <span class="fa fa-paper-plane fa-fw fa-2x"
                                           ng-click="sendMessage(); currentMessage = ''"></span>
                                     <span ng-click="toggleRecording()">
                                         <i class="fa {$ recording ? 'fa-stop' : 'fa-microphone' $} fa-2x fa-fw"></i>

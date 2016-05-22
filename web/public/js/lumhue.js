@@ -126,6 +126,10 @@
                     self._openMenu();
                     document.addEventListener(self.eventtype, self.bodyClickFn);
                 });
+                this.menu.addEventListener('mouseout', function (ev) {
+                    self._closeMenu();
+                    document.addEventListener(self.eventtype, self.bodyClickFn);
+                })
             }
             this.trigger.addEventListener(this.eventtype, function (ev) {
                 ev.stopPropagation();

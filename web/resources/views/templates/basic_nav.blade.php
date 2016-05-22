@@ -38,7 +38,7 @@
                 </div>
             </nav>
         </li>
-        <li><a ng-show="route.current.current === 'dashboard'" ng-click="toggleModal()">New Widget</a></li>
+        <li ng-cloak><a ng-show="route.current.current === 'dashboard'" ng-click="toggleModal()">New Widget</a></li>
         <li></li>
     </ul>
     <header class="codrops-header">@yield('header')</header>

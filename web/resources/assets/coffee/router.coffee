@@ -16,6 +16,6 @@ app.config ['$routeProvider', ($routeProvider) ->
     templateUrl: '../views/ambiance.html'
     current: 'ambiances'
 
-  .otherwise
-    redirectTo: '/dashboard'
+#  .otherwise
+#    redirectTo: '/dashboard'
 ]

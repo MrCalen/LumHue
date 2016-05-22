@@ -3,6 +3,7 @@
     <div>
         <link rel="stylesheet" href="../css/light/light.css">
         <link rel="stylesheet" href="../css/spinners/loader.css">
+        <link rel="stylesheet" href="../assets/dashboard/css/custom.css">
         <link rel="stylesheet"
               href="../components/angular-bootstrap-colorpicker/css/colorpicker.min.css">
         <link rel="stylesheet" href="../components/angular-ui-switch/angular-ui-switch.min.css">
@@ -30,10 +31,10 @@
         <div class="container-fluid row">
             <div class="row" ng-if="ambiances">
                 <div ng-repeat="ambiance in ambiances">
-                    <div class="col-lg-3 col-md-3 light_info_row">
-                        <div class="text-center">
-                            <div class="container-fluid">
-                                <div class="col-md-8 pull-right alignButton">
+                    <div class="col-lg-3 col-md-3 light_info_row ">
+                        <div class="text-center x_panel">
+                            <div class="container-fluid ">
+                                <div class="col-md-8 pull-right x_title alignButton">
                                     <i class="fa fa-lightbulb-o fa-fw cursor" style="font-size:30px;"
                                        ng-click="applyAmbiance($index)"></i>
                                     <i class="fa fa-edit fa-fw cursor" style="font-size:28px; margin-top:10px"
@@ -41,7 +42,7 @@
                                     <i class="fa fa-trash fa-fw cursor" style="font-size:28px;"
                                        ng-click="deleteAmbiance($index)"></i>
                                 </div>
-                                <div class="row">
+                                <div class="row x_content">
                                     <section class="flatstage">
 
                                         <div class="carousel slide carousel-fade preview" data-ride="carousel"
@@ -72,15 +73,15 @@
             </div>
 
             <div>
-                <div class="col-lg-1 col-md-1 light_info_row">
-                    <div class="container-fluid">
-                        <button class="modal-toggle" style="margin: 0 auto"
-                                ng-click="toggleNewAmbiance()">
+                <div class="col-lg-1 col-md-1 light_info_row" ng-click="toggleNewAmbiance()" style="cursor:pointer;">
+                    <div class="container-fluid x_panel">
+                        <button class="modal-toggle" style="margin: 0 auto">
                             <i class="fa fa-plus"></i>
                         </button>
                     </div>
                 </div>
             </div>
+            <br/>
         </div>
     </div>
 
@@ -105,6 +106,7 @@
                                 ng-class="{'active': $index == 0}"
                                 ng-repeat="slideLights in currentAmbiance.lights"></li>
                         </ol>
+                        <hr/>
 
                         <div class="carousel-inner" role="listbox">
 
@@ -193,11 +195,6 @@
                     <div id="ambianceCarousel2" class="carousel slide carousel-fade" data-ride="carousel"
                          data-interval="0">
 
-                        <ol class="carousel-indicators">
-                            <li data-target="#ambianceCarousel2" data-slide-to="{$ $index $}"
-                                ng-class="{'active': $index == 0}"
-                                ng-repeat="slideLights in currentAmbiance.lights"></li>
-                        </ol>
 
                         <div class="carousel-inner" role="listbox">
 
@@ -239,12 +236,10 @@
                                         </div>
                                     </div>
 
-
-                                    <br margin-bottom="8px"></br>
-                                    <a class="carousel-control left" href="#ambianceCarousel2" data-slide="prev">
+                                    <a class="carousel-control left" ng-click='previousSlide("#ambianceCarousel2")' data-slide="prev">
                                         <span class="glyphicon glyphicon-chevron-left"></span>
                                     </a>
-                                    <a class="carousel-control right" href="#ambianceCarousel2" data-slide="next">
+                                    <a class="carousel-control right" ng-click='nextSlide("#ambianceCarousel2")' data-slide="next">
                                         <span class="glyphicon glyphicon-chevron-right"></span>
                                     </a>
 
@@ -252,6 +247,12 @@
                             </div>
 
                         </div>
+                        <hr class="invisible"/>
+                        <ol class="carousel-indicators" style="position: relative">
+                            <li data-target="#ambianceCarousel2" data-slide-to="{$ $index $}"
+                                ng-class="{'active': $index == 0}"
+                                ng-repeat="slideLights in currentAmbiance.lights"></li>
+                        </ol>
 
                     </div>
                 </div>
