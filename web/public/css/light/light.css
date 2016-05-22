@@ -8,6 +8,12 @@ body {
     margin: 25px;
 }
 
+.light_info {
+    font-size: 40px;
+    color: white;
+
+}
+
 img {
     max-width: 100%;
     height: auto;

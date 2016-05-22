@@ -38,6 +38,7 @@
                 </div>
             </nav>
         </li>
+        <li><a>LumHue</a></li>
         <li ng-cloak><a ng-show="route.current.current === 'dashboard'" ng-click="toggleModal()">New Widget</a></li>
         <li></li>
     </ul>
