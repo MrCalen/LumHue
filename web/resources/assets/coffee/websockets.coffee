@@ -91,7 +91,7 @@ app.controller 'WebSocketController', ($scope, $http, $timeout, $window, $sce, $
 
     navigator.getUserMedia {audio : true, video : false},
       (stream) ->
-        $scope.recordRTC = RecordRTC(stream, { type: 'audio', mimeType: 'audio/ogg' })
+        $scope.recordRTC = RecordRTC(stream, { type: 'audio', mimeType: 'audio/wav' })
         return
       (err) ->
         console.log(err)

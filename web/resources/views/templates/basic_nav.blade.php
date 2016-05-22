@@ -23,22 +23,22 @@
 </head>
 <body @yield('ngController')>
 <div class="container">
-    <ul id="gn-menu" class="gn-menu-main">
+    <ul id="gn-menu" class="gn-menu-main" ng-controller="NavController">
         <li class="gn-trigger">
             <a class="gn-icon gn-icon-menu"><span>Menu</span></a>
             <nav class="gn-menu-wrapper">
                 <div class="gn-scroller">
                     <ul class="gn-menu">
-                        @yield('dropdown_options')
                         <li><a class="gn-icon gn-icon-download" href="/app/#/dashboard">Dashboard</a></li>
                         <li><a class="gn-icon gn-icon-cog" href="/app/#/lights">Lights</a></li>
                         <li><a class="gn-icon gn-icon-help" href="/app/#/ambiances">Ambiances</a></li>
+
                         <li><a class="gn-icon gn-icon-archive">Log out</a></li>
                     </ul>
                 </div>
             </nav>
         </li>
-        @yield('nav_options')
+        <li><a ng-show="route.current.current === 'dashboard'" ng-click="toggleModal()">New Widget</a></li>
         <li></li>
     </ul>
     <header class="codrops-header">@yield('header')</header>

@@ -42,6 +42,7 @@ app.controller "DashboardController", ($scope, $timeout, localStorageService) ->
   $scope.onChange = ->
     $scope.currentWidget.availableStates = $scope.sizes[$scope.currentWidget.widget_type]
     $scope.currentWidget.size = $scope.currentWidget.availableStates[0]
+    localStorageService.cookie.set('dashboard', $scope.models)
 
   $scope.onChange()
 
@@ -51,6 +52,7 @@ app.controller "DashboardController", ($scope, $timeout, localStorageService) ->
     $scope.models.dropzones['A'].push(angular.copy $scope.currentWidget)
     console.log $scope.models
     $scope.currentWidget = {}
+    $scope.onChange()
 
   defaultModel = {
     dropzones: {
@@ -73,12 +75,15 @@ app.controller "DashboardController", ($scope, $timeout, localStorageService) ->
 
   $scope.applyNewSize = (size, widgetid) ->
     $scope.models.dropzones['A'][widgetid].size = size
+    $scope.onChange()
 
   $scope.removeWidget = (widgetid) ->
     $scope.models.dropzones['A'].splice(widgetid, 1)
+    $scope.onChange()
 
   $scope.resetDashboard = ->
     $scope.models = defaultModel
+    $scope.onChange()
 
   $scope.models = localStorageService.cookie.get('dashboard')
   if !$scope.models?
