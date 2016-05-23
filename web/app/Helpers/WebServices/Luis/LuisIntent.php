@@ -14,18 +14,20 @@ class LuisIntent
             'deuxieme'    => 2,
             '2e'          => 2,
             'seconde'     => 2,
+            'de'          => 2,
 
             'troisième'   => 3,
             'troisieme'   => 3,
             '3e'          => 3,
 
         ],
-        'color'          => [
-            'rouge'        => 'rgb(255, 0, 0)',
+        'color'       => [
+            'rouge'       => 'rgb(255, 0, 0)',
             'bleu'        => 'rgb(0, 0, 186)',
-            'jaune'        => 'rgb(255, 255, 98)',
-            'orange'        => 'rgb(255, 145, 98)',
-            'blanc'        => 'rgb(255, 255, 255)',
+            'jaune'       => 'rgb(255, 255, 98)',
+            'orange'      => 'rgb(255, 145, 98)',
+            'blanc'       => 'rgb(255, 255, 255)',
+            'vert'        => 'rgb(69, 139, 0)',
         ],
     ];
 
