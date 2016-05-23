@@ -15,6 +15,7 @@ use URL;
 use Input;
 use Validator;
 use HueMail;
+use MongoHue;
 
 class SignupController extends Controller
 {
@@ -74,6 +75,13 @@ class SignupController extends Controller
         }
         $user->validation_token = null;
         $user->save();
+
+        $prefToken = Hash::make(substr(str_shuffle(MD5(microtime())), 0, 16));
+
+        MongoHue::insert('user_settings', [
+            'user_id' => $user->id,
+            'token' => $prefToken,
+        ]);
 
         return Redirect::to('login')->with([
             'info' => 'Email Confirmed, please login.',

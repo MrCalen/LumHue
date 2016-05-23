@@ -115,3 +115,12 @@ app.controller 'WebSocketController', ($scope, $http, $timeout, $window, $sce, $
       $scope.sendAudioMessage(blob)
 
   $scope.initRecord()
+
+  # used by websockets
+  $scope.removeUserInfo = ->
+    $http.post $scope.base_url + '/api/preferences/chat?access_token=' + window.token, {}
+    .success (data, status) ->
+      $scope.messages.push
+        'content' : 'Preferences removed'
+        'author'  : 'LumHue Bot'
+        'date' : new Date("now")

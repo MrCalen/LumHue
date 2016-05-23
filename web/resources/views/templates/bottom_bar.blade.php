@@ -42,3 +42,8 @@
         </div>
     </div>
 </div>
+<script>
+    var removeUserPref = function () {
+        $.post(window.base_url + '/api/preferences/chat?access_token=' + window.token, function (){});
+    }
+</script>

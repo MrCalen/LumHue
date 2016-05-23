@@ -38,4 +38,11 @@ class MongoHue
         $this->table($table)
              ->insertOne($data);
     }
+
+    public function getPrefs($user_id) {
+        return $this->find('user_settings', [
+            'user_id' => $user_id,
+        ])->{0};
+    }
+
 }

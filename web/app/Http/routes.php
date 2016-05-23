@@ -38,6 +38,10 @@ Route::group(['prefix' => 'api'], function () {
             Route::get('/history', 'Api\dashboard\StatsController@history');
             Route::get('/weather', 'Api\dashboard\StatsController@weather');
         });
+
+        Route::group(['prefix' => 'preferences'], function () {
+            Route::post('/chat', 'Api\Preferences\PreferencesController@chat');
+        });
     });
 
     // Token Generation routes.

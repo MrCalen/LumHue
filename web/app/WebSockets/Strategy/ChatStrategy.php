@@ -35,7 +35,7 @@ class ChatStrategy implements StrategyInterface
         if ($message->type === 'auth') {
             $name = $message->data->name;
             $protocol->getConnections()[$connection->resourceId]->setName($name);
-            $client->send(json_encode($bot->onConnect($name)));
+            $client->send(json_encode($bot->onConnect($name, $user->id)));
             return;
         } elseif ($message->type === 'message') {
             // Handle message with luis
