@@ -18,7 +18,7 @@ class LightsController extends Controller
     public function setLights(Request $request)
     {
         $light_id = $request->get('id');
-        $light_on = $request->get('on') === 'true';
+        $light_on = $request->get('on') === 'true' || $request->get('on') === true;
         $light_effect = $request->get('effect');
         $light_color = $request->get('color');
         $light_color = LumHueColorConverter::RGBstrToRGB($light_color);
