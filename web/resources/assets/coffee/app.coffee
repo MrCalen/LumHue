@@ -26,11 +26,17 @@ app.directive 'graphComponent', ($http) ->
         delete attrs.lightid
       else
         scope.lightid = attrs.lightid
+      scope.granularity = attrs.granularity
       scope.sizes = [
         'small'
         'half'
         'medium'
         'large'
+      ]
+      scope.granularities = [
+        'none'
+        'days'
+        'hours'
       ]
 
       datas = []
@@ -40,7 +46,6 @@ app.directive 'graphComponent', ($http) ->
         params =
           granularity: attrs.granularity
           access_token: window.token
-
         url = window.base_url + "/api/dashboard/lights"
         if attrs.lightid?
           params.light_id = attrs.lightid
@@ -98,7 +103,7 @@ app.directive 'graphComponent', ($http) ->
             borderWidth: 1,
             color: '#fff'
           },
-          colors: ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)"],
+          colors: ["#87898A", "#87898A"],
           xaxis: {
             tickColor: "rgba(51, 51, 51, 0.06)",
             mode: "time",

@@ -69,11 +69,11 @@ app.controller 'WebSocketController', ($scope, $http, $timeout, $window, $sce, $
         'content' : $sce.trustAsHtml message.content
         'author'  : message.author
         'date' : message.date
+    $scope.$apply()
     $rootScope.$emit 'refresh', {}
     $('#chat').animate({
       scrollTop: $('#chat')[0].scrollHeight }, 50
     );
-    $scope.$apply();
 
 
   audioconn.onmessage = (e) ->

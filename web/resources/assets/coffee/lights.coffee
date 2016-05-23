@@ -3,6 +3,7 @@ app.controller 'LightController', ($rootScope, $scope, $http, $timeout) ->
     $scope.token = window.token
 
     $scope.recordedInput = {}
+    $scope.first = true
 
     $rootScope.$on 'refresh', ->
       $scope.refreshLights ->
@@ -65,5 +66,7 @@ app.controller 'LightController', ($rootScope, $scope, $http, $timeout) ->
               else
                 $scope.loop()
     $timeout ->
+      if $scope.first
+        $scope.first = false
         $scope.refreshLights()
     , 200

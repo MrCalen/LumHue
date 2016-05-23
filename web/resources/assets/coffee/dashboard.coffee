@@ -25,10 +25,9 @@ app.controller "DashboardController", ($scope, $timeout, localStorageService) ->
       'medium'
     ]
   $scope.lights = [
-    "1",
-    "2",
-    "3",
-    "all"
+    "1"
+    "2"
+    "3"
   ]
 
   $scope.granularities = [
@@ -48,33 +47,29 @@ app.controller "DashboardController", ($scope, $timeout, localStorageService) ->
 
   $scope.createWidget = ->
     delete $scope.currentWidget.availableStates
-    console.log $scope.currentWidget
     $scope.models.dropzones['A'].push(angular.copy $scope.currentWidget)
-    console.log $scope.models
     $scope.currentWidget = {}
     $scope.onChange()
 
-  defaultModel = {
-    dropzones: {
+  defaultModel =
+    dropzones:
       "A": [
-        {
-          "widget_type": "graph",
-          "size": "large",
-        },
-        {
-          "size": "medium",
+          "widget_type": "graph"
+          "size": "large"
+        ,
+          "size": "medium"
           "widget_type": "weather"
-        },
-        {
-          "size": "small",
+        ,
+          "size": "small"
           "widget_type": "history"
-        }
-      ],
-    }
-  };
+      ]
 
   $scope.applyNewSize = (size, widgetid) ->
     $scope.models.dropzones['A'][widgetid].size = size
+    $scope.onChange()
+
+  $scope.applyNewGranularity = (granularity, widgetid) ->
+    $scope.models.dropzones['A'][widgetid].granularity = granularity
     $scope.onChange()
 
   $scope.removeWidget = (widgetid) ->
@@ -86,9 +81,7 @@ app.controller "DashboardController", ($scope, $timeout, localStorageService) ->
     $scope.onChange()
 
   $scope.models = localStorageService.cookie.get('dashboard')
-  if !$scope.models?
-    console.log 'default'
-    $scope.models = defaultModel
+  $scope.models = defaultModel if !$scope.models?
 
   $timeout ->
     $scope.$watch 'models.dropzones', (model) ->

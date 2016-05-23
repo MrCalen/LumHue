@@ -87,7 +87,7 @@
                                       }">
 
                 <div ng-if="item.widget_type == 'graph'">
-                    <graph-component granularity="hours" widgetid="{$ $index $}" lightid="{$ item.light $}"></graph-component>
+                    <graph-component granularity="{$ item.granularity $}" widgetid="{$ $index $}" lightid="{$ item.light $}"></graph-component>
                 </div>
                 <div ng-if="item.widget_type == 'weather'">
                     <weather-component widgetid="{$ $index $}"></weather-component>
@@ -104,7 +104,14 @@
             <div class="dashboard_graph">
                 <div class="row x_title">
                     <div class="col-md-6">
-                        <h3 ng-if="lightid">Stats for light <b ng-bind="lightid"></b></h3>
+                        <h3 ng-if="lightid">Stats for light
+                            <b ng-bind="lightid"></b>
+                            <small ng-switch="granularity">
+                                <i ng-switch-when="none">Life</i>
+                                <i ng-switch-when="days">Last 24 hours</i>
+                                <i ng-switch-when="hours">Last Hour</i>
+                            </small>
+                        </h3>
                         <h3 ng-if="!lightid">Global Stats</h3>
                     </div>
                     <div class="col-md-6">
@@ -119,6 +126,15 @@
                                         <ul class="dropdown-menu">
                                             <li ng-repeat="size in sizes">
                                                 <a ng-bind="size" ng-click="applyNewSize(size, widgetid)"></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                        <a href="#" tabindex="-1">Granularity</a>
+                                        <span></span>
+                                        <ul class="dropdown-menu">
+                                            <li ng-repeat="granularity in granularities">
+                                                <a ng-bind="granularity" ng-click="applyNewGranularity(granularity, widgetid)"></a>
                                             </li>
                                         </ul>
                                     </li>
@@ -149,9 +165,7 @@
         <div class="boxes">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Recent Activities
-                        <small>Sessions</small>
-                    </h2>
+                    <h2>Recent Activities</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
