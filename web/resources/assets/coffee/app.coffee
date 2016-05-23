@@ -86,12 +86,12 @@ app.directive 'graphComponent', ($http) ->
             splines: {
               show: true,
               tension: 0.4,
-              lineWidth: 1,
+              lineWidth: 0.4,
               fill: 0.4
             },
             points: {
-              radius: 0,
-              show: true
+              radius: 1,
+              show: false
             },
             shadowSize: 2
           },
@@ -105,8 +105,8 @@ app.directive 'graphComponent', ($http) ->
           },
           colors: ["#87898A", "#87898A"],
           xaxis: {
-            tickColor: "rgba(51, 51, 51, 0.06)",
-            mode: "time",
+            tickColor: "rgba(51, 51, 51, 1)",
+            mode: "dateTime",
             tickSize: [1, "day"],
             axisLabel: "Date",
             axisLabelUseCanvas: true,
@@ -115,7 +115,7 @@ app.directive 'graphComponent', ($http) ->
             axisLabelPadding: 10
           },
           yaxis: {
-            ticks: 8,
+            ticks: 2,
             tickColor: "rgba(51, 51, 51, 0.06)",
           },
           tooltip: false

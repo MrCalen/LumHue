@@ -30,10 +30,10 @@
                 <div class="gn-scroller">
                     <ul class="gn-menu">
                         <li><a class="gn-icon gn-icon-download" href="/app/#/dashboard">Dashboard</a></li>
-                        <li><a class="gn-icon gn-icon-cog" href="/app/#/lights">Lights</a></li>
-                        <li><a class="gn-icon gn-icon-help" href="/app/#/ambiances">Ambiances</a></li>
+                        <li><a class="gn-icon gn-icon-download" href="/app/#/lights">Lights</a></li>
+                        <li><a class="gn-icon gn-icon-download" href="/app/#/ambiances">Ambiances</a></li>
 
-                        <li><a class="gn-icon gn-icon-archive">Log out</a></li>
+                        <li><a class="gn-icon gn-icon-download" href="/logout">Log out</a></li>
                     </ul>
                 </div>
             </nav>

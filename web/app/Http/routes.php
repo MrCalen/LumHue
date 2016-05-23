@@ -64,6 +64,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/', 'App\LoginController@loginPage');
         Route::post('/', 'App\LoginController@authenticate');
     });
+    Route::get('/logout', 'App\LoginController@logout');
 
     // Signup routes
     Route::group(['prefix' => 'signup'], function () {

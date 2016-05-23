@@ -1,5 +1,5 @@
-@extends('templates/basic_nav')
-@section('content')
+@extends('templates/basic_layout')
+@section('body')
   <div class="center-block">
   <center>
     {{ Form::open(array('url' => 'signup')) }}

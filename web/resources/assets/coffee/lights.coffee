@@ -53,8 +53,6 @@ app.controller 'LightController', ($rootScope, $scope, $http, $timeout) ->
                 )
           .success (data, status) ->
               $scope.lights = data.lights
-              $scope.light = data.lights[1]
-              $scope.name = $scope.light.name
               $scope.loading = false
               if callback
                 callback()

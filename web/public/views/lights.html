@@ -10,16 +10,16 @@
 
     <div class="row light_info">
         <div class="text-center">
-            <div ng-show="loading && lights">
-                <i class="left fa fa-spinner fa-spin fa-fw"></i> Refreshing
+            <div>
+                <i ng-show="loading && lights" class="left fa fa-spinner fa-spin fa-fw"></i>
+                Lights
             </div>
-            <div ng-hide="loading && lights">Lights</div>
         </div>
         <hr/>
     </div>
 
     <div class="container-fluid" id="content">
-        <center class="sk-folding-cube" ng-show="!lights">
+        <center class="sk-folding-cube" ng-show="loading">
             <div class="sk-cube1 sk-cube"></div>
             <div class="sk-cube2 sk-cube"></div>
             <div class="sk-cube4 sk-cube"></div>

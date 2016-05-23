@@ -32,7 +32,7 @@
         <div class="container-fluid row">
             <div class="row" ng-if="ambiances">
                 <div ng-repeat="ambiance in ambiances">
-                    <div class="col-lg-3 col-md-4 light_info_row">
+                    <div class="col-lg-3 col-md-4 col-xs-12 light_info_row">
                         <div class="text-center x_panel">
                             <div class="container-fluid ">
                                 <div class="col-md-8 pull-right x_title alignButton">
@@ -52,7 +52,7 @@
                                                      ng-repeat="slideLights in ambiance.lights">
                                                     <div class="container-fluid">
                                                         <div ng-repeat="light in slideLights.lightscolors">
-                                                            <div class="col-lg-4">
+                                                            <div class="col-lg-4" style="min-width: 80px;">
                                                                 <figure class="flatball" style="background: radial-gradient(circle at 0% 5%, {$ light.color $} , #0a0a0a 150%, #000000 150%)"></figure>
                                                             </div>
                                                         </div>
@@ -62,7 +62,7 @@
                                         </div>
                                     </section>
                                 </div>
-                                <div ng-bind="ambiance.name"></div>
+                                <b ng-bind="ambiance.name"></b>
                             </div>
                         </div>
                     </div>

@@ -43,6 +43,10 @@ class LightsController extends Controller
     public function getBridge(Request $request)
     {
         $meethue = $this->getMeetHueToken($request);
+        if (!$meethue)
+            return json_encode([
+                'light' => [],
+            ]);
         $bridge = LightQueryBuilder::create(null, $meethue)->getBridgeState();
         $bridge = json_decode($bridge);
         foreach ($bridge->lights as $light) {

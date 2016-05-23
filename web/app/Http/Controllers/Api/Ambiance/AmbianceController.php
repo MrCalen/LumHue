@@ -16,7 +16,9 @@ class AmbianceController extends Controller
     public function index(Request $request)
     {
         $user_id = $this->tokenToUser($request);
-        $result = MongoHue::find('ambiance');
+        $result = MongoHue::find('ambiance', [
+            'user_id' => $user_id->id,
+        ]);
         foreach ($result as $key => $value) {
             $ambiance = $value->ambiance;
             foreach ($ambiance->lights as $ambiancelights) {
