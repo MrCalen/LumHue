@@ -4,8 +4,31 @@ namespace App\Helpers;
 
 use App\Models\RGB;
 
+use MischiefCollective\ColorJizz\Formats\Yxy;
+
+class XY {
+    public $x;
+    public $y;
+
+    /**
+     * XY constructor.
+     * @param $x
+     * @param $y
+     */
+    public function __construct($x, $y)
+    {
+        $this->x = $x;
+        $this->y = $y;
+    }
+
+    public static function crossProduct($p1, $p2) {
+        return ($p1->x * $p2->y - $p1->y * $p2->x);
+    }
+}
+
 class LumHueColorConverter
 {
+
     public static function RGBstrToRGB(string $str)
     {
         $matches = [];
@@ -47,8 +70,8 @@ class LumHueColorConverter
             $x = 0;
             $y = 0;
         } else {
-            $x = round($X / ($X + $Y + $Z), 4);
-            $y = round($Y / ($X + $Y + $Z), 4);
+            $x = round($X / ($X + $Y + $Z), 10);
+            $y = round($Y / ($X + $Y + $Z), 10);
         }
 
         $bri = round($Y * 254);
@@ -73,38 +96,35 @@ class LumHueColorConverter
         return $hex;
     }
 
-    public static function chromaticToRGB($x, $y, $bri)
-    {
-        $z = 1 - $x - $y;
-        $Y = $bri / 254;
+    public static function chromaticToRGB($x, $y, $bri) {
+        return self::getRGBFromXYState($x, $y, $bri);
+    }
 
-        if ($y == 0) {
-            $X = 0;
-            $Z = 0;
-        } else {
-            $X = ($Y / $y) * $x;
-            $Z = ($Y / $y) * $z;
-        }
 
-        $r = $X * 3.2406 - $Y * 1.5372 - $Z * 0.4986;
-        $g = - $X * 0.9689 + $Y * 1.8758 + $Z * 0.0415;
-        $b = $X * 0.0557 - $Y * 0.204 + $Z * 1.057;
+    private static function getRGBFromXYState($x, $y, $brightness) {
+        $Y = $brightness;
+        $X = ($Y / $y) * $x;
+        $Z = ($Y / $y) * (1 - $x - $y);
+        $rgb = [
+            $X * 1.612 - $Y * 0.203 - $Z * 0.302,
+            -$X * 0.509 + $Y * 1.412 + $Z * 0.066,
+            $X * 0.026 - $Y * 0.072 + $Z * 0.962
+        ];
 
-        $r = ($r <= 0.0031308 ? 12.92 * $r : (1.055) * pow($r, (1 / 2.4)) - 0.055);
-        $g = ($g <= 0.0031308 ? 12.92 * $g : (1.055) * pow($g, (1 / 2.4)) - 0.055);
-        $b = ($b <= 0.0031308 ? 12.92 * $b : (1.055) * pow($b, (1 / 2.4)) - 0.055);
+        $rgb = array_map(function ($x) {
+            return ($x <= 0.0031308) ? (12.92 * $x) : ((1.0 + 0.055) * pow($x, (1.0 / 2.4)) - 0.055);
+        }, $rgb);
 
-        $r = ($r < 0 ? 0 : round($r * 255));
-        $g = ($g < 0 ? 0 : round($g * 255));
-        $b = ($b < 0 ? 0 : round($b * 255));
-        $r = ($r > 255 ? 255 : $r);
-        $g = ($g > 255 ? 255 : $g);
-        $b = ($b > 255 ? 255 : $b);
+        $rgb = array_map(function ($x) { return max(0, $x); }, $rgb);
+        $max = max($rgb[0], $rgb[1], $rgb[2]);
+        if ($max > 1)
+            $rgb = array_map(function ($x) use($max) { return $x / $max; }, $rgb);
 
+        $tmp = array_map(function ($x) { return $x * 255;}, $rgb);
         return [
-            'r' => $r,
-            'g' => $g,
-            'b' => $b,
+            'r' => $tmp[0],
+            'g' => $tmp[1],
+            'b' => $tmp[2]
         ];
     }
 }
