@@ -133,7 +133,7 @@ img {
 }
 .carousel-indicators li.active {
   background-color: cornflowerblue;
-  border-color: 004080;
+  border-color: #004080;
 }
 
 .carousel-fade .carousel-inner .item {

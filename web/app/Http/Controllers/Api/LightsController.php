@@ -49,6 +49,9 @@ class LightsController extends Controller
             ]);
         $bridge = LightQueryBuilder::create(null, $meethue)->getBridgeState();
         $bridge = json_decode($bridge);
+        if (!$bridge) {
+            return Response::send("Error", 500);
+        }
         foreach ($bridge->lights as $light) {
             $rgb = LumHueColorConverter::chromaticToRGB($light->state->xy[0], $light->state->xy[1], $light->state->bri);
             $light->rgb = $rgb;

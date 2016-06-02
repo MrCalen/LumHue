@@ -4,8 +4,6 @@ namespace App\Helpers;
 
 use App\Models\RGB;
 
-use MischiefCollective\ColorJizz\Formats\Yxy;
-
 class XY {
     public $x;
     public $y;
@@ -108,11 +106,13 @@ class LumHueColorConverter
         $rgb = [
             $X * 1.612 - $Y * 0.203 - $Z * 0.302,
             -$X * 0.509 + $Y * 1.412 + $Z * 0.066,
-            $X * 0.026 - $Y * 0.072 + $Z * 0.962
+            $X * 0.026 - $Y * 0.072 + $Z * 0.962,
         ];
 
         $rgb = array_map(function ($x) {
-            return ($x <= 0.0031308) ? (12.92 * $x) : ((1.0 + 0.055) * pow($x, (1.0 / 2.4)) - 0.055);
+            return ($x <= 0.0031308)
+                    ? (12.92 * $x)
+                    : ((1.0 + 0.055) * pow($x, (1.0 / 2.4)) - 0.055);
         }, $rgb);
 
         $rgb = array_map(function ($x) { return max(0, $x); }, $rgb);
@@ -120,11 +120,11 @@ class LumHueColorConverter
         if ($max > 1)
             $rgb = array_map(function ($x) use($max) { return $x / $max; }, $rgb);
 
-        $tmp = array_map(function ($x) { return $x * 255;}, $rgb);
+        $rgb = array_map(function ($x) { return $x * 255;}, $rgb);
         return [
-            'r' => $tmp[0],
-            'g' => $tmp[1],
-            'b' => $tmp[2]
+            'r' => $rgb[0],
+            'g' => $rgb[1],
+            'b' => $rgb[2],
         ];
     }
 }

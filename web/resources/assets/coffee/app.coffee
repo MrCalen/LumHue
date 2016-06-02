@@ -123,7 +123,6 @@ app.directive 'graphComponent', ($http, $timeout) ->
 
       scope.timeout = (duration = 10000) ->
         $timeout ->
-          scope.loading = true
           scope.fetchData()
           scope.timeout()
         , duration
@@ -159,7 +158,6 @@ app.directive 'activitiesComponent', ($http, $timeout) ->
 
       scope.timeout = (duration = 20000) ->
         $timeout ->
-          scope.loading = true
           scope.refresh()
           scope.timeout()
         , duration
@@ -186,6 +184,7 @@ app.directive 'weatherComponent', ($http, $timeout) ->
         scope.position =
           lat: position.coords.latitude
           long: position.coords.longitude
+        scope.loading = true
         scope.timeout(200)
 
       navigator.geolocation.getCurrentPosition(showPosition);
@@ -241,7 +240,6 @@ app.directive 'weatherComponent', ($http, $timeout) ->
 
       scope.timeout = (duration = 20000) ->
         $timeout ->
-          scope.loading = true
           scope.refresh()
           scope.timeout()
         , duration
