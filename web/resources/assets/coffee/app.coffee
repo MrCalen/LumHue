@@ -12,7 +12,7 @@ app = angular.module 'LumHue', [
 app.config (localStorageServiceProvider) ->
     localStorageServiceProvider.setStorageCookie()
 
-app.directive 'graphComponent', ($http) ->
+app.directive 'graphComponent', ($http, $timeout) ->
   return {
     restrict: 'E'
     templateUrl: "graph-template.html"
@@ -120,10 +120,17 @@ app.directive 'graphComponent', ($http) ->
           },
           tooltip: false
         });
+
+      scope.timeout = (duration = 10000) ->
+        $timeout ->
+          scope.loading = true
+          scope.fetchData()
+          scope.timeout()
+        , duration
   }
 
 
-app.directive 'activitiesComponent', ($http) ->
+app.directive 'activitiesComponent', ($http, $timeout) ->
   return {
     restrict: 'E',
     templateUrl: 'activities-template.html',
@@ -150,7 +157,14 @@ app.directive 'activitiesComponent', ($http) ->
           scope.messages = data
           scope.loading = false
 
-      scope.refresh()
+      scope.timeout = (duration = 20000) ->
+        $timeout ->
+          scope.loading = true
+          scope.refresh()
+          scope.timeout()
+        , duration
+      scope.timeout(200)
+
   }
 
 app.directive 'weatherComponent', ($http, $timeout) ->
@@ -166,14 +180,13 @@ app.directive 'weatherComponent', ($http, $timeout) ->
       }
 
       scope.widgetid = attrs.widgetid
-      scope.loading = true
       url = window.base_url + "/api/dashboard/weather"
       scope.position = {}
       showPosition = (position) ->
         scope.position =
           lat: position.coords.latitude
           long: position.coords.longitude
-        scope.refresh()
+        scope.timeout(200)
 
       navigator.geolocation.getCurrentPosition(showPosition);
 
@@ -225,6 +238,14 @@ app.directive 'weatherComponent', ($http, $timeout) ->
             icons.play();
             scope.loading = false
           , 200
+
+      scope.timeout = (duration = 20000) ->
+        $timeout ->
+          scope.loading = true
+          scope.refresh()
+          scope.timeout()
+        , duration
+
   }
 
 window.app = app
