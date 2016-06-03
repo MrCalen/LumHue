@@ -11,8 +11,32 @@ use Illuminate\Http\Request;
 use MongoHue;
 use Response;
 
+/**
+ * Class AmbianceController
+ * @package App\Http\Controllers\Api\Ambiance
+ *
+ * @SWG\Info(
+ *     title="LumHue",
+ *     version="1.0.0"
+ * )
+ */
 class AmbianceController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return mixed
+     *
+     * @SWG\Get(
+     *     path="/api/ambiance",
+     *     description="Returns the list of lights (with color converted).",
+     *     produces={"application/json"},
+     *     tags={"ambiances"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="List of lights"
+     *     ),
+     * )
+     */
     public function index(Request $request)
     {
         $user_id = $this->tokenToUser($request);
@@ -35,6 +59,21 @@ class AmbianceController extends Controller
         return Response::json($result);
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     *
+     * @SWG\Post(
+     *     path="/api/ambiance/create",
+     *     description="Create a new ambiance.",
+     *     produces={"application/json"},
+     *     tags={"ambiances"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="if the operation succeeded"
+     *     ),
+     * )
+     */
     public function create(Request $request)
     {
         $user = $this->tokenToUser($request);
@@ -55,6 +94,21 @@ class AmbianceController extends Controller
         return Response::json(['success' => true,]);
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     *
+     * @SWG\Post(
+     *     path="/api/ambiance/udpate",
+     *     description="Update an ambiance",
+     *     produces={"application/json"},
+     *     tags={"ambiances"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="if the operation succeeded"
+     *     ),
+     * )
+     */
     public function update(Request $request)
     {
         $user = $this->tokenToUser($request);
@@ -83,6 +137,21 @@ class AmbianceController extends Controller
         return Response::json('{ "success" : true }');
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     *
+     * @SWG\Post(
+     *     path="/api/ambiance/remove",
+     *     description="Deletes an ambiance",
+     *     produces={"application/json"},
+     *     tags={"ambiances"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="If the operation succeeded."
+     *     ),
+     * )
+     */
     public function remove(Request $request)
     {
         $user = $this->tokenToUser($request);
@@ -107,6 +176,21 @@ class AmbianceController extends Controller
         return Response::json('{ "success" : true }');
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     *
+     * @SWG\Post(
+     *     path="/api/ambiance/apply",
+     *     description="Applies the ambiance to lights",
+     *     produces={"application/json"},
+     *     tags={"ambiances"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="if the operation succeeded."
+     *     ),
+     * )
+     */
     public function apply(Request $request)
     {
         $ambiance_id = $request->get('ambiance_id');

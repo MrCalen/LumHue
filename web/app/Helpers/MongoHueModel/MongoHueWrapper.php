@@ -9,8 +9,21 @@ use App\Models\HueLight;
 use MongoHue;
 use DataTime;
 
+/**
+ * Class MongoHueWrapper
+ * @package App\Helpers\MongoHueModel
+ *
+ * Wrapper around Mongo
+ */
 class MongoHueWrapper
 {
+    /**
+     * Fetches a new bridge status
+     *
+     * @param $bridge : Data of the fetch
+     * @param $user_id : Id of the User
+     *
+     */
     public static function updateBridgeStatus($bridge, $user_id)
     {
         MongoHue::table('bridge')
@@ -29,6 +42,14 @@ class MongoHueWrapper
         ]);
     }
 
+    /**
+     * Returns a light from Mongo
+     *
+     * @param $user_id : Id of the User
+     * @param $light_id : Id of the lamp
+     * @return HueLight : instance of the lights
+     * @throws \Exception : If light does not exists
+     */
     public static function retrieveLight($user_id, $light_id) : HueLight
     {
         $lights = MongoHueWrapper::retrieveLightStates($user_id);
@@ -38,6 +59,13 @@ class MongoHueWrapper
         return $lights[$light_id];
     }
 
+    /**
+     * Fetches all the lights from Mongo
+     *
+     * @param $user_id : Id of the User
+     * @return array : all the lights
+     * @throws \Exception : If light does not exists
+     */
     public static function retrieveLightStates($user_id) : array
     {
         $bridgeStatus = MongoHue::table('bridge')->find([ 'user_id' => $user_id ]);

@@ -13,8 +13,28 @@ use Auth;
 use App\QueryBuilder\LightQueryBuilder;
 use App\Helpers\LumHueColorConverter;
 
+/**
+ * Class LightsController
+ * @package App\Http\Controllers\Api
+ *
+ */
 class LightsController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return string
+     *
+     * @SWG\Post(
+     *     path="/api/lights",
+     *     description="Apply treatment to light",
+     *     produces={"application/json"},
+     *     tags={"lights"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Apply treatment to light"
+     *     ),
+     * )
+     */
     public function setLights(Request $request)
     {
         $light_id = $request->get('id');
@@ -40,6 +60,21 @@ class LightsController extends Controller
         $queryBuilder->apply();
     }
 
+    /**
+     * @param Request $request
+     * @return string
+     *
+     * @SWG\Get(
+     *     path="/api/bridge",
+     *     description="Get Bridge status",
+     *     produces={"application/json"},
+     *     tags={"lights"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Get bridge status"
+     *     ),
+     * )
+     */
     public function getBridge(Request $request)
     {
         $meethue = $this->getMeetHueToken($request);
@@ -63,6 +98,21 @@ class LightsController extends Controller
         return json_encode($bridge);
     }
 
+    /**
+     * @param Request $request
+     * @return string
+     *
+     * @SWG\Get(
+     *     path="/api/lights",
+     *     description="Get Light status as Array",
+     *     produces={"application/json"},
+     *     tags={"lights"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Get Light status as Array"
+     *     ),
+     * )
+     */
     public function getLights(Request $request)
     {
         $bridge = json_decode($this->getBridge($request));

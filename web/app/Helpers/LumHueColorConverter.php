@@ -1,34 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Helpers;
 
 use App\Models\RGB;
 
-class XY
-{
-    public $x;
-    public $y;
-
-    /**
-     * XY constructor.
-     * @param $x
-     * @param $y
-     */
-    public function __construct($x, $y)
-    {
-        $this->x = $x;
-        $this->y = $y;
-    }
-
-    public static function crossProduct($p1, $p2)
-    {
-        return ($p1->x * $p2->y - $p1->y * $p2->x);
-    }
-}
-
 class LumHueColorConverter
 {
-    public static function RGBstrToRGB(string $str)
+    public static function RGBstrToRGB(string $str) : array
     {
         $matches = [];
         if (preg_match('/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/', $str, $matches)) {
@@ -42,7 +22,7 @@ class LumHueColorConverter
         ];
     }
 
-    public static function RGBToChromaticRGB(RGB $rgb)
+    public static function RGBToChromaticRGB(RGB $rgb) : array
     {
         return LumHueColorConverter::RGBtoChromatic(
             $rgb->getRed(),
@@ -51,7 +31,7 @@ class LumHueColorConverter
         );
     }
 
-    public static function RGBtoChromatic($r, $g, $b)
+    public static function RGBtoChromatic($r, $g, $b) : array
     {
         $r = $r / 255;
         $g = $g / 255;
@@ -85,7 +65,7 @@ class LumHueColorConverter
         ];
     }
 
-    public static function RGBToHex($r, $g, $b)
+    public static function RGBToHex($r, $g, $b) : string
     {
         $hex = "#";
         $hex .= str_pad(dechex($r), 2, "0", STR_PAD_LEFT);
@@ -95,13 +75,13 @@ class LumHueColorConverter
         return $hex;
     }
 
-    public static function chromaticToRGB($x, $y, $bri)
+    public static function chromaticToRGB($x, $y, $bri) : array
     {
         return self::getRGBFromXYState($x, $y, $bri);
     }
 
 
-    private static function getRGBFromXYState($x, $y, $brightness)
+    private static function getRGBFromXYState($x, $y, $brightness) : array
     {
         $Y = $brightness;
         $X = ($Y / $y) * $x;

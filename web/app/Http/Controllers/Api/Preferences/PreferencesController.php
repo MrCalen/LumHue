@@ -11,6 +11,21 @@ use JWTAuth;
 
 class PreferencesController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return string
+     *
+     * @SWG\Post(
+     *     path="/api/preferences/chat",
+     *     description="Remove chat popup for User",
+     *     produces={"application/json"},
+     *     tags={"preferences"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description=""
+     *     ),
+     * )
+     */
     public function chat(Request $request)
     {
         $user = $this->tokenToUser($request);

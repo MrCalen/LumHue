@@ -12,6 +12,21 @@ use JWTAuth;
 
 class MeetHueController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return string
+     *
+     * @SWG\Get(
+     *     path="/api/meethue/bridge",
+     *     description="Returns the bridge status from meethue",
+     *     produces={"application/json"},
+     *     tags={"meethue"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description=""
+     *     ),
+     * )
+     */
     public function getBridge(Request $request)
     {
         $user = $this->tokenToUser($request);

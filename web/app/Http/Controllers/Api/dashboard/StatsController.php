@@ -7,8 +7,28 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MongoHue;
 
+/**
+ * Class StatsController
+ * @package App\Http\Controllers\Api\dashboard
+ *
+ */
 class StatsController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return string
+     *
+     * @SWG\Get(
+     *     path="/api/dashboard/light",
+     *     description="Returns the stats of a light",
+     *     produces={"application/json"},
+     *     tags={"dashboard"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Light Status depending of granularity..."
+     *     ),
+     * )
+     */
     public function light(Request $request)
     {
         $light_id = $request->get('light_id');
@@ -25,6 +45,21 @@ class StatsController extends Controller
         return json_encode($statsManager->lightStats($granularity, $light_id));
     }
 
+    /**
+     * @param Request $request
+     * @return string
+     *
+     * @SWG\Get(
+     *     path="/api/dashboard/lights",
+     *     description="Returns the stats for all lights",
+     *     produces={"application/json"},
+     *     tags={"dashboard"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Light Status depending of granularity..."
+     *     ),
+     * )
+     */
     public function lights(Request $request)
     {
         $granularity = $request->get('granularity');
@@ -44,12 +79,42 @@ class StatsController extends Controller
         return json_encode($stats);
     }
 
+    /**
+     * @param Request $request
+     * @return string
+     *
+     * @SWG\Get(
+     *     path="/api/dashboard/bridge",
+     *     description="Returns the bridge",
+     *     produces={"application/json"},
+     *     tags={"dashboard"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Returns the full status of the bridge"
+     *     ),
+     * )
+     */
     public function bridge(Request $request)
     {
         $statsManager = new StatsManager($this->tokenToUser($request));
         return json_encode($statsManager->bridgeStats('hours'));
     }
 
+    /**
+     * @param Request $request
+     * @return string
+     *
+     * @SWG\Get(
+     *     path="/api/dashboard/history",
+     *     description="Returns the historic of actions",
+     *     produces={"application/json"},
+     *     tags={"dashboard"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Returns the historic of actions"
+     *     ),
+     * )
+     */
     public function history(Request $request)
     {
         $statsManager = new StatsManager($this->tokenToUser($request));
@@ -57,6 +122,21 @@ class StatsController extends Controller
         return json_encode($records);
     }
 
+    /**
+     * @param Request $request
+     * @return string
+     *
+     * @SWG\Get(
+     *     path="/api/dashboard/weather",
+     *     description="Returns the weather forecast",
+     *     produces={"application/json"},
+     *     tags={"dashboard"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Returns the weather forecast"
+     *     ),
+     * )
+     */
     public function weather(Request $request)
     {
         $lat = $request->get('lat');
