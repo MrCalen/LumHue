@@ -4,7 +4,8 @@ namespace App\Helpers;
 
 use App\Models\RGB;
 
-class XY {
+class XY
+{
     public $x;
     public $y;
 
@@ -19,14 +20,14 @@ class XY {
         $this->y = $y;
     }
 
-    public static function crossProduct($p1, $p2) {
+    public static function crossProduct($p1, $p2)
+    {
         return ($p1->x * $p2->y - $p1->y * $p2->x);
     }
 }
 
 class LumHueColorConverter
 {
-
     public static function RGBstrToRGB(string $str)
     {
         $matches = [];
@@ -43,7 +44,7 @@ class LumHueColorConverter
 
     public static function RGBToChromaticRGB(RGB $rgb)
     {
-        return LumHueColorConverter::RGBToChromatic(
+        return LumHueColorConverter::RGBtoChromatic(
             $rgb->getRed(),
             $rgb->getGreen(),
             $rgb->getBlue()
@@ -80,7 +81,7 @@ class LumHueColorConverter
         return [
             'x' => $x,
             'y' => $y,
-            'bri' => $Y,
+            'bri' => $bri,
         ];
     }
 
@@ -94,12 +95,14 @@ class LumHueColorConverter
         return $hex;
     }
 
-    public static function chromaticToRGB($x, $y, $bri) {
+    public static function chromaticToRGB($x, $y, $bri)
+    {
         return self::getRGBFromXYState($x, $y, $bri);
     }
 
 
-    private static function getRGBFromXYState($x, $y, $brightness) {
+    private static function getRGBFromXYState($x, $y, $brightness)
+    {
         $Y = $brightness;
         $X = ($Y / $y) * $x;
         $Z = ($Y / $y) * (1 - $x - $y);
@@ -115,12 +118,19 @@ class LumHueColorConverter
                     : ((1.0 + 0.055) * pow($x, (1.0 / 2.4)) - 0.055);
         }, $rgb);
 
-        $rgb = array_map(function ($x) { return max(0, $x); }, $rgb);
+        $rgb = array_map(function ($x) {
+            return max(0, $x);
+        }, $rgb);
         $max = max($rgb[0], $rgb[1], $rgb[2]);
-        if ($max > 1)
-            $rgb = array_map(function ($x) use($max) { return $x / $max; }, $rgb);
+        if ($max > 1) {
+            $rgb = array_map(function ($x) use ($max) {
+                return $x / $max;
+            }, $rgb);
+        }
 
-        $rgb = array_map(function ($x) { return $x * 255;}, $rgb);
+        $rgb = array_map(function ($x) {
+            return $x * 255;
+        }, $rgb);
         return [
             'r' => $rgb[0],
             'g' => $rgb[1],

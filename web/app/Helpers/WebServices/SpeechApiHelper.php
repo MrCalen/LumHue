@@ -4,7 +4,7 @@ namespace App\Helpers\WebServices;
 
 class SpeechApiHelper
 {
-    public static function IssueToken()
+    public static function issueToken()
     {
         $curl = curl_init();
 
@@ -16,7 +16,10 @@ class SpeechApiHelper
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "grant_type=client%20credentials&client_id=lumhue&client_secret=" . env('BINGTOKEN') . "&scope=https%3A%2F%2Fspeech.platform.bing.com",
+            CURLOPT_POSTFIELDS =>
+                "grant_type=client%20credentials&client_id=lumhue&client_secret="
+                . env('BINGTOKEN')
+                . "&scope=https%3A%2F%2Fspeech.platform.bing.com",
             CURLOPT_HTTPHEADER => array(
                 "cache-control: no-cache",
                 "content-type: application/x-www-form-urlencoded",
@@ -24,16 +27,15 @@ class SpeechApiHelper
         ));
 
         $response = curl_exec($curl);
-        $err = curl_error($curl);
 
         curl_close($curl);
         $json = json_decode($response);
         return $json->access_token;
     }
 
-    public static function SendBinary($binaryData)
+    public static function sendBinary($binaryData)
     {
-        $token = self::IssueToken();
+        $token = self::issueToken();
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -61,7 +63,6 @@ class SpeechApiHelper
         ));
         curl_setopt($curl, CURLOPT_POSTFIELDS, $binaryData);
         $response = curl_exec($curl);
-        $err = curl_error($curl);
 
         curl_close($curl);
         return json_decode($response);

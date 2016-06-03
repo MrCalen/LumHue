@@ -22,15 +22,13 @@ class AmbianceController extends Controller
         foreach ($result as $key => $value) {
             $ambiance = $value->ambiance;
             foreach ($ambiance->lights as $ambiancelights) {
-              $duration = $ambiancelights->duration;
-              foreach ($ambiancelights->lightscolors as $light) {
-                  $light_color = LumHueColorConverter::RGBstrToRGB($light->color);
-                  $r = $light_color[0];
-                  $g = $light_color[1];
-                  $b = $light_color[2];
-
-                  $light->rgbhex = LumHueColorConverter::RGBToHex($r, $g, $b);
-              }
+                foreach ($ambiancelights->lightscolors as $light) {
+                    $light_color = LumHueColorConverter::RGBstrToRGB($light->color);
+                    $r = $light_color[0];
+                    $g = $light_color[1];
+                    $b = $light_color[2];
+                    $light->rgbhex = LumHueColorConverter::RGBToHex($r, $g, $b);
+                }
             }
         }
 
@@ -52,7 +50,7 @@ class AmbianceController extends Controller
             'ambiance' => $ambiance,
             'user_id' => $user->id,
         ]);
-        Logger::Log('Created ambiance ', $user->id, $user->name);
+        Logger::log('Created ambiance ', $user->id, $user->name);
 
         return Response::json(['success' => true,]);
     }
@@ -81,11 +79,12 @@ class AmbianceController extends Controller
         ], [
             'upsert' => true,
         ]);
-        Logger::Log('Update ambiance', $user->id, $user->name);
+        Logger::log('Update ambiance', $user->id, $user->name);
         return Response::json('{ "success" : true }');
     }
 
-    public function remove(Request $request) {
+    public function remove(Request $request)
+    {
         $user = $this->tokenToUser($request);
 
         $ambiance_id = $request->get('ambiance_id');
@@ -97,7 +96,7 @@ class AmbianceController extends Controller
         }
 
         $ambianceId = new \MongoDB\BSON\ObjectID($ambiance_id);
-        Logger::Log('Deleted ambiance', $user->id, $user->name);
+        Logger::log('Deleted ambiance', $user->id, $user->name);
 
         $user = $this->tokenToUser($request);
         MongoHue::table('ambiance')->deleteOne([
@@ -118,7 +117,7 @@ class AmbianceController extends Controller
             ]);
         }
         $user = $this->tokenToUser($request);
-        Logger::Log('Applyied ambiance ' . $ambiance_id, $user->id, $user->name);
+        Logger::log('Applyied ambiance ' . $ambiance_id, $user->id, $user->name);
         $this->dispatch((new JobAmbiance($ambiance_id, $this->tokenToUser($request))));
         return Response::json([
             'success' => true,

@@ -1,14 +1,13 @@
 <?php
 
-
 namespace App\Models;
-
 
 use MongoHue;
 
 class Logger
 {
-    public static function Log($str, $user_id, $user) {
+    public static function log($str, $user_id, $user)
+    {
         date_default_timezone_set('Europe/Paris');
         MongoHue::table('history')
             ->insertOne([

@@ -31,26 +31,27 @@ class LuisIntent
         ],
     ];
 
-    public static function GetLightParameters($parameters)
+    public static function getLightParameters($parameters)
     {
         $foundParameters = [];
         foreach ($parameters as $intent) {
-            if ($intent->type === 'lightnumber')
-                $foundParameters['index'] = self::GetIntent($intent);
+            if ($intent->type === 'lightnumber') {
+                $foundParameters['index'] = self::getIntent($intent);
+            }
         }
         return $foundParameters;
     }
 
-    public static function GetColorParameters($parameters)
+    public static function getColorParameters($parameters)
     {
         $foundParameters = [];
         foreach ($parameters as $parameter) {
             foreach ($parameter->value as $intent) {
-
-                if ($intent->type === 'lightnumber')
-                    $foundParameters['index'] = self::GetIntent($intent);
-                else if ($intent->type === 'color')
-                    $foundParameters['color'] = self::GetIntent($intent);
+                if ($intent->type === 'lightnumber') {
+                    $foundParameters['index'] = self::getIntent($intent);
+                } elseif ($intent->type === 'color') {
+                    $foundParameters['color'] = self::getIntent($intent);
+                }
             }
         }
 
@@ -58,24 +59,26 @@ class LuisIntent
 
     }
 
-    public static function GetIntent($value)
+    public static function getIntent($value)
     {
         if (!isset(LuisIntent::$intents[$value->type][$value->entity])) {
             return null;
-        } else
-            return LuisIntent::$intents[$value->type][$value->entity];
+        }
+        return LuisIntent::$intents[$value->type][$value->entity];
     }
 
-    public static function ApplyIntent($intent, $meethue_token)
+    public static function applyIntent($intent, $meethue_token)
     {
-        if ($intent->intent === 'light')
+        if ($intent->intent === 'light') {
             $luisintent = new LightIntent();
-        elseif ($intent->intent === 'color')
+        } elseif ($intent->intent === 'color') {
             $luisintent = new ColorIntent();
-        else
+        } else {
             return null;
+        }
+
         try {
-            $luisintent->ApplyIntent($intent, $meethue_token);
+            $luisintent->applyIntent($intent, $meethue_token);
         } catch (\Throwable $e) {
             return null;
         }

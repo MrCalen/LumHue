@@ -29,11 +29,9 @@ class LoginController extends Controller
         $validator = \Validator::make(\Input::all(), $rules);
 
         if ($validator->fails()) {
-            $messages = $validator->messages();
             return Redirect::to('login')
                 ->withErrors($validator)
                 ->withInput(\Input::except('password'));
-
         } else {
             $credentials = [
                 'email' => $request->input('email'),

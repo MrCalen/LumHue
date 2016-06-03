@@ -27,9 +27,13 @@ class StatsManager
         $i = 0;
 
         foreach ($records as $key => $record) {
-            if (!isset($record->status->lights)) continue;
+            if (!isset($record->status->lights)) {
+                continue;
+            }
             foreach ($record->status->lights as $lightId => $light) {
-                if ($light_id != $lightId) continue;
+                if ($light_id != $lightId) {
+                    continue;
+                }
                 $stats[$record->last_updated->timestamp] = $light->state;
                 ++$i;
             }
@@ -41,7 +45,8 @@ class StatsManager
      * @param $granularity
      * @return array : timestamp with bridge status
      */
-    public function bridgeStats($granularity) {
+    public function bridgeStats($granularity)
+    {
         $records = $this->getRecord($granularity);
         $stats = [];
         foreach ($records as $key => $record) {
@@ -54,22 +59,24 @@ class StatsManager
      * @param $granularity
      * @return mixed : fetches a number of record according to granularity
      */
-    private function getRecord($granularity) {
+    private function getRecord($granularity)
+    {
         $lastFilter = [];
-        if ($granularity === 'hours')
+        if ($granularity === 'hours') {
             $lastFilter = [
                 'limit' => 60,
                 'sort' => [
                     '_id' => -1,
                 ],
             ];
-        else if ($granularity === 'days')
+        } elseif ($granularity === 'days') {
             $lastFilter = [
                 'limit' => 1440,
                 'sort' => [
                     '_id' => -1,
                 ],
             ];
+        }
 
         $records = MongoHue::table('bridge')->find([
             'user_id' => $this->user->id,
@@ -77,7 +84,8 @@ class StatsManager
         return $records;
     }
 
-    public function history() {
+    public function history()
+    {
         $record = MongoHue::table('history')->find([
             'user_id' => $this->user->id,
         ], [
@@ -89,7 +97,8 @@ class StatsManager
         return $record;
     }
 
-    public function weather($lat, $long) {
+    public function weather($lat, $long)
+    {
         $token = env('WEATHER_API_KEY');
 
         $base_uri = 'api.openweathermap.org/data/2.5/forecast?APPID=' . $token . '&lat=' . $lat . '&lon=' . $long;

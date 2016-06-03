@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers\Api\dashboard;
 
 use App\Helpers\StatsManager;
@@ -8,10 +7,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MongoHue;
 
-
 class StatsController extends Controller
 {
-    public function light(Request $request) {
+    public function light(Request $request)
+    {
         $light_id = $request->get('light_id');
         $granularity = $request->get('granularity');
         if (!$light_id || !$granularity) {
@@ -26,7 +25,8 @@ class StatsController extends Controller
         return json_encode($statsManager->lightStats($granularity, $light_id));
     }
 
-    public function lights(Request $request) {
+    public function lights(Request $request)
+    {
         $granularity = $request->get('granularity');
         if (!$granularity) {
             return json_encode([
@@ -44,18 +44,21 @@ class StatsController extends Controller
         return json_encode($stats);
     }
 
-    public function bridge(Request $request) {
+    public function bridge(Request $request)
+    {
         $statsManager = new StatsManager($this->tokenToUser($request));
         return json_encode($statsManager->bridgeStats('hours'));
     }
 
-    public function history(Request $request) {
+    public function history(Request $request)
+    {
         $statsManager = new StatsManager($this->tokenToUser($request));
         $records = iterator_to_array($statsManager->history());
         return json_encode($records);
     }
 
-    public function weather(Request $request) {
+    public function weather(Request $request)
+    {
         $lat = $request->get('lat');
         $long = $request->get('long');
 
@@ -71,7 +74,7 @@ class StatsController extends Controller
             if ($day === $matches[1] && $first) {
                 $first = false;
                 return true;
-            } else if ($matches[2] === '15') {
+            } elseif ($matches[2] === '15') {
                 return true;
             }
             return false;

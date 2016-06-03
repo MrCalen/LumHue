@@ -1,30 +1,33 @@
 <?php
 
-
 namespace App\WebSockets;
-
 
 use MongoHue;
 
 class Bot
 {
     private static $instance;
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
-    public static function instance() {
+    public static function instance()
+    {
         if (is_null(self::$instance)) {
             self::$instance = new Bot();
         }
         return self::$instance;
     }
 
-    public function handleMessage($message) {
+    public function handleMessage($message)
+    {
         $messageParts = explode(' ', $message);
         $command = $messageParts[0];
         return $this->handleCommand($command, array_slice($messageParts, 1));
     }
 
-    private function handleCommand($command, $args) {
+    private function handleCommand($command, $args)
+    {
         switch ($command) {
             case '/help':
                 return '<div>
@@ -39,10 +42,12 @@ class Bot
         return $command;
     }
 
-    public function onConnect($clientName, $clientId) {
+    public function onConnect($clientName, $clientId)
+    {
         $prefs = MongoHue::getPrefs($clientId);
-        if (isset($prefs->prefs->chat) && !$prefs->prefs->chat)
+        if (isset($prefs->prefs->chat) && !$prefs->prefs->chat) {
             $msg = '';
+        }
 
         return [
             "type" => 'message',
@@ -60,5 +65,4 @@ class Bot
             'date' => date('l jS \of F Y h:i:s A'),
         ];
     }
-
 }

@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\WebSockets\Strategy;
 
-use App\Helpers\WebServices\SpeechApiHelper;
 use App\Helpers\WebServices\LuisApiHelper;
-use App\WebSockets\Bot;
+use App\Helpers\WebServices\SpeechApiHelper;
 use App\WebSockets\Protocol;
-use Ratchet\ConnectionInterface;
 use JWAuth;
+use Ratchet\ConnectionInterface;
 
 class AudioStrategy implements StrategyInterface
 {
@@ -18,15 +17,14 @@ class AudioStrategy implements StrategyInterface
     {
         // Skip ping messages
         $json = json_decode($message);
-        if ($json)
-        {
-            if ($json->type === 'auth')
-            {
+        if ($json) {
+            if ($json->type === 'auth') {
                 $token = $json->data->token;
                 \JWTAuth::setToken($token);
                 $user = \JWTAuth::toUser();
-                if (!$user)
+                if (!$user) {
                     return;
+                }
                 $client = $protocol->getConnections()[$connection->resourceId];
                 $client->setName($json->data->name);
                 $client->setToken($token);
@@ -34,21 +32,23 @@ class AudioStrategy implements StrategyInterface
             return;
         }
         $client = $protocol->getConnections()[$connection->resourceId];
-        if (!$client || !$client->getToken())
+        if (!$client || !$client->getToken()) {
             return;
+        }
 
         $token = $client->getToken();
         \JWTAuth::setToken($token);
         $user = \JWTAuth::toUser();
-        if (!$user)
+        if (!$user) {
             return;
+        }
         $uniq = time();
         $filename = '/tmp/' . $uniq . '.wav';
         $filename_sampled = '/tmp/' . $uniq . '.sampled.wav';
         file_put_contents($filename, $message);
         shell_exec('sox ' . $filename . ' ' . $filename_sampled . ' rate 16k');
         $message = file_get_contents($filename_sampled);
-        $result = SpeechApiHelper::SendBinary($message);
+        $result = SpeechApiHelper::sendBinary($message);
         unlink($filename);
         unlink($filename_sampled);
         if (!isset($result->results)) {
@@ -68,7 +68,7 @@ class AudioStrategy implements StrategyInterface
         ]));
 
         try {
-            LuisApiHelper::GetIntent($result, $client->meethue_token);
+            LuisApiHelper::getIntent($result, $client->meethue_token);
         } catch (Throwable $e) {
             $client->send(json_encode([
                 'result' => 'KO',

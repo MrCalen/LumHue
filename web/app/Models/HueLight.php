@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace app\Models;
+namespace App\Models;
 
 use stdClass;
 
@@ -51,7 +51,7 @@ class HueLight
         $result['on'] = $this->on;
 
         if (isset($this->bri)) {
-//            $result['bri'] = $this->bri * 100;
+            $result['bri'] = $this->bri;
         }
 
         if (isset($this->effect)) {

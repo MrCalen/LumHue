@@ -38,7 +38,11 @@ class JobAmbiance extends Job implements SelfHandling, ShouldQueue
                 $builder = LightQueryBuilder::create($light->id + 1, $this->user->meethue_token);
                 $hueLight = new HueLight($light->id + 1, new \stdClass());
                 $light_color = LumHueColorConverter::RGBstrToRGB($light->color);
-                $light_color = LumHueColorConverter::RGBtoChromatic($light_color[0],$light_color[1], $light_color[2]);
+                $light_color = LumHueColorConverter::RGBtoChromatic(
+                    $light_color[0],
+                    $light_color[1],
+                    $light_color[2]
+                );
                 $xy = [
                     $light_color['x'],
                     $light_color['y'],

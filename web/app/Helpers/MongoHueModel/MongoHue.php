@@ -29,20 +29,20 @@ class MongoHue
 
     public function find($table, $criteria = [], $filter = [ 'sort' => ['_id' =>  1]]) : \stdClass
     {
-        return Utils::toJson(Utils::MongoArray($this->table($table)
+        return Utils::toJson(Utils::mongoArray($this->table($table)
                                                     ->find($criteria, $filter)));
     }
 
-    public function insert($table, $data, $filter = [])
+    public function insert($table, $data)
     {
         $this->table($table)
              ->insertOne($data);
     }
 
-    public function getPrefs($user_id) {
+    public function getPrefs($user_id)
+    {
         return $this->find('user_settings', [
             'user_id' => $user_id,
         ])->{0};
     }
-
 }

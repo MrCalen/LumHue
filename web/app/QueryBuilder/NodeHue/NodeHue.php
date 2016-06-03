@@ -50,8 +50,7 @@ class NodeHue
         curl_setopt($ch, CURLOPT_POST, count($arr));
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
 
-        $data = curl_exec($ch);
+        curl_exec($ch);
         curl_close($ch);
-
     }
 }

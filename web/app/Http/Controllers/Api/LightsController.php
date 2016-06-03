@@ -26,7 +26,7 @@ class LightsController extends Controller
         $hueColors = LumHueColorConverter::RGBtoChromatic($light_color[0], $light_color[1], $light_color[2]);
 
         $user = $this->tokenToUser($request);
-        Logger::Log('Applying action on light ' . $light_id, $user->id, $user->name);
+        Logger::log('Applying action on light ' . $light_id, $user->id, $user->name);
 
         $queryBuilder = LightQueryBuilder::create(strval($light_id), $user->meethue_token);
         $queryBuilder->setProperty('on', $light_on)
@@ -43,10 +43,11 @@ class LightsController extends Controller
     public function getBridge(Request $request)
     {
         $meethue = $this->getMeetHueToken($request);
-        if (!$meethue)
+        if (!$meethue) {
             return json_encode([
                 'light' => [],
             ]);
+        }
         $bridge = LightQueryBuilder::create(null, $meethue)->getBridgeState();
         $bridge = json_decode($bridge);
         if (!$bridge) {
@@ -66,7 +67,7 @@ class LightsController extends Controller
     {
         $bridge = json_decode($this->getBridge($request));
         $lights = array();
-        foreach($bridge->lights as $light) {
+        foreach ($bridge->lights as $light) {
             $lights[] = $light;
         }
         return json_encode($lights);

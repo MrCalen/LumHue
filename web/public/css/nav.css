@@ -668,8 +668,8 @@ input.gn-search:focus {
     height: 3em;
     font-weight: 400;
     font-family: 'Maven Pro', sans-serif;
-    -webkit-transform-origin: 50% 0%;
-    transform-origin: 50% 0%;
+    -webkit-transform-origin: 50% 0;
+    transform-origin: 50% 0;
     -webkit-transition: -webkit-transform 0.6s cubic-bezier(0.7, 0, 0.3, 1);
     transition: transform 0.6s cubic-bezier(0.7, 0, 0.3, 1);
     -webkit-font-smoothing: antialiased;
@@ -730,7 +730,7 @@ a.checkout__button:focus {
 .checkout__order,
 .checkout__order::before {
     position: absolute;
-    bottom: 0%;
+    bottom: 0;
     left: 50%;
     -webkit-transform: translate3d(-50%, 0%, 0);
     transform: translate3d(-50%, 0%, 0);

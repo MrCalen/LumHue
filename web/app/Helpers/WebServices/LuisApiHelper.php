@@ -6,7 +6,7 @@ use App\Helpers\WebServices\Luis\LuisIntent;
 
 class LuisApiHelper
 {
-    private static function IssueCall($query)
+    private static function issueCall($query)
     {
         $curl = curl_init();
         $uri = "https://api.projectoxford.ai/luis/v1/application?"
@@ -31,25 +31,26 @@ class LuisApiHelper
         return json_decode($response);
     }
 
-    public static function GetIntent($message, $meethue_token)
+    public static function getIntent($message, $meethue_token)
     {
-        $response = self::IssueCall($message);
+        $response = self::issueCall($message);
         $intent = $response->intents[0];
         $confidence = $intent->score * 100;
-        if ($confidence < 50)
+        if ($confidence < 50) {
             return [
                 'success' => false,
                 'message' => "Je ne suis pas certain de l'action à appliquer",
                 'confidence' => $confidence,
             ];
-        $intent = LuisIntent::ApplyIntent($intent, $meethue_token);
-        if ($intent === null)
+        }
+        $intent = LuisIntent::applyIntent($intent, $meethue_token);
+        if ($intent === null) {
             return [
                 'success' => false,
                 'message' => "Je n'ai pas compris votre message",
                 'confidence' => $confidence,
             ];
-
+        }
         return [
             'success' => true,
             'message' => "C'est fait :)",

@@ -40,16 +40,13 @@ class SignupController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            $messages = $validator->messages();
-
             return Redirect::to('signup')
                 ->withErrors($validator)
                 ->withInput(Input::except('password', 'passwordVerificaton'));
-
         } else {
             $user = User::create($request->all());
             $user->password = Hash::make($request->input('password'));
-            $validation_token = Hash::make(substr(str_shuffle(MD5(microtime())), 0, 16));
+            $validation_token = Hash::make(substr(str_shuffle(md5(microtime())), 0, 16));
             $user->validation_token = $validation_token;
             $user->save();
             $validation_link = URL::to('signup/confirm') . '?token=' . $validation_token;
@@ -76,7 +73,7 @@ class SignupController extends Controller
         $user->validation_token = null;
         $user->save();
 
-        $prefToken = Hash::make(substr(str_shuffle(MD5(microtime())), 0, 16));
+        $prefToken = Hash::make(substr(str_shuffle(md5(microtime())), 0, 16));
 
         MongoHue::insert('user_settings', [
             'user_id' => $user->id,
@@ -103,7 +100,7 @@ class SignupController extends Controller
         }
 
         $email = $credentials['email'];
-        $resetToken = Hash::make(substr(str_shuffle(MD5(microtime())), 0, 16));
+        $resetToken = Hash::make(substr(str_shuffle(md5(microtime())), 0, 16));
         $user = User::where('email', '=', $email)->first();
         if (!$user) {
             return Redirect::to('login')->with([
@@ -166,12 +163,9 @@ class SignupController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            $messages = $validator->messages();
-
             return Redirect::back()
                 ->withErrors($validator)
                 ->withInput(Input::except('password', 'passwordVerificaton'));
-
         } else {
             $user = User::where('email', '=', $request->get('email'))
                         ->where('reset_token', '=', $token)

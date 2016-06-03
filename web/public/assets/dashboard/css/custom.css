@@ -304,8 +304,8 @@ a:hover, a:focus {
 }
 .top_search .form-control {
   border-right: 0;
-  box-shadow: inset 0 1px 0px rgba(0, 0, 0, 0.075);
-  border-radius: 25px 0px 0px 25px;
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.075);
+  border-radius: 25px 0 0 25px;
   padding-left: 20px;
   border: 1px solid rgba(221, 226, 232, 0.49);
 }
@@ -314,7 +314,7 @@ a:hover, a:focus {
   border-right: 0;
 }
 .top_search .input-group-btn button {
-  border-radius: 0px 25px 25px 0px;
+  border-radius: 0 25px 25px 0;
   border: 1px solid rgba(221, 226, 232, 0.49);
   border-left: 0;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -476,7 +476,7 @@ h2 {
   margin-right: 7px;
 }
 .detail {
-  margin: 10px 0 10px 0px;
+  margin: 10px 0 10px 0;
   display: none;
   line-height: 22px;
   height: 150px;
@@ -612,7 +612,7 @@ legend {
   margin-bottom: 3px;
 }
 .well.profile_view .right {
-  margin-top: 0px;
+  margin-top: 0;
   padding: 10px;
 }
 .well.profile_view .img-circle {
@@ -1189,7 +1189,7 @@ span.right {
   text-overflow: ellipsis;
 }
 .sidebar-footer {
-  bottom: 0px;
+  bottom: 0;
   clear: both;
   display: block;
   padding: 5px 0 0 0;
@@ -1581,7 +1581,7 @@ a.star {
 .mail_list h3 {
   font-size: 15px;
   font-weight: bold;
-  margin: 0px 0 6px;
+  margin: 0 0 6px;
 }
 .mail_list h3 small {
   float: right;
@@ -2044,13 +2044,13 @@ span.tag a {
 }
 .tagsinput input {
   width: 80px;
-  margin: 0px;
+  margin: 0;
   font-size: 13px;
   border: 1px solid transparent;
   padding: 3px;
   background: transparent;
   color: #000;
-  outline: 0px;
+  outline: 0;
 }
 .tagsinput div {
   display: block;
@@ -2059,7 +2059,7 @@ span.tag a {
 .tags_clear {
   clear: both;
   width: 100%;
-  height: 0px;
+  height: 0;
 }
 .not_valid {
   background: #FBD8DB !important;

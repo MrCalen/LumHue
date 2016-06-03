@@ -6,7 +6,6 @@ namespace App\WebSockets;
 
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
-use App\WebSockets\Connection;
 use App\WebSockets\Strategy\StrategyInterface;
 use Exception;
 use MongoHue;

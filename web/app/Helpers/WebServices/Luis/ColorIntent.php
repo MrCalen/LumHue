@@ -9,7 +9,7 @@ use App\QueryBuilder\LightQueryBuilder;
 
 class ColorIntent
 {
-    public function ApplyIntent($intent, $meethue_token)
+    public function applyIntent($intent, $meethue_token)
     {
         $actions = $intent->actions;
         $parameters = [];
@@ -19,7 +19,7 @@ class ColorIntent
             }
         }
 
-        $parameters = LuisIntent::GetColorParameters($parameters);
+        $parameters = LuisIntent::getColorParameters($parameters);
         $lightQueryBuidler = LightQueryBuilder::create($parameters['index'], $meethue_token);
         $lightQueryBuidler->setProperty('on', true);
 

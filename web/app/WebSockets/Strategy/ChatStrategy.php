@@ -11,15 +11,6 @@ use Ratchet\ConnectionInterface;
 
 class ChatStrategy implements StrategyInterface
 {
-    private function broadcast(Protocol $protocol, string $message, ConnectionInterface $connection)
-    {
-        $username = $protocol->getConnections()[$connection->resourceId]->getName();
-        $protocol->keepLog("New message {$message} from {$username}", $connection);
-        foreach ($protocol->getConnections() as $name => $client) {
-            $client->send($message);
-        }
-    }
-
     public function onMessage(ConnectionInterface $connection, string $message, Protocol $protocol)
     {
         date_default_timezone_set('Europe/Paris');
@@ -27,8 +18,9 @@ class ChatStrategy implements StrategyInterface
         $token = $message->token;
         \JWTAuth::setToken($token);
         $user = \JWTAuth::toUser();
-        if (!$user)
+        if (!$user) {
             return;
+        }
         $client = $protocol->getConnections()[$connection->resourceId];
         $bot = Bot::instance();
 
@@ -47,7 +39,7 @@ class ChatStrategy implements StrategyInterface
                 'date' => date('l jS \of F Y h:i:s A'),
             ]));
 
-            $luisresponse = LuisApiHelper::GetIntent($content, $user->meethue_token);
+            $luisresponse = LuisApiHelper::getIntent($content, $user->meethue_token);
             $client->send(json_encode([
                 'content' => $luisresponse['message'],
                 'type' => 'message',
@@ -63,6 +55,7 @@ class ChatStrategy implements StrategyInterface
             if ($connection->resourceId !== $elt->getConnection()->resourceId) {
                 return $elt->getName();
             }
+            return null;
         }, array_values($protocol->getConnections()));
         $names = array_filter($names, function ($elt) {
             return $elt != null;

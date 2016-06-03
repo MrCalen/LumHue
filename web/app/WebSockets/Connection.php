@@ -47,6 +47,4 @@ class Connection
     {
         $this->token = $token;
     }
-
-
 }

@@ -31,7 +31,7 @@ class MongoHueWrapper
 
     public static function retrieveLight($user_id, $light_id) : HueLight
     {
-        $lights = MongoHueWrapper::RetrieveLightStates($user_id);
+        $lights = MongoHueWrapper::retrieveLightStates($user_id);
         if (!isset($lights[$light_id])) {
             throw new \Exception('Light does not exist');
         }
@@ -41,7 +41,7 @@ class MongoHueWrapper
     public static function retrieveLightStates($user_id) : array
     {
         $bridgeStatus = MongoHue::table('bridge')->find([ 'user_id' => $user_id ]);
-        $bridgeStatus = Utils::MongoArray($bridgeStatus);
+        $bridgeStatus = Utils::mongoArray($bridgeStatus);
         if (!count($bridgeStatus) | !isset($bridgeStatus[0]->status->lights)) {
             throw new \Exception('No bridge found');
         }
