@@ -6,6 +6,7 @@ use App\Helpers\StatsManager;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MongoHue;
+use Response;
 
 /**
  * Class StatsController
@@ -34,7 +35,7 @@ class StatsController extends Controller
         $light_id = $request->get('light_id');
         $granularity = $request->get('granularity');
         if (!$light_id || !$granularity) {
-            return json_encode([
+            return Response::json([
                 'granularity' => $granularity,
                 'light_id' => $light_id,
                 'error' => 'Please provide a light id and granularity',
@@ -42,7 +43,7 @@ class StatsController extends Controller
         }
 
         $statsManager = new StatsManager($this->tokenToUser($request));
-        return json_encode($statsManager->lightStats($granularity, $light_id));
+        return Response::json($statsManager->lightStats($granularity, $light_id));
     }
 
     /**
@@ -64,7 +65,7 @@ class StatsController extends Controller
     {
         $granularity = $request->get('granularity');
         if (!$granularity) {
-            return json_encode([
+            return Response::json([
                 'granularity' => $granularity,
                 'error' => 'Please provide a light id and granularity',
             ]);
@@ -76,7 +77,7 @@ class StatsController extends Controller
         foreach ($light_ids as $light_id) {
             $stats[$light_id] = $statsManager->lightStats($granularity, $light_id);
         }
-        return json_encode($stats);
+        return Response::json($stats);
     }
 
     /**
@@ -97,7 +98,7 @@ class StatsController extends Controller
     public function bridge(Request $request)
     {
         $statsManager = new StatsManager($this->tokenToUser($request));
-        return json_encode($statsManager->bridgeStats('hours'));
+        return Response::json($statsManager->bridgeStats('hours'));
     }
 
     /**
@@ -119,7 +120,7 @@ class StatsController extends Controller
     {
         $statsManager = new StatsManager($this->tokenToUser($request));
         $records = iterator_to_array($statsManager->history());
-        return json_encode($records);
+        return Response::json($records);
     }
 
     /**
@@ -159,6 +160,6 @@ class StatsController extends Controller
             }
             return false;
         }));
-        return json_encode($json_dec);
+        return Response::json($json_dec);
     }
 }

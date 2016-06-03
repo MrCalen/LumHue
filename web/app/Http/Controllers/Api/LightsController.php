@@ -10,6 +10,7 @@ use MeetHue;
 use MongoHue;
 use JWTAuth;
 use Auth;
+use Response;
 use App\QueryBuilder\LightQueryBuilder;
 use App\Helpers\LumHueColorConverter;
 
@@ -41,6 +42,10 @@ class LightsController extends Controller
         $light_on = $request->get('on') === 'true' || $request->get('on') === true;
         $light_effect = $request->get('effect');
         $light_color = $request->get('color');
+        if (!$light_id || !$light_color) {
+            return Response::json("Missing parameter", 500);
+        }
+
         $light_color = LumHueColorConverter::RGBstrToRGB($light_color);
 
         $hueColors = LumHueColorConverter::RGBtoChromatic($light_color[0], $light_color[1], $light_color[2]);
@@ -58,6 +63,10 @@ class LightsController extends Controller
                      ->setProperty('effect', $light_effect);
 
         $queryBuilder->apply();
+
+        return Response::json([
+            'status' => 'OK',
+        ]);
     }
 
     /**
@@ -79,8 +88,9 @@ class LightsController extends Controller
     {
         $meethue = $this->getMeetHueToken($request);
         if (!$meethue) {
-            return json_encode([
+            return Response::json([
                 'light' => [],
+                'status' => 'KO',
             ]);
         }
         $bridge = LightQueryBuilder::create(null, $meethue)->getBridgeState();
@@ -95,7 +105,7 @@ class LightsController extends Controller
             $light->rgbhex = LumHueColorConverter::RGBToHex($rgb['r'], $rgb['g'], $rgb['b']);
         }
 
-        return json_encode($bridge);
+        return Response::json($bridge);
     }
 
     /**
@@ -120,6 +130,6 @@ class LightsController extends Controller
         foreach ($bridge->lights as $light) {
             $lights[] = $light;
         }
-        return json_encode($lights);
+        return Response::json($lights);
     }
 }

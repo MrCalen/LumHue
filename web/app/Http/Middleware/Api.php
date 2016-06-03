@@ -37,8 +37,12 @@ class Api
             return $this->error("Access Token not found" . $error_message);
         }
 
-        JWTAuth::setToken($token);
-        $user = JWTAuth::toUser();
+        try {
+            JWTAuth::setToken($token);
+            $user = JWTAuth::toUser();
+        } catch (\Throwable $e) {
+            return $this->error("Invalid Access Token");
+        }
         if (!$user) {
             return $this->error("Invalid Access Token");
         }

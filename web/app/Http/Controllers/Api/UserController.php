@@ -20,6 +20,7 @@ class UserController extends Controller
             return Response::json(compact('token'));
         } catch (\Exception $e) {
             return Response::json([
+                'status' => 'OK',
                 'success' => false,
             ]);
         }
@@ -32,7 +33,8 @@ class UserController extends Controller
         $token = \JWTAuth::attempt($credentials);
         if (!$token) {
             return Response::json([
-                'Auth Failed'
+                'status' => 'KO',
+                'reason' => 'Auth Failed',
             ]);
         }
         return Response::json(compact('token'));

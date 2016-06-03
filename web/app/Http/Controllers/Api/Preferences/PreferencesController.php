@@ -40,6 +40,6 @@ class PreferencesController extends Controller
             'upsert' => true,
         ]);
 
-        return json_encode(['success' => true ]);
+        return Response::json(['success' => true ]);
     }
 }

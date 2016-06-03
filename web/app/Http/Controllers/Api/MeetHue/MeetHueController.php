@@ -9,6 +9,7 @@ use MongoHue;
 use View;
 use DB;
 use JWTAuth;
+use Response;
 
 class MeetHueController extends Controller
 {
