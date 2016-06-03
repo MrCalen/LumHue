@@ -54,14 +54,21 @@ app.controller "DashboardController", ($scope, $timeout, localStorageService) ->
   defaultModel =
     dropzones:
       "A": [
-          "widget_type": "graph"
-          "size": "large"
-        ,
           "size": "medium"
           "widget_type": "weather"
         ,
           "size": "small"
           "widget_type": "history"
+        ,
+          "widget_type": "graph"
+          "size": "half"
+          "light": 1
+          "granularity": "days"
+        ,
+          "widget_type": "graph"
+          "size": "half"
+          "light": 2
+          "granularity": "days"
       ]
 
   $scope.applyNewSize = (size, widgetid) ->
