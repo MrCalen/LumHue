@@ -238,7 +238,7 @@ app.directive 'weatherComponent', ($http, $timeout) ->
             scope.loading = false
           , 200
 
-      scope.timeout = (duration = 20000) ->
+      scope.timeout = (duration = 1200000) ->
         $timeout ->
           scope.refresh()
           scope.timeout()

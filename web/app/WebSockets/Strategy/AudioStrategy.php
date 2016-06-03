@@ -68,7 +68,7 @@ class AudioStrategy implements StrategyInterface
         ]));
 
         try {
-            LuisApiHelper::getIntent($result, $client->meethue_token);
+            $luisresponse = LuisApiHelper::getIntent($result, $user->meethue_token);
         } catch (Throwable $e) {
             $client->send(json_encode([
                 'result' => 'KO',
@@ -79,7 +79,9 @@ class AudioStrategy implements StrategyInterface
 
         // FIXME: Handle when results are not confident enough
         $client->send(json_encode([
-            'result' => 'OK',
+            'type' => 'message',
+            'content' => $luisresponse['message'],
+            'date' => date('l jS \of F Y h:i:s A'),
         ]));
     }
 

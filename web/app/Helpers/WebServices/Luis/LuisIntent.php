@@ -28,6 +28,7 @@ class LuisIntent
             'orange'      => 'rgb(255, 145, 98)',
             'blanc'       => 'rgb(255, 255, 255)',
             'vert'        => 'rgb(69, 139, 0)',
+            'verre'       => 'rgb(69, 139, 0)',
         ],
     ];
 

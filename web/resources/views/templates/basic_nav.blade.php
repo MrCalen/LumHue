@@ -70,7 +70,7 @@
 <script src="{{ URL::asset('components/angular-ui-switch/angular-ui-switch.min.js')}}"></script>
 <script src="{{ URL::asset('components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js')}}"></script>
 <script src="{{ URL::asset('components/angular-local-storage/dist/angular-local-storage.min.js') }}"></script>
-<script src="//www.WebRTC-Experiment.com/RecordRTC.js"></script>
+<script src="/recorder.js"></script>
 
 <script src="{{ elixir('js/app.js') }}"></script>
 

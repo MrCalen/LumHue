@@ -60,9 +60,7 @@ app.controller 'WebSocketController', ($scope, $http, $timeout, $window, $sce, $
       'token': window.token
       'message': message
 
-  ## On receive
-  messageconn.onmessage = (e) ->
-    console.log e
+  $scope.onMessage = (e) ->
     message = JSON.parse e.data
     if message.type == 'message'
       $scope.messages.push
@@ -75,23 +73,38 @@ app.controller 'WebSocketController', ($scope, $http, $timeout, $window, $sce, $
       scrollTop: $('#chat')[0].scrollHeight }, 50
     );
 
-
-  audioconn.onmessage = (e) ->
-    console.log e
-    $scope.$apply();
-
+  ## On receive
+  messageconn.onmessage = $scope.onMessage
+  audioconn.onmessage = $scope.onMessage
 
   ######### AUDIO RECORD #########
+
+  window.AudioContext = window.AudioContext || window.webkitAudioContext;
+
+  audioContext = new AudioContext();
   $scope.initRecord = ->
-    navigator.userMedia = (
-      $window.navigator.getUserMedia ||
-        $window.navigator.webkitGetUserMedia ||
-        $window.navigator.mozGetUserMedia ||
-        $window.navigator.msGetUserMedia)
+    if (!navigator.getUserMedia)
+      navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    if (!navigator.cancelAnimationFrame)
+      navigator.cancelAnimationFrame = navigator.webkitCancelAnimationFrame || navigator.mozCancelAnimationFrame;
+    if (!navigator.requestAnimationFrame)
+      navigator.requestAnimationFrame = navigator.webkitRequestAnimationFrame || navigator.mozRequestAnimationFrame;
 
     navigator.getUserMedia {audio : true, video : false},
       (stream) ->
-        $scope.recordRTC = RecordRTC(stream, { type: 'audio', mimeType: 'audio/wav' })
+        inputPoint = audioContext.createGain();
+
+        realAudioInput = audioContext.createMediaStreamSource(stream);
+        audioInput = realAudioInput;
+        audioInput.connect(inputPoint);
+        analyserNode = audioContext.createAnalyser();
+        analyserNode.fftSize = 2048;
+        inputPoint.connect( analyserNode );
+        $scope.audioRecorder = new Recorder( inputPoint );
+        zeroGain = audioContext.createGain();
+        zeroGain.gain.value = 0.0;
+        inputPoint.connect( zeroGain );
+        zeroGain.connect( audioContext.destination );
         return
       (err) ->
         console.log(err)
@@ -106,13 +119,16 @@ app.controller 'WebSocketController', ($scope, $http, $timeout, $window, $sce, $
       $scope.stopRecord()
 
   $scope.startRecord = ->
-    $scope.recordRTC.startRecording()
+    $scope.audioRecorder.clear();
+    $scope.audioRecorder.record();
     $scope.recording = true
   $scope.stopRecord = ->
     $scope.recording = false
-    $scope.recordRTC.stopRecording (audioUrl) ->
-      blob = $scope.recordRTC.getBlob()
-      $scope.sendAudioMessage(blob)
+    $scope.audioRecorder.stop()
+    $scope.audioRecorder.getBuffer (buffers) ->
+      $scope.audioRecorder.exportWAV (blob) ->
+        $scope.sendAudioMessage(blob)
+    return
 
   $scope.initRecord()
 
