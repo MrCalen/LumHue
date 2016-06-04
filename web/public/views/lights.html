@@ -32,11 +32,12 @@
                     <div class="x_panel boxes">
                         <div class="x_title">
                             <h2>{$ light.name $}</h2>
-                            <a class="nav navbar-right panel_toolbox"
+                            <a class="nav navbar-right panel_toolbox" ng-if="light.state.reachable"
                                style="cursor: pointer;"
                                 ng-click="toggleModal($index)">
                                 <i class=" fa fa-edit fa-fw fa-2x"></i>
                             </a>
+                            <i ng-if="!light.state.reachable">Light is not reachable</i>
 
                             <div class="clearfix"></div>
                         </div>
