@@ -27,7 +27,9 @@ class ChatStrategy implements StrategyInterface
         if ($message->type === 'auth') {
             $name = $message->data->name;
             $protocol->getConnections()[$connection->resourceId]->setName($name);
-            $client->send(json_encode($bot->onConnect($name, $user->id)));
+            if (!isset($message->mobile)) {
+                $client->send(json_encode($bot->onConnect($name, $user->id)));
+            }
             return;
         } elseif ($message->type === 'message') {
             // Handle message with luis
@@ -45,6 +47,9 @@ class ChatStrategy implements StrategyInterface
                 'type' => 'message',
                 'date' => date('l jS \of F Y h:i:s A'),
             ]));
+        } elseif ($message->type === 'beacon') {
+            // MongoHue::table('beacon_data')
+            //    ->insert($message);
         }
     }
 
