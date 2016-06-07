@@ -93,10 +93,11 @@ class LightsController extends Controller
                 'status' => 'KO',
             ]);
         }
-        $bridge = LightQueryBuilder::create(null, $meethue)->getBridgeState();
-        $bridge = json_decode($bridge);
+        $bridge_str = LightQueryBuilder::create(null, $meethue)->getBridgeState();
+        $bridge = json_decode($bridge_str);
         if (!$bridge) {
-            return Response::send("Error", 500);
+            Logger::error($bridge_str, Auth::user()->id);
+            return Response::json("Error", 500);
         }
         foreach ($bridge->lights as $light) {
             $rgb = LumHueColorConverter::chromaticToRGB($light->state->xy[0], $light->state->xy[1], $light->state->bri);

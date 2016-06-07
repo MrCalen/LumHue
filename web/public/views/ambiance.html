@@ -29,7 +29,7 @@
             <div class="sk-cube3 sk-cube"></div>
         </center>
 
-        <div class="container-fluid row">
+        <div class="container-fluid row" style="padding-bottom: 150px;">
             <div class="row" ng-if="ambiances">
                 <div ng-repeat="ambiance in ambiances">
                     <div class="col-lg-3 col-md-4 col-xs-12 light_info_row">
@@ -70,8 +70,8 @@
             </div>
 
             <div>
-                <div class="col-lg-1 col-md-1 light_info_row" ng-click="toggleNewAmbiance()" style="cursor:pointer;">
-                    <div class="container-fluid x_panel">
+                <div class="col-lg-1 col-md-1 light_info_row" style="cursor:pointer;">
+                    <div class="container-fluid x_panel" ng-click="toggleNewAmbiance()">
                         <button class="modal-toggle" style="margin: 0 auto">
                             <i class="fa fa-plus"></i>
                         </button>
@@ -79,100 +79,6 @@
                 </div>
             </div>
             <br/>
-        </div>
-    </div>
-
-
-    <div class="modal fade" tabindex="-1" role="dialog" id="modalCreateAmbiance" aria-labelledby="modalCreateAmbiance">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title">
-                        Create ambiance</h4>
-                </div>
-                <div class="modal-body">
-
-                    <div id="ambianceCarousel" class="carousel slide carousel-fade" data-ride="carousel"
-                         data-interval="0">
-
-                        <ol class="carousel-indicators">
-                            <li data-target="#ambianceCarousel" data-slide-to="{$ $index $}"
-                                ng-class="{'active': $index == 0}"
-                                ng-repeat="slideLights in currentAmbiance.lights"></li>
-                        </ol>
-                        <hr/>
-
-                        <div class="carousel-inner" role="listbox">
-
-                            <div class="item" ng-class="{'active':$index == 0}"
-                                 ng-repeat="slideLights in currentAmbiance.lights">
-
-                                <div class="row">
-                                    <i class="fa fa-clock-o black left col-md-offset-1" aria-hidden="true"></i>
-                                    <input type="number" min="1" ng-model="slideLights.duration"
-                                           class="ambiance-duration left"/>
-                                    <i class="fa fa-trash col-md-offset-8 right"
-                                       ng-class="{ 'white' : $first, 'black': $index > 0 }"
-                                       ng-click="deleteSlide('#ambianceCarousel')"></i>
-
-                                </div>
-                                <div class="col-md-10 col-md-offset-1">
-                                    <div class="container-fluid">
-                                        <div class="col-md-10 col-md-offset-1">
-                                            <div ng-repeat="light in slideLights.lightscolors">
-                                                <div class="col-md-4">
-                                                    <div class="text-center">
-                                                        <figure class="flatball"
-                                                                style="background: radial-gradient(circle at 0% 5%, {$ light.color $} , #0a0a0a 150%, #000000 150%)">
-                                                            <span class="shadow"></span>
-                                                        </figure>
-                                                        <br>
-                                                        <button colorpicker="rgb" type="button"
-                                                                colorpicker-position="top"
-                                                                class="colorpickerButton alignButton"
-                                                                ng-model="light.color">
-                                                            <img src="/assets/art-palette.png" width="30px"/>
-                                                        </button>
-                                                        <switch id="enabled" name="enabled" ng-model="light.on"
-                                                                class="green alignButton"></switch>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-
-                                    <br margin-bottom="8px"></br>
-                                    <a class="carousel-control left" href="#ambianceCarousel" data-slide="prev">
-                                        <span class="glyphicon glyphicon-chevron-left"></span>
-                                    </a>
-                                    <a class="carousel-control right" href="#ambianceCarousel" data-slide="next">
-                                        <span class="glyphicon glyphicon-chevron-right"></span>
-                                    </a>
-
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input ng-model="currentAmbiance.name" class="ambiance-name"/>
-                    <button type="button" class="btn blackBtn" ng-click="addNewAmbianceSlide()" ng-hide="saving">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>Add state
-                    </button>
-                    <div ng-show="saving"><span class="modal-title" ng-bind="savingText"></span><i
-                            class="fa fa-spinner fa-spin fa-fw black"></i></div>
-                    <button type="button" class="save-button btn" ng-click="saveNewAmbiance()" ng-hide="saving">
-                        Save
-                    </button>
-                </div>
-            </div>
         </div>
     </div>
 

@@ -48,7 +48,9 @@ class HueLight
     {
         $result = [];
 
-        $result['on'] = $this->on;
+        if (isset($this->on)) {
+            $result['on'] = $this->on;
+        }
 
         if (isset($this->bri)) {
             $result['bri'] = $this->bri;

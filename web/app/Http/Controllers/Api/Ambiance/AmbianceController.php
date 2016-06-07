@@ -64,43 +64,8 @@ class AmbianceController extends Controller
      * @return mixed
      *
      * @SWG\Post(
-     *     path="/api/ambiance/create",
-     *     description="Create a new ambiance.",
-     *     produces={"application/json"},
-     *     tags={"ambiances"},
-     *     @SWG\Response(
-     *         response=200,
-     *         description="if the operation succeeded"
-     *     ),
-     * )
-     */
-    public function create(Request $request)
-    {
-        $user = $this->tokenToUser($request);
-        $ambiance = $request->get('ambiance');
-        if (!$ambiance) {
-            return Response::json([
-                'error' => 'Please provide an ambiance',
-                'success' => false,
-            ]);
-        }
-
-        MongoHue::insert('ambiance', [
-            'ambiance' => $ambiance,
-            'user_id' => $user->id,
-        ]);
-        Logger::log('Created ambiance ', $user->id, $user->name);
-
-        return Response::json(['success' => true,]);
-    }
-
-    /**
-     * @param Request $request
-     * @return mixed
-     *
-     * @SWG\Post(
      *     path="/api/ambiance/udpate",
-     *     description="Update an ambiance",
+     *     description="Update an ambiance or create if it does not exists",
      *     produces={"application/json"},
      *     tags={"ambiances"},
      *     @SWG\Response(
@@ -114,11 +79,18 @@ class AmbianceController extends Controller
         $user = $this->tokenToUser($request);
         $ambiance_id = $request->get('ambiance_id');
         $ambiance = $request->get('ambiance');
-        if (!$ambiance_id || !$ambiance) {
+        if (!$ambiance) {
             return Response::json([
                 'error' => 'Please provide an ambiance',
                 'success' => false,
             ]);
+        } elseif (!$ambiance_id) {
+            MongoHue::insert('ambiance', [
+                'ambiance' => $ambiance,
+                'user_id' => $user->id,
+            ]);
+            Logger::log('Created ambiance ', $user->id, $user->name);
+            return Response::json(['success' => true,]);
         }
 
         $ambianceId = new \MongoDB\BSON\ObjectID($ambiance_id);

@@ -86,7 +86,8 @@ app.controller 'AmbianceController', ($scope, $http, $timeout) ->
             on: true
           ]
         ]
-      $('#modalCreateAmbiance').modal('toggle')
+      console.log $('#modalUpdateAmbiance')
+      $('#modalUpdateAmbiance').modal('toggle')
       return
 
 
