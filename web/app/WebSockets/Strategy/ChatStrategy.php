@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\WebSockets\Strategy;
 
@@ -11,10 +11,10 @@ use Ratchet\ConnectionInterface;
 
 class ChatStrategy implements StrategyInterface
 {
-    public function onMessage(ConnectionInterface $connection, string $message, Protocol $protocol)
+    public function onMessage(ConnectionInterface $connection, string $realmessage, Protocol $protocol)
     {
         date_default_timezone_set('Europe/Paris');
-        $message = json_decode($message);
+        $message = json_decode($realmessage);
         $token = $message->token;
         \JWTAuth::setToken($token);
         $user = \JWTAuth::toUser();
@@ -66,7 +66,7 @@ class ChatStrategy implements StrategyInterface
             return $elt != null;
         });
         $message = json_encode([
-            'type'  => 'auth',
+            'type' => 'auth',
             'users' => $names,
         ]);
 
