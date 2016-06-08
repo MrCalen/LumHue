@@ -84,8 +84,8 @@ class LumHueColorConverter
     private static function getRGBFromXYState($x, $y, $brightness) : array
     {
         $Y = $brightness;
-        $X = ($Y / $y) * $x;
-        $Z = ($Y / $y) * (1 - $x - $y);
+        $X = $y === 0 ? 0 : ($Y / $y) * $x;
+        $Z = $y === 0 ? 0 : ($Y / $y) * (1 - $x - $y);
         $rgb = [
             $X * 1.612 - $Y * 0.203 - $Z * 0.302,
             -$X * 0.509 + $Y * 1.412 + $Z * 0.066,
