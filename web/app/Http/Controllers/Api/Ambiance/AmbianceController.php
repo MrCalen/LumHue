@@ -94,6 +94,9 @@ class AmbianceController extends Controller
         }
 
         $ambianceId = new \MongoDB\BSON\ObjectID($ambiance_id);
+        $ambiance = json_decode($ambiance);
+        $ambiance->uniq_id = $ambianceId;
+        $ambiance = json_encode($ambiance);
         MongoHue::table('ambiance')->updateOne([
             'user_id' => $user->id,
             '_id' => $ambianceId,
