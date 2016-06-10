@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="button" type="id" />
+    <item name="tv" type="id" />
+    <item name="pb" type="id" />
+    <item name="lightsLayout" type="id" />
+</resources>

@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">LumHue</string>
+    <string name="action_settings">Settings</string>
+    <string name="api">https://karskrin.mr-calen.eu/api</string>
+    <string name="circleShape">Circle Shape</string>
+    <string name="lights">Lights</string>
+    <string name="ambiances">Ambiances</string>
+    <string name="logout">Logout</string>
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_lights</item>
+        <item>@drawable/ic_ambiances</item>
+        <item>@drawable/ic_logout</item>
+    </array>
+    <string-array name="navigation_drawer_items_array">
+        <item>Home</item>
+        <item>Lights</item>
+        <item>Ambiances</item>
+        <item>Logout</item>
+    </string-array>
+    <string name="desc_list_item_icon">Item Icon</string>
+    <string name="title_activity_drawer_layout">drawer_layout</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="title_activity_ambiance">AmbianceActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+</resources>
