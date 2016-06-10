@@ -42,6 +42,11 @@ Route::group(['prefix' => 'api'], function () {
         Route::group(['prefix' => 'preferences'], function () {
             Route::post('/chat', 'Api\Preferences\PreferencesController@chat');
         });
+
+        Route::group(['prefix' => 'editor'], function () {
+            Route::post('/save', 'Api\Editor\EditorController@save');
+        });
+
     });
 
     // Token Generation routes.
@@ -85,6 +90,11 @@ Route::group(['middleware' => ['web']], function () {
     // Authenticated routes
     Route::group(['middleware' => 'auth', 'prefix' => 'app'], function () {
         Route::get('/', 'App\AppController@index');
+    });
+
+    Route::group(['middleware' => 'auth', 'prefix' => 'editor'], function () {
+        Route::get('/', 'Editor\EditorController@index');
+        Route::post('/save', 'Editor\EditorController@save');
     });
 
     Route::group(['prefix' => 'test'], function () {

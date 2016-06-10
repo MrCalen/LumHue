@@ -82,4 +82,26 @@ class MongoHueWrapper
         }
         return $convertedLights;
     }
+
+    public static function updateEditor($data, $user_id)
+    {
+        MongoHue::table('editor')->updateOne([
+            'user_id' => $user_id,
+        ], [
+            '$set' => [
+                'user_id' => $user_id,
+                'data' => $data,
+            ],
+        ], [
+            'upsert' => true,
+        ]);
+    }
+
+    public static function findEditor($user_id)
+    {
+        return MongoHue::table('editor')
+            ->findOne([
+                'user_id' => $user_id,
+            ]);
+    }
 }
