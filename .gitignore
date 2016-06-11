@@ -5,3 +5,4 @@ bower_components
 .editorconfig
 .ftpconfig
 web/composer.lock
+web/public/js/blueprint3d.js

@@ -29,6 +29,7 @@
             <nav class="gn-menu-wrapper">
                 <div class="gn-scroller">
                     <ul class="gn-menu">
+                        <li><a class="gn-icon gn-icon-download" href="{{ URL::to("/editor") }}">Your flat</a></li>
                         <li><a class="gn-icon gn-icon-download" href="/app/#/dashboard">Dashboard</a></li>
                         <li><a class="gn-icon gn-icon-download" href="/app/#/lights">Lights</a></li>
                         <li><a class="gn-icon gn-icon-download" href="/app/#/ambiances">Ambiances</a></li>

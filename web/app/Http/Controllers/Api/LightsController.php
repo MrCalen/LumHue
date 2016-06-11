@@ -96,7 +96,7 @@ class LightsController extends Controller
         $bridge_str = LightQueryBuilder::create(null, $meethue)->getBridgeState();
         $bridge = json_decode($bridge_str);
         if (!$bridge) {
-            Logger::error($bridge_str, Auth::user()->id);
+            Logger::error($bridge_str, "user");
             return Response::json("Error", 500);
         }
         foreach ($bridge->lights as $light) {
