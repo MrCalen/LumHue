@@ -38,70 +38,58 @@
                     <hr/>
                 </div>
 
-                {{-- Here they should be square instead of simple tabs --}}
-                <ul class="list-inline navbar-nav">
-                    <li id="floorplan_tab">
-                        <a href="#">
-                            <i class="fa fa-map fa-white fa-fw"></i>
-                            {{--Edit Floorplan--}}
-                        </a>
-                    </li>
-                    <li id="design_tab">
-                        <a href="#">
-                            <i class="fa fa-cubes fa-white fa-fw"></i>
-                            {{--Design--}}
-                        </a>
-                    </li>
-                    <li id="items_tab">
-                        <a href="#">
-                            <i class="fa fa-plus fa-white fa-fw"></i>
-                            {{--Add Items--}}
-                        </a>
-                    </li>
-                </ul>
+                <div class="row">
+                    <ul class="list-inline navbar-nav">
+                        <li>
+                            <a href="#" id="floorplan_tab">
+                                <i class="fa fa-map fa-white fa-fw"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="design_tab">
+                                <i class="fa fa-cubes fa-white fa-fw"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="items_tab">
+                                <i class="fa fa-plus fa-white fa-fw"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 <hr/>
 
                 <!-- Context Menu -->
                 <div id="context-menu">
                     <div style="margin: 0 20px">
                         <span id="context-menu-name" class="lead"></span>
-                        <br/><br/>
-                        <button class="btn btn-block btn-danger" id="context-menu-delete">
-                            <span class="glyphicon glyphicon-trash"></span>
-                            Delete Item
-                        </button>
+                        <i class="fa fa-fw fa-trash fa-white pull-right" id="context-menu-delete"></i>
                         <br/>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Adjust Size</div>
-                            <div class="panel-body" style="color: #333333">
-
-                                <div class="form form-horizontal" class="lead">
-                                    <div class="form-group">
-                                        <label class="col-sm-5 control-label">
-                                            Width
-                                        </label>
-                                        <div class="col-sm-6">
-                                            <input type="number" class="form-control" id="item-width">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-5 control-label">
-                                            Depth
-                                        </label>
-                                        <div class="col-sm-6">
-                                            <input type="number" class="form-control" id="item-depth">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-5 control-label">
-                                            Height
-                                        </label>
-                                        <div class="col-sm-6">
-                                            <input type="number" class="form-control" id="item-height">
-                                        </div>
-                                    </div>
+                        <br/>
+                        <div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">
+                                    Width
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="number" class="form-control" id="item-width">
                                 </div>
-                                <small><span class="text-muted">Measurements in inches.</span></small>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">
+                                    Depth
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="number" class="form-control" id="item-depth">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">
+                                    Height
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="number" class="form-control" id="item-height">
+                                </div>
                             </div>
                         </div>
 

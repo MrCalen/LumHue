@@ -173,3 +173,16 @@ ul li {
     text-align: center;
     float: left
 }
+
+#floorplanner-canvas {
+    background: white;
+}
+
+.fa-white {
+    color: white !important;
+    cursor: pointer;
+}
+
+label {
+    color: white;
+}
