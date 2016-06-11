@@ -92,35 +92,28 @@
                                 </div>
                             </div>
                         </div>
-
                         <label><input type="checkbox" id="fixed"/> Lock in place</label>
-                        <br/><br/>
                     </div>
                 </div>
 
                 <!-- Floor textures -->
                 <div id="floorTexturesDiv" style="display:none; padding: 0 20px">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Adjust Floor</div>
-                        <div class="panel-body" style="color: #333333">
-
-                            <div class="col-sm-6" style="padding: 3px">
-                                <a href="#" class="thumbnail texture-select-thumbnail"
-                                   texture-url="/rooms/textures/light_fine_wood.jpg" texture-stretch="false"
-                                   texture-scale="300">
-                                    <img alt="Thumbnail light fine wood"
-                                         src="/rooms/thumbnails/thumbnail_light_fine_wood.jpg"/>
-                                </a>
-                            </div>
-                        </div>
+                    <div class="white">Floor Texture</div>
+                    <div class="col-sm-6" style="padding: 3px">
+                        <a href="#" class="thumbnail texture-select-thumbnail"
+                           texture-url="/rooms/textures/light_fine_wood.jpg" texture-stretch="false"
+                           texture-scale="300">
+                            <img alt="Thumbnail light fine wood"
+                                 src="/rooms/thumbnails/thumbnail_light_fine_wood.jpg"/>
+                        </a>
                     </div>
                 </div>
 
                 <!-- Wall Textures -->
                 <div id="wallTextures" style="display:none; padding: 0 20px">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Adjust Wall</div>
-                        <div class="panel-body" style="color: #333333">
+                    <div class="">
+                        <div class="white">Adjust Wall</div>
+                        <div>
                             <div class="col-sm-6" style="padding: 3px">
                                 <a href="#" class="thumbnail texture-select-thumbnail"
                                    texture-url="/rooms/textures/marbletiles.jpg" texture-stretch="false"
