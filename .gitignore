@@ -6,3 +6,4 @@ bower_components
 .ftpconfig
 web/composer.lock
 web/public/js/blueprint3d.js
+**/.DS_Store

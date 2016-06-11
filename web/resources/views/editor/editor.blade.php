@@ -19,163 +19,9 @@
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
     <script src="/recorder.js"></script>
-
-    <style type="text/css">
-        html {
-            overflow: hidden;
-            height: 100%;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            height: 100%;
-        }
-
-        div {
-            margin: 0;
-            padding: 0;
-        }
-
-        /*
-         * Sidebar
-         */
-
-        .main-row {
-            padding: 0;
-        }
-
-        .sidebar {
-            padding: 20px;
-            overflow-x: hidden;
-            overflow-y: auto;
-            border-right: 1px solid #eee;
-        }
-
-        .nav-sidebar {
-            margin-right: -21px; /* 20px padding + 1px border */
-            margin-bottom: 20px;
-            margin-left: -20px;
-        }
-
-        .nav-sidebar > li > a {
-            padding-right: 20px;
-            padding-left: 20px;
-        }
-
-        .nav-sidebar > .active > a,
-        .nav-sidebar > .active > a:hover,
-        .nav-sidebar > .active > a:focus {
-            color: #fff;
-            background-color: #428bca;
-        }
-
-        /*
-         * Main content
-         */
-
-        .main {
-            padding: 0;
-        }
-
-        /*
-         * "Loading" modal
-         */
-
-        #loading-modal {
-            position: absolute;
-            z-index: 10;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            padding: 20px;
-            background-color: rgba(50, 50, 50, 0.9);
-        }
-
-        #loading-modal h1 {
-            text-align: center;
-            margin-top: 30%;
-            color: #fff;
-        }
-
-        /*
-         * Design
-         */
-
-        #viewer {
-            display: none;
-        }
-
-        #floorplanner {
-            display: none;
-        }
-
-        #add-items {
-            display: none;
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        #main-controls {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            padding: 0;
-        }
-
-        #camera-controls {
-            position: absolute;
-            bottom: 20px;
-            right: 0;
-            padding: 0 20px;
-            text-align: right;
-        }
-
-        #floorplanner-controls {
-            position: absolute;
-            left: 0;
-            top: 0;
-            margin: 20px 0;
-            padding: 0 20px;
-            width: 100%;
-        }
-
-        #draw-walls-hint {
-            position: absolute;
-            left: 20px;
-            bottom: 20px;
-            background-color: rgba(0, 0, 0, 0.50);
-            color: #ffffff;
-            padding: 5px 10px;
-            z-index: 10;
-            display: none;
-        }
-
-        .add-item {
-            cursor: pointer;
-        }
-
-        .btn-file {
-            display: inline-block;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-file input[type=file] {
-            position: absolute;
-            top: 0;
-            right: 0;
-            min-width: 100%;
-            min-height: 100%;
-            filter: alpha(opacity=0);
-            opacity: 0;
-            cursor: inherit;
-            display: block;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ URL::asset('css/nav.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
+    <link rel="stylesheet" href=" {{ URL::asset('css/editor/editor.css') }}">
     <script src="{{ elixir('js/app.js') }}"></script>
     <script src="//misc.mr-calen.eu/js/blueprint3d.js"></script>
     <script src="/js/items.js"></script>
@@ -186,20 +32,32 @@
 <div class="container-fluid" ng-app="EditorModule" ng-controller="EditorController">
     <div class="container-fluid">
         <div class="row main-row">
-            <div class="col-xs-3 sidebar">
-                <ul class="nav nav-sidebar">
-                    <li id="floorplan_tab"><a href="#">
-                            Edit Floorplan
-                            <span class="glyphicon glyphicon-chevron-right pull-right"></span>
-                        </a></li>
-                    <li id="design_tab"><a href="#">
-                            Design
-                            <span class="glyphicon glyphicon-chevron-right pull-right"></span>
-                        </a></li>
-                    <li id="items_tab"><a href="#">
-                            Add Items
-                            <span class="glyphicon glyphicon-chevron-right pull-right"></span>
-                        </a></li>
+            <div class="col-xs-4 sidebar">
+                <div class="row light_info">
+                    <div class="text-center" style="color: white">Your flat</div>
+                    <hr/>
+                </div>
+
+                {{-- Here they should be square instead of simple tabs --}}
+                <ul class="list-inline navbar-nav">
+                    <li id="floorplan_tab">
+                        <a href="#">
+                            <i class="fa fa-map fa-white fa-fw"></i>
+                            {{--Edit Floorplan--}}
+                        </a>
+                    </li>
+                    <li id="design_tab">
+                        <a href="#">
+                            <i class="fa fa-cubes fa-white fa-fw"></i>
+                            {{--Design--}}
+                        </a>
+                    </li>
+                    <li id="items_tab">
+                        <a href="#">
+                            <i class="fa fa-plus fa-white fa-fw"></i>
+                            {{--Add Items--}}
+                        </a>
+                    </li>
                 </ul>
                 <hr/>
 
@@ -302,20 +160,12 @@
                 </div>
             </div>
 
-            <div class="col-xs-9 main">
-                <input type="file" class="" id="loadFile">
+            <div class="col-xs-8 main">
                 <div id="viewer">
-
                     <div id="main-controls">
-                        <a href="#" class="btn btn-default btn-sm" id="new">
-                            New Plan
-                        </a>
-                        <a href="#" class="btn btn-default btn-sm" ng-click="savePlan()">
+                        <button href="#" class="btn btn-default btn-sm" ng-click="savePlan()">
                             Save Plan
-                        </a>
-                        <a class="btn btn-sm btn-default btn-file">
-                            Load Plan
-                        </a>
+                        </button>
                     </div>
 
                     <div id="loading-modal">
@@ -342,8 +192,7 @@
                     </div>
                 </div>
                 <div id="add-items">
-                    <div class="row" id="items-wrapper">
-                    </div>
+                    <div class="row" id="items-wrapper"></div>
                 </div>
             </div>
         </div>
