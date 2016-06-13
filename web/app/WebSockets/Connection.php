@@ -12,6 +12,7 @@ class Connection
     protected $connection;
     protected $name;
     protected $token;
+    protected $id;
 
     public function __construct(ConnectionInterface $connection)
     {
@@ -46,5 +47,21 @@ class Connection
     public function setToken($token)
     {
         $this->token = $token;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 }

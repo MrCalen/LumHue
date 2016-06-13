@@ -15,6 +15,8 @@ class ChatStrategy implements StrategyInterface
     {
         date_default_timezone_set('Europe/Paris');
         $message = json_decode($realmessage);
+        if (!$message)
+            return;
         $token = $message->token;
         \JWTAuth::setToken($token);
         $user = \JWTAuth::toUser();
@@ -27,6 +29,7 @@ class ChatStrategy implements StrategyInterface
         if ($message->type === 'auth') {
             $name = $message->data->name;
             $protocol->getConnections()[$connection->resourceId]->setName($name);
+            $protocol->getConnections()[$connection->resourceId]->setId($user->id);
             if (!isset($message->mobile)) {
                 $client->send(json_encode($bot->onConnect($name, $user->id)));
             }
@@ -42,11 +45,16 @@ class ChatStrategy implements StrategyInterface
             ]));
 
             $luisresponse = LuisApiHelper::getIntent($content, $user->meethue_token);
-            $client->send(json_encode([
-                'content' => $luisresponse['message'],
-                'type' => 'message',
-                'date' => date('l jS \of F Y h:i:s A'),
-            ]));
+
+            foreach ($protocol->getConnections() as $connection) {
+                if ($connection->getId() != $user->id) continue;
+                $connection->getConnection()->send(json_encode([
+                    'content' => $luisresponse['message'],
+                    'type' => 'message',
+                    'date' => date('l jS \of F Y h:i:s A'),
+                ]));
+            }
+
         } elseif ($message->type === 'beacon') {
             // MongoHue::table('beacon_data')
             //    ->insert($message);
@@ -54,32 +62,5 @@ class ChatStrategy implements StrategyInterface
     }
 
     public function onClose(ConnectionInterface $connection, Protocol $protocol)
-    {
-        date_default_timezone_set('Europe/Paris');
-        $names = array_map(function ($elt) use ($connection) {
-            if ($connection->resourceId !== $elt->getConnection()->resourceId) {
-                return $elt->getName();
-            }
-            return null;
-        }, array_values($protocol->getConnections()));
-        $names = array_filter($names, function ($elt) {
-            return $elt != null;
-        });
-        $message = json_encode([
-            'type' => 'auth',
-            'users' => $names,
-        ]);
-
-        $name = $protocol->getConnections()[$connection->resourceId]->getName();
-        $botMessage = json_encode([
-            'type' => 'message',
-            'content' => "{$name} disconnected",
-            'author' => 'LumHue Bot',
-            'date' => date('l jS \of F Y h:i:s A'),
-        ]);
-        foreach ($protocol->getConnections() as $name => $client) {
-            $client->send($message);
-            $client->send($botMessage);
-        }
-    }
+    {}
 }
