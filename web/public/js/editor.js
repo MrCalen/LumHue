@@ -192,7 +192,7 @@ var SideMenu = function (blueprint3d, floorplanControls, modalEffects) {
 
         // show and hide the right divs
         currentState.div.hide();
-        newState.div.show(); 
+        newState.div.show();
 
         // custom actions
         if (newState == scope.states.FLOORPLAN) {
@@ -236,8 +236,10 @@ var SideMenu = function (blueprint3d, floorplanControls, modalEffects) {
                 resizable: true,
                 modelUrl: modelUrl,
                 itemType: itemType
+            };
+            if (itemType === 1) {
+                return;
             }
-
             blueprint3d.model.scene.addItem(itemType, modelUrl, metadata);
             setCurrentState(scope.states.DEFAULT);
         });
