@@ -90,22 +90,9 @@ app.controller 'AmbianceController', ($scope, $http, $timeout) ->
       $('#modalUpdateAmbiance').modal('toggle')
       return
 
-
-    $scope.saveNewAmbiance = ->
-      $scope.saving = true
-      $scope.savingText = "Saving new ambiance..."
-      $http.post $scope.base_url + '/api/ambiance/create?access_token=' + window.token,
-          ambiance: $scope.currentAmbiance
-      .success (data, status) ->
-        $scope.savingText = "Saved"
-        $scope.refreshAmbiances ->
-          $scope.savingText = ""
-          $scope.saving = false
-          $("#modalCreateAmbiance").modal('toggle')
-
     $scope.updateAmbiance = ->
-      $http.post $scope.base_url + '/api/ambiance/update?access_token=' + window.token,
-        ambiance: $scope.currentAmbiance
+      $http.post $scope.base_url + '/api/ambiance/update?access_token=' + window.token, data
+        ambiance: if $scope.currentAmbiance.uniq_id then (angular.toJson $scope.currentAmbiance) else $scope.currentAmbiance
         ambiance_id: $scope.currentAmbiance.uniq_id
       .success (data, status) ->
         $scope.savingText = "Saved"
