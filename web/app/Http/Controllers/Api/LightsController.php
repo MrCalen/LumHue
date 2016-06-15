@@ -126,7 +126,7 @@ class LightsController extends Controller
      */
     public function getLights(Request $request)
     {
-        $bridge = json_decode($this->getBridge($request));
+        $bridge = json_decode($this->getBridge($request)->content());
         $lights = array();
         foreach ($bridge->lights as $light) {
             $lights[] = $light;
