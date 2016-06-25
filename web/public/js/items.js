@@ -25,6 +25,12 @@ $(document).ready(function () {
             "image": "//misc.mr-calen.eu/models/thumbnails/thumbnail_ore-white.png",
             "model": "//misc.mr-calen.eu/models/js/ore-3legged-white_baked.js",
             "type": "1"
+        },
+        {
+            "name" : "Beacon",
+            "image" : "//misc.mr-calen.eu/models/thumbnails/thumbnail_ore-white.png",
+            "model" : "//misc.mr-calen.eu/models/js/beacon.js",
+            "type" : "3"
         }
         // ,
         // {

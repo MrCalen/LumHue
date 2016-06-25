@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\WebSockets\Strategy;
 
@@ -12,6 +12,10 @@ use Ratchet\ConnectionInterface;
 
 class AudioStrategy implements StrategyInterface
 {
+    public function getName() : string
+    {
+        return "ws:audio";
+    }
 
     public function onMessage(ConnectionInterface $connection, string $message, Protocol $protocol)
     {

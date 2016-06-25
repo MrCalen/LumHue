@@ -11,12 +11,18 @@ use Ratchet\ConnectionInterface;
 
 class ChatStrategy implements StrategyInterface
 {
+    public function getName() : string
+    {
+        return "ws:chat";
+    }
+
     public function onMessage(ConnectionInterface $connection, string $realmessage, Protocol $protocol)
     {
         date_default_timezone_set('Europe/Paris');
         $message = json_decode($realmessage);
-        if (!$message)
+        if (!$message) {
             return;
+        }
         $token = $message->token;
         \JWTAuth::setToken($token);
         $user = \JWTAuth::toUser();
@@ -47,7 +53,9 @@ class ChatStrategy implements StrategyInterface
             $luisresponse = LuisApiHelper::getIntent($content, $user->meethue_token);
 
             foreach ($protocol->getConnections() as $connection) {
-                if ($connection->getId() != $user->id) continue;
+                if ($connection->getId() != $user->id) {
+                    continue;
+                }
                 $connection->getConnection()->send(json_encode([
                     'content' => $luisresponse['message'],
                     'type' => 'message',
@@ -62,5 +70,6 @@ class ChatStrategy implements StrategyInterface
     }
 
     public function onClose(ConnectionInterface $connection, Protocol $protocol)
-    {}
+    {
+    }
 }

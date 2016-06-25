@@ -237,9 +237,6 @@ var SideMenu = function (blueprint3d, floorplanControls, modalEffects) {
                 modelUrl: modelUrl,
                 itemType: itemType
             };
-            if (itemType === 1) {
-                return;
-            }
             blueprint3d.model.scene.addItem(itemType, modelUrl, metadata);
             setCurrentState(scope.states.DEFAULT);
         });
