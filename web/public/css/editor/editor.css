@@ -190,3 +190,8 @@ label {
 .white {
     color: white !important;
 }
+
+
+.option-label {
+    font-size: 20px;
+}

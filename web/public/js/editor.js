@@ -34,6 +34,9 @@ var ContextMenu = function (blueprint3d) {
         selectedItem = item;
 
         $("#context-menu-name").text(item.metadata.itemName);
+        window.currentItem = selectedItem;
+        angular.element($("#body")).scope().$apply();
+
 
         $("#item-width").val(cmToIn(selectedItem.getWidth()).toFixed(0));
         $("#item-height").val(cmToIn(selectedItem.getHeight()).toFixed(0));
@@ -290,7 +293,9 @@ var TextureSelector = function (blueprint3d, sideMenu) {
         $("#floorTexturesDiv").show();
     }
 
-    function reset() {
+    function reset(item) {
+        window.currentItem = item;
+        angular.element($("#body")).scope().$apply();
         $("#wallTextures").hide();
         $("#floorTexturesDiv").hide();
     }

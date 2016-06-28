@@ -29,7 +29,7 @@
 </head>
 <body>
 
-<div class="container-fluid" ng-app="EditorModule" ng-controller="EditorController">
+<div class="container-fluid" ng-app="EditorModule" ng-controller="EditorController" id="body">
     <div class="container-fluid">
         <div class="row main-row">
             <div class="col-xs-4 sidebar">
@@ -60,7 +60,7 @@
                 <hr/>
 
                 <!-- Context Menu -->
-                <div id="context-menu">
+                <div id="context-menu" style="margin-bottom: 100px">
                     <div style="margin: 0 20px">
                         <span id="context-menu-name" class="lead"></span>
                         <i class="fa fa-fw fa-trash fa-white pull-right" id="context-menu-delete"></i>
@@ -93,6 +93,31 @@
                             </div>
                         </div>
                         <label><input type="checkbox" id="fixed"/> Lock in place</label>
+                        <div ng-if="currentItem && currentItem.isLight">
+                            <hr/>
+                            <label id="lightids" class="option-label">Link this object to a lamp:</label>
+                                <select aria-labelledby="lightids"
+                                        ng-options="item for item in [1,2]"
+                                        ng-model="currentItem.light_id"
+                                        ng-change="addLightToItem()"
+                                        class="form-control"></select>
+                        </div>
+
+                        <div ng-if="currentItem && currentItem.isBeacon">
+                            <hr/>
+                            <label id="beaconactions" class="option-label">On Enter: </label>
+                            <select class="form-control"
+                                    multiple
+                                    ng-options="item.value as item.label for item in beaconOptions"
+                                    ng-model="currentItem.enterLight"></select>
+                            <hr width="50%"/>
+                            <label id="beaconactions2" class="option-label">On Leave: </label>
+                            <select class="form-control"
+                                    multiple
+                                    ng-options="item.value as item.label for item in beaconOptions"
+                                    ng-model="currentItem.leaveLight"></select>
+                        </div>
+
                     </div>
                 </div>
 
