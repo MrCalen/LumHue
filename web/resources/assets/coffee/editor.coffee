@@ -10,21 +10,6 @@ angular.module('EditorModule', [])
       label: 'Light On Light ' + i,
       value: i
 
-#  $scope.beaconOptions = [
-#      label : 'Light Off Light 1',
-#      value : -1
-#    ,
-#      label : 'Light On Light 1',
-#      value : 1
-#    ,
-#      label : 'Light Off Light 2',
-#      value : -2
-#    ,
-#      label : 'Light On Light 2',
-#      value : 2
-#  ];
-
-
   $scope.base_url = window.base_url
   $scope.$watch ->
     return $window.currentItem
@@ -52,10 +37,9 @@ angular.module('EditorModule', [])
       $window.currentItem.add light
 
   $scope.fetch = ->
-    $http.get($scope.base_url + "/api/bridge",
+    $http.get $scope.base_url + "/api/bridge",
       params:
         access_token: window.token
-    )
     .success (data, status) ->
       $scope.lights = data.lights
       blueprint3d.three.getScene().getItems().forEach (elt) ->
