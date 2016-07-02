@@ -3,23 +3,25 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Response;
 use JWTAuth;
+use Request;
 
 class Api
 {
-    private function error($str)
+    private function error($str, $error_code = 403)
     {
         $error = [
             'error' => $str,
+            'success' => false,
         ];
-
-        return \Response::json($error);
+        return Response::json($error, $error_code);
     }
 
     /**
     * Handle an incoming request.
     *
-    * @param  \Illuminate\Http\Request $request
+    * @param   $request
     * @param  \Closure $next
     * @return mixed
     */
@@ -41,11 +43,13 @@ class Api
             JWTAuth::setToken($token);
             $user = JWTAuth::toUser();
         } catch (\Throwable $e) {
-            return $this->error("Invalid Access Token");
+            return $this->error("Invalid Access Token", 500);
         }
         if (!$user) {
-            return $this->error("Invalid Access Token");
+            return $this->error("Invalid Access Token", 500);
         }
+
+        $request->user = $user;
         return $next($request);
     }
 }

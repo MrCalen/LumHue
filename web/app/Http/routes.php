@@ -44,6 +44,8 @@ Route::group(['prefix' => 'api'], function () {
         });
 
         Route::group(['prefix' => 'editor'], function () {
+            Route::get('/beacons/all', 'Api\Editor\EditorController@allBeacons');
+            Route::post('/beacon/sync', 'Api\Editor\EditorController@syncBeacon');
             Route::post('/save', 'Api\Editor\EditorController@save');
         });
 

@@ -104,4 +104,16 @@ class MongoHueWrapper
                 'user_id' => $user_id,
             ]);
     }
+
+    public static function fetchAndConvertEditor($user_id)
+    {
+        $editor = MongoHueWrapper::findEditor($user_id);
+        if (!$editor) {
+            return null;
+        }
+
+        $editor = \MongoDB\BSON\toJSON(\MongoDB\BSON\fromPHP($editor));
+        $editor = json_decode($editor);
+        return $editor;
+    }
 }

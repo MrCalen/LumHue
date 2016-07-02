@@ -51,6 +51,9 @@ angular.module('EditorModule', [])
 
   $scope.refreshLightsColors = ->
     $timeout ->
-      $scope.fetch();
+      $scope.fetch()
     , 10000
-  $scope.fetch()
+
+  $timeout ->
+    $scope.fetch()
+  , 2000
