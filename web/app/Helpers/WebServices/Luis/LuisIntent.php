@@ -11,8 +11,12 @@ class LuisIntent
             '1ere'        => 1,
 
             'deuxième'    => 2,
+            "deux"        => 2,
             'deuxieme'    => 2,
             '2e'          => 2,
+            '2ème'        => 2,
+            '2'           => 2,
+            '2eme'        => 2,
             'seconde'     => 2,
             'de'          => 2,
 

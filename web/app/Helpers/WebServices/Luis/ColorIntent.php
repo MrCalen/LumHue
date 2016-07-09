@@ -20,14 +20,14 @@ class ColorIntent
         }
 
         $parameters = LuisIntent::getColorParameters($parameters);
-        $lightQueryBuidler = LightQueryBuilder::create($parameters['index'], $meethue_token);
-        $lightQueryBuidler->setProperty('on', true);
+        $lightQueryBuilder = LightQueryBuilder::create($parameters['index'], $meethue_token);
+        $lightQueryBuilder->setProperty('on', true);
 
         // Set color
         $colorstr = $parameters['color'];
         $light_color = LumHueColorConverter::RGBstrToRGB($colorstr);
         $hueColors = LumHueColorConverter::RGBtoChromatic($light_color[0], $light_color[1], $light_color[2]);
-        $lightQueryBuidler
+        $lightQueryBuilder
             ->setProperty('on', true)
             ->setProperty('xy', [
                 $hueColors['x'],

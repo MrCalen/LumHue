@@ -91,7 +91,7 @@ app.controller 'AmbianceController', ($scope, $http, $timeout) ->
       return
 
     $scope.updateAmbiance = ->
-      $http.post $scope.base_url + '/api/ambiance/update?access_token=' + window.token, data
+      $http.post $scope.base_url + '/api/ambiance/update?access_token=' + window.token,
         ambiance: if $scope.currentAmbiance.uniq_id then (angular.toJson $scope.currentAmbiance) else $scope.currentAmbiance
         ambiance_id: $scope.currentAmbiance.uniq_id
       .success (data, status) ->
