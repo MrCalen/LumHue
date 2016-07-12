@@ -42,18 +42,18 @@ class Bot
         return $command;
     }
 
-    public function onConnect($clientName, $clientId)
+    public function onConnect($clientName, $clientId, $mobile)
     {
         $prefs = MongoHue::getPrefs($clientId);
         if (isset($prefs->prefs->chat) && !$prefs->prefs->chat) {
             $msg = '';
         }
 
-        return [
-            "type" => 'message',
-            "content" => "
-                <p><b>Bienvenue ${clientName}</b></p>"
-                . (isset($msg) ? '' : "
+        if ($mobile) {
+            $content = "Bienvenue ${clientName}";
+        } else {
+            $content = "<p><b>Bienvenue ${clientName}</b></p>"
+            . (isset($msg) ? '' : "
                 <p>Pour utiliser notre service:
                     <ul>
                         <li><pre>Allume la lampe une</pre></li>
@@ -61,7 +61,12 @@ class Bot
                     </ul>
                 </p>
                 <p onclick='removeUserPref()'><i style='font-size=12px'>Click here to never show it again</i></p>
-                "),
+                ");
+        }
+
+        return [
+            "type" => 'message',
+            "content" => $content,
             'date' => date('l jS \of F Y h:i:s A'),
         ];
     }
