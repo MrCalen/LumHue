@@ -32,13 +32,13 @@ $(document).ready(function () {
             "model" : "//misc.mr-calen.eu/models/js/beacon.js",
             "type" : "2"
         }
-        // ,
-        // {
-        //     "name": "Chair",
-        //     "image": "//misc.mr-calen.eu.models/thumbnails/thumbnail_Church-Chair-oak-white_1024x1024.jpg",
-        //     "model": "//misc.mr-calen.eu.models/js/gus-churchchair-whiteoak.js",
-        //     "type": "1"
-        // },
+        ,
+        {
+            "name": "Chair",
+            "image": "//misc.mr-calen.eu/models/thumbnails/thumbnail_Church-Chair-oak-white_1024x1024.jpg",
+            "model": "//misc.mr-calen.eu/models/js/gus-churchchair-whiteoak.json",
+            "type": "1"
+        },
         // {
         //     "name": "Red Chair",
         //     "image": "//misc.mr-calen.eu.models/thumbnails/thumbnail_tn-orange.png",

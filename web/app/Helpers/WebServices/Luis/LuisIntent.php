@@ -9,6 +9,7 @@ class LuisIntent
             'premiere'    => 1,
             'première'    => 1,
             '1ere'        => 1,
+            '1ère'        => 1,
 
             'deuxième'    => 2,
             "deux"        => 2,

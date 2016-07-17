@@ -47,7 +47,7 @@ class AudioStrategy implements StrategyInterface
             return;
         }
         $uniq = time();
-        $filename = '/tmp/' . $uniq . '.wav';
+        $filename = '/tmp/' . $uniq . '.wav'; // 16000
         $filename_sampled = '/tmp/' . $uniq . '.sampled.wav';
         file_put_contents($filename, $message);
         shell_exec('sox ' . $filename . ' ' . $filename_sampled . ' rate 16k');
