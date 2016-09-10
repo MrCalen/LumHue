@@ -14,6 +14,7 @@ class EditorController extends Controller
     public function index()
     {
         $data = MongoHueWrapper::findEditor(Auth::user()->id);
+        $data = $data ?? [];
         $data = \MongoDB\BSON\toJSON(\MongoDB\BSON\fromPHP($data));
         $data = json_decode($data);
         
