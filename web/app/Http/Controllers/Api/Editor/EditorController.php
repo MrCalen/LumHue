@@ -77,6 +77,22 @@ class EditorController extends Controller
         return Response::json(array_values($beacons));
     }
 
+    /**
+     * @param Request $request
+     * @return string
+     *
+     * @SWG\Get(
+     *     path="/api/beacons/sync",
+     *     description="Sync a beacon with its real object",
+     *     produces={"application/json"},
+     *     tags={"beacons"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description=""
+     *     ),
+     * )
+     */
+
     public function syncBeacon(Request $request)
     {
         $user_id = $request->user->id;
