@@ -39,6 +39,21 @@ class EditorController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return string
+     *
+     * @SWG\Get(
+     *     path="/api/beacons/all",
+     *     description="Get all beacons on the apartment",
+     *     produces={"application/json"},
+     *     tags={"beacons"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description=""
+     *     ),
+     * )
+     */
     public function allBeacons(Request $request)
     {
         $user_id = $request->user->id;
