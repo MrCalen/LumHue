@@ -19,6 +19,7 @@ class Protocol implements MessageComponentInterface
     {
         $this->openConnections = [];
         $this->strategy = $strategy;
+        $this->strategy->setProtocol($this);
     }
 
     public function onOpen(ConnectionInterface $connection)

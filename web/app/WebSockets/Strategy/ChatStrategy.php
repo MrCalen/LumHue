@@ -7,10 +7,54 @@ namespace App\WebSockets\Strategy;
 use App\Helpers\WebServices\LuisApiHelper;
 use App\WebSockets\Bot;
 use App\WebSockets\Protocol;
+use Redis;
 use Ratchet\ConnectionInterface;
 
 class ChatStrategy implements StrategyInterface
 {
+    private $protocol;
+
+    public function __construct()
+    {
+        $redis = new Redis();
+        $redis->connect('127.0.0.1');
+
+        /*
+         * Message like: {'light_id': '1', 'color': '#213', 'token' : '****'}
+         */
+        $redis->subscribe(['ws'], function ($redis, $chan, $msg) {
+            $message = json_decode($msg);
+            if (!$message) {
+                return;
+            }
+            $token = $message->token;
+            \JWTAuth::setToken($token);
+            $user = \JWTAuth::toUser();
+            if (!$user) {
+                return;
+            }
+
+            foreach ($this->protocol->getConnections() as $connection) {
+                if ($connection->getId() != $user->id) {
+                    continue;
+                }
+                $connection->getConnection()->send(json_encode([
+                    'content' => [
+                        'light_id' => $message->light_id,
+                        'color' => $message->color,
+                    ],
+                    'type' => 'apply',
+                    'date' => date('l jS \of F Y h:i:s A'),
+                ]));
+            }
+        });
+    }
+
+    public function setProtocol(Protocol $protocol)
+    {
+        $this->protocol = $protocol;
+    }
+
     public function getName() : string
     {
         return "ws:chat";

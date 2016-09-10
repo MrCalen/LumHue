@@ -12,6 +12,13 @@ use Ratchet\ConnectionInterface;
 
 class AudioStrategy implements StrategyInterface
 {
+    private $protocol;
+
+    public function setProtocol(Protocol $p)
+    {
+        $this->protocol = $p;
+    }
+
     public function getName() : string
     {
         return "ws:audio";
