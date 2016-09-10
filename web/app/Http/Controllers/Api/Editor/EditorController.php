@@ -71,7 +71,7 @@ class EditorController extends Controller
                 return false;
             }
             // Element is a beacon
-            $elt->isSync = isset($elt->uid);
+            $elt->isSync = isset($elt->lh_id);
             return true;
         });
         return Response::json(array_values($beacons));
