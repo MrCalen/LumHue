@@ -74,13 +74,13 @@ class EditorController extends Controller
             $elt->isSync = isset($elt->uid);
             return true;
         });
-        return Response::json($beacons);
+        return Response::json(array_values($beacons));
     }
 
     public function syncBeacon(Request $request)
     {
         $user_id = $request->user->id;
-        if (!$request->has('beacon_id') || !$request->has('beacon_uid')) {
+        if (!$request->has('beacon_id') || !$request->has('beacon_uuid')) {
             return Response::json([
                 'success' => false,
                 'error' => 'Please provide beacon id and beacon uid',
@@ -88,7 +88,7 @@ class EditorController extends Controller
         }
 
         $beaconId = $request->get('beacon_id');
-        $beaconUid = $request->get('beacon_uid');
+        $beaconUUid = $request->get('beacon_uuid');
 
         $editor = MongoHueWrapper::fetchAndConvertEditor($user_id);
         if (!$editor) {
@@ -101,9 +101,14 @@ class EditorController extends Controller
         $editorObjects = $editor->data->items;
         $change = false;
         foreach ($editorObjects as $object) {
-            if (isset($object->uuid) && $object->uuid === $beaconId) {
+            if ($object->item_name !== 'Beacon') {
+                continue;
+            }
+
+            if (isset($object->uuid) && $object->uuid !== $beaconId) {
                 $change = true;
-                $object->beacon_uid = $beaconUid;
+                $object->uuid = $beaconUUid;
+                $object->lh_id = $beaconId;
             }
         }
         if ($change) {
