@@ -26,7 +26,7 @@ class HueLight
         $this->id = $id;
         if (count((array)$light)) {
             foreach ($light->state as $key => $value) {
-                $this->{$key} = $value;
+                $this->{ $key } = $value;
             }
             $this->name = $light->name;
         }
@@ -64,5 +64,14 @@ class HueLight
         }
 
         return $result;
+    }
+
+    public function getColor() : array
+    {
+        return [
+            'bri' => $this->bri,
+            'x' => $this->xy['x'],
+            'y' => $this->xy['y'],
+        ];
     }
 }

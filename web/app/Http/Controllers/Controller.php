@@ -18,6 +18,7 @@ class Controller extends BaseController
         $token = $this->getToken($request);
         \JWTAuth::setToken($token);
         $user = \JWTAuth::toUser();
+        $user->token = $token;
         return $user;
     }
 

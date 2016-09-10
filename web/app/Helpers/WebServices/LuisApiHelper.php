@@ -31,7 +31,7 @@ class LuisApiHelper
         return json_decode($response);
     }
 
-    public static function getIntent($message, $meethue_token)
+    public static function getIntent($message, $meethue_token, $access_token)
     {
         $response = self::issueCall($message);
         $intent = $response->intents[0];
@@ -43,7 +43,7 @@ class LuisApiHelper
                 'confidence' => $confidence,
             ];
         }
-        $intent = LuisIntent::applyIntent($intent, $meethue_token);
+        $intent = LuisIntent::applyIntent($intent, $meethue_token, $access_token);
         if ($intent === null) {
             return [
                 'success' => false,

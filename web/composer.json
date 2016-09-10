@@ -25,7 +25,8 @@
         "cboden/ratchet": "^0.3.4",
         "predis/predis": "^1.0",
         "ratchet/rfc6455": "^0.2.1",
-        "jlapp/swaggervel": "dev-master"
+        "jlapp/swaggervel": "dev-master",
+        "clue/redis-react": "^1.0"
     },
     "require-dev": {
     },

@@ -2,6 +2,8 @@
 
 namespace App\Helpers\WebServices\Luis;
 
+use App\Helpers\HueRedis;
+
 class LuisIntent
 {
     public static $intents = [
@@ -73,7 +75,7 @@ class LuisIntent
         return LuisIntent::$intents[$value->type][$value->entity];
     }
 
-    public static function applyIntent($intent, $meethue_token)
+    public static function applyIntent($intent, $meethue_token, $access_token)
     {
         if ($intent->intent === 'light') {
             $luisintent = new LightIntent();
@@ -84,7 +86,8 @@ class LuisIntent
         }
 
         try {
-            $luisintent->applyIntent($intent, $meethue_token);
+            $light = $luisintent->applyIntent($intent, $meethue_token);
+            HueRedis::publishLightState($light, $access_token);
         } catch (\Throwable $e) {
             return null;
         }

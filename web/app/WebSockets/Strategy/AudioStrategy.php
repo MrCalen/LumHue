@@ -79,7 +79,7 @@ class AudioStrategy implements StrategyInterface
         ]));
 
         try {
-            $luisresponse = LuisApiHelper::getIntent($result, $user->meethue_token);
+            $luisresponse = LuisApiHelper::getIntent($result, $user->meethue_token, $token);
         } catch (Throwable $e) {
             $client->send(json_encode([
                 'result' => 'KO',

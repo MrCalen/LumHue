@@ -4,18 +4,18 @@ declare(strict_types = 1);
 
 namespace App\Helpers;
 
+use App\Models\HueLight;
 use Redis;
 
 class HueRedis
 {
-    private static $instance;
 
     private $redis;
 
     private function __construct()
     {
-        $this->redis = new Redis();
-        $this->redis->connect("localhost");
+        $redis = new Redis();
+        $redis->connect('127.0.0.1');
     }
 
     public function getRedis() : Redis
@@ -23,12 +23,15 @@ class HueRedis
         return $this->redis;
     }
 
-    public static function instance() : HueRedis
+    public static function publishLightState(HueLight $light, $access_token)
     {
-        if (!self::$instance) {
-            self::$instance = new HueRedis();
-        }
-
-        return self::$instance;
+        $tmp = new HueRedis();
+        list($bri, $x, $y) = extract($light->getColor());
+        $msg = [
+            'light_id' => $light->getId(),
+            'color' => LumHueColorConverter::chromaticToRGB($x, $y, $bri),
+            'token' => $access_token,
+        ];
+        $tmp->getRedis()->publish('ws', json_encode($msg));
     }
 }

@@ -7,47 +7,24 @@ namespace App\WebSockets\Strategy;
 use App\Helpers\WebServices\LuisApiHelper;
 use App\WebSockets\Bot;
 use App\WebSockets\Protocol;
-use Redis;
 use Ratchet\ConnectionInterface;
+use Clue\React\Redis\Client;
+use Clue\React\Redis\Factory;
+use Clue\Redis\Protocol\Model\StatusReply;
+use Redis;
 
 class ChatStrategy implements StrategyInterface
 {
     private $protocol;
+    private $redis;
 
     public function __construct()
     {
+        ini_set('default_socket_timeout', "-1");
         $redis = new Redis();
         $redis->connect('127.0.0.1');
-
-        /*
-         * Message like: {'light_id': '1', 'color': '#213', 'token' : '****'}
-         */
-        $redis->subscribe(['ws'], function ($redis, $chan, $msg) {
-            $message = json_decode($msg);
-            if (!$message) {
-                return;
-            }
-            $token = $message->token;
-            \JWTAuth::setToken($token);
-            $user = \JWTAuth::toUser();
-            if (!$user) {
-                return;
-            }
-
-            foreach ($this->protocol->getConnections() as $connection) {
-                if ($connection->getId() != $user->id) {
-                    continue;
-                }
-                $connection->getConnection()->send(json_encode([
-                    'content' => [
-                        'light_id' => $message->light_id,
-                        'color' => $message->color,
-                    ],
-                    'type' => 'apply',
-                    'date' => date('l jS \of F Y h:i:s A'),
-                ]));
-            }
-        });
+        $this->redis = $redis;
+        $this->subscribe();
     }
 
     public function setProtocol(Protocol $protocol)
@@ -58,6 +35,47 @@ class ChatStrategy implements StrategyInterface
     public function getName() : string
     {
         return "ws:chat";
+    }
+
+    private function subscribe()
+    {
+        $loop = \React\EventLoop\Factory::create();
+        $factory = new Factory($loop);
+
+        $factory->createClient()->then(function (Client $client) {
+                $client->subscribe('ws');
+                $client->on('message', function ($chan, $msg) {
+                    $message = json_decode($msg);
+                    if (!$message) {
+                        return;
+                    }
+                    $token = $message->token;
+                    \JWTAuth::setToken($token);
+                    $user = \JWTAuth::toUser();
+                    if (!$user) {
+                        return;
+                    }
+
+                    foreach ($this->protocol->getConnections() as $connection) {
+                        if ($connection->getId() != $user->id) {
+                            continue;
+                        }
+                        $connection->getConnection()->send(json_encode([
+                            'content' => [
+                                'light_id' => $message->light_id,
+                                'color' => $message->color,
+                            ],
+                            'type' => 'apply',
+                            'date' => date('l jS \of F Y h:i:s A'),
+                        ]));
+                    }
+                });
+        });
+        $loop->run();
+        return;
+        /*
+         * Message like: {'light_id': '1', 'color': '#213', 'token' : '****'}
+         */
     }
 
     public function onMessage(ConnectionInterface $connection, string $realmessage, Protocol $protocol)
@@ -92,7 +110,7 @@ class ChatStrategy implements StrategyInterface
                 'date' => date('l jS \of F Y h:i:s A'),
             ]));
 
-            $luisresponse = LuisApiHelper::getIntent($content, $user->meethue_token);
+            $luisresponse = LuisApiHelper::getIntent($content, $user->meethue_token, $token);
 
             foreach ($protocol->getConnections() as $connection) {
                 if ($connection->getId() != $user->id) {

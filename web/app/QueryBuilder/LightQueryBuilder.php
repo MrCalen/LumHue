@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\QueryBuilder;
 
+use App\Helpers\HueRedis;
 use App\Models\HueLight;
 use NodeHue;
 use MongoHue;
@@ -76,12 +77,12 @@ class LightQueryBuilder
         return $this;
     }
 
-    public function apply()
+    public function apply() : HueLight
     {
         if ($this->access_method === 'node') {
             NodeHue::applyLightStatus($this->light);
-            return;
+            return $this->light;
         }
-        MeetHue::applyLightStatus($this->light, $this->meethue_token);
+        return $this->light;
     }
 }
