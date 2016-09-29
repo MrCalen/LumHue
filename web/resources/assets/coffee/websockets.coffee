@@ -140,3 +140,5 @@ app.controller 'WebSocketController', ($scope, $http, $timeout, $window, $sce, $
         'content' : 'Preferences removed'
         'author'  : 'LumHue Bot'
         'date' : new Date("now")
+
+  socket = io.connect("https://calen.mr-calen.eu/socket.io");

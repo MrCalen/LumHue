@@ -72,7 +72,7 @@
 <script src="{{ URL::asset('components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js')}}"></script>
 <script src="{{ URL::asset('components/angular-local-storage/dist/angular-local-storage.min.js') }}"></script>
 <script src="/recorder.js"></script>
-
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 <script src="{{ elixir('js/app.js') }}"></script>
 
 </body>
