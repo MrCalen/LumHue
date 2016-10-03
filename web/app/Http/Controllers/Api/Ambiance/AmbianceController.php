@@ -93,6 +93,9 @@ class AmbianceController extends Controller
             return Response::json(['success' => true,]);
         }
         $ambianceId = new \MongoDB\BSON\ObjectID($ambiance_id);
+        if (is_array($ambiance)) {
+            $ambiance = json_encode($ambiance);
+        }
         $ambiance = json_decode($ambiance);
         $ambiance->uniq_id = $ambiance_id;
         MongoHue::table('ambiance')->updateOne([
