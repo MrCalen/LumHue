@@ -141,4 +141,4 @@ app.controller 'WebSocketController', ($scope, $http, $timeout, $window, $sce, $
         'author'  : 'LumHue Bot'
         'date' : new Date("now")
 
-  socket = io.connect("https://calen.mr-calen.eu/socket.io");
+  socket = io.connect("https://calen.mr-calen.eu/socket.io", { transports: ['websocket', 'polling'] });
