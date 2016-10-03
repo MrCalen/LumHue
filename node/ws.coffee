@@ -1,21 +1,28 @@
 express = require('express');
 app = express();
 server = require('http').createServer(app);
-io = require("socket.io").listen(server);
-
 server.listen(9095);
+io = require("socket.io").listen(server);
+curl = require 'curlrequest'
 console.log('listening on port 9095');
 
-io.sockets.on 'connection', (socket) ->
-  console.log('user connected');
+redis = require('redis');
+subscribe = redis.createClient();
 
-  msg = "user connected!!!";
-  socket.emit('message', msg);
+connections = {}
 
-  socket.on 'disconnect', ->
-    console.log('user disconnected')
+io.of '/socket.io', (socket) ->
+  socket.on 'auth', (msg) ->
+    json = JSON.parse msg
+    token = json.token
+    curl.request {
+        url: 'https://calen.mr-calen.eu/api/user?access_token=' + token
+      }
+    , (err, data) ->
+      usr = JSON.parse data
+      if usr.id?
+        connections[token] = usr
 
-  socket.on 'message', (msg) ->
-    socket.emit('message', msg);
-    console.log('message: ' + msg)
-
+subscribe.subscribe('lights');
+subscribe.on "message", (channel, message) ->
+  console.log connections, message
