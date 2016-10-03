@@ -59,6 +59,7 @@ app.controller 'LightController', ($rootScope, $scope, $http, $timeout) ->
               else
                 $scope.loop()
           .error ->
+              $scope.loading = false
               if callback
                 callback()
               else

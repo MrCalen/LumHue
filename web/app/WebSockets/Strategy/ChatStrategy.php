@@ -24,7 +24,6 @@ class ChatStrategy implements StrategyInterface
         $redis = new Redis();
         $redis->connect('127.0.0.1');
         $this->redis = $redis;
-        $this->subscribe();
     }
 
     public function setProtocol(Protocol $protocol)
@@ -35,47 +34,6 @@ class ChatStrategy implements StrategyInterface
     public function getName() : string
     {
         return "ws:chat";
-    }
-
-    private function subscribe()
-    {
-        $loop = \React\EventLoop\Factory::create();
-        $factory = new Factory($loop);
-
-        $factory->createClient()->then(function (Client $client) {
-                $client->subscribe('ws');
-                $client->on('message', function ($chan, $msg) {
-                    $message = json_decode($msg);
-                    if (!$message) {
-                        return;
-                    }
-                    $token = $message->token;
-                    \JWTAuth::setToken($token);
-                    $user = \JWTAuth::toUser();
-                    if (!$user) {
-                        return;
-                    }
-
-                    foreach ($this->protocol->getConnections() as $connection) {
-                        if ($connection->getId() != $user->id) {
-                            continue;
-                        }
-                        $connection->getConnection()->send(json_encode([
-                            'content' => [
-                                'light_id' => $message->light_id,
-                                'color' => $message->color,
-                            ],
-                            'type' => 'apply',
-                            'date' => date('l jS \of F Y h:i:s A'),
-                        ]));
-                    }
-                });
-        });
-        $loop->run();
-        return;
-        /*
-         * Message like: {'light_id': '1', 'color': '#213', 'token' : '****'}
-         */
     }
 
     public function onMessage(ConnectionInterface $connection, string $realmessage, Protocol $protocol)
