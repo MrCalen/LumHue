@@ -2,8 +2,6 @@
 
 namespace App\Helpers\WebServices\Luis;
 
-use App\Helpers\HueRedis;
-
 class LuisIntent
 {
     public static $intents = [
@@ -86,8 +84,7 @@ class LuisIntent
         }
 
         try {
-            $light = $luisintent->applyIntent($intent, $meethue_token);
-            HueRedis::publishLightState($light, $access_token);
+            $luisintent->applyIntent($intent, $meethue_token);
         } catch (\Throwable $e) {
             return null;
         }

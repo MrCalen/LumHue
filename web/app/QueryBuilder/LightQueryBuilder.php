@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\QueryBuilder;
 
-use App\Helpers\HueRedis;
 use App\Models\HueLight;
 use NodeHue;
 use MongoHue;
