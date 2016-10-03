@@ -12,6 +12,9 @@
 Route::group(['prefix' => 'api'], function () {
     Route::group(['middleware' => ['api']], function () {
 
+
+        Route::get('/user', 'Api\UserController@tokenToUser');
+
         // MeetHue direct responses
         Route::group(['prefix' => 'meethue'], function () {
             Route::get('/bridge', 'Api\MeetHue\MeetHueController@getBridge');

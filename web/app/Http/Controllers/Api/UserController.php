@@ -39,4 +39,9 @@ class UserController extends Controller
         }
         return Response::json(compact('token'));
     }
+
+    public function tokenToUser(Request $request)
+    {
+        return Response::json(parent::tokenToUser($request));
+    }
 }
