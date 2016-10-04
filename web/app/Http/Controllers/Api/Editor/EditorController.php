@@ -92,7 +92,6 @@ class EditorController extends Controller
      *     ),
      * )
      */
-
     public function syncBeacon(Request $request)
     {
         $user_id = $request->user->id;
@@ -121,7 +120,7 @@ class EditorController extends Controller
                 continue;
             }
 
-            if (isset($object->uuid) && $object->uuid !== $beaconId) {
+            if (isset($object->uuid) && $object->uuid === $beaconUUid) {
                 $change = true;
                 $object->uuid = $beaconUUid;
                 $object->lh_id = $beaconId;
