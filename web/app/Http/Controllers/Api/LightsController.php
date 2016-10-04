@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\HueRedis;
 use App\Http\Controllers\Controller;
 use App\Models\Light;
 use App\Models\Logger;
@@ -63,6 +64,7 @@ class LightsController extends Controller
                      ->setProperty('effect', $light_effect);
 
         $l = $queryBuilder->apply();
+        HueRedis::publishLightState($l, $this->getToken($request));
 
         return Response::json([
             'status' => 'OK',

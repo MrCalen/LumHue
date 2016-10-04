@@ -3,6 +3,7 @@
 
 namespace App\Jobs;
 
+use App\Helpers\HueRedis;
 use App\Helpers\LumHueColorConverter;
 use App\Helpers\MongoHue;
 use app\Models\HueLight;
@@ -50,6 +51,7 @@ class JobAmbiance extends Job implements SelfHandling, ShouldQueue
                 $hueLight->setProperty('on', $light->on);
                 $builder->setLight($hueLight);
                 $l = $builder->apply();
+                HueRedis::publishLightState($l, $this->user->token);
             }
             sleep($sleep_time);
         }
