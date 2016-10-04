@@ -88,8 +88,8 @@ class LuisIntent
         try {
             $light = $luisintent->applyIntent($intent, $meethue_token);
             HueRedis::publishLightState($light, $access_token);
-        } catch (\Throwable $e) {
-            return null;
+        } catch (\Exception $e) {
+            return $e->getMessage();
         }
         return $intent->intent;
     }

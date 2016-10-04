@@ -83,6 +83,7 @@ class LightQueryBuilder
             NodeHue::applyLightStatus($this->light);
             return $this->light;
         }
+        MeetHue::applyLightStatus($this->light, $this->meethue_token);
         return $this->light;
     }
 }

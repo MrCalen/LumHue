@@ -25,4 +25,4 @@ io.of '/socket.io', (socket) ->
 
 subscribe.subscribe('lights');
 subscribe.on "message", (channel, message) ->
-  console.log connections, message
+  console.log message

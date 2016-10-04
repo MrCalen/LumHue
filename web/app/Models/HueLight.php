@@ -70,8 +70,8 @@ class HueLight
     {
         return [
             'bri' => $this->bri,
-            'x' => $this->xy['x'],
-            'y' => $this->xy['y'],
+            'x' => $this->xy[0],
+            'y' => $this->xy[1],
         ];
     }
 }

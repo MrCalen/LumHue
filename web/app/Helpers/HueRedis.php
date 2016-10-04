@@ -6,16 +6,16 @@ namespace App\Helpers;
 
 use App\Models\HueLight;
 use Redis;
+use JWAuth;
 
 class HueRedis
 {
-
     private $redis;
 
     private function __construct()
     {
-        $redis = new Redis();
-        $redis->connect('127.0.0.1');
+        $this->redis = new Redis();
+        $this->redis->connect('127.0.0.1');
     }
 
     public function getRedis() : Redis
@@ -25,13 +25,20 @@ class HueRedis
 
     public static function publishLightState(HueLight $light, $access_token)
     {
-        $tmp = new HueRedis();
-        list($bri, $x, $y) = extract($light->getColor());
-        $msg = [
-            'light_id' => $light->getId(),
-            'color' => LumHueColorConverter::chromaticToRGB($x, $y, $bri),
-            'token' => $access_token,
-        ];
-        $tmp->getRedis()->publish('ws', json_encode($msg));
+        try {
+            $tmp = new HueRedis();
+            \JWTAuth::setToken($access_token);
+            $user = \JWTAuth::toUser();
+
+            $msg = [
+                'light_id' => $light->getId(),
+                'token' => $access_token,
+                'user' => $user
+            ];
+            $tmp->getRedis()->publish('lights', json_encode($msg));
+        } catch (\Throwable $e) {
+            //
+            dd($e->getMessage());
+        }
     }
 }
