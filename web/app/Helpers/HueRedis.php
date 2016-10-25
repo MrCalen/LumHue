@@ -28,16 +28,16 @@ class HueRedis
         try {
             $tmp = new HueRedis();
             \JWTAuth::setToken($access_token);
-            $user = \JWTAuth::toUser();
 
             list($bri, $x, $y) = array_values($light->getColor());
-
+            $rgb = LumHueColorConverter::chromaticToRGB($x, $y, $bri);
+            list($r, $g, $b) = array_values($rgb);
             $msg = [
                 'light_id' => $light->getId(),
                 'light' => $light->toArray(),
-                'color' => LumHueColorConverter::chromaticToRGB($x, $y, $bri),
+                'color' => $rgb,
+                'rgbhex' => LumHueColorConverter::RGBToHex($r, $g, $b),
                 'token' => $access_token,
-//                'user' => $user
             ];
             $tmp->getRedis()->publish('lights', json_encode($msg));
         } catch (\Throwable $e) {

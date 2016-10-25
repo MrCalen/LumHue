@@ -8,6 +8,11 @@ app.controller 'LightController', ($rootScope, $scope, $http, $timeout) ->
     $rootScope.$on 'refresh', ->
       $scope.refreshLights ->
 
+    $rootScope.$on 'setlight', (_, msg) ->
+      $scope.lights[msg.light_id].rgbhex = msg.hex
+      $scope.lights[msg.light_id].rgb = msg.color
+      $scope.lights[msg.light_id].rgbstr = "rgb(" + msg.color.r + "," + msg.color.g + "," + msg.color.b + ")"
+      $scope.$apply()
 
     # View controls Logic
     $scope.toggleModal = (i) ->

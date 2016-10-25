@@ -150,7 +150,11 @@ app.controller 'WebSocketController', ($scope, $http, $timeout, $window, $sce, $
       'token': window.token
     })
     socket.on 'auth', (msg) ->
-      console.log msg
       socket.on 'message', (msg) ->
-        console.log msg
+        msg = JSON.parse(msg)
+        obj =
+          light_id: msg.light_id
+          color: msg.color
+          hex: msg.rgbhex
+        $rootScope.$emit 'setlight', obj
   , 2000
