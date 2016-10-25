@@ -30,10 +30,14 @@ class HueRedis
             \JWTAuth::setToken($access_token);
             $user = \JWTAuth::toUser();
 
+            list($bri, $x, $y) = array_values($light->getColor());
+
             $msg = [
                 'light_id' => $light->getId(),
+                'light' => $light->toArray(),
+                'color' => LumHueColorConverter::chromaticToRGB($x, $y, $bri),
                 'token' => $access_token,
-                'user' => $user
+//                'user' => $user
             ];
             $tmp->getRedis()->publish('lights', json_encode($msg));
         } catch (\Throwable $e) {

@@ -44,11 +44,12 @@ class Bot
 
     public function onConnect($clientName, $clientId, $mobile)
     {
-        $prefs = MongoHue::getPrefs($clientId);
-        if (isset($prefs->prefs->chat) && !$prefs->prefs->chat) {
-            $msg = '';
-        }
+//        $prefs = MongoHue::getPrefs($clientId);
+//        if (isset($prefs->prefs->chat) && !$prefs->prefs->chat) {
+//            $msg = '';
+//        }
 
+        $mobile = true;
         if ($mobile) {
             $content = "Bienvenue ${clientName}";
         } else {

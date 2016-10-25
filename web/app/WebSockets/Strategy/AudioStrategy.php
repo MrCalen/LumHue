@@ -27,10 +27,14 @@ class AudioStrategy implements StrategyInterface
     public function onMessage(ConnectionInterface $connection, string $message, Protocol $protocol)
     {
         // Skip ping messages
+        var_dump($message);
         $json = json_decode($message);
         if ($json) {
             if ($json->type === 'auth') {
-                $token = $json->data->token;
+                if (isset($json->token))
+                    $token = $json->token;
+                else
+                    $token = $json->data->token;
                 \JWTAuth::setToken($token);
                 $user = \JWTAuth::toUser();
                 if (!$user) {
@@ -57,13 +61,20 @@ class AudioStrategy implements StrategyInterface
         $filename = '/tmp/' . $uniq . '.wav'; // 16000
         $filename_sampled = '/tmp/' . $uniq . '.sampled.wav';
         file_put_contents($filename, $message);
-        shell_exec('sox ' . $filename . ' ' . $filename_sampled . ' rate 16k');
-        $message = file_get_contents($filename_sampled);
+        try {
+            shell_exec('sox ' . $filename . ' ' . $filename_sampled . ' rate 16k');
+            $message = file_get_contents($filename_sampled);
+        } catch (\Throwable $e) {
+            $message = file_get_contents($filename);
+        }
+        var_dump($message);
+
         $result = SpeechApiHelper::sendBinary($message);
-        unlink($filename);
-        unlink($filename_sampled);
+        @unlink($filename);
+        @unlink($filename_sampled);
         if (!isset($result->results)) {
             $client->send(json_encode([
+                'message' => $result,
                 'result' => 'KO',
                 'reason' => 'no result found',
             ]));

@@ -49,6 +49,7 @@ app.controller 'WebSocketController', ($scope, $http, $timeout, $window, $sce, $
   ## Send messages
   $scope.sendAudioMessage = (blob) ->
     audioconn.send blob, { binary: true }
+    console.log 'after send'
 
   $scope.sendMessage = ->
     message = angular.copy $scope.currentMessage
@@ -128,6 +129,8 @@ app.controller 'WebSocketController', ($scope, $http, $timeout, $window, $sce, $
     $scope.audioRecorder.getBuffer (buffers) ->
       $scope.audioRecorder.exportWAV (blob) ->
         $scope.sendAudioMessage(blob)
+        console.log blob
+        return
     return
 
   $scope.initRecord()
@@ -146,4 +149,8 @@ app.controller 'WebSocketController', ($scope, $http, $timeout, $window, $sce, $
     socket.emit 'auth', JSON.stringify({
       'token': window.token
     })
+    socket.on 'auth', (msg) ->
+      console.log msg
+      socket.on 'message', (msg) ->
+        console.log msg
   , 2000

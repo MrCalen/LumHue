@@ -10,11 +10,18 @@ redis = require('redis');
 subscribe = redis.createClient();
 
 connections = {}
+subscribe.subscribe('lights');
 
-io.of '/socket.io', (socket) ->
+listen = (socket) ->
+  console.log "new connection"
   socket.on 'auth', (msg) ->
-    json = JSON.parse msg
+    try
+      json = JSON.parse msg
+    catch error
+      json = msg
+
     token = json.token
+
     curl.request {
         url: 'https://calen.mr-calen.eu/api/user?access_token=' + token
       }
@@ -22,7 +29,12 @@ io.of '/socket.io', (socket) ->
       usr = JSON.parse data
       if usr.id?
         connections[token] = usr
+    socket.emit 'auth', {}
+    subscribe.on "message", (channel, message) ->
+      socket.emit('message', message)
 
-subscribe.subscribe('lights');
-subscribe.on "message", (channel, message) ->
-  console.log message
+io.on 'connection', (socket) ->
+  listen(socket)
+
+io.of '/socket.io', (socket) ->
+  listen(socket)

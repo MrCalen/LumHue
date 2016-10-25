@@ -8,7 +8,7 @@ class NodeHue
 {
     private $base_uri = "http://localhost:3000";
 
-    private function curlGetHelper() : string
+    private function curlGetHelper()
     {
         $base_uri = $this->base_uri . '/getBridge';
         $ch = curl_init();

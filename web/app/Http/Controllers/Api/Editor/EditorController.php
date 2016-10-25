@@ -104,6 +104,7 @@ class EditorController extends Controller
 
         $beaconId = $request->get('beacon_id');
         $beaconUUid = $request->get('beacon_uuid');
+        $customData = $request->get('data');
 
         $editor = MongoHueWrapper::fetchAndConvertEditor($user_id);
         if (!$editor) {
@@ -124,6 +125,8 @@ class EditorController extends Controller
                 $change = true;
                 $object->uuid = $beaconUUid;
                 $object->lh_id = $beaconId;
+                $object->data = $customData;
+                break;
             }
         }
         if ($change) {
