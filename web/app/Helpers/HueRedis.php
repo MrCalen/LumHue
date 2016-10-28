@@ -27,7 +27,6 @@ class HueRedis
     {
         try {
             $tmp = new HueRedis();
-            \JWTAuth::setToken($access_token);
 
             list($bri, $x, $y) = array_values($light->getColor());
             $rgb = LumHueColorConverter::chromaticToRGB($x, $y, $bri);

@@ -102,7 +102,7 @@
                             <hr/>
                             <label id="lightids" class="option-label">Link this object to a lamp:</label>
                                 <select aria-labelledby="lightids"
-                                        ng-options="item for item in [1,2]"
+                                        ng-options="item for item in [1,2,3]"
                                         ng-model="currentItem.light_id"
                                         ng-change="addLightToItem()"
                                         class="form-control"></select>
