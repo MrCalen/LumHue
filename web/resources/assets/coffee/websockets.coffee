@@ -151,7 +151,6 @@ app.controller 'WebSocketController', ($scope, $http, $timeout, $window, $sce, $
     })
     socket.on 'auth', (msg) ->
       socket.on 'message', (msg) ->
-        msg = JSON.parse(msg)
         obj =
           light_id: msg.light_id
           color: msg.color
