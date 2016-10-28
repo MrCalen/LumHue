@@ -69,7 +69,7 @@ class HueLight
     public function getColor() : array
     {
         return [
-            'bri' => $this->bri,
+            'bri' => $this->bri ?? 255,
             'x' => $this->xy[0],
             'y' => $this->xy[1],
         ];
