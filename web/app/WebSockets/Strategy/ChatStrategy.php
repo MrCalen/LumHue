@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\WebSockets\Strategy;
 
+use App\Beacons\BeaconManager;
 use App\Helpers\WebServices\LuisApiHelper;
 use App\WebSockets\Bot;
 use App\WebSockets\Protocol;
@@ -82,8 +83,9 @@ class ChatStrategy implements StrategyInterface
             }
 
         } elseif ($message->type === 'beacon') {
-            // MongoHue::table('beacon_data')
-            //    ->insert($message);
+            $beaconId = $message->beacon;
+            $action = $message->action;
+            BeaconManager::applyBeaconAction($beaconId, $action, $user->meethue_token, $token);
         }
     }
 
