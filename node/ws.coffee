@@ -31,7 +31,7 @@ listen = (socket) ->
         connections[token] = usr
     socket.emit 'auth', {}
     subscribe.on "message", (channel, message) ->
-      socket.emit('message', message)
+      socket.emit('message', JSON.parse(message))
 
 io.on 'connection', (socket) ->
   listen(socket)
