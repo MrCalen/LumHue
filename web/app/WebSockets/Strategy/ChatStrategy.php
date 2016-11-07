@@ -92,4 +92,9 @@ class ChatStrategy implements StrategyInterface
     public function onClose(ConnectionInterface $connection, Protocol $protocol)
     {
     }
+
+    public function onBinaryMessage(ConnectionInterface $from, $msg)
+    {
+        // TODO: Implement onBinaryMessage() method.
+    }
 }

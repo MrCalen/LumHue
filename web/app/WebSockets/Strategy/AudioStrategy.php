@@ -24,28 +24,7 @@ class AudioStrategy implements StrategyInterface
         return "ws:audio";
     }
 
-    public function onMessage(ConnectionInterface $connection, string $message, Protocol $protocol)
-    {
-        // Skip ping messages
-        var_dump($message);
-        $json = json_decode($message);
-        if ($json) {
-            if ($json->type === 'auth') {
-                if (isset($json->token))
-                    $token = $json->token;
-                else
-                    $token = $json->data->token;
-                \JWTAuth::setToken($token);
-                $user = \JWTAuth::toUser();
-                if (!$user) {
-                    return;
-                }
-                $client = $protocol->getConnections()[$connection->resourceId];
-                $client->setName($json->data->name);
-                $client->setToken($token);
-            }
-            return;
-        }
+    public function onBinaryMessage(ConnectionInterface $connection, $message, Protocol $protocol) {
         $client = $protocol->getConnections()[$connection->resourceId];
         if (!$client || !$client->getToken()) {
             return;
@@ -105,6 +84,29 @@ class AudioStrategy implements StrategyInterface
             'content' => $luisresponse['message'],
             'date' => date('l jS \of F Y h:i:s A'),
         ]));
+    }
+
+    public function onMessage(ConnectionInterface $connection, string $message, Protocol $protocol)
+    {
+        // Skip ping messages
+        $json = json_decode($message);
+        if ($json) {
+            if ($json->type === 'auth') {
+                if (isset($json->token))
+                    $token = $json->token;
+                else
+                    $token = $json->data->token;
+                \JWTAuth::setToken($token);
+                $user = \JWTAuth::toUser();
+                if (!$user) {
+                    return;
+                }
+                $client = $protocol->getConnections()[$connection->resourceId];
+                $client->setName($json->data->name);
+                $client->setToken($token);
+            }
+            return;
+        }
     }
 
     public function onClose(ConnectionInterface $connection, Protocol $protocol)

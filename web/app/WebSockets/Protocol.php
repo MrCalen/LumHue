@@ -27,8 +27,14 @@ class Protocol implements MessageComponentInterface
         $this->openConnections[$connection->resourceId] = new Connection($connection);
     }
 
+    public function onBinaryMessage(ConnectionInterface $from, $msg)
+    {
+        $this->strategy->onBinaryMessage($from, $msg, $this);
+    }
+
     public function onMessage(ConnectionInterface $connection, $message)
     {
+        var_dump($message);
         $this->strategy->onMessage($connection, $message, $this);
     }
 
