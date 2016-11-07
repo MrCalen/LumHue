@@ -40,8 +40,6 @@ class HueRedis
             ];
             $tmp->getRedis()->publish('lights', json_encode($msg));
         } catch (\Throwable $e) {
-            //
-            dd($e->getMessage());
         }
     }
 }
