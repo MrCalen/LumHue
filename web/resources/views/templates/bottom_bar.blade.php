@@ -8,7 +8,7 @@
         <div class="checkout__order">
             <div class="checkout__order-inner">
                 <div class="checkout__summary">
-                    <ul class="chat chat-body row" style="overflow-y: scroll; outline: none; max-height: 280px;" id="chat">
+                    <ul class="chat chat-body row" style="overflow-y: scroll; outline: none; max-height: 200px;" id="chat">
                         <li ng-repeat="message in messages track by $index"
                             class="answer {$ message.author == username ? 'right' : 'left' $}">
                             <div class="avatar">
@@ -25,13 +25,19 @@
                     <ul class="chat-body">
                         <li>
                             <form class="answer-add" ng-submit="sendMessage(); currentMessage = ''">
-                                <input placeholder="Write a message" ng-model="currentMessage">
-                                <hr/>
+                                <div class="row">
+                                    <div class="col-xs-7">
+                                        <input placeholder="Write a message" ng-model="currentMessage">
+                                    </div>
+                                    <div class="col-xs-4">
                                     <span class="fa fa-paper-plane fa-fw fa-2x"
                                           ng-click="sendMessage(); currentMessage = ''"></span>
-                                    <span ng-click="toggleRecording()">
+                                        <span ng-click="toggleRecording()">
                                         <i class="fa {$ recording ? 'fa-stop' : 'fa-microphone' $} fa-2x fa-fw"></i>
                                     </span>
+
+                                    </div>
+                                </div>
                             </form>
                         </li>
                     </ul>
