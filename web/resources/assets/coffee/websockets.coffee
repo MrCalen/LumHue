@@ -48,7 +48,8 @@ app.controller 'WebSocketController', ($scope, $http, $timeout, $window, $sce, $
 
   ## Send messages
   $scope.sendAudioMessage = (blob) ->
-    audioconn.send blob, { binary: true }
+    console.log(audioconn)
+    audioconn.send blob
     console.log 'after send'
 
   $scope.sendMessage = ->
@@ -100,12 +101,12 @@ app.controller 'WebSocketController', ($scope, $http, $timeout, $window, $sce, $
         audioInput.connect(inputPoint);
         analyserNode = audioContext.createAnalyser();
         analyserNode.fftSize = 2048;
-        inputPoint.connect( analyserNode );
-        $scope.audioRecorder = new Recorder( inputPoint );
+        inputPoint.connect(analyserNode);
+        $scope.audioRecorder = new Recorder(inputPoint);
         zeroGain = audioContext.createGain();
         zeroGain.gain.value = 0.0;
-        inputPoint.connect( zeroGain );
-        zeroGain.connect( audioContext.destination );
+        inputPoint.connect(zeroGain);
+        zeroGain.connect(audioContext.destination);
         return
       (err) ->
         console.log(err)
