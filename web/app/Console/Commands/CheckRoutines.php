@@ -3,9 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Helpers\HueRedis;
+use App\Helpers\MongoHueModel\MongoHueWrapper;
 use App\QueryBuilder\LightQueryBuilder;
 use App\User;
 use Illuminate\Console\Command;
+use MongoDB\BSON\ObjectID;
 use MongoHue;
 use JWAuth;
 
@@ -44,7 +46,7 @@ class CheckRoutines extends Command
     public function handle()
     {
         date_default_timezone_set('Europe/Paris');
-        $routines = MongoHue::getRoutines();
+        $routines = MongoHueWrapper::getRoutines(true);
         $users = User::all()->all();
         $users = array_reduce($users, function ($new, $user) {
             $new[$user->id] = $user;
@@ -66,7 +68,7 @@ class CheckRoutines extends Command
             $isHour = $currentHour == $routine->h;
             $isMin = $currentMin == $routine->m;
 
-            if (!$isDay || !$isHour || !$isMin) continue;
+//            if (!$isDay || !$isHour || !$isMin) continue;
 
             foreach ($routine->lights as $light) {
                 $light_id = $light->light_id;
@@ -74,6 +76,12 @@ class CheckRoutines extends Command
                 $light = LightQueryBuilder::create($light_id, $meethue_token)
                     ->setProperty('on', $on)
                     ->apply();
+            }
+
+            if (!$routine->rec) {
+                MongoHue::table('routines')->deleteOne([
+                    '_id' => new ObjectID($routine->_id->{'$oid'}),
+                ]);
             }
         }
     }
