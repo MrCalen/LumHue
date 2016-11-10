@@ -33,6 +33,7 @@
                         <li><a class="gn-icon gn-icon-download" href="/app/#/dashboard">Dashboard</a></li>
                         <li><a class="gn-icon gn-icon-download" href="/app/#/lights">Lights</a></li>
                         <li><a class="gn-icon gn-icon-download" href="/app/#/ambiances">Ambiances</a></li>
+                        <li><a class="gn-icon gn-icon-download" href="/app/#/routines">Routines</a></li>
 
                         <li><a class="gn-icon gn-icon-download" href="/logout">Log out</a></li>
                     </ul>

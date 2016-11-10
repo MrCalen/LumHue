@@ -11,7 +11,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading" ng-click="open = !open" style="font-size: 15px">Quick Access</div>
                 <div class="panel-body" ng-show="open">
-                    <div ng-repeat="msg in messages"  ng-bind-html="msg.content" style="font-size: 14px; color: black"></div>
+                    <div ng-repeat="msg in messages"  ng-bind-html="msg.content" style="font-size: 14px; color: black; max-height: 50px;"></div>
                     <form class="answer-add" ng-submit="sendBotMessage(); currentMessage = ''">
                         <input placeholder="Write a message" ng-model="currentMessage" style="font-size: 17px; color: black">
                     </form>
