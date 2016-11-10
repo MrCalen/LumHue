@@ -55,6 +55,10 @@ Route::group(['prefix' => 'api'], function () {
             Route::post('/sync', 'Api\Editor\EditorController@syncBeacon');
         });
 
+        Route::group(['prefix' => 'routines'], function () {
+            Route::get('/', 'Api\Routines\RoutinesController@get');
+        });
+
     });
 
     // Token Generation routes.

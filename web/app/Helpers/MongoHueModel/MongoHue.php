@@ -39,6 +39,17 @@ class MongoHue
              ->insertOne($data);
     }
 
+    public function getRoutines() : array
+    {
+        $routines = (array)MongoHue::find('routines');
+        $newRoutines = [];
+        foreach ($routines as $elt) {
+            unset($elt->_id);
+            $newRoutines[] = $elt;
+        }
+        return $newRoutines;
+    }
+
     public function getPrefs($user_id)
     {
         return $this->find('user_settings', [
