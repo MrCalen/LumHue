@@ -116,4 +116,18 @@ class MongoHueWrapper
         $editor = json_decode($editor);
         return $editor;
     }
+
+    public static function getRoutines($includeId = false) : array
+    {
+        $routines = (array)MongoHue::find('routines');
+        $newRoutines = [];
+        foreach ($routines as $elt) {
+            if (!$includeId) {
+                unset($elt->_id);
+            }
+            $newRoutines[] = $elt;
+        }
+        return $newRoutines;
+    }
+
 }
