@@ -12,8 +12,13 @@ app.controller 'RoutinesController', ($rootScope, $scope, $http, $timeout) ->
     )
     .success (data, status) ->
       $scope.routines = data
-      console.log $scope.routines
     .error ->
       console.error 'err'
 
   $scope.getRoutines()
+
+  $scope.save = (routineId) ->
+    routine = $scope.routines[routineId]
+    $http.post $scope.base_url + '/api/routines/edit?access_token=' + window.token,
+      routine: routine
+    .success (data, status) ->
