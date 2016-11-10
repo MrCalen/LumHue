@@ -11,6 +11,7 @@ class Kernel extends ConsoleKernel
         Commands\UpdateBridge::class,
         Commands\WebSocketServer::class,
         Commands\WebSocketAudioServer::class,
+        Commands\CheckRoutines::class,
     ];
 
     protected function schedule(Schedule $schedule)
