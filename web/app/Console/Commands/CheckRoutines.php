@@ -14,35 +14,15 @@ use JWAuth;
 
 class CheckRoutines extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'routines:check';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Check for routines update';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         parent::__construct();
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
     public function handle()
     {
         date_default_timezone_set('Europe/Paris');
@@ -68,7 +48,7 @@ class CheckRoutines extends Command
             $isHour = $currentHour == $routine->h;
             $isMin = $currentMin == $routine->m;
 
-//            if (!$isDay || !$isHour || !$isMin) continue;
+            if (!$isDay || !$isHour || !$isMin) continue;
 
             foreach ($routine->lights as $light) {
                 $light_id = $light->light_id;
