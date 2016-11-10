@@ -54,6 +54,8 @@ class CheckRoutines extends Command
                 $light_id = $light->light_id;
                 $on = $light->status == 1;
                 $light = LightQueryBuilder::create($light_id, $meethue_token)
+                    ->setProperty('xy', [0, 0])
+                    ->setProperty('bri', 255)
                     ->setProperty('on', $on)
                     ->apply();
             }
