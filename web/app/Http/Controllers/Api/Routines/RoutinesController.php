@@ -17,6 +17,26 @@ class RoutinesController extends Controller
         return new JsonResponse($routines);
     }
 
+    public function create(Request $request)
+    {
+        $user = $this->tokenToUser($request);
+        $routine = $request->only('routine');
+        if (!$routine) {
+            return new JsonResponse([
+                'error' => true,
+                'message' => 'routine field not provided'
+            ], 400);
+        }
+
+        $routine = $routine['routine'];
+        $routine['user_id'] = $user->id;
+        RoutinesManager::createRoutine($routine);
+        return new JsonResponse([
+            'error' => false,
+            'routine' => $routine,
+        ]);
+    }
+
     public function edit(Request $request)
     {
         $routine = $request->only('routine');
