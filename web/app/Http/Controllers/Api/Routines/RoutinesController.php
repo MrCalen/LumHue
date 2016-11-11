@@ -54,4 +54,21 @@ class RoutinesController extends Controller
             'routine' => $routine,
         ]);
     }
+
+    public function delete(Request $request)
+    {
+        if (!$request->has('routineId')) {
+            return new JsonResponse([
+                'error' => true,
+                'message' => 'routineId field not provided'
+            ], 400);
+        }
+
+        $routineId = $request->get('routineId');
+        RoutinesManager::deleteRoutine($routineId);
+        return new JsonResponse([
+            'error' => false,
+            'message' => "Remove successful",
+        ]);
+    }
 }

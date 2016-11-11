@@ -57,7 +57,9 @@ Route::group(['prefix' => 'api'], function () {
 
         Route::group(['prefix' => 'routines'], function () {
             Route::get('/', 'Api\Routines\RoutinesController@get');
+            Route::post('/create', 'Api\Routines\RoutinesController@create');
             Route::post('/edit', 'Api\Routines\RoutinesController@edit');
+            Route::post('/delete', 'Api\Routines\RoutinesController@delete');
         });
 
     });

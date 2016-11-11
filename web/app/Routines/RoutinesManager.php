@@ -2,6 +2,7 @@
 
 namespace App\Routines;
 
+use MongoDB\BSON\ObjectID;
 use MongoHue;
 
 class RoutinesManager
@@ -21,6 +22,18 @@ class RoutinesManager
             '$set' => $fields,
         ], [
             'upsert' => true,
+        ]);
+    }
+
+    public static function createRoutine($routine)
+    {
+        MongoHue::table('routines')->insertOne($routine);
+    }
+
+    public static function deleteRoutine($routineId)
+    {
+        MongoHue::table("routines")->deleteOne([
+            '_id' => new ObjectID($routineId),
         ]);
     }
 }
