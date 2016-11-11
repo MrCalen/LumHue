@@ -20,5 +20,8 @@ class Kernel extends ConsoleKernel
                  ->everyMinute()
                  ->sendOutputTo('/tmp/hue.log')
                  ;
+        $schedule->command('routines:check')
+            ->everyMinute()
+            ->sendOutputTo('/tmp/routines.log');
     }
 }

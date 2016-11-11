@@ -50,6 +50,8 @@ class CheckRoutines extends Command
 
             if (!$isDay || !$isHour || !$isMin) continue;
 
+            echo "Applying routine for user {$user->name}\n";
+
             foreach ($routine->lights as $index => $on) {
                 $light_id = $index + 1;
                 $light = LightQueryBuilder::create($light_id, $meethue_token)
