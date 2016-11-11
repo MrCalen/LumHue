@@ -22,3 +22,9 @@ app.controller 'RoutinesController', ($rootScope, $scope, $http, $timeout) ->
     $http.post $scope.base_url + '/api/routines/edit?access_token=' + window.token,
       routine: routine
     .success (data, status) ->
+
+  $scope.removeLight = (routine, lightId) ->
+    routine.lights[lightId] = false
+
+  $scope.addLight = (routine, lightId) ->
+    routine.lights[lightId] = true
