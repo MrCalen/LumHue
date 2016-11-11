@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('meethue:bridge')
-                 ->everyMinute()
+                 ->everyFiveMinutes()
                  ->sendOutputTo('/tmp/hue.log')
                  ;
         $schedule->command('routines:check')
