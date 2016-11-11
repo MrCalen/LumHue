@@ -24,10 +24,9 @@
                     <div class="x_title">
                         <h2>{$ routine.name $}</h2>
                         <div class="pull-right" style="font-size: 20px">
-                            <i class="fa fa-save fa-fw cursor"
-                               ng-click="save($index)"></i>
-                            <i class="fa fa-trash fa-fw cursor"
-                               ng-click="delete($index)"></i>
+                            <i ng-show="loading" class="fa fa-spinner fa-pulse fa-spin"></i>
+                            <i ng-hide="loading" class="fa fa-save fa-fw cursor" ng-click="save($index)"></i>
+                            <i ng-hide="loading" class="fa fa-trash fa-fw cursor" ng-click="delete($index)"></i>
                         </div>
                         <div class="clearfix"></div>
                     </div>
