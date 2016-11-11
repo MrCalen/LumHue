@@ -81,6 +81,70 @@
                     </div>
                 </div>
             </div>
+
+
+            <!-- New template -->
+            <div class="col-md-4">
+                <div class="x_panel boxes">
+                    <div class="x_title">
+                        <h2>{$ newRoutine.name $}</h2>
+                        <div class="pull-right" style="font-size: 20px">
+                            <i ng-show="loading" class="fa fa-spinner fa-pulse fa-spin"></i>
+                            <i ng-hide="loading" class="fa fa-save fa-fw cursor" ng-click="createRoutine()"></i>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content" style="text-align: left; padding-right: 20px">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div ng-repeat="day in days">
+                                    <input ng-model="newRoutine.days[$index]"
+                                           type="checkbox"
+                                    />
+                                    {$ day $}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <label>Name</label>
+                                    <input ng-model="newRoutine.name" class="form-control"/>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <label>Hour & Minute</label>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <input ng-model="newRoutine.h"
+                                                   class="form-control"
+                                                   max="24"
+                                                   min="0"
+                                                   type="number"/>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <input ng-model="newRoutine.m"
+                                                   class="form-control"
+                                                   max="59"
+                                                   min="0"
+                                                   type="number"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="container-fluid">
+                                <div ng-repeat="light in [0, 1, 2]">
+                                    <div class="col-xs-4">
+                                        <i ng-hide="newRoutine.lights[light]" ng-click="addLight(newRoutine, light)" class="fa fa-lightbulb-o fa-2x cursor" style="color: darkslategray"></i>
+                                        <i ng-show="newRoutine.lights[light]" ng-click="removeLight(newRoutine, light)" class="fa fa-lightbulb-o fa-2x cursor" style="color: darkgoldenrod"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

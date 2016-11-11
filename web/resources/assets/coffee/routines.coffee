@@ -2,6 +2,17 @@ app.controller 'RoutinesController', ($rootScope, $scope, $http, $timeout) ->
   $scope.base_url = window.base_url
   $scope.token = window.token
 
+  $scope.initRoutine = ->
+    $scope.newRoutine =
+      name: "Nouvelle Routine"
+      lights: [false, false, false]
+      days: [false, false, false, false, false, false, false]
+      rec: true
+      m: 0
+      h: 0
+
+  $scope.initRoutine()
+
   $scope.loading = false
   $scope.days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
 
@@ -25,6 +36,16 @@ app.controller 'RoutinesController', ($rootScope, $scope, $http, $timeout) ->
       routine: routine
     .success (data, status) ->
       $scope.loading = false
+
+  $scope.createRoutine = ->
+    $scope.loading = true
+    $http.post $scope.base_url + '/api/routines/create?access_token=' + window.token,
+      routine: $scope.newRoutine
+    .success (data, status) ->
+      $scope.loading = false
+      $scope.getRoutines()
+      $scope.initRoutine()
+
 
   $scope.removeLight = (routine, lightId) ->
     routine.lights[lightId] = false
