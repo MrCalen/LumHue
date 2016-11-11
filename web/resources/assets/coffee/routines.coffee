@@ -46,6 +46,18 @@ app.controller 'RoutinesController', ($rootScope, $scope, $http, $timeout) ->
       $scope.getRoutines()
       $scope.initRoutine()
 
+  $scope.delete = (index) ->
+    routine = $scope.routines[index]
+    routineId = routine._id.$oid;
+    $scope.loading = true
+    $http.post $scope.base_url + '/api/routines/delete?access_token=' + window.token,
+      routineId: routineId
+    .success (data, status) ->
+      $scope.loading = false
+      $scope.getRoutines()
+      $scope.initRoutine()
+
+
 
   $scope.removeLight = (routine, lightId) ->
     routine.lights[lightId] = false
