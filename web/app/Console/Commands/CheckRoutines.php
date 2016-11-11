@@ -50,9 +50,8 @@ class CheckRoutines extends Command
 
             if (!$isDay || !$isHour || !$isMin) continue;
 
-            foreach ($routine->lights as $light) {
-                $light_id = $light->light_id;
-                $on = $light->status == 1;
+            foreach ($routine->lights as $index => $on) {
+                $light_id = $index + 1;
                 $light = LightQueryBuilder::create($light_id, $meethue_token)
                     ->setProperty('xy', [0, 0])
                     ->setProperty('bri', 255)
