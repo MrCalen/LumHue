@@ -30,9 +30,12 @@ class BeaconManager
         $actionsToApply = $beacon->{ $action };
         foreach ($actionsToApply as $act) {
             $query = LightQueryBuilder::create(abs($act), $meethue_token);
-            $query->setProperty('on', $act > 0);
+            $query->setProperty('on', $act > 0)
+                  ->setProperty('bri', 255)
+                  ->setProperty('xy', [0, 0]);
             $l = $query->apply();
-            HueRedis::publishLightState($l, $access_token);
+            // FIXME: publish with the real color
+            // HueRedis::publishLightState($l, $access_token);
         }
     }
 }

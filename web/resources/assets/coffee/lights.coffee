@@ -11,6 +11,7 @@ app.controller 'LightController', ($rootScope, $scope, $http, $timeout) ->
     $rootScope.$on 'setlight', (_, msg) ->
       $scope.lights[msg.light_id].rgbhex = msg.hex
       $scope.lights[msg.light_id].rgb = msg.color
+      $scope.lights[msg.light_id].state.on = msg.on
       $scope.lights[msg.light_id].rgbstr = "rgb(" + msg.color.r + "," + msg.color.g + "," + msg.color.b + ")"
       $scope.$apply()
 

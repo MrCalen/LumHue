@@ -56,7 +56,8 @@ class LightsController extends Controller
 
         $queryBuilder = LightQueryBuilder::create(strval($light_id), $user->meethue_token);
         $queryBuilder->setProperty('on', $light_on)
-                     ->setProperty('bri', $hueColors['bri'])
+                     ->setProperty('bri', 255)
+//                     ->setProperty('bri', $hueColors['bri'])
                      ->setProperty('xy', [
                        $hueColors['x'],
                        $hueColors['y'],

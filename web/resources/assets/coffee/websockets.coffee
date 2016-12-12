@@ -156,5 +156,6 @@ app.controller 'WebSocketController', ($scope, $http, $timeout, $window, $sce, $
           light_id: msg.light_id
           color: msg.color
           hex: msg.rgbhex
+          on: msg.light.on
         $rootScope.$emit 'setlight', obj
   , 2000
